@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/bilder">
+        <file>bilder/einstelung.png</file>
+        <file>bilder/home.png</file>
+        <file>bilder/zurueck.png</file>
+        <file>bilder/crosstimemain.png</file>
+    </qresource>
+</RCC>
