@@ -16,33 +16,62 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     licht.cpp \
     einstellung.cpp \
-    einstellunglicht.cpp \
     einstellunghauptlicht.cpp \
-    thread.cpp \
     rgbwand.cpp \
     mythread.cpp \
-    pca_9635.cpp
+    pca_9635.cpp \
+    passwort.cpp \
+    mainconfig.cpp \
+    maincontroll.cpp \
+    modelthreadlicht.cpp \
+    steuerungthreadlicht.cpp \
+    rgb_decke.cpp \
+    thread_ueberwachung.cpp \
+    sliderarduino.cpp \
+    thread_slider.cpp \
+    menue_einstellung.cpp \
+    theke.cpp \
+    palette.cpp \
+    application.cpp \
+    audio.cpp
 
 HEADERS  += mainwindow.h \
-    einstellung.h \
-    einstellunglicht.h \
     licht.h \
     einstellunghauptlicht.h \
-    thread.h \
     rgbwand.h \
     mythread.h \
-    pca_9635.h
+    pca_9635.h \
+    mainconfig.h \
+    passwort.h \
+    modelthreadlicht.h \
+    steuerungthreadlicht.h \
+    maincontroll.h \
+    rgb_decke.h \
+    thread_ueberwachung.h \
+    sliderarduino.h \
+    thread_slider.h \
+    menue_einstellung.h \
+    theke.h \
+    einstellung.h \
+    palette.h \
+    application.h \
+    audio.h
 
 FORMS    += mainwindow.ui \
     licht.ui \
-    einstellunglicht.ui \
     einstellung.ui \
     einstellunghauptlicht.ui \
-    rgbwand.ui
+    rgbwand.ui \
+    passwort.ui \
+    rgb_decke.ui \
+    menue_einstellung.ui \
+    theke.ui \
+    palette.ui \
+    audio.ui
 
 RESOURCES += \
     bilder.qrc
 
-LIBS +=-L/usr/local/lib -lwiringPi
+LIBS +=-L/usr/lib -lwiringPi
 
 INCLUDEPATH    += /usr/local/include

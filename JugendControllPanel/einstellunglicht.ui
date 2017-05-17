@@ -28,6 +28,7 @@
   <property name="styleSheet">
    <string notr="true">QDialog{
 background-color:rgb(255, 255, 255);
+background-image:url(:/new/bilder/bilder/einstellung.png);
 }</string>
   </property>
   <widget class="QPushButton" name="pushButtonHome">
@@ -65,6 +66,7 @@ background-color:rgb(255, 255, 255);
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
+	background-color:transperant;
 
 border-image:url(:/new/bilder/bilder/zurueck.png) 1;
 border-width: 1px;
@@ -106,20 +108,23 @@ border-width: 1px;
       </property>
       <property name="font">
        <font>
-        <family>Comic Sans MS</family>
-        <pointsize>13</pointsize>
-        <weight>75</weight>
-        <italic>true</italic>
-        <bold>true</bold>
+        <family>MS Shell Dlg 2</family>
+        <pointsize>11</pointsize>
+        <weight>9</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+      </property>
       <property name="text">
-       <string>RGB Wand</string>
+       <string>RGB Fenster</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="pushButtonDinner">
+     <widget class="QPushButton" name="pushButtonBeamer">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -151,7 +156,7 @@ border-width: 1px;
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Diner</string>
+       <string>Beamer</string>
       </property>
      </widget>
     </item>
@@ -262,7 +267,7 @@ border-width: 1px;
      </widget>
     </item>
     <item row="0" column="2">
-     <widget class="QPushButton" name="pushButtonRGBDecke">
+     <widget class="QPushButton" name="pushButtonRGBTheke">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -291,11 +296,24 @@ border-width: 1px;
        </font>
       </property>
       <property name="text">
-       <string>RGB Decke</string>
+       <string>RGB Theke</string>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButtonEinstellung">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>400</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Einstellungen</string>
+   </property>
   </widget>
  </widget>
  <resources/>

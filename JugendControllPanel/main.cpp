@@ -1,13 +1,15 @@
-#include "mainwindow.h"
 #include <QApplication>
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    //set dark palette
+    Application a(argc, argv);
+
     MainWindow w;
-
-
-    w.show();
-
+    //w.installEventFilter(new MouseClickEater());
+    w.showFullScreen();
+    //w.show();
     return a.exec();
 }
+

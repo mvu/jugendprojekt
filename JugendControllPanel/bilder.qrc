@@ -4,5 +4,30 @@
         <file>bilder/home.png</file>
         <file>bilder/zurueck.png</file>
         <file>bilder/crosstimemain.png</file>
+        <file>bilder/einstellung.png</file>
+        <file>bilder/backgroundlich.png</file>
+        <file>bilder/worshipback.png</file>
+        <file>bilder/movieback.png</file>
+        <file>bilder/praise.png</file>
+        <file>bilder/praisedark.png</file>
+        <file>bilder/gelbuebergang.png</file>
+        <file>bilder/GrundrissJugend.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>bilder/Icons/audio.png</file>
+        <file>bilder/Icons/back_small.png</file>
+        <file>bilder/Icons/fish.png</file>
+        <file>bilder/Icons/jugend.png</file>
+        <file>bilder/Icons/lampe.png</file>
+        <file>bilder/Icons/settings.png</file>
+        <file>bilder/Icons/back_rot_half.jpg</file>
+        <file>bilder/Icons/backspace_icon.png</file>
+        <file>bilder/Icons/arrow_left_icon.png</file>
+        <file>bilder/Icons/shutdown-icon.png</file>
+        <file>bilder/Icons/back_green.png</file>
+        <file>bilder/Icons/arrow_left_icon_blk.png</file>
+        <file>bilder/Icons/back_blue.png</file>
+        <file>bilder/Icons/back_dark.png</file>
+        <file>bilder/Icons/back_grundriss.png</file>
     </qresource>
 </RCC>
