@@ -28,11 +28,12 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QPushButton *pushButtonRGBWand;
-    QPushButton *pushButtonDinner;
+    QPushButton *pushButtonBeamer;
     QPushButton *pushButtonPaletten;
     QPushButton *pushButtonTheke;
     QPushButton *pushButtonHauptlicht;
-    QPushButton *pushButtonRGBDecke;
+    QPushButton *pushButtonRGBTheke;
+    QPushButton *pushButtonEinstellung;
 
     void setupUi(QDialog *EinstellungLicht)
     {
@@ -43,6 +44,7 @@ public:
         EinstellungLicht->setMaximumSize(QSize(800, 480));
         EinstellungLicht->setStyleSheet(QLatin1String("QDialog{\n"
 "background-color:rgb(255, 255, 255);\n"
+"background-image:url(:/new/bilder/bilder/einstellung.png);\n"
 "}"));
         pushButtonHome = new QPushButton(EinstellungLicht);
         pushButtonHome->setObjectName(QStringLiteral("pushButtonHome"));
@@ -59,6 +61,7 @@ public:
         font.setPointSize(15);
         pushButtonHome->setFont(font);
         pushButtonHome->setStyleSheet(QLatin1String("QPushButton{\n"
+"	background-color:transperant;\n"
 "\n"
 "border-image:url(:/new/bilder/bilder/zurueck.png) 1;\n"
 "border-width: 1px;\n"
@@ -76,31 +79,32 @@ public:
         pushButtonRGBWand->setMinimumSize(QSize(100, 80));
         pushButtonRGBWand->setMaximumSize(QSize(100, 80));
         QFont font1;
-        font1.setFamily(QStringLiteral("Comic Sans MS"));
-        font1.setPointSize(13);
-        font1.setBold(true);
-        font1.setItalic(true);
-        font1.setWeight(75);
+        font1.setFamily(QStringLiteral("MS Shell Dlg 2"));
+        font1.setPointSize(11);
+        font1.setBold(false);
+        font1.setItalic(false);
+        font1.setWeight(9);
         pushButtonRGBWand->setFont(font1);
+        pushButtonRGBWand->setStyleSheet(QStringLiteral("font: 75 11pt \"MS Shell Dlg 2\";"));
 
         gridLayout->addWidget(pushButtonRGBWand, 0, 1, 1, 1);
 
-        pushButtonDinner = new QPushButton(gridLayoutWidget);
-        pushButtonDinner->setObjectName(QStringLiteral("pushButtonDinner"));
-        sizePolicy.setHeightForWidth(pushButtonDinner->sizePolicy().hasHeightForWidth());
-        pushButtonDinner->setSizePolicy(sizePolicy);
-        pushButtonDinner->setMinimumSize(QSize(100, 80));
-        pushButtonDinner->setMaximumSize(QSize(100, 80));
+        pushButtonBeamer = new QPushButton(gridLayoutWidget);
+        pushButtonBeamer->setObjectName(QStringLiteral("pushButtonBeamer"));
+        sizePolicy.setHeightForWidth(pushButtonBeamer->sizePolicy().hasHeightForWidth());
+        pushButtonBeamer->setSizePolicy(sizePolicy);
+        pushButtonBeamer->setMinimumSize(QSize(100, 80));
+        pushButtonBeamer->setMaximumSize(QSize(100, 80));
         QFont font2;
         font2.setFamily(QStringLiteral("Comic Sans MS"));
         font2.setPointSize(15);
         font2.setBold(true);
         font2.setItalic(true);
         font2.setWeight(75);
-        pushButtonDinner->setFont(font2);
-        pushButtonDinner->setStyleSheet(QStringLiteral(""));
+        pushButtonBeamer->setFont(font2);
+        pushButtonBeamer->setStyleSheet(QStringLiteral(""));
 
-        gridLayout->addWidget(pushButtonDinner, 1, 0, 1, 1);
+        gridLayout->addWidget(pushButtonBeamer, 1, 0, 1, 1);
 
         pushButtonPaletten = new QPushButton(gridLayoutWidget);
         pushButtonPaletten->setObjectName(QStringLiteral("pushButtonPaletten"));
@@ -140,16 +144,25 @@ public:
 
         gridLayout->addWidget(pushButtonHauptlicht, 0, 0, 1, 1);
 
-        pushButtonRGBDecke = new QPushButton(gridLayoutWidget);
-        pushButtonRGBDecke->setObjectName(QStringLiteral("pushButtonRGBDecke"));
-        sizePolicy.setHeightForWidth(pushButtonRGBDecke->sizePolicy().hasHeightForWidth());
-        pushButtonRGBDecke->setSizePolicy(sizePolicy);
-        pushButtonRGBDecke->setMinimumSize(QSize(100, 80));
-        pushButtonRGBDecke->setMaximumSize(QSize(100, 80));
-        pushButtonRGBDecke->setFont(font1);
+        pushButtonRGBTheke = new QPushButton(gridLayoutWidget);
+        pushButtonRGBTheke->setObjectName(QStringLiteral("pushButtonRGBTheke"));
+        sizePolicy.setHeightForWidth(pushButtonRGBTheke->sizePolicy().hasHeightForWidth());
+        pushButtonRGBTheke->setSizePolicy(sizePolicy);
+        pushButtonRGBTheke->setMinimumSize(QSize(100, 80));
+        pushButtonRGBTheke->setMaximumSize(QSize(100, 80));
+        QFont font4;
+        font4.setFamily(QStringLiteral("Comic Sans MS"));
+        font4.setPointSize(13);
+        font4.setBold(true);
+        font4.setItalic(true);
+        font4.setWeight(75);
+        pushButtonRGBTheke->setFont(font4);
 
-        gridLayout->addWidget(pushButtonRGBDecke, 0, 2, 1, 1);
+        gridLayout->addWidget(pushButtonRGBTheke, 0, 2, 1, 1);
 
+        pushButtonEinstellung = new QPushButton(EinstellungLicht);
+        pushButtonEinstellung->setObjectName(QStringLiteral("pushButtonEinstellung"));
+        pushButtonEinstellung->setGeometry(QRect(60, 400, 161, 61));
 
         retranslateUi(EinstellungLicht);
         QObject::connect(pushButtonHome, SIGNAL(clicked()), EinstellungLicht, SLOT(close()));
@@ -161,12 +174,13 @@ public:
     {
         EinstellungLicht->setWindowTitle(QApplication::translate("EinstellungLicht", "Einstellung", 0));
         pushButtonHome->setText(QApplication::translate("EinstellungLicht", "Back", 0));
-        pushButtonRGBWand->setText(QApplication::translate("EinstellungLicht", "RGB Wand", 0));
-        pushButtonDinner->setText(QApplication::translate("EinstellungLicht", "Diner", 0));
+        pushButtonRGBWand->setText(QApplication::translate("EinstellungLicht", "RGB Fenster", 0));
+        pushButtonBeamer->setText(QApplication::translate("EinstellungLicht", "Beamer", 0));
         pushButtonPaletten->setText(QApplication::translate("EinstellungLicht", "Paletten", 0));
         pushButtonTheke->setText(QApplication::translate("EinstellungLicht", "Theke", 0));
         pushButtonHauptlicht->setText(QApplication::translate("EinstellungLicht", "Hauptlicht", 0));
-        pushButtonRGBDecke->setText(QApplication::translate("EinstellungLicht", "RGB Decke", 0));
+        pushButtonRGBTheke->setText(QApplication::translate("EinstellungLicht", "RGB Theke", 0));
+        pushButtonEinstellung->setText(QApplication::translate("EinstellungLicht", "Einstellungen", 0));
     } // retranslateUi
 
 };

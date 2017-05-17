@@ -3,47 +3,85 @@
 #include "pca9635.h"
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
+#include "einstellunghauptlicht.h"
+#include "mainconfig.h"
 
-
-
+bool arryHauptlicht[8];
 
 MyThread::MyThread(QObject *parent) :
     QThread(parent)
 {
-
+    connect(parent, SIGNAL(CheckBoxChanged(int,bool)), this,SLOT(checkBoxChanged(int,bool)));
 }
-
 
 void MyThread::run()
 {
-    int i = 0;
-    //int ledAddresse = 0x5f;
-    int arduinoAddresse = 0x0e;
-    //int ledRegister = 9;
-    int sliderValue = 0;
-    //int pcaInit = wiringPiI2CSetup(ledAddresse);
-    int arduinoInit = wiringPiI2CSetup(arduinoAddresse);
-    emit Verbunden(arduinoInit);
+    for(int i=0; i<8; i++)
+        arryHauptlicht[i] = false;
 
-    if (arduinoInit < 0);
-    else{
-        while(1)
+    int sliderOld = pca->pca9635PWMRead(pcaHL,0x03);
+    slider->set(SLIDERSETONE,sliderOld / 2.55);
+    emit SliderChanged(sliderOld);
+
+    int sliderVal = slider->get(SLIDERGETONE);
+    int sliderValNeu = 0;
+    int sliderDif = 0;
+    emit Verbunden(1);
+    while(1)
+    {
+        sliderValNeu = slider->get(SLIDERGETONE);
+
+        if (sliderVal != sliderValNeu)
         {
+            sliderDif = abs(sliderValNeu - sliderVal); // Prüfen ob neue Slider Wert +/- 20% vom alten wert nicht überschreitet
 
-            float sliderValuefloat = wiringPiI2CReadReg8(arduinoInit, 9);
-            sliderValuefloat = sliderValue / 100.0;
-            sliderValue = 255 - (255.0 * sliderValuefloat);
-            if (sliderValue == 252)sliderValue = 255;
-            //PCA9635PWMWrite(pcaInit, ledRegister, sliderValue);
-            emit ValChanged(sliderValuefloat);
-            i++;
-            emit Threadrun(i);
-            QThread::msleep(10);
-            //QMutex mutex;
-            //mutex.lock();
-            if(this->stop)break;
-            //mutex.unlock();
+            if (sliderDif <=20)
+            {   // Wenn der neue Slider wert im berreich drinnen ist
+                sliderVal = sliderValNeu;                                                   // wird der neue Wert übernommen
+                emit ValChanged(sliderVal);
+                //if (sliderVal <= 4)sliderVal=0;
+                sliderVal *= 2.55;
+                if (sliderVal >= 180)
+                    sliderVal = 180;
 
+                while(sliderOld != sliderVal)
+                {                                  // Alten Slider wert auf Neuen wert in 1 schritten ranfahren
+                    if(sliderOld < sliderVal)
+                        sliderOld++;
+                    else
+                        sliderOld--;
+
+                    for(int i = 2; i < 10; i++)
+                    {
+                        if (arryHauptlicht[i - 2]== 1)
+                            pca->pca9635PWMWrite(pcaHL,i,sliderOld);
+               // Alten Slider wert der um 1 erhöt wurde in alle LEDs schreiben
+                    }
+                    QThread::msleep(10);
+
+                }
+            }
+        }
+
+        QThread::msleep(150);
+        if(this->Stop){
+            slider->set(SLIDERSETONE, 1);
+            emit Verbunden(0);
+
+            int hlprozent = 0;
+            for(int i = 2; i < 10; i++)
+            {
+                hlprozent += pca->pca9635PWMRead(pcaHL, i);
+            }
+            hlprozent /= 8;
+            pca->pca9635PWMWrite(pcaHL,LUEFTERHAUPTLICHT,hlprozent);
+            pca->pca9635PWMWrite(pcaHL,LUEFTERNETZEIL,hlprozent + 70);
+            break;
         }
     }
+}
+
+void MyThread::checkBoxChanged(int index, bool value)
+{
+    arryHauptlicht[index] = value;
 }

@@ -2,13 +2,12 @@
 #define RGBWAND_H
 
 #include <QDialog>
-#include "mythread.h"
-#include "pca_9635.h"
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
 
+#include "mainconfig.h"
 
-#define pca9635_rot 3
+class steuerungThreadLicht;
+class ModelThreadLicht;
+class thread_Slider;
 
 namespace Ui {
 class RgbWand;
@@ -19,35 +18,29 @@ class RgbWand : public QDialog
     Q_OBJECT
 
 public:
-    explicit RgbWand(QWidget *parent = 0);
+    explicit RgbWand(QWidget *parent = 0, steuerungThreadLicht *s = NULL, ModelThreadLicht *m = NULL);
     ~RgbWand();
-
-    MyThread * mThread;
-    pca_9635 *pca;
-
-
-private slots:
-    void on_pushStart_clicked();
-
-    void on_pushStop_clicked();
-
-    void on_SliderRot_valueChanged(int value);
-
-    void on_SliderGruen_valueChanged(int value);
-
-    void on_SliderBlau_valueChanged(int value);
-signals:
-
-
-public slots:
-    void onValChanged(float);
-    void onVerbunden(int);
-    void onThreadrun(int);
-    //void onPcafd(int);
 
 private:
     Ui::RgbWand *ui;
-    int pcaInit;
+    steuerungThreadLicht *sThread;
+    ModelThreadLicht *mThread;
+    thread_Slider *Slider;
+
+public slots:
+
+signals:
+    void wandRGBrot(int, int);
+    void wandRGBblau(int, int);
+    void wandRGBgreun(int, int);
+
+private slots:
+    void SliderChanged_ROT(int value);
+    void SliderChanged_GRN(int value);
+    void SliderChanged_BLAU(int value);
+    void on_pushButton_back_released();
+    void on_pushButton_einst_released();
+    void on_pushButton_toggle_released();
 };
 
 #endif // RGBWAND_H
