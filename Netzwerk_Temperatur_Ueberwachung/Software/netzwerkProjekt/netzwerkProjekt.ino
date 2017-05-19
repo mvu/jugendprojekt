@@ -14,10 +14,10 @@
 #define udpPort 4505
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192,168,1,189);
-IPAddress gateway(192, 168, 1, 1);
+IPAddress ip(192,168,188,250);									//  in der Fritzbox Jugend hinterlegt
+IPAddress gateway(192, 168, 188, 1);
 IPAddress subnet(255, 255, 255, 0);
-IPAddress RecipientIP(192, 168, 1, 100);
+IPAddress RecipientIP(192, 168, 188, 1);
 unsigned int localPort = 8888;
 
 EthernetUDP Udp;
