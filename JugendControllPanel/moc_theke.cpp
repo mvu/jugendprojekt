@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Theke_t {
-    QByteArrayData data[19];
-    char stringdata[270];
+    QByteArrayData data[20];
+    char stringdata[283];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,20 +40,22 @@ QT_MOC_LITERAL(7, 40, 13),
 QT_MOC_LITERAL(8, 54, 1),
 QT_MOC_LITERAL(9, 56, 11),
 QT_MOC_LITERAL(10, 68, 16),
-QT_MOC_LITERAL(11, 85, 17),
-QT_MOC_LITERAL(12, 103, 17),
-QT_MOC_LITERAL(13, 121, 18),
-QT_MOC_LITERAL(14, 140, 14),
-QT_MOC_LITERAL(15, 155, 32),
-QT_MOC_LITERAL(16, 188, 30),
-QT_MOC_LITERAL(17, 219, 27),
-QT_MOC_LITERAL(18, 247, 22)
+QT_MOC_LITERAL(11, 85, 12),
+QT_MOC_LITERAL(12, 98, 17),
+QT_MOC_LITERAL(13, 116, 17),
+QT_MOC_LITERAL(14, 134, 18),
+QT_MOC_LITERAL(15, 153, 14),
+QT_MOC_LITERAL(16, 168, 32),
+QT_MOC_LITERAL(17, 201, 30),
+QT_MOC_LITERAL(18, 232, 27),
+QT_MOC_LITERAL(19, 260, 22)
     },
     "Theke\0thekeRGBrot\0\0r\0val\0thekeRGBblau\0"
     "b\0thekeRGBgruen\0g\0thekeRGBall\0"
-    "thekeDeckeToggle\0SliderChanged_ROT\0"
-    "SliderChanged_GRN\0SliderChanged_BLAU\0"
-    "afterAnimation\0on_pushButton_rgb_togge_released\0"
+    "thekeDeckeToggle\0parentEnable\0"
+    "SliderChanged_ROT\0SliderChanged_GRN\0"
+    "SliderChanged_BLAU\0afterAnimation\0"
+    "on_pushButton_rgb_togge_released\0"
     "on_pushButton_rgb_set_released\0"
     "on_pushButton_back_released\0"
     "on_pushButton_released"
@@ -66,29 +68,30 @@ static const uint qt_meta_data_Theke[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       5,       // signalCount
+       6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   79,    2, 0x06 /* Public */,
-       5,    2,   84,    2, 0x06 /* Public */,
-       7,    2,   89,    2, 0x06 /* Public */,
-       9,    3,   94,    2, 0x06 /* Public */,
-      10,    1,  101,    2, 0x06 /* Public */,
+       1,    2,   84,    2, 0x06 /* Public */,
+       5,    2,   89,    2, 0x06 /* Public */,
+       7,    2,   94,    2, 0x06 /* Public */,
+       9,    3,   99,    2, 0x06 /* Public */,
+      10,    1,  106,    2, 0x06 /* Public */,
+      11,    0,  109,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      11,    1,  104,    2, 0x08 /* Private */,
-      12,    1,  107,    2, 0x08 /* Private */,
-      13,    1,  110,    2, 0x08 /* Private */,
-      14,    0,  113,    2, 0x08 /* Private */,
-      15,    0,  114,    2, 0x08 /* Private */,
-      16,    0,  115,    2, 0x08 /* Private */,
-      17,    0,  116,    2, 0x08 /* Private */,
-      18,    0,  117,    2, 0x08 /* Private */,
+      12,    1,  110,    2, 0x08 /* Private */,
+      13,    1,  113,    2, 0x08 /* Private */,
+      14,    1,  116,    2, 0x08 /* Private */,
+      15,    0,  119,    2, 0x08 /* Private */,
+      16,    0,  120,    2, 0x08 /* Private */,
+      17,    0,  121,    2, 0x08 /* Private */,
+      18,    0,  122,    2, 0x08 /* Private */,
+      19,    0,  123,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -96,6 +99,7 @@ static const uint qt_meta_data_Theke[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    4,
     QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,    2,    2,    2,
     QMetaType::Void, QMetaType::Bool,    2,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    4,
@@ -120,14 +124,15 @@ void Theke::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 2: _t->thekeRGBgruen((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->thekeRGBall((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 4: _t->thekeDeckeToggle((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 5: _t->SliderChanged_ROT((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->SliderChanged_GRN((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: _t->SliderChanged_BLAU((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->afterAnimation(); break;
-        case 9: _t->on_pushButton_rgb_togge_released(); break;
-        case 10: _t->on_pushButton_rgb_set_released(); break;
-        case 11: _t->on_pushButton_back_released(); break;
-        case 12: _t->on_pushButton_released(); break;
+        case 5: _t->parentEnable(); break;
+        case 6: _t->SliderChanged_ROT((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->SliderChanged_GRN((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->SliderChanged_BLAU((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->afterAnimation(); break;
+        case 10: _t->on_pushButton_rgb_togge_released(); break;
+        case 11: _t->on_pushButton_rgb_set_released(); break;
+        case 12: _t->on_pushButton_back_released(); break;
+        case 13: _t->on_pushButton_released(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -163,6 +168,12 @@ void Theke::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
                 *result = 4;
             }
         }
+        {
+            typedef void (Theke::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Theke::parentEnable)) {
+                *result = 5;
+            }
+        }
     }
 }
 
@@ -191,13 +202,13 @@ int Theke::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }
@@ -235,5 +246,11 @@ void Theke::thekeDeckeToggle(bool _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);
+}
+
+// SIGNAL 5
+void Theke::parentEnable()
+{
+    QMetaObject::activate(this, &staticMetaObject, 5, 0);
 }
 QT_END_MOC_NAMESPACE

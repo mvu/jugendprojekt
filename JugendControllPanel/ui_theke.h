@@ -48,7 +48,7 @@ public:
         if (Theke->objectName().isEmpty())
             Theke->setObjectName(QStringLiteral("Theke"));
         Theke->resize(400, 480);
-        Theke->setMaximumSize(QSize(800, 480));
+        Theke->setMaximumSize(QSize(800, 530));
         Theke->setStyleSheet(QStringLiteral("QGroupBox::title{subcontrol-origin:margin; left:10px; padding: 0 3px 0 3px;color:rgb(10,10,10);}"));
         label = new QLabel(Theke);
         label->setObjectName(QStringLiteral("label"));
@@ -60,13 +60,13 @@ public:
         label->setAlignment(Qt::AlignCenter);
         frame = new QFrame(Theke);
         frame->setObjectName(QStringLiteral("frame"));
-        frame->setGeometry(QRect(0, 0, 400, 480));
+        frame->setGeometry(QRect(0, 0, 560, 541));
         frame->setStyleSheet(QStringLiteral("background-image: url(:/bilder/Icons/back_green.png);"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
-        pushButton_back = new QPushButton(Theke);
+        pushButton_back = new QPushButton(frame);
         pushButton_back->setObjectName(QStringLiteral("pushButton_back"));
-        pushButton_back->setGeometry(QRect(330, 410, 60, 60));
+        pushButton_back->setGeometry(QRect(320, 410, 60, 60));
         pushButton_back->setFocusPolicy(Qt::NoFocus);
         QIcon icon;
         icon.addFile(QStringLiteral(":/bilder/Icons/arrow_left_icon_blk.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -150,7 +150,6 @@ public:
 
         frame->raise();
         label->raise();
-        pushButton_back->raise();
         groupBox_RGB->raise();
         groupBox_lampen->raise();
 

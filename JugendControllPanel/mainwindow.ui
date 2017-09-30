@@ -617,7 +617,7 @@ background-color:rgba(0,0,0,0);</string>
          <enum>QFrame::Plain</enum>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Audio&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Medien&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -1915,7 +1915,7 @@ background-color:rgba(0,0,0,0);</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>800</width>
+      <width>799</width>
       <height>480</height>
      </rect>
     </property>

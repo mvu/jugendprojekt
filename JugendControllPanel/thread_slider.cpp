@@ -30,7 +30,7 @@ void thread_Slider::init(int val1, int val2, int val3, int val4)
 {
     std::cout << "Slider init \n";
 
-    int delay =75; //to set interval in ms for checking Sliders
+    int delay = 200; //to set interval in ms for checking Sliders
 
     setSlider(SLIDERSETONE, val1);
     setSlider(SLIDERSETTWO, val2);
@@ -46,37 +46,44 @@ void thread_Slider::init(int val1, int val2, int val3, int val4)
 void thread_Slider::Slider1_Check()
 {
     int SliderNew = SliderControl->get(SLIDERGETONE);
- //   std::cout<<"Slider1: read " << SliderNew << "\n";
-    if (SliderNew != SliderOld[0]){
-        emit Slider1_Changed(SliderNew);
-        SliderOld[0] = SliderNew;
+    if (SliderNew != -1){
+        if (SliderNew != SliderOld[0]){
+            emit Slider1_Changed(SliderNew);
+            SliderOld[0] = SliderNew;
+        }
     }
 }
 
 void thread_Slider::Slider2_Check()
 {
     int SliderNew = SliderControl->get(SLIDERGETTWO);
-    if (SliderNew != SliderOld[1]){
-        emit Slider2_Changed(SliderNew);
-        SliderOld[1] = SliderNew;
+    if (SliderNew != -1){
+        if (SliderNew != SliderOld[1]){
+            emit Slider2_Changed(SliderNew);
+            SliderOld[1] = SliderNew;
+        }
     }
 }
 
 void thread_Slider::Slider3_Check()
 {
     int SliderNew = SliderControl->get(SLIDERGETTHREE);
-    if (SliderNew != SliderOld[2]){
-        emit Slider3_Changed(SliderNew);
-        SliderOld[2] = SliderNew;
+    if (SliderNew != -1){
+        if (SliderNew != SliderOld[2]){
+            emit Slider3_Changed(SliderNew);
+            SliderOld[2] = SliderNew;
+        }
     }
 }
 
 void thread_Slider::Slider4_Check()
 {
     int SliderNew = SliderControl->get(SLIDERGETFOUR);
-    if (SliderNew != SliderOld[3]){
-        emit Slider4_Changed(SliderNew);
-        SliderOld[3] = SliderNew;
+    if (SliderNew != -1){
+        if (SliderNew != SliderOld[3]){
+            emit Slider4_Changed(SliderNew);
+            SliderOld[3] = SliderNew;
+        }
     }
 }
 

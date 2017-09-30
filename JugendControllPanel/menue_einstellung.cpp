@@ -28,8 +28,9 @@ Menue_Einstellung::Menue_Einstellung(QWidget *parent, steuerungThreadLicht *s, M
     //initial reading
     time_update();
 
-    //no clock?? if window centered
-    //ui->label_uhr_2->hide();
+    //initialize Palette-Button
+    if (sThread->getStatusPalette())ui->label_5->setText("Paletten aus");
+    else ui->label_5->setText("Paletten an");
 }
 
 Menue_Einstellung::~Menue_Einstellung()
@@ -41,6 +42,8 @@ Menue_Einstellung::~Menue_Einstellung()
 void Menue_Einstellung::on_pushButton_hauptlicht_2_released()
 {
     hauptlicht = new EinstellungHauptlicht(Hauptfenster, sThread, mThread);
+    connect(hauptlicht, SIGNAL(EnableParent()), this, SLOT(EnableMenue()));
+    this->setEnabled(false);
     hauptlicht->setModal(true);
     hauptlicht->setWindowFlags(Qt::FramelessWindowHint);
     hauptlicht->show();
@@ -48,18 +51,21 @@ void Menue_Einstellung::on_pushButton_hauptlicht_2_released()
 
 void Menue_Einstellung::on_pushButton_RGBdecke_released()
 {
-    rgbDecke = new RGB_Decke(Hauptfenster, sThread, mThread);
-    rgbDecke->setModal(true);
-    rgbDecke->setWindowFlags(Qt::FramelessWindowHint);
-    rgbDecke->show();
+//    rgbDecke = new RGB_Decke(Hauptfenster, sThread, mThread);
+//    rgbDecke->setModal(true);
+//    rgbDecke->setWindowFlags(Qt::FramelessWindowHint);
+//    rgbDecke->show();
 }
 
 void Menue_Einstellung::on_pushButton_Theke_2_released()
 {
     theke = new Theke(Hauptfenster, sThread, mThread);
+    connect(theke, SIGNAL(parentEnable()), this, SLOT(EnableMenue()));
+    this->setEnabled(false);
     theke->setModal(true);
     theke->setWindowFlags(Qt::FramelessWindowHint);
-    theke->show();
+    theke->showFullScreen();
+
 }
 
 void Menue_Einstellung::on_pushButton_palette_released()
@@ -78,10 +84,10 @@ void Menue_Einstellung::on_pushButton_palette_released()
 
 void Menue_Einstellung::on_pushButton_RGBfenster_released()
 {
-    rgbWand = new RgbWand(Hauptfenster, sThread, mThread);
-    rgbWand->setModal(true);
-    rgbWand->setWindowFlags(Qt::FramelessWindowHint);
-    rgbWand->show();
+//    rgbWand = new RgbWand(this, sThread, mThread);
+//    rgbWand->setModal(true);
+//    rgbWand->setWindowFlags(Qt::FramelessWindowHint);
+//    rgbWand->show();
 }
 
 void Menue_Einstellung::on_pushButton_save_released()
@@ -113,5 +119,6 @@ void Menue_Einstellung::time_update(){
 }
 
 void Menue_Einstellung::EnableMenue(){
-    ui->verticalLayout_2->setEnabled(true);
+//    ui->verticalLayout_2->setEnabled(true);
+    this->setEnabled(true);
 }

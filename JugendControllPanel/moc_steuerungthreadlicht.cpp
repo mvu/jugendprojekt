@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_steuerungThreadLicht_t {
-    QByteArrayData data[64];
-    char stringdata[910];
+    QByteArrayData data[71];
+    char stringdata[1018];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -60,39 +60,46 @@ QT_MOC_LITERAL(27, 326, 16),
 QT_MOC_LITERAL(28, 343, 7),
 QT_MOC_LITERAL(29, 351, 19),
 QT_MOC_LITERAL(30, 371, 13),
-QT_MOC_LITERAL(31, 385, 14),
-QT_MOC_LITERAL(32, 400, 4),
-QT_MOC_LITERAL(33, 405, 4),
-QT_MOC_LITERAL(34, 410, 4),
-QT_MOC_LITERAL(35, 415, 17),
-QT_MOC_LITERAL(36, 433, 5),
-QT_MOC_LITERAL(37, 439, 20),
-QT_MOC_LITERAL(38, 460, 11),
-QT_MOC_LITERAL(39, 472, 16),
-QT_MOC_LITERAL(40, 489, 19),
-QT_MOC_LITERAL(41, 509, 22),
-QT_MOC_LITERAL(42, 532, 13),
-QT_MOC_LITERAL(43, 546, 18),
-QT_MOC_LITERAL(44, 565, 15),
-QT_MOC_LITERAL(45, 581, 7),
-QT_MOC_LITERAL(46, 589, 17),
-QT_MOC_LITERAL(47, 607, 23),
-QT_MOC_LITERAL(48, 631, 11),
-QT_MOC_LITERAL(49, 643, 25),
-QT_MOC_LITERAL(50, 669, 27),
-QT_MOC_LITERAL(51, 697, 26),
-QT_MOC_LITERAL(52, 724, 6),
-QT_MOC_LITERAL(53, 731, 13),
-QT_MOC_LITERAL(54, 745, 11),
-QT_MOC_LITERAL(55, 757, 4),
-QT_MOC_LITERAL(56, 762, 9),
-QT_MOC_LITERAL(57, 772, 15),
-QT_MOC_LITERAL(58, 788, 17),
-QT_MOC_LITERAL(59, 806, 18),
-QT_MOC_LITERAL(60, 825, 22),
-QT_MOC_LITERAL(61, 848, 25),
-QT_MOC_LITERAL(62, 874, 24),
-QT_MOC_LITERAL(63, 899, 10)
+QT_MOC_LITERAL(31, 385, 19),
+QT_MOC_LITERAL(32, 405, 14),
+QT_MOC_LITERAL(33, 420, 4),
+QT_MOC_LITERAL(34, 425, 4),
+QT_MOC_LITERAL(35, 430, 4),
+QT_MOC_LITERAL(36, 435, 17),
+QT_MOC_LITERAL(37, 453, 5),
+QT_MOC_LITERAL(38, 459, 20),
+QT_MOC_LITERAL(39, 480, 11),
+QT_MOC_LITERAL(40, 492, 13),
+QT_MOC_LITERAL(41, 506, 16),
+QT_MOC_LITERAL(42, 523, 19),
+QT_MOC_LITERAL(43, 543, 22),
+QT_MOC_LITERAL(44, 566, 13),
+QT_MOC_LITERAL(45, 580, 18),
+QT_MOC_LITERAL(46, 599, 15),
+QT_MOC_LITERAL(47, 615, 7),
+QT_MOC_LITERAL(48, 623, 17),
+QT_MOC_LITERAL(49, 641, 23),
+QT_MOC_LITERAL(50, 665, 11),
+QT_MOC_LITERAL(51, 677, 8),
+QT_MOC_LITERAL(52, 686, 15),
+QT_MOC_LITERAL(53, 702, 16),
+QT_MOC_LITERAL(54, 719, 25),
+QT_MOC_LITERAL(55, 745, 27),
+QT_MOC_LITERAL(56, 773, 26),
+QT_MOC_LITERAL(57, 800, 18),
+QT_MOC_LITERAL(58, 819, 6),
+QT_MOC_LITERAL(59, 826, 13),
+QT_MOC_LITERAL(60, 840, 11),
+QT_MOC_LITERAL(61, 852, 4),
+QT_MOC_LITERAL(62, 857, 9),
+QT_MOC_LITERAL(63, 867, 15),
+QT_MOC_LITERAL(64, 883, 17),
+QT_MOC_LITERAL(65, 901, 18),
+QT_MOC_LITERAL(66, 920, 12),
+QT_MOC_LITERAL(67, 933, 22),
+QT_MOC_LITERAL(68, 956, 25),
+QT_MOC_LITERAL(69, 982, 24),
+QT_MOC_LITERAL(70, 1007, 10)
     },
     "steuerungThreadLicht\0hauptlichtAllVal\0"
     "\0hauptlichtSelectValSig\0thekegetRGBvalue\0"
@@ -104,20 +111,22 @@ QT_MOC_LITERAL(63, 899, 10)
     "initHauptlicht\0initRGB\0initGPIO\0"
     "toggleStandard\0on\0hauptlichtAll\0"
     "hauptlichtSelect\0leuchte\0hauptlichtSelectVal\0"
-    "SetHauptlicht\0thekeRGBAllVal\0valR\0"
-    "valG\0valB\0thekeRGBSelectVal\0farbe\0"
-    "thekeRGBRainbowOnOff\0thekegetRGB\0"
-    "fensterRGBAllVal\0fensterRGBSelectVal\0"
-    "fensterRGBRainbowOnOff\0fenstergetRGB\0"
-    "deckeRGBPowerOnOff\0thekeLichtOnOff\0"
-    "checked\0paletteLichtOnOff\0"
+    "SetHauptlicht\0getStatusHauptlicht\0"
+    "thekeRGBAllVal\0valR\0valG\0valB\0"
+    "thekeRGBSelectVal\0farbe\0thekeRGBRainbowOnOff\0"
+    "thekegetRGB\0thekegetDecke\0fensterRGBAllVal\0"
+    "fensterRGBSelectVal\0fensterRGBRainbowOnOff\0"
+    "fenstergetRGB\0deckeRGBPowerOnOff\0"
+    "thekeLichtOnOff\0checked\0paletteLichtOnOff\0"
     "hauptlichtNetzteilOnOff\0beamerOnOff\0"
+    "pc_pulse\0getStatusBeamer\0getStatusPalette\0"
     "RGB_Decke_DataRot_Changed\0"
     "RGB_Decke_DataGruen_Changed\0"
-    "RGB_Decke_DataBlau_Changed\0allOFF\0"
-    "jugendLichtON\0teenLichtOn\0kino\0praistime\0"
-    "luefterNetzteil\0luefterController\0"
-    "luefterAusgangOben\0getLuefterNetzteilslot\0"
+    "RGB_Decke_DataBlau_Changed\0"
+    "getStatusRGBRelais\0allOFF\0jugendLichtON\0"
+    "teenLichtOn\0kino\0praistime\0luefterNetzteil\0"
+    "luefterController\0luefterAusgangOben\0"
+    "luefterOnkyo\0getLuefterNetzteilslot\0"
     "getLuefterAusgangObenslot\0"
     "getLuefterControllerslot\0standardOn"
 };
@@ -129,7 +138,7 @@ static const uint qt_meta_data_steuerungThreadLicht[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      52,   14, // methods
+      59,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -137,60 +146,67 @@ static const uint qt_meta_data_steuerungThreadLicht[] = {
       15,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  274,    2, 0x06 /* Public */,
-       3,    1,  277,    2, 0x06 /* Public */,
-       4,    3,  280,    2, 0x06 /* Public */,
-       8,    1,  287,    2, 0x06 /* Public */,
-       9,    1,  290,    2, 0x06 /* Public */,
-      10,    1,  293,    2, 0x06 /* Public */,
-      11,    3,  296,    2, 0x06 /* Public */,
-      12,    1,  303,    2, 0x06 /* Public */,
-      13,    1,  306,    2, 0x06 /* Public */,
-      14,    1,  309,    2, 0x06 /* Public */,
-      15,    1,  312,    2, 0x06 /* Public */,
-      16,    1,  315,    2, 0x06 /* Public */,
-      17,    1,  318,    2, 0x06 /* Public */,
-      19,    1,  321,    2, 0x06 /* Public */,
-      20,    1,  324,    2, 0x06 /* Public */,
+       1,    1,  309,    2, 0x06 /* Public */,
+       3,    1,  312,    2, 0x06 /* Public */,
+       4,    3,  315,    2, 0x06 /* Public */,
+       8,    1,  322,    2, 0x06 /* Public */,
+       9,    1,  325,    2, 0x06 /* Public */,
+      10,    1,  328,    2, 0x06 /* Public */,
+      11,    3,  331,    2, 0x06 /* Public */,
+      12,    1,  338,    2, 0x06 /* Public */,
+      13,    1,  341,    2, 0x06 /* Public */,
+      14,    1,  344,    2, 0x06 /* Public */,
+      15,    1,  347,    2, 0x06 /* Public */,
+      16,    1,  350,    2, 0x06 /* Public */,
+      17,    1,  353,    2, 0x06 /* Public */,
+      19,    1,  356,    2, 0x06 /* Public */,
+      20,    1,  359,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      21,    0,  327,    2, 0x0a /* Public */,
-      22,    0,  328,    2, 0x0a /* Public */,
-      23,    0,  329,    2, 0x0a /* Public */,
-      24,    1,  330,    2, 0x0a /* Public */,
-      26,    1,  333,    2, 0x0a /* Public */,
-      27,    2,  336,    2, 0x0a /* Public */,
-      29,    1,  341,    2, 0x0a /* Public */,
-       1,    0,  344,    2, 0x0a /* Public */,
-      30,    1,  345,    2, 0x0a /* Public */,
-      31,    3,  348,    2, 0x0a /* Public */,
-      35,    2,  355,    2, 0x0a /* Public */,
-      37,    0,  360,    2, 0x0a /* Public */,
-      38,    0,  361,    2, 0x0a /* Public */,
-      39,    1,  362,    2, 0x0a /* Public */,
-      40,    2,  365,    2, 0x0a /* Public */,
-      41,    0,  370,    2, 0x0a /* Public */,
-      42,    0,  371,    2, 0x0a /* Public */,
-      43,    0,  372,    2, 0x0a /* Public */,
-      44,    1,  373,    2, 0x0a /* Public */,
-      46,    1,  376,    2, 0x0a /* Public */,
-      47,    0,  379,    2, 0x0a /* Public */,
-      48,    1,  380,    2, 0x0a /* Public */,
-      49,    1,  383,    2, 0x0a /* Public */,
-      50,    1,  386,    2, 0x0a /* Public */,
-      51,    1,  389,    2, 0x0a /* Public */,
-      52,    0,  392,    2, 0x0a /* Public */,
-      53,    0,  393,    2, 0x0a /* Public */,
-      54,    0,  394,    2, 0x0a /* Public */,
-      55,    0,  395,    2, 0x0a /* Public */,
-      56,    0,  396,    2, 0x0a /* Public */,
-      57,    1,  397,    2, 0x0a /* Public */,
-      58,    1,  400,    2, 0x0a /* Public */,
-      59,    1,  403,    2, 0x0a /* Public */,
-      60,    0,  406,    2, 0x0a /* Public */,
-      61,    0,  407,    2, 0x0a /* Public */,
-      62,    0,  408,    2, 0x0a /* Public */,
-      63,    0,  409,    2, 0x0a /* Public */,
+      21,    0,  362,    2, 0x0a /* Public */,
+      22,    0,  363,    2, 0x0a /* Public */,
+      23,    0,  364,    2, 0x0a /* Public */,
+      24,    1,  365,    2, 0x0a /* Public */,
+      26,    1,  368,    2, 0x0a /* Public */,
+      27,    2,  371,    2, 0x0a /* Public */,
+      29,    1,  376,    2, 0x0a /* Public */,
+       1,    0,  379,    2, 0x0a /* Public */,
+      30,    1,  380,    2, 0x0a /* Public */,
+      31,    0,  383,    2, 0x0a /* Public */,
+      32,    3,  384,    2, 0x0a /* Public */,
+      36,    2,  391,    2, 0x0a /* Public */,
+      38,    0,  396,    2, 0x0a /* Public */,
+      39,    0,  397,    2, 0x0a /* Public */,
+      40,    0,  398,    2, 0x0a /* Public */,
+      41,    1,  399,    2, 0x0a /* Public */,
+      42,    2,  402,    2, 0x0a /* Public */,
+      43,    0,  407,    2, 0x0a /* Public */,
+      44,    0,  408,    2, 0x0a /* Public */,
+      45,    0,  409,    2, 0x0a /* Public */,
+      46,    1,  410,    2, 0x0a /* Public */,
+      48,    1,  413,    2, 0x0a /* Public */,
+      49,    0,  416,    2, 0x0a /* Public */,
+      50,    1,  417,    2, 0x0a /* Public */,
+      51,    0,  420,    2, 0x0a /* Public */,
+      52,    0,  421,    2, 0x0a /* Public */,
+      53,    0,  422,    2, 0x0a /* Public */,
+      54,    1,  423,    2, 0x0a /* Public */,
+      55,    1,  426,    2, 0x0a /* Public */,
+      56,    1,  429,    2, 0x0a /* Public */,
+      57,    0,  432,    2, 0x0a /* Public */,
+      58,    0,  433,    2, 0x0a /* Public */,
+      59,    0,  434,    2, 0x0a /* Public */,
+      60,    0,  435,    2, 0x0a /* Public */,
+      61,    0,  436,    2, 0x0a /* Public */,
+      62,    0,  437,    2, 0x0a /* Public */,
+      63,    1,  438,    2, 0x0a /* Public */,
+      64,    1,  441,    2, 0x0a /* Public */,
+      65,    1,  444,    2, 0x0a /* Public */,
+      66,    1,  447,    2, 0x0a /* Public */,
+      67,    0,  450,    2, 0x0a /* Public */,
+      68,    0,  451,    2, 0x0a /* Public */,
+      69,    0,  452,    2, 0x0a /* Public */,
+      70,    0,  453,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -219,27 +235,34 @@ static const uint qt_meta_data_steuerungThreadLicht[] = {
     QMetaType::Void, QMetaType::Int,   28,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   18,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   32,   33,   34,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   36,   18,
+    QMetaType::Bool,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   33,   34,   35,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   37,   18,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Bool,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   37,   18,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,   47,
+    QMetaType::Void, QMetaType::Bool,   47,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,   47,
+    QMetaType::Void,
+    QMetaType::Bool,
+    QMetaType::Bool,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Bool,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   18,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   36,   18,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   45,
-    QMetaType::Void, QMetaType::Bool,   45,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   45,
-    QMetaType::Void, QMetaType::Int,   18,
-    QMetaType::Void, QMetaType::Int,   18,
-    QMetaType::Void, QMetaType::Int,   18,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, QMetaType::Int,   18,
@@ -280,34 +303,46 @@ void steuerungThreadLicht::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         case 21: _t->hauptlichtSelectVal((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 22: _t->hauptlichtAllVal(); break;
         case 23: _t->SetHauptlicht((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 24: _t->thekeRGBAllVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 25: _t->thekeRGBSelectVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 26: _t->thekeRGBRainbowOnOff(); break;
-        case 27: _t->thekegetRGB(); break;
-        case 28: _t->fensterRGBAllVal((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: _t->fensterRGBSelectVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 30: _t->fensterRGBRainbowOnOff(); break;
-        case 31: _t->fenstergetRGB(); break;
-        case 32: _t->deckeRGBPowerOnOff(); break;
-        case 33: _t->thekeLichtOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 34: _t->paletteLichtOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 35: _t->hauptlichtNetzteilOnOff(); break;
-        case 36: _t->beamerOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 37: _t->RGB_Decke_DataRot_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: _t->RGB_Decke_DataGruen_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 39: _t->RGB_Decke_DataBlau_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 40: _t->allOFF(); break;
-        case 41: _t->jugendLichtON(); break;
-        case 42: _t->teenLichtOn(); break;
-        case 43: _t->kino(); break;
-        case 44: _t->praistime(); break;
-        case 45: _t->luefterNetzteil((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 46: _t->luefterController((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 47: _t->luefterAusgangOben((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 48: _t->getLuefterNetzteilslot(); break;
-        case 49: _t->getLuefterAusgangObenslot(); break;
-        case 50: _t->getLuefterControllerslot(); break;
-        case 51: _t->standardOn(); break;
+        case 24: { bool _r = _t->getStatusHauptlicht();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 25: _t->thekeRGBAllVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 26: _t->thekeRGBSelectVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 27: _t->thekeRGBRainbowOnOff(); break;
+        case 28: _t->thekegetRGB(); break;
+        case 29: { bool _r = _t->thekegetDecke();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 30: _t->fensterRGBAllVal((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 31: _t->fensterRGBSelectVal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 32: _t->fensterRGBRainbowOnOff(); break;
+        case 33: _t->fenstergetRGB(); break;
+        case 34: _t->deckeRGBPowerOnOff(); break;
+        case 35: _t->thekeLichtOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 36: _t->paletteLichtOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 37: _t->hauptlichtNetzteilOnOff(); break;
+        case 38: _t->beamerOnOff((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 39: _t->pc_pulse(); break;
+        case 40: { bool _r = _t->getStatusBeamer();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 41: { bool _r = _t->getStatusPalette();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 42: _t->RGB_Decke_DataRot_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 43: _t->RGB_Decke_DataGruen_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 44: _t->RGB_Decke_DataBlau_Changed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 45: { bool _r = _t->getStatusRGBRelais();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 46: _t->allOFF(); break;
+        case 47: _t->jugendLichtON(); break;
+        case 48: _t->teenLichtOn(); break;
+        case 49: _t->kino(); break;
+        case 50: _t->praistime(); break;
+        case 51: _t->luefterNetzteil((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 52: _t->luefterController((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 53: _t->luefterAusgangOben((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 54: _t->luefterOnkyo((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 55: _t->getLuefterNetzteilslot(); break;
+        case 56: _t->getLuefterAusgangObenslot(); break;
+        case 57: _t->getLuefterControllerslot(); break;
+        case 58: _t->standardOn(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -431,13 +466,13 @@ int steuerungThreadLicht::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 52)
+        if (_id < 59)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 52;
+        _id -= 59;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 52)
+        if (_id < 59)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 52;
+        _id -= 59;
     }
     return _id;
 }

@@ -5,6 +5,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+  //setup hardware
+    init(); // setzen der varibalen für bus in mainconfig
+
   //create UI
     ui->setupUi(this);
     //timer for clock
@@ -25,9 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(allOff()), sThread, SLOT(allOFF()));
     connect(this, SIGNAL(TeenkreisLichtOn()), sThread, SLOT(teenLichtOn()));
     connect(this, SIGNAL(JugendLichtOn()), sThread, SLOT(jugendLichtON()));
-
-  //setup hardware
-    init(); // setzen der varibalen für bus in mainconfig
 }
 
 MainWindow::~MainWindow()
@@ -51,12 +51,12 @@ void MainWindow::on_pushButton_lichteinstellung_released()
 void MainWindow::on_pushButton_teenkreis_released()
 {
     if (ui->label_teenkreis_2->text() == "Licht an"){
-        emit TeenkreisLichtOn();//  <--------not completely implementet yet, set all registers so that jugend is off automatically
+        //emit TeenkreisLichtOn();//  <--------not completely implementet yet, set all registers so that jugend is off automatically
         ui->label_teenkreis_2->setText("Licht aus");
         ui->label_lugend_2->setText("Licht an");
     }
     else {
-        emit allOff();
+        //emit allOff();
         ui->label_teenkreis_2->setText("Licht an");
     }
 }
@@ -64,25 +64,28 @@ void MainWindow::on_pushButton_teenkreis_released()
 void MainWindow::on_pushButton_jugend_released()
 {
     if (ui->label_lugend_2->text() == "Licht an"){
-        emit JugendLichtOn();//  <--------not completely implementet yet, set all registers so that teenkreis is off automatically
+        //emit JugendLichtOn();//  <--------not completely implementet yet, set all registers so that teenkreis is off automatically
         ui->label_lugend_2->setText("Licht aus");
         ui->label_teenkreis_2->setText("Licht an");
     }
     else {
-        emit allOff();
+        //emit allOff();
         ui->label_lugend_2->setText("Licht an");
     }
 }
 
 void MainWindow::on_pushButton_audio_released()
 {
-
+    centralWidget()->setEnabled(false);
+    medien = new Medien_auswahl(this, sThread, mThread);
+    connect(medien, SIGNAL(ParentEnable()), this, SLOT(MainEnable()));
+    medien->setModal(true);
+    medien->setWindowFlags(Qt::FramelessWindowHint);
+    medien->show();
 }
 
 void MainWindow::on_pushButton_system_released()
 {
-    //    system_stats = new System(this);
-    //    system_stats->show();
     centralWidget()->setEnabled(false);
     system_2 = new Einstellung(this, sThread, mThread, Ueberwachung);
     connect(system_2, SIGNAL(ParentEnable()), this, SLOT(MainEnable()));

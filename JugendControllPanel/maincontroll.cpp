@@ -39,7 +39,7 @@ void pca9635HLWriteAll(int pwm){
     for (int var = 2; var < 10; ++var) {
         wiringPiI2CWriteReg8(pcaHL, var, pwm);
     }
-    wiringPiI2CWriteReg8(pcaHL, 0x05, 0x55);
+    //wiringPiI2CWriteReg8(pcaHL, 0x05, pwm);
 
 }
 
@@ -76,6 +76,12 @@ void gpiocontrollWriteA(int pin, bool val){
     else wiringPiI2CWriteReg8(expander, PORTA, read ^ pin);
 }
 
+void gpiocontrollWriteB(int pin, bool val){
+    int read = wiringPiI2CReadReg8(expander,PORTB);
+    if (val == true) wiringPiI2CWriteReg8(expander, PORTB, read | pin);
+    else wiringPiI2CWriteReg8(expander, PORTB, read ^ pin);
+}
+
 void gpiocontrollWriteAllA(int val){
     wiringPiI2CWriteReg8(expander, PORTA, val);
 }
@@ -85,8 +91,6 @@ void gpiocontrollWriteAllB(int val){
 }
 
 int gpiocontrollReadA(int pin){
-    int a =  wiringPiI2CReadReg8(expander,PORTA);
-    std::cout << "gpiocontrol:" << a << std::endl;
     return pin & wiringPiI2CReadReg8(expander,PORTA);
 }
 

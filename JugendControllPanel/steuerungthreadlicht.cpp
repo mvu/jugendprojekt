@@ -1,24 +1,28 @@
 #include "steuerungthreadlicht.h"
-#include <QtCore>
-#include <QtDebug>
-#include <iostream>
 
 steuerungThreadLicht::steuerungThreadLicht(QObject *parent) :
     QThread(parent)
 {
     //initialize RGB_Decke
+    RGB_Decke_DataRot_Changed(0);
+    RGB_Decke_DataGruen_Changed(0);
+    RGB_Decke_DataBlau_Changed(0);
+    gpiocontrollWriteA(NETZTEIL12V,0);
+
     for (int i = 0; i < 18; i++){
         for (int j = 0; j < 3; j++){
-            RGB_Decke_Data[i][j] = 0;
-        }
+            RGB_Decke_Data[i][j] = 0;        }
         RGB_Decke_Checked[i] = false;
     }
-    //initialize RGB_Theke_Data
+    //initialize RGB_Theke
+    thekeRGBAllVal(0,0,0);
     for (int i = 0; i < 3; i++)
     {
-        RGB_Theke_Data[i] = 10;
+        RGB_Theke_Data[i] = 0;
     }
     //initialize Hauptlicht
+    hauptlichtAll(0);
+    gpiocontrollWriteA(NETZTEIL48V,0);
     for (int i = 0; i < 9; i++)
     {
          Hauptlicht_Data[i] = 0;
@@ -28,9 +32,7 @@ steuerungThreadLicht::steuerungThreadLicht(QObject *parent) :
 
 void steuerungThreadLicht::run()
 {
-    //connect(this, SIGNAL(fenstergetRGBvalue(int,int,int)),RgbWand,SLOT(setRGBwand(int,int,int)));
-    //connect(this, SIGNAL(thekegetRGBvalue(int,int,int)),RgbTheke,SLOT(getRGBvalue(int,int,int)));
-
+    //nop
 }
 
 // INIT CONTROLLER ##################################################
@@ -57,14 +59,14 @@ void steuerungThreadLicht::toggleStandard(bool on)
     if (on)
     {
         standardOn();
-        luefterNetzteil(0xff);
-        luefterController(0xff);
+//        luefterNetzteil(0xff);
+//        luefterController(0xff);
     }
     else
     {
         allOFF();
-        luefterNetzteil(0x00);
-        luefterController(0x00);
+//        luefterNetzteil(0x00);
+//        luefterController(0x00);
     }
 }
 
@@ -74,11 +76,15 @@ void steuerungThreadLicht::hauptlichtAll(int val)
 {
     //wants 8bit pwm value
     pca9635HLWriteAll(val);
+    for (int i = 0; i < 9; i++){
+        Hauptlicht_Data[i] = val;
+    }
 }
 
 void steuerungThreadLicht::hauptlichtSelect(int leuchte, int val)
 {
     pca9635HLWrite(leuchte,val);
+    Hauptlicht_Data[leuchte] = val;
 }
 
 void steuerungThreadLicht::hauptlichtNetzteilOnOff()
@@ -101,12 +107,20 @@ void steuerungThreadLicht::hauptlichtAllVal()
 void steuerungThreadLicht::SetHauptlicht(int val)
 {
     //sets value only if box checked
-    for (int i = 0; i < 8; i++){
-        if (Hauptlicht_Checked[i]){
+    //std::cout<<"Set Hauptlicht"<< val<<"\n";
+    for (int i = 0; i < 9; i++){
+        std::cout<<"Checked"<<i<<","<<Hauptlicht_Checked[i]<<"\n";
+        if (Hauptlicht_Checked[i] == true){
             Hauptlicht_Data[i] = val;
             pca9635HLWrite(i,val);
         }
     }
+}
+
+bool steuerungThreadLicht::getStatusHauptlicht()
+{
+    if(gpiocontrollReadA(NETZTEIL48V) >= 1) return true;
+    else return false;
 }
 
 // THEKE ###########################################################
@@ -133,6 +147,13 @@ void steuerungThreadLicht::thekegetRGB()
     int b = pca9635RGBRead(RGBTHEKEBLAU);
     emit thekegetRGBvalue(r,g,b);
 }
+
+bool steuerungThreadLicht::thekegetDecke()
+{
+    if(gpiocontrollReadA(THEKE) >= 1) return true;
+    else return false;
+}
+
 
 // FENSTER #######################################################
 
@@ -169,14 +190,37 @@ void steuerungThreadLicht::thekeLichtOnOff(bool checked)
 
 void steuerungThreadLicht::paletteLichtOnOff(bool checked)
 {
-    if (gpiocontrollReadA(PALETTE) >= 1) gpiocontrollWriteA(THEKE, 0);
-    else gpiocontrollWriteA(THEKE, 1);
+    if (gpiocontrollReadA(PALETTE) >= 1) gpiocontrollWriteA(PALETTE, 0);
+    else gpiocontrollWriteA(PALETTE, 1);
+}
+
+bool steuerungThreadLicht::getStatusPalette()
+{
+    if(gpiocontrollReadA(PALETTE) >= 1) return true;
+    else return false;
 }
 
 void steuerungThreadLicht::beamerOnOff(bool checked)
 {
     if (gpiocontrollReadA(BEAMER) >= 1) gpiocontrollWriteA(BEAMER, 0);
     else gpiocontrollWriteA(BEAMER, 1);
+}
+
+bool steuerungThreadLicht::getStatusBeamer()
+{
+    if(gpiocontrollReadA(BEAMER) >= 1) return true;
+    else return false;
+}
+
+void steuerungThreadLicht::pc_pulse(){
+    gpiocontrollWriteB(PC,true);
+//    int a = 0;
+//    while(1){
+//        a++;
+//        if(a > 100000)break;
+//    }
+    QThread::msleep(200);
+    gpiocontrollWriteB(PC,false);
 }
 
 // DECKEN RGB LEUCHTEN #########################################
@@ -220,23 +264,33 @@ void steuerungThreadLicht::RGB_Decke_DataBlau_Changed(int val)
     }
 }
 
+bool steuerungThreadLicht::getStatusRGBRelais(){
+    if(gpiocontrollReadA(NETZTEIL12V) >= 1) return true;
+    else return false;
+}
 
 // Lüfter Controller ###################################################
 
 void steuerungThreadLicht::luefterController(int val)
 {
-    pca9635HLWrite(LUEFTERHAUPTLICHT,val);
+    pca9635RGBWrite(LUEFTERHAUPTLICHT,val);
 }
 
 void steuerungThreadLicht::luefterAusgangOben(int val)
 {
-    pca9635HLWrite(LUEFTERTOP, val);
+    pca9635RGBWrite(LUEFTERTOP, val);
 }
 
 void steuerungThreadLicht::luefterNetzteil(int val)
 {
-    pca9635HLWrite(LUEFTERNETZEIL, val);
+    pca9635RGBWrite(LUEFTERNETZEIL, val);
 }
+
+void steuerungThreadLicht::luefterOnkyo(int val)
+{
+    pca9635RGBWrite(LUEFTERONKYO, val);
+}
+
 
 void steuerungThreadLicht::getLuefterAusgangObenslot()
 {
@@ -294,6 +348,9 @@ void steuerungThreadLicht::standardOn()
     //hauptlicht an
     hauptlichtNetzteilOnOff();
     hauptlichtAll(0x55);
+    luefterAusgangOben(0x80);
+    luefterController(0x80);
+    luefterNetzteil(0x80);
 }
 
 void steuerungThreadLicht::jugendLichtON(){

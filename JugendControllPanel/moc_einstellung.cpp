@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Einstellung_t {
-    QByteArrayData data[18];
-    char stringdata[290];
+    QByteArrayData data[21];
+    char stringdata[319];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,9 +44,12 @@ QT_MOC_LITERAL(11, 163, 14),
 QT_MOC_LITERAL(12, 178, 27),
 QT_MOC_LITERAL(13, 206, 26),
 QT_MOC_LITERAL(14, 233, 12),
-QT_MOC_LITERAL(15, 246, 16),
-QT_MOC_LITERAL(16, 263, 15),
-QT_MOC_LITERAL(17, 279, 10)
+QT_MOC_LITERAL(15, 246, 3),
+QT_MOC_LITERAL(16, 250, 16),
+QT_MOC_LITERAL(17, 267, 15),
+QT_MOC_LITERAL(18, 283, 10),
+QT_MOC_LITERAL(19, 294, 10),
+QT_MOC_LITERAL(20, 305, 13)
     },
     "Einstellung\0luefterSetNetzteil\0\0val\0"
     "luefterSetController\0luefterSetAusgangOben\0"
@@ -55,8 +58,8 @@ QT_MOC_LITERAL(17, 279, 10)
     "Shutdown\0afterAnimation\0"
     "on_pushButton_back_released\0"
     "on_pushButton_Off_released\0TempRaum_neu\0"
-    "TempNetzteil_neu\0TempPlatine_neu\0"
-    "TempPi_neu"
+    "pwm\0TempNetzteil_neu\0TempPlatine_neu\0"
+    "TempPi_neu\0TempPc_neu\0TempOnkyo_neu"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,7 +69,7 @@ static const uint qt_meta_data_Einstellung[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -74,23 +77,25 @@ static const uint qt_meta_data_Einstellung[] = {
        7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   89,    2, 0x06 /* Public */,
-       4,    1,   92,    2, 0x06 /* Public */,
-       5,    1,   95,    2, 0x06 /* Public */,
-       6,    0,   98,    2, 0x06 /* Public */,
-       7,    0,   99,    2, 0x06 /* Public */,
-       8,    0,  100,    2, 0x06 /* Public */,
-       9,    0,  101,    2, 0x06 /* Public */,
+       1,    1,   99,    2, 0x06 /* Public */,
+       4,    1,  102,    2, 0x06 /* Public */,
+       5,    1,  105,    2, 0x06 /* Public */,
+       6,    0,  108,    2, 0x06 /* Public */,
+       7,    0,  109,    2, 0x06 /* Public */,
+       8,    0,  110,    2, 0x06 /* Public */,
+       9,    0,  111,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    0,  102,    2, 0x0a /* Public */,
-      11,    0,  103,    2, 0x0a /* Public */,
-      12,    0,  104,    2, 0x08 /* Private */,
-      13,    0,  105,    2, 0x08 /* Private */,
-      14,    1,  106,    2, 0x08 /* Private */,
-      15,    1,  109,    2, 0x08 /* Private */,
-      16,    1,  112,    2, 0x08 /* Private */,
-      17,    1,  115,    2, 0x08 /* Private */,
+      10,    0,  112,    2, 0x0a /* Public */,
+      11,    0,  113,    2, 0x0a /* Public */,
+      12,    0,  114,    2, 0x08 /* Private */,
+      13,    0,  115,    2, 0x08 /* Private */,
+      14,    2,  116,    2, 0x08 /* Private */,
+      16,    2,  121,    2, 0x08 /* Private */,
+      17,    2,  126,    2, 0x08 /* Private */,
+      18,    1,  131,    2, 0x08 /* Private */,
+      19,    1,  134,    2, 0x08 /* Private */,
+      20,    2,  137,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -106,10 +111,12 @@ static const uint qt_meta_data_Einstellung[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    3,   15,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    3,   15,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    3,   15,
     QMetaType::Void, QMetaType::Float,    3,
     QMetaType::Void, QMetaType::Float,    3,
-    QMetaType::Void, QMetaType::Float,    3,
-    QMetaType::Void, QMetaType::Float,    3,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    3,   15,
 
        0        // eod
 };
@@ -130,10 +137,12 @@ void Einstellung::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 8: _t->afterAnimation(); break;
         case 9: _t->on_pushButton_back_released(); break;
         case 10: _t->on_pushButton_Off_released(); break;
-        case 11: _t->TempRaum_neu((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 12: _t->TempNetzteil_neu((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 13: _t->TempPlatine_neu((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 11: _t->TempRaum_neu((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 12: _t->TempNetzteil_neu((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 13: _t->TempPlatine_neu((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 14: _t->TempPi_neu((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 15: _t->TempPc_neu((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 16: _t->TempOnkyo_neu((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -209,13 +218,13 @@ int Einstellung::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }

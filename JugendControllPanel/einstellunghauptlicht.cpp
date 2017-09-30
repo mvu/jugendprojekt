@@ -1,6 +1,8 @@
 #include "einstellunghauptlicht.h"
 #include "ui_einstellunghauptlicht.h"
 
+#define SlinderarduinoEnable false
+
 //QThread cThread;
 //Thread cObject;
 
@@ -11,8 +13,10 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, steuerungThreadLic
     ui->setupUi(this);
     ui->pushButton_back->setVisible(false);
 
-    Slider = new thread_Slider(this);
-
+    if(SlinderarduinoEnable == true)
+    {
+        Slider = new thread_Slider(this);
+    }
     sThread = s;
     mThread = m;
 
@@ -37,8 +41,11 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, steuerungThreadLic
     ArrayOfPushButtons.append(ui->pushButton_9);
 
     //Setup Sliders
-    Slider->init(sThread->Hauptlicht_Data[0]/2.55, 0,0,0);
-    Slider->start();
+    if(SlinderarduinoEnable == true){
+        Slider->init(sThread->Hauptlicht_Data[0]/2.55, 0,0,0);
+        Slider->start();
+    }
+
 
     //setup backgrounds, borders
     for (int i = 0; i < ArrayOfPushButtons.length(); i++)
@@ -47,25 +54,35 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, steuerungThreadLic
         ArrayOfPushButtons[i]->setChecked(false);
     }
     SetAllButtonsColor();
-    ui->verticalSlider->setSliderPosition(sThread->Hauptlicht_Data[0]/2.55);
-    connect(ui->verticalSlider, SIGNAL(sliderMoved(int)), this, SLOT(SliderHellChanged(int)));//<----for testing
+    ui->horizontalSlider->setSliderPosition(sThread->Hauptlicht_Data[0]/2.55);
+    //connect(ui->horizontalSlider, SIGNAL(sliderMoved(int)), this, SLOT(SliderHellChanged(int)));//<----for testing
 
+    //setup button AnAus
+    if (sThread->getStatusHauptlicht()) ui->pushButton_AnAus->setText("Aus");
+    else ui->pushButton_AnAus->setText("An");
   //Communication between Threads
     //Slider -> UI
-    connect(Slider, SIGNAL(Slider1_Changed(int)), this, SLOT(SliderHellChanged(int)));
+    if(SlinderarduinoEnable == true) connect(Slider, SIGNAL(Slider1_Changed(int)), this, SLOT(SliderHellChanged(int)));
+
     //UI -> steuerungThreadLicht
     connect(this, SIGNAL(HelligkeitChanged(int)), sThread, SLOT(SetHauptlicht(int)));
+    connect(this,SIGNAL(toggelhauptlicht()), sThread,SLOT(hauptlichtNetzteilOnOff()));
+    connect(this,SIGNAL(hauptlichtOn(int)),sThread,SLOT(SetHauptlicht(int)));
+
+    emit hauptlichtOn(1);
 }
 
 EinstellungHauptlicht::~EinstellungHauptlicht()
 {
-    Slider->exit();
+    if(ui->horizontalSlider->value() <= 2)emit hauptlichtOn(0);
+    if(SlinderarduinoEnable == true) Slider->exit();
     delete ui;
 }
 
 void EinstellungHauptlicht::ButtonPressed(int button, bool checked)
 {
-    sThread->Hauptlicht_Checked[button-1] = checked;
+    sThread->Hauptlicht_Checked[button -1] = checked;
+    std::cout << "Button:" << button<<"Checked:"<< checked<<"\n";
     //std::cout << button-1 << ": " << sThread->RGB_Decke_Checked[button-1] << "\n";
     if (checked)
     {
@@ -80,15 +97,17 @@ void EinstellungHauptlicht::ButtonPressed(int button, bool checked)
 void EinstellungHauptlicht::SliderHellChanged(int value)
 {
     int wert = int(value*2.55);
+    if(wert >= 120) wert = 120;
     emit HelligkeitChanged(wert);
     SetAllButtonsColor();
 }
 
 void EinstellungHauptlicht::SetAllButtonsColor()
 {
-    for (int i = 0; i < ArrayOfPushButtons.length(); i++)
+    for (int i = 0; i < 9; i++)
     {
-        ArrayOfPushButtons[i]->setStyleSheet(ArrayOfPushButtons[i]->styleSheet().replace(45, 42, QString("background-color:rgba(%1, %1, %1, 80);").arg(sThread->Hauptlicht_Data[i])));
+            std::cout<<"Hauptlicht Data"<<sThread->Hauptlicht_Data[i] <<","<<i<<"\n";
+            ArrayOfPushButtons[i]->setStyleSheet(ArrayOfPushButtons[i]->styleSheet().replace(45, 42, QString("background-color:rgba(%1, %1, %1, 80);").arg(sThread->Hauptlicht_Data[i])));
     }
 }
 
@@ -144,9 +163,11 @@ void EinstellungHauptlicht::on_pushButton_9_toggled(bool checked)
 
 void EinstellungHauptlicht::on_pushButton_alle_toggled(bool checked)
 {
-    for (int i = 0; i < ArrayOfPushButtons.length(); i++)
+
+    for (int i = 0; i < 9; i++)
     {
         ArrayOfPushButtons[i]->setChecked(checked);
+        sThread->Hauptlicht_Checked[i] = checked;
     }
 }
 
@@ -180,7 +201,7 @@ void EinstellungHauptlicht::on_pushButton_Group2_toggled(bool checked)
 
 void EinstellungHauptlicht::on_pushButton_back_released()
 {
-    Slider->close();
+    if(SlinderarduinoEnable == true) Slider->close();
     //slide out animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
     connect(animation, SIGNAL(finished()), this, SLOT(close()));
@@ -189,4 +210,17 @@ void EinstellungHauptlicht::on_pushButton_back_released()
     animation->setEndValue(QRect(-800,0,400,480));
     animation->setEasingCurve(QEasingCurve::InCubic);
     animation->start();
+    emit EnableParent();
+}
+
+void EinstellungHauptlicht::on_pushButton_AnAus_released()
+{
+    if (ui->pushButton_AnAus->text() == "An") ui->pushButton_AnAus->setText("Aus");
+    else ui->pushButton_AnAus->setText("An");
+    emit toggelhauptlicht();
+}
+
+void EinstellungHauptlicht::on_horizontalSlider_valueChanged(int value)
+{
+    SliderHellChanged(value);
 }

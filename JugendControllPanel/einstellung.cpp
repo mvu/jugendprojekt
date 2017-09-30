@@ -28,10 +28,12 @@ Einstellung::Einstellung(QWidget *parent, steuerungThreadLicht *s, ModelThreadLi
     connect(this, SIGNAL(getLuefterController()),s,SLOT(getLuefterControllerslot()));
     connect(this, SIGNAL(getLuefterNetzteil()),s,SLOT(getLuefterNetzteilslot()));
     //uThread->UI
-    connect(uThread, SIGNAL(TempDeckeChanged(float)), this, SLOT(TempRaum_neu(float)));
-    connect(uThread, SIGNAL(TempNetzteileChanged(float)), this, SLOT(TempNetzteil_neu(float)));
-    connect(uThread, SIGNAL(TempSteuerplatineChanged(float)), this, SLOT(TempPlatine_neu(float)));
+    connect(uThread, SIGNAL(TempDeckeChanged(float, int)), this, SLOT(TempRaum_neu(float, int)));
+    connect(uThread, SIGNAL(TempNetzteileChanged(float, int)), this, SLOT(TempNetzteil_neu(float, int)));
+    connect(uThread, SIGNAL(TempSteuerplatineChanged(float, int)), this, SLOT(TempPlatine_neu(float, int)));
     connect(uThread, SIGNAL(TempPiChanged(float)), this, SLOT(TempPi_neu(float)));
+    connect(uThread, SIGNAL(TempPCChanged(float)), this, SLOT(TempPc_neu(float)));
+    connect(uThread, SIGNAL(TempVerstaerkerChanged(float, int)), this, SLOT(TempOnkyo_neu(float, int)));
 
 //    emit getLuefterAusgangOben();
 //    emit getLuefterController();
@@ -42,10 +44,14 @@ Einstellung::Einstellung(QWidget *parent, steuerungThreadLicht *s, ModelThreadLi
     float temp_raum = uThread->requestTemp(2);
     float temp_netz = uThread->requestTemp(1);
     float temp_plat = uThread->requestTemp(0);
-    TempNetzteil_neu(temp_netz);
-    TempPlatine_neu(temp_plat);
-    TempRaum_neu(temp_raum);
+    float temp_onkyo = uThread->requestTemp(4);
+    float temp_pc = uThread->requestTemp(5);
+    TempNetzteil_neu(temp_netz, 0);
+    TempPlatine_neu(temp_plat, 0);
+    TempRaum_neu(temp_raum, 0);
     TempPi_neu(temp_pi);
+    TempOnkyo_neu(temp_onkyo, 0);
+    TempPc_neu(temp_pc);
 }
 
 Einstellung::~Einstellung()
@@ -69,11 +75,11 @@ void Einstellung::on_pushButton_back_released()
 
 void Einstellung::on_pushButton_Off_released()
 {
-//    password = new Passwort(this);
-//    connect(password, SIGNAL(PasswortCorrect()), this, SLOT(Shutdown()));
-//    password->showFullScreen();
+    password = new Passwort(this);
+    connect(password, SIGNAL(PasswortCorrect()), this, SLOT(Shutdown()));
+    password->showFullScreen();
 
-    Shutdown();
+    //Shutdown();
 }
 
 void Einstellung::afterAnimation()
@@ -91,7 +97,7 @@ void Einstellung::Shutdown()
     this->close();
 }
 
-void Einstellung::TempNetzteil_neu(float val)
+void Einstellung::TempNetzteil_neu(float val, int pwm)
 {
     ui->label_temp_netz->setText((QString::number(val, 'f', 2 )).append("°C"));
 
@@ -108,9 +114,12 @@ void Einstellung::TempNetzteil_neu(float val)
     {
         ui->label_temp_netz->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
     }
+
+    //set pwm-label
+    ui->label_fan_netz->setText((QString::number(pwm, 'i', 0)).append("%"));
 }
 
-void Einstellung::TempPlatine_neu(float val)
+void Einstellung::TempPlatine_neu(float val, int pwm)
 {
     ui->label_temp_plat->setText((QString::number(val, 'f', 2 )).append("°C"));
 
@@ -127,9 +136,12 @@ void Einstellung::TempPlatine_neu(float val)
     {
         ui->label_temp_plat->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
     }
+
+    //set pwm-label
+    ui->label_fan_plat->setText((QString::number(pwm, 'i', 0)).append("%"));
 }
 
-void Einstellung::TempRaum_neu(float val)
+void Einstellung::TempRaum_neu(float val, int pwm)
 {
     ui->label_temp_raum->setText((QString::number(val, 'f', 2 )).append("°C"));
 
@@ -146,6 +158,8 @@ void Einstellung::TempRaum_neu(float val)
     {
         ui->label_temp_raum->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
     }
+    //set pwm-label
+    ui->label_fan_raum->setText((QString::number(pwm, 'i', 0)).append("%"));
 }
 
 void Einstellung::TempPi_neu(float val)
@@ -165,4 +179,44 @@ void Einstellung::TempPi_neu(float val)
     {
         ui->label_temp_pi->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
     }
+}
+
+void Einstellung::TempPc_neu(float val)
+{
+    ui->label_temp_pc->setText((QString::number(val, 'f', 2 )).append("°C"));
+
+    //set color
+    if (val < TempPc_High)
+    {
+        ui->label_temp_pc->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(0,255,0);"));
+    }
+    else if (val < TempPc_Crit)
+    {
+        ui->label_temp_pc->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,255,0);"));
+    }
+    else
+    {
+        ui->label_temp_pc->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
+    }
+}
+
+void Einstellung::TempOnkyo_neu(float val, int pwm)
+{
+    ui->label_temp_onkyo->setText((QString::number(val, 'f', 2 )).append("°C"));
+
+    //set color
+    if (val < TempOnkyo_High)
+    {
+        ui->label_temp_onkyo->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(0,255,0);"));
+    }
+    else if (val < TempOnkyo_Crit)
+    {
+        ui->label_temp_onkyo->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,255,0);"));
+    }
+    else
+    {
+        ui->label_temp_onkyo->setStyleSheet(QString("font: 14pt 'Courier New';color:rgb(255,0,0);"));
+    }
+    //set pwm-label
+    ui->label_fan_raum->setText((QString::number(pwm, 'i', 0)).append("%"));
 }

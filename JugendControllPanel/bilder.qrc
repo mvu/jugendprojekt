@@ -29,5 +29,7 @@
         <file>bilder/Icons/back_blue.png</file>
         <file>bilder/Icons/back_dark.png</file>
         <file>bilder/Icons/back_grundriss.png</file>
+        <file>bilder/Icons/back_audio.jpg</file>
+        <file>bilder/Icons/back_green_triang.jpg</file>
     </qresource>
 </RCC>

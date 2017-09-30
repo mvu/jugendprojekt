@@ -61,6 +61,7 @@ private:
     RgbWand *rgbWand;
     Passwort *PW;
     QTimer *clock_timer;
+
 };
 
 #endif // MENUE_EINSTELLUNG_H

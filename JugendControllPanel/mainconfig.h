@@ -75,6 +75,7 @@
 #define LUEFTERTOP          0x04
 #define LUEFTERNETZEIL      0x03
 #define LUEFTERHAUPTLICHT   0x02
+#define LUEFTERONKYO        0x08
 #define RGBFENSTERGRUEN     0x0d
 #define RGBFENSTERBLAU      0x0c
 #define RGBFENSTERROT       0x0b
@@ -101,7 +102,7 @@
 #define PALETTE             0x04
 #define BEAMER              0x08
 #define NETZTEIL12V         0x01
-#define PC                  0x02    // GPIOB !!!!!!
+#define PC                  0x02    // <-- GPIOB !!!!!!
 #define LeeresRelais1       0x10
 #define LeeresRelais2       0x20
 #define LeeresRelais3       0x40
@@ -117,7 +118,24 @@
 #define GPIOB               0x13
 
 
+//Temperaturschwellwerte
+#define THRESHOLD 30.0
+#define HYSTERESE 3.0
+#define LuefterMin 0.2 //minimalwert in dezimal für Lüfter(ausreichend zum Anluafen)
+#define LuefterTopMin 0.5 //großer deckenluefter läuft sonst nicht an
 
+#define TempPi_High 50.0
+#define TempPi_Crit 70.0
+#define TempNetz_High 40.0
+#define TempNetz_Crit 60.0
+#define TempPlat_High 40.0
+#define TempPlat_Crit 50.0
+#define TempRaum_High 30.0
+#define TempRaum_Crit 35.0
+#define TempPc_High 45.0
+#define TempPc_Crit 60.0
+#define TempOnkyo_High 40.0
+#define TempOnkyo_Crit 50.0
 
 // Init
 void init();

@@ -29,7 +29,6 @@ class Ui_EinstellungHauptlicht
 {
 public:
     QLabel *label;
-    QSlider *verticalSlider;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton_alle;
@@ -50,6 +49,8 @@ public:
     QPushButton *pushButton_8;
     QPushButton *pushButton_9;
     QFrame *frame_2;
+    QSlider *horizontalSlider;
+    QPushButton *pushButton_AnAus;
 
     void setupUi(QDialog *EinstellungHauptlicht)
     {
@@ -60,7 +61,7 @@ public:
         EinstellungHauptlicht->setStyleSheet(QStringLiteral(""));
         label = new QLabel(EinstellungHauptlicht);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 20, 800, 50));
+        label->setGeometry(QRect(0, 20, 341, 50));
         QFont font;
         font.setPointSize(36);
         font.setBold(false);
@@ -69,11 +70,6 @@ public:
         label->setStyleSheet(QStringLiteral("color:rgb(250,250,250);"));
         label->setTextFormat(Qt::PlainText);
         label->setAlignment(Qt::AlignCenter);
-        verticalSlider = new QSlider(EinstellungHauptlicht);
-        verticalSlider->setObjectName(QStringLiteral("verticalSlider"));
-        verticalSlider->setGeometry(QRect(770, 0, 21, 131));
-        verticalSlider->setMaximum(100);
-        verticalSlider->setOrientation(Qt::Vertical);
         verticalLayoutWidget = new QWidget(EinstellungHauptlicht);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(709, 160, 91, 141));
@@ -278,14 +274,31 @@ public:
         frame_2->setStyleSheet(QStringLiteral("background-image: url(:/bilder/Icons/back_dark.png);"));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
+        horizontalSlider = new QSlider(frame_2);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setGeometry(QRect(380, 20, 406, 61));
+        horizontalSlider->setMaximum(255);
+        horizontalSlider->setPageStep(0);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+        pushButton_AnAus = new QPushButton(EinstellungHauptlicht);
+        pushButton_AnAus->setObjectName(QStringLiteral("pushButton_AnAus"));
+        pushButton_AnAus->setGeometry(QRect(710, 340, 89, 40));
+        sizePolicy.setHeightForWidth(pushButton_AnAus->sizePolicy().hasHeightForWidth());
+        pushButton_AnAus->setSizePolicy(sizePolicy);
+        pushButton_AnAus->setFont(font1);
+        pushButton_AnAus->setFocusPolicy(Qt::NoFocus);
+        pushButton_AnAus->setStyleSheet(QLatin1String("border:none;\n"
+"background-color:rgba(0,0,0,100);\n"
+"color:rgb(250,250,250);"));
+        pushButton_AnAus->setCheckable(true);
         frame_2->raise();
         frame->raise();
         label->raise();
-        verticalSlider->raise();
         verticalLayoutWidget->raise();
         label_2->raise();
         pushButton_back->raise();
         gridLayoutWidget->raise();
+        pushButton_AnAus->raise();
 
         retranslateUi(EinstellungHauptlicht);
 
@@ -310,6 +323,7 @@ public:
         pushButton_7->setText(QString());
         pushButton_8->setText(QString());
         pushButton_9->setText(QString());
+        pushButton_AnAus->setText(QApplication::translate("EinstellungHauptlicht", "An", 0));
     } // retranslateUi
 
 };

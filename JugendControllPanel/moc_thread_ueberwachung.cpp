@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_thread_Ueberwachung_t {
-    QByteArrayData data[16];
-    char stringdata[206];
+    QByteArrayData data[18];
+    char stringdata[243];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,20 +35,23 @@ QT_MOC_LITERAL(2, 34, 0),
 QT_MOC_LITERAL(3, 35, 20),
 QT_MOC_LITERAL(4, 56, 24),
 QT_MOC_LITERAL(5, 81, 16),
-QT_MOC_LITERAL(6, 98, 19),
-QT_MOC_LITERAL(7, 118, 10),
-QT_MOC_LITERAL(8, 129, 6),
-QT_MOC_LITERAL(9, 136, 3),
-QT_MOC_LITERAL(10, 140, 11),
-QT_MOC_LITERAL(11, 152, 6),
-QT_MOC_LITERAL(12, 159, 7),
-QT_MOC_LITERAL(13, 167, 10),
-QT_MOC_LITERAL(14, 178, 17),
-QT_MOC_LITERAL(15, 196, 9)
+QT_MOC_LITERAL(6, 98, 22),
+QT_MOC_LITERAL(7, 121, 13),
+QT_MOC_LITERAL(8, 135, 19),
+QT_MOC_LITERAL(9, 155, 10),
+QT_MOC_LITERAL(10, 166, 6),
+QT_MOC_LITERAL(11, 173, 3),
+QT_MOC_LITERAL(12, 177, 11),
+QT_MOC_LITERAL(13, 189, 6),
+QT_MOC_LITERAL(14, 196, 7),
+QT_MOC_LITERAL(15, 204, 10),
+QT_MOC_LITERAL(16, 215, 17),
+QT_MOC_LITERAL(17, 233, 9)
     },
     "thread_Ueberwachung\0TempPiChanged\0\0"
     "TempNetzteileChanged\0TempSteuerplatineChanged\0"
-    "TempDeckeChanged\0WandschalterPressed\0"
+    "TempDeckeChanged\0TempVerstaerkerChanged\0"
+    "TempPCChanged\0WandschalterPressed\0"
     "setLuefter\0number\0val\0requestTemp\0"
     "Sensor\0getTemp\0getTemp_pi\0checkWandschalter\0"
     "checkTemp"
@@ -61,39 +64,43 @@ static const uint qt_meta_data_thread_Ueberwachung[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       5,       // signalCount
+       7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   69,    2, 0x06 /* Public */,
-       3,    1,   72,    2, 0x06 /* Public */,
-       4,    1,   75,    2, 0x06 /* Public */,
-       5,    1,   78,    2, 0x06 /* Public */,
-       6,    1,   81,    2, 0x06 /* Public */,
+       1,    1,   79,    2, 0x06 /* Public */,
+       3,    2,   82,    2, 0x06 /* Public */,
+       4,    2,   87,    2, 0x06 /* Public */,
+       5,    2,   92,    2, 0x06 /* Public */,
+       6,    2,   97,    2, 0x06 /* Public */,
+       7,    1,  102,    2, 0x06 /* Public */,
+       8,    1,  105,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    2,   84,    2, 0x0a /* Public */,
-      10,    1,   89,    2, 0x0a /* Public */,
-      12,    1,   92,    2, 0x08 /* Private */,
-      13,    0,   95,    2, 0x08 /* Private */,
-      14,    0,   96,    2, 0x08 /* Private */,
-      15,    0,   97,    2, 0x08 /* Private */,
+       9,    2,  108,    2, 0x0a /* Public */,
+      12,    1,  113,    2, 0x0a /* Public */,
+      14,    1,  116,    2, 0x08 /* Private */,
+      15,    0,  119,    2, 0x08 /* Private */,
+      16,    0,  120,    2, 0x08 /* Private */,
+      17,    0,  121,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Float,    2,
-    QMetaType::Void, QMetaType::Float,    2,
-    QMetaType::Void, QMetaType::Float,    2,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    2,    2,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    2,    2,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    2,    2,
+    QMetaType::Void, QMetaType::Float, QMetaType::Int,    2,    2,
     QMetaType::Void, QMetaType::Float,    2,
     QMetaType::Void, QMetaType::Bool,    2,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
-    QMetaType::Float, QMetaType::Int,   11,
-    QMetaType::Float, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   10,   11,
+    QMetaType::Float, QMetaType::Int,   13,
+    QMetaType::Float, QMetaType::Int,   13,
     QMetaType::Float,
     QMetaType::Bool,
     QMetaType::Void,
@@ -107,20 +114,22 @@ void thread_Ueberwachung::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         thread_Ueberwachung *_t = static_cast<thread_Ueberwachung *>(_o);
         switch (_id) {
         case 0: _t->TempPiChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 1: _t->TempNetzteileChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 2: _t->TempSteuerplatineChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 3: _t->TempDeckeChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 4: _t->WandschalterPressed((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 5: _t->setLuefter((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 6: { float _r = _t->requestTemp((*reinterpret_cast< int(*)>(_a[1])));
+        case 1: _t->TempNetzteileChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->TempSteuerplatineChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 3: _t->TempDeckeChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->TempVerstaerkerChanged((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->TempPCChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 6: _t->WandschalterPressed((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->setLuefter((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 8: { float _r = _t->requestTemp((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = _r; }  break;
-        case 7: { float _r = _t->getTemp((*reinterpret_cast< int(*)>(_a[1])));
+        case 9: { float _r = _t->getTemp((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = _r; }  break;
-        case 8: { float _r = _t->getTemp_pi();
+        case 10: { float _r = _t->getTemp_pi();
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = _r; }  break;
-        case 9: { bool _r = _t->checkWandschalter();
+        case 11: { bool _r = _t->checkWandschalter();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 10: _t->checkTemp(); break;
+        case 12: _t->checkTemp(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -133,27 +142,39 @@ void thread_Ueberwachung::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
             }
         }
         {
-            typedef void (thread_Ueberwachung::*_t)(float );
+            typedef void (thread_Ueberwachung::*_t)(float , int );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::TempNetzteileChanged)) {
                 *result = 1;
             }
         }
         {
-            typedef void (thread_Ueberwachung::*_t)(float );
+            typedef void (thread_Ueberwachung::*_t)(float , int );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::TempSteuerplatineChanged)) {
                 *result = 2;
             }
         }
         {
-            typedef void (thread_Ueberwachung::*_t)(float );
+            typedef void (thread_Ueberwachung::*_t)(float , int );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::TempDeckeChanged)) {
                 *result = 3;
             }
         }
         {
+            typedef void (thread_Ueberwachung::*_t)(float , int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::TempVerstaerkerChanged)) {
+                *result = 4;
+            }
+        }
+        {
+            typedef void (thread_Ueberwachung::*_t)(float );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::TempPCChanged)) {
+                *result = 5;
+            }
+        }
+        {
             typedef void (thread_Ueberwachung::*_t)(bool );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&thread_Ueberwachung::WandschalterPressed)) {
-                *result = 4;
+                *result = 6;
             }
         }
     }
@@ -184,13 +205,13 @@ int thread_Ueberwachung::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }
@@ -203,30 +224,44 @@ void thread_Ueberwachung::TempPiChanged(float _t1)
 }
 
 // SIGNAL 1
-void thread_Ueberwachung::TempNetzteileChanged(float _t1)
+void thread_Ueberwachung::TempNetzteileChanged(float _t1, int _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void thread_Ueberwachung::TempSteuerplatineChanged(float _t1)
+void thread_Ueberwachung::TempSteuerplatineChanged(float _t1, int _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void thread_Ueberwachung::TempDeckeChanged(float _t1)
+void thread_Ueberwachung::TempDeckeChanged(float _t1, int _t2)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 
 // SIGNAL 4
+void thread_Ueberwachung::TempVerstaerkerChanged(float _t1, int _t2)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+}
+
+// SIGNAL 5
+void thread_Ueberwachung::TempPCChanged(float _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
+}
+
+// SIGNAL 6
 void thread_Ueberwachung::WandschalterPressed(bool _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+    QMetaObject::activate(this, &staticMetaObject, 6, _a);
 }
 QT_END_MOC_NAMESPACE

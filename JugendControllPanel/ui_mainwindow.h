@@ -444,7 +444,7 @@ public:
 
         background_frame = new QFrame(centralWidget);
         background_frame->setObjectName(QStringLiteral("background_frame"));
-        background_frame->setGeometry(QRect(0, 0, 800, 480));
+        background_frame->setGeometry(QRect(0, 0, 799, 480));
         background_frame->setStyleSheet(QStringLiteral("background-image:url(:/bilder/Icons/back_small.png);"));
         background_frame->setFrameShape(QFrame::StyledPanel);
         background_frame->setFrameShadow(QFrame::Raised);
@@ -466,7 +466,7 @@ public:
         label_uhrzeit->setText(QApplication::translate("MainWindow", "22:27", 0));
         label_datum->setText(QApplication::translate("MainWindow", "20. April", 0));
         groupBox_audio->setTitle(QString());
-        label_audio->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Audio</span></p></body></html>", 0));
+        label_audio->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Medien</span></p></body></html>", 0));
         pushButton_audio->setText(QString());
         groupBox_system->setTitle(QString());
         label_system->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt;\">System</span></p></body></html>", 0));

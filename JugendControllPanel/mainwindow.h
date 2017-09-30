@@ -8,6 +8,7 @@
 //fenster
 #include "menue_einstellung.h"
 #include "einstellung.h"
+#include "medien_auswahl.h"
 
 class ModelThreadLicht;
 class steuerungThreadLicht;
@@ -15,6 +16,7 @@ class thread_Ueberwachung;
 
 class Menue_Einstellung;
 class Einstellung;
+class Medien_auswahl;
 
 namespace Ui {
 class MainWindow;
@@ -52,6 +54,7 @@ private:
     Ui::MainWindow *ui;
     Menue_Einstellung *settings;
     Einstellung *system_2;
+    Medien_auswahl *medien;
     QTimer *timer_clock;
 };
 

@@ -2,12 +2,15 @@
 #define THEKE_H
 
 #include <QDialog>
+#include <QColorDialog>
 
 #include "mainconfig.h"
+#include "menue_einstellung.h"
 
 class steuerungThreadLicht;
 class ModelThreadLicht;
 class thread_Slider;
+class Menue_Einstellung;
 
 namespace Ui {
 class Theke;
@@ -26,6 +29,8 @@ private:
     steuerungThreadLicht *sThread;
     ModelThreadLicht *mThread;
     thread_Slider *slider;
+    Menue_Einstellung *einstellung;
+    QColorDialog *color = new QColorDialog(this);
 
 private slots:
     void SliderChanged_ROT(int val);
@@ -39,12 +44,14 @@ private slots:
 
     void on_pushButton_released();
 
+
 signals:
     void thekeRGBrot(int r, int val);
     void thekeRGBblau(int b, int val);
     void thekeRGBgruen(int g, int val);
     void thekeRGBall(int, int, int);
     void thekeDeckeToggle(bool);
+    void parentEnable();
 };
 
 #endif // THEKE_H

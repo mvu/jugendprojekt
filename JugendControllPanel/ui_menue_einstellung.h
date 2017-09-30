@@ -353,7 +353,7 @@ public:
         label_uhr_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         background_menue_frame = new QFrame(Menue_Einstellung);
         background_menue_frame->setObjectName(QStringLiteral("background_menue_frame"));
-        background_menue_frame->setGeometry(QRect(0, 0, 400, 480));
+        background_menue_frame->setGeometry(QRect(0, 0, 399, 480));
         QPalette palette8;
         palette8.setBrush(QPalette::Active, QPalette::Text, brush);
         palette8.setBrush(QPalette::Inactive, QPalette::Text, brush);

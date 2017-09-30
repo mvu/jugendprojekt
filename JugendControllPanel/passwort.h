@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "mainconfig.h"
 
-#define correctPasswort 12345
+#define correctPasswort 715309
 
 namespace Ui {
 class Passwort;

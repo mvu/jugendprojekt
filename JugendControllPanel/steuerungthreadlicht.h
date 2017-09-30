@@ -21,8 +21,8 @@ public:
     bool RGB_Decke_Checked[18];
     int RGB_Wand_Data[3];
     int RGB_Theke_Data[3];
-    int Hauptlicht_Data[8];
-    bool Hauptlicht_Checked[8];
+    int Hauptlicht_Data[9];
+    bool Hauptlicht_Checked[9];
 
 signals:
     // Hauptlicht Helligkeit Infos
@@ -69,12 +69,14 @@ public slots:
     void hauptlichtSelectVal(int leuchte);
     void hauptlichtAllVal();
     void SetHauptlicht(int val);
+    bool getStatusHauptlicht();
 
     // Theke
     void thekeRGBAllVal(int valR, int valG, int valB);
     void thekeRGBSelectVal(int farbe, int val);
     void thekeRGBRainbowOnOff();
     void thekegetRGB();
+    bool thekegetDecke();
 
     // Fenster
     void fensterRGBAllVal(int val);
@@ -88,11 +90,15 @@ public slots:
     void paletteLichtOnOff(bool checked);
     void hauptlichtNetzteilOnOff();
     void beamerOnOff(bool checked);
+    void pc_pulse();
+    bool getStatusBeamer();
+    bool getStatusPalette();
 
     // Decken RGB Leuchten
     void RGB_Decke_DataRot_Changed(int val);
     void RGB_Decke_DataGruen_Changed(int val);
     void RGB_Decke_DataBlau_Changed(int val);
+    bool getStatusRGBRelais();
 
     // main Controll
     void allOFF();
@@ -105,6 +111,7 @@ public slots:
     void luefterNetzteil(int val);
     void luefterController(int val);
     void luefterAusgangOben(int val);
+    void luefterOnkyo(int val);
     void getLuefterNetzteilslot();
     void getLuefterAusgangObenslot();
     void getLuefterControllerslot();

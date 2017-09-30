@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
+QT       += widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,7 +35,9 @@ SOURCES += main.cpp\
     theke.cpp \
     palette.cpp \
     application.cpp \
-    audio.cpp
+    audio.cpp \
+    medien_auswahl.cpp \
+    arduinocommunication.cpp
 
 HEADERS  += mainwindow.h \
     licht.h \
@@ -55,7 +59,9 @@ HEADERS  += mainwindow.h \
     einstellung.h \
     palette.h \
     application.h \
-    audio.h
+    audio.h \
+    medien_auswahl.h \
+    arduinocommunication.h
 
 FORMS    += mainwindow.ui \
     licht.ui \
@@ -67,7 +73,8 @@ FORMS    += mainwindow.ui \
     menue_einstellung.ui \
     theke.ui \
     palette.ui \
-    audio.ui
+    audio.ui \
+    medien_auswahl.ui
 
 RESOURCES += \
     bilder.qrc

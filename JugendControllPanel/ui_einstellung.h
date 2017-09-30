@@ -28,8 +28,8 @@ public:
     QLabel *label;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QLabel *label_5;
     QLabel *label_2;
+    QLabel *label_5;
     QLabel *label_fan_netz;
     QLabel *label_9;
     QLabel *label_fan_raum;
@@ -42,6 +42,12 @@ public:
     QLabel *label_13;
     QLabel *label_temp_pi;
     QLabel *label_15;
+    QLabel *label_6;
+    QLabel *label_fan_pc;
+    QLabel *label_temp_pc;
+    QLabel *label_7;
+    QLabel *label_temp_onkyo;
+    QLabel *label_fan_onkyo;
     QPushButton *pushButton_back;
     QPushButton *pushButton_Off;
 
@@ -73,10 +79,18 @@ public:
         label->setAlignment(Qt::AlignCenter);
         gridLayoutWidget = new QWidget(einstellung);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 100, 331, 221));
+        gridLayoutWidget->setGeometry(QRect(20, 90, 331, 291));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
+        label_2 = new QLabel(gridLayoutWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color: rgb(240, 240, 240);"));
+        label_2->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_2, 1, 2, 1, 1);
+
         label_5 = new QLabel(gridLayoutWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
         QFont font1;
@@ -90,14 +104,6 @@ public:
 "color: rgb(240, 240, 240);"));
 
         gridLayout->addWidget(label_5, 4, 0, 1, 1);
-
-        label_2 = new QLabel(gridLayoutWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
-"color: rgb(240, 240, 240);"));
-        label_2->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(label_2, 1, 2, 1, 1);
 
         label_fan_netz = new QLabel(gridLayoutWidget);
         label_fan_netz->setObjectName(QStringLiteral("label_fan_netz"));
@@ -195,6 +201,54 @@ public:
 
         gridLayout->addWidget(label_15, 5, 2, 1, 1);
 
+        label_6 = new QLabel(gridLayoutWidget);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setFont(font1);
+        label_6->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color: rgb(240, 240, 240);"));
+
+        gridLayout->addWidget(label_6, 6, 0, 1, 1);
+
+        label_fan_pc = new QLabel(gridLayoutWidget);
+        label_fan_pc->setObjectName(QStringLiteral("label_fan_pc"));
+        label_fan_pc->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color: rgb(240, 240, 240);"));
+        label_fan_pc->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_fan_pc, 6, 2, 1, 1);
+
+        label_temp_pc = new QLabel(gridLayoutWidget);
+        label_temp_pc->setObjectName(QStringLiteral("label_temp_pc"));
+        label_temp_pc->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color:rgb(0,255,0);"));
+        label_temp_pc->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_temp_pc, 6, 1, 1, 1);
+
+        label_7 = new QLabel(gridLayoutWidget);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setFont(font1);
+        label_7->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color: rgb(240, 240, 240);"));
+
+        gridLayout->addWidget(label_7, 7, 0, 1, 1);
+
+        label_temp_onkyo = new QLabel(gridLayoutWidget);
+        label_temp_onkyo->setObjectName(QStringLiteral("label_temp_onkyo"));
+        label_temp_onkyo->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color:rgb(0,255,0);"));
+        label_temp_onkyo->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_temp_onkyo, 7, 1, 1, 1);
+
+        label_fan_onkyo = new QLabel(gridLayoutWidget);
+        label_fan_onkyo->setObjectName(QStringLiteral("label_fan_onkyo"));
+        label_fan_onkyo->setStyleSheet(QLatin1String("font: 14pt \"Courier New\";\n"
+"color: rgb(240, 240, 240);"));
+        label_fan_onkyo->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_fan_onkyo, 7, 2, 1, 1);
+
         pushButton_back = new QPushButton(einstellung);
         pushButton_back->setObjectName(QStringLiteral("pushButton_back"));
         pushButton_back->setGeometry(QRect(320, 400, 71, 70));
@@ -221,8 +275,8 @@ public:
     {
         einstellung->setWindowTitle(QApplication::translate("einstellung", "Dialog", 0));
         label->setText(QApplication::translate("einstellung", "System", 0));
-        label_5->setText(QApplication::translate("einstellung", "<html><head/><body><p><span style=\" font-weight:600;\">Raum</span></p></body></html>", 0));
         label_2->setText(QApplication::translate("einstellung", "L\303\274fter:", 0));
+        label_5->setText(QApplication::translate("einstellung", "<html><head/><body><p><span style=\" font-weight:600;\">Raum</span></p></body></html>", 0));
         label_fan_netz->setText(QApplication::translate("einstellung", "45%", 0));
         label_9->setText(QApplication::translate("einstellung", "Temp.:", 0));
         label_fan_raum->setText(QApplication::translate("einstellung", "20%", 0));
@@ -235,6 +289,12 @@ public:
         label_13->setText(QApplication::translate("einstellung", "<html><head/><body><p><span style=\" font-weight:600;\">Pi CPU</span></p></body></html>", 0));
         label_temp_pi->setText(QApplication::translate("einstellung", "43.2\302\260C", 0));
         label_15->setText(QApplication::translate("einstellung", "-", 0));
+        label_6->setText(QApplication::translate("einstellung", "<html><head/><body><p><span style=\" font-weight:600;\">PC</span></p></body></html>", 0));
+        label_fan_pc->setText(QApplication::translate("einstellung", "0%", 0));
+        label_temp_pc->setText(QApplication::translate("einstellung", "43.2\302\260C", 0));
+        label_7->setText(QApplication::translate("einstellung", "<html><head/><body><p><span style=\" font-weight:600;\">Onkyo</span></p></body></html>", 0));
+        label_temp_onkyo->setText(QApplication::translate("einstellung", "43.2\302\260C", 0));
+        label_fan_onkyo->setText(QApplication::translate("einstellung", "100%", 0));
         pushButton_back->setText(QString());
         pushButton_Off->setText(QString());
     } // retranslateUi

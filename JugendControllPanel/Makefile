@@ -12,13 +12,13 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I. -isystem /usr/local/include -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I.
+INCPATH       = -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I. -isystem /usr/local/include -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtNetwork -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) -L/usr/lib -lwiringPi -lQt5Widgets -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/lib -lwiringPi -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/arm-linux-gnueabihf/qt5/bin/qmake
@@ -66,7 +66,9 @@ SOURCES       = main.cpp \
 		theke.cpp \
 		palette.cpp \
 		application.cpp \
-		audio.cpp qrc_bilder.cpp \
+		audio.cpp \
+		medien_auswahl.cpp \
+		arduinocommunication.cpp qrc_bilder.cpp \
 		moc_mainwindow.cpp \
 		moc_licht.cpp \
 		moc_einstellunghauptlicht.cpp \
@@ -84,7 +86,9 @@ SOURCES       = main.cpp \
 		moc_theke.cpp \
 		moc_einstellung.cpp \
 		moc_palette.cpp \
-		moc_audio.cpp
+		moc_audio.cpp \
+		moc_medien_auswahl.cpp \
+		moc_arduinocommunication.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		licht.o \
@@ -107,6 +111,8 @@ OBJECTS       = main.o \
 		palette.o \
 		application.o \
 		audio.o \
+		medien_auswahl.o \
+		arduinocommunication.o \
 		qrc_bilder.o \
 		moc_mainwindow.o \
 		moc_licht.o \
@@ -125,7 +131,9 @@ OBJECTS       = main.o \
 		moc_theke.o \
 		moc_einstellung.o \
 		moc_palette.o \
-		moc_audio.o
+		moc_audio.o \
+		moc_medien_auswahl.o \
+		moc_arduinocommunication.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
@@ -201,7 +209,9 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		theke.cpp \
 		palette.cpp \
 		application.cpp \
-		audio.cpp
+		audio.cpp \
+		medien_auswahl.cpp \
+		arduinocommunication.cpp
 QMAKE_TARGET  = JugendControlPanel-1-0
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = JugendControlPanel-1-0
@@ -231,7 +241,7 @@ first: all
 
 all: Makefile $(TARGET)
 
-$(TARGET): ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h ui_medien_auswahl.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: JugendControlPanel-1-0.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
@@ -292,7 +302,8 @@ Makefile: JugendControlPanel-1-0.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/li
 		bilder.qrc \
 		/usr/lib/arm-linux-gnueabihf/libQt5Widgets.prl \
 		/usr/lib/arm-linux-gnueabihf/libQt5Gui.prl \
-		/usr/lib/arm-linux-gnueabihf/libQt5Core.prl
+		/usr/lib/arm-linux-gnueabihf/libQt5Core.prl \
+		/usr/lib/arm-linux-gnueabihf/libQt5Network.prl
 	$(QMAKE) -o Makefile JugendControlPanel-1-0.pro
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/shell-unix.conf:
@@ -353,6 +364,7 @@ bilder.qrc:
 /usr/lib/arm-linux-gnueabihf/libQt5Widgets.prl:
 /usr/lib/arm-linux-gnueabihf/libQt5Gui.prl:
 /usr/lib/arm-linux-gnueabihf/libQt5Core.prl:
+/usr/lib/arm-linux-gnueabihf/libQt5Network.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile JugendControlPanel-1-0.pro
 
@@ -360,7 +372,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/JugendControlPanel-1-01.0.0 || mkdir -p .tmp/JugendControlPanel-1-01.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents bilder.qrc .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents mainwindow.h licht.h einstellunghauptlicht.h rgbwand.h mythread.h pca_9635.h mainconfig.h passwort.h modelthreadlicht.h steuerungthreadlicht.h maincontroll.h rgb_decke.h thread_ueberwachung.h sliderarduino.h thread_slider.h menue_einstellung.h theke.h einstellung.h palette.h application.h audio.h .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp licht.cpp einstellung.cpp einstellunghauptlicht.cpp rgbwand.cpp mythread.cpp pca_9635.cpp passwort.cpp mainconfig.cpp maincontroll.cpp modelthreadlicht.cpp steuerungthreadlicht.cpp rgb_decke.cpp thread_ueberwachung.cpp sliderarduino.cpp thread_slider.cpp menue_einstellung.cpp theke.cpp palette.cpp application.cpp audio.cpp .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents mainwindow.ui licht.ui einstellung.ui einstellunghauptlicht.ui rgbwand.ui passwort.ui rgb_decke.ui menue_einstellung.ui theke.ui palette.ui audio.ui .tmp/JugendControlPanel-1-01.0.0/ && (cd `dirname .tmp/JugendControlPanel-1-01.0.0` && $(TAR) JugendControlPanel-1-01.0.0.tar JugendControlPanel-1-01.0.0 && $(COMPRESS) JugendControlPanel-1-01.0.0.tar) && $(MOVE) `dirname .tmp/JugendControlPanel-1-01.0.0`/JugendControlPanel-1-01.0.0.tar.gz . && $(DEL_FILE) -r .tmp/JugendControlPanel-1-01.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents bilder.qrc .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents mainwindow.h licht.h einstellunghauptlicht.h rgbwand.h mythread.h pca_9635.h mainconfig.h passwort.h modelthreadlicht.h steuerungthreadlicht.h maincontroll.h rgb_decke.h thread_ueberwachung.h sliderarduino.h thread_slider.h menue_einstellung.h theke.h einstellung.h palette.h application.h audio.h medien_auswahl.h arduinocommunication.h .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp licht.cpp einstellung.cpp einstellunghauptlicht.cpp rgbwand.cpp mythread.cpp pca_9635.cpp passwort.cpp mainconfig.cpp maincontroll.cpp modelthreadlicht.cpp steuerungthreadlicht.cpp rgb_decke.cpp thread_ueberwachung.cpp sliderarduino.cpp thread_slider.cpp menue_einstellung.cpp theke.cpp palette.cpp application.cpp audio.cpp medien_auswahl.cpp arduinocommunication.cpp .tmp/JugendControlPanel-1-01.0.0/ && $(COPY_FILE) --parents mainwindow.ui licht.ui einstellung.ui einstellunghauptlicht.ui rgbwand.ui passwort.ui rgb_decke.ui menue_einstellung.ui theke.ui palette.ui audio.ui medien_auswahl.ui .tmp/JugendControlPanel-1-01.0.0/ && (cd `dirname .tmp/JugendControlPanel-1-01.0.0` && $(TAR) JugendControlPanel-1-01.0.0.tar JugendControlPanel-1-01.0.0 && $(COMPRESS) JugendControlPanel-1-01.0.0.tar) && $(MOVE) `dirname .tmp/JugendControlPanel-1-01.0.0`/JugendControlPanel-1-01.0.0.tar.gz . && $(DEL_FILE) -r .tmp/JugendControlPanel-1-01.0.0
 
 
 clean:compiler_clean 
@@ -393,12 +405,14 @@ qrc_bilder.cpp: bilder.qrc \
 		bilder/Icons/back_small.png \
 		bilder/Icons/fish.png \
 		bilder/Icons/back_dark.png \
+		bilder/Icons/back_green_triang.jpg \
 		bilder/Icons/shutdown-icon.png \
 		bilder/Icons/arrow_left_icon_blk.png \
 		bilder/Icons/back_blue.png \
 		bilder/Icons/lampe.png \
 		bilder/Icons/backspace_icon.png \
 		bilder/Icons/arrow_left_icon.png \
+		bilder/Icons/back_audio.jpg \
 		bilder/Icons/settings.png \
 		bilder/einstellung.png \
 		bilder/home.png \
@@ -414,9 +428,9 @@ qrc_bilder.cpp: bilder.qrc \
 		bilder/praise.png
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc -name bilder bilder.qrc -o qrc_bilder.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_licht.cpp moc_einstellunghauptlicht.cpp moc_rgbwand.cpp moc_mythread.cpp moc_pca_9635.cpp moc_passwort.cpp moc_modelthreadlicht.cpp moc_steuerungthreadlicht.cpp moc_rgb_decke.cpp moc_thread_ueberwachung.cpp moc_sliderarduino.cpp moc_thread_slider.cpp moc_menue_einstellung.cpp moc_theke.cpp moc_einstellung.cpp moc_palette.cpp moc_audio.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_licht.cpp moc_einstellunghauptlicht.cpp moc_rgbwand.cpp moc_mythread.cpp moc_pca_9635.cpp moc_passwort.cpp moc_modelthreadlicht.cpp moc_steuerungthreadlicht.cpp moc_rgb_decke.cpp moc_thread_ueberwachung.cpp moc_sliderarduino.cpp moc_thread_slider.cpp moc_menue_einstellung.cpp moc_theke.cpp moc_einstellung.cpp moc_palette.cpp moc_audio.cpp moc_medien_auswahl.cpp moc_arduinocommunication.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_licht.cpp moc_einstellunghauptlicht.cpp moc_rgbwand.cpp moc_mythread.cpp moc_pca_9635.cpp moc_passwort.cpp moc_modelthreadlicht.cpp moc_steuerungthreadlicht.cpp moc_rgb_decke.cpp moc_thread_ueberwachung.cpp moc_sliderarduino.cpp moc_thread_slider.cpp moc_menue_einstellung.cpp moc_theke.cpp moc_einstellung.cpp moc_palette.cpp moc_audio.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_licht.cpp moc_einstellunghauptlicht.cpp moc_rgbwand.cpp moc_mythread.cpp moc_pca_9635.cpp moc_passwort.cpp moc_modelthreadlicht.cpp moc_steuerungthreadlicht.cpp moc_rgb_decke.cpp moc_thread_ueberwachung.cpp moc_sliderarduino.cpp moc_thread_slider.cpp moc_menue_einstellung.cpp moc_theke.cpp moc_einstellung.cpp moc_palette.cpp moc_audio.cpp moc_medien_auswahl.cpp moc_arduinocommunication.cpp
 moc_mainwindow.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
 		maincontroll.h \
@@ -426,17 +440,19 @@ moc_mainwindow.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		menue_einstellung.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
+		medien_auswahl.h \
+		audio.h \
 		mainwindow.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_licht.cpp: menue_einstellung.h \
 		mainconfig.h \
@@ -448,19 +464,18 @@ moc_licht.cpp: menue_einstellung.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
 		licht.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include licht.h -o moc_licht.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include licht.h -o moc_licht.cpp
 
-moc_einstellunghauptlicht.cpp: pca_9635.h \
-		mainconfig.h \
+moc_einstellunghauptlicht.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
 		maincontroll.h \
 		theke.h \
@@ -469,12 +484,13 @@ moc_einstellunghauptlicht.cpp: pca_9635.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		ui_einstellunghauptlicht.h \
 		einstellunghauptlicht.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include einstellunghauptlicht.h -o moc_einstellunghauptlicht.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include einstellunghauptlicht.h -o moc_einstellunghauptlicht.cpp
 
 moc_rgbwand.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -485,11 +501,12 @@ moc_rgbwand.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		rgbwand.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include rgbwand.h -o moc_rgbwand.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include rgbwand.h -o moc_rgbwand.cpp
 
 moc_mythread.cpp: sliderarduino.h \
 		mainconfig.h \
@@ -501,11 +518,12 @@ moc_mythread.cpp: sliderarduino.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		application.h \
 		pca_9635.h \
 		mythread.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mythread.h -o moc_mythread.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mythread.h -o moc_mythread.cpp
 
 moc_pca_9635.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -516,11 +534,12 @@ moc_pca_9635.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		pca_9635.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include pca_9635.h -o moc_pca_9635.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include pca_9635.h -o moc_pca_9635.cpp
 
 moc_passwort.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -531,11 +550,12 @@ moc_passwort.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		passwort.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include passwort.h -o moc_passwort.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include passwort.h -o moc_passwort.cpp
 
 moc_modelthreadlicht.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -546,11 +566,12 @@ moc_modelthreadlicht.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		modelthreadlicht.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include modelthreadlicht.h -o moc_modelthreadlicht.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include modelthreadlicht.h -o moc_modelthreadlicht.cpp
 
 moc_steuerungthreadlicht.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -561,11 +582,12 @@ moc_steuerungthreadlicht.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		steuerungthreadlicht.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include steuerungthreadlicht.h -o moc_steuerungthreadlicht.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include steuerungthreadlicht.h -o moc_steuerungthreadlicht.cpp
 
 moc_rgb_decke.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -576,12 +598,13 @@ moc_rgb_decke.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		ui_rgb_decke.h \
 		rgb_decke.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include rgb_decke.h -o moc_rgb_decke.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include rgb_decke.h -o moc_rgb_decke.cpp
 
 moc_thread_ueberwachung.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -592,11 +615,12 @@ moc_thread_ueberwachung.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		thread_ueberwachung.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include thread_ueberwachung.h -o moc_thread_ueberwachung.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include thread_ueberwachung.h -o moc_thread_ueberwachung.cpp
 
 moc_sliderarduino.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -607,11 +631,12 @@ moc_sliderarduino.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		sliderarduino.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include sliderarduino.h -o moc_sliderarduino.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include sliderarduino.h -o moc_sliderarduino.cpp
 
 moc_thread_slider.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -622,11 +647,12 @@ moc_thread_slider.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		thread_slider.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include thread_slider.h -o moc_thread_slider.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include thread_slider.h -o moc_thread_slider.cpp
 
 moc_menue_einstellung.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -637,16 +663,16 @@ moc_menue_einstellung.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
 		menue_einstellung.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include menue_einstellung.h -o moc_menue_einstellung.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include menue_einstellung.h -o moc_menue_einstellung.cpp
 
 moc_theke.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -657,11 +683,12 @@ moc_theke.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		theke.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include theke.h -o moc_theke.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include theke.h -o moc_theke.cpp
 
 moc_einstellung.cpp: mainconfig.h \
 		steuerungthreadlicht.h \
@@ -672,23 +699,70 @@ moc_einstellung.cpp: mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		einstellung.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include einstellung.h -o moc_einstellung.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include einstellung.h -o moc_einstellung.cpp
 
 moc_palette.cpp: palette.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include palette.h -o moc_palette.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include palette.h -o moc_palette.cpp
 
-moc_audio.cpp: audio.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/JugendProjektTestProgramm/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include audio.h -o moc_audio.cpp
+moc_audio.cpp: mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_ueberwachung.h \
+		arduinocommunication.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h \
+		audio.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include audio.h -o moc_audio.cpp
+
+moc_medien_auswahl.cpp: audio.h \
+		mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_ueberwachung.h \
+		arduinocommunication.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h \
+		medien_auswahl.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include medien_auswahl.h -o moc_medien_auswahl.cpp
+
+moc_arduinocommunication.cpp: thread_ueberwachung.h \
+		mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h \
+		arduinocommunication.h \
+		arduinocommunication.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/PreRealase_SichervorJonas/Jugend2.0 -I/usr/local/include -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include arduinocommunication.h -o moc_arduinocommunication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h
+compiler_uic_make_all: ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h ui_medien_auswahl.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h
+	-$(DEL_FILE) ui_mainwindow.h ui_licht.h ui_einstellung.h ui_einstellunghauptlicht.h ui_rgbwand.h ui_passwort.h ui_rgb_decke.h ui_menue_einstellung.h ui_theke.h ui_palette.h ui_audio.h ui_medien_auswahl.h
 ui_mainwindow.h: mainwindow.ui
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
 
@@ -722,6 +796,9 @@ ui_palette.h: palette.ui
 ui_audio.h: audio.ui
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic audio.ui -o ui_audio.h
 
+ui_medien_auswahl.h: medien_auswahl.ui
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic medien_auswahl.ui -o ui_medien_auswahl.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -742,15 +819,17 @@ main.o: main.cpp mainwindow.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		menue_einstellung.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
-		ui_rgb_decke.h
+		ui_rgb_decke.h \
+		medien_auswahl.h \
+		audio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -763,15 +842,17 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		menue_einstellung.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
+		medien_auswahl.h \
+		audio.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
@@ -786,11 +867,11 @@ licht.o: licht.cpp licht.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
@@ -805,6 +886,7 @@ einstellung.o: einstellung.cpp einstellung.h \
 		rgbwand.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -813,7 +895,6 @@ einstellung.o: einstellung.cpp einstellung.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o einstellung.o einstellung.cpp
 
 einstellunghauptlicht.o: einstellunghauptlicht.cpp einstellunghauptlicht.h \
-		pca_9635.h \
 		mainconfig.h \
 		steuerungthreadlicht.h \
 		maincontroll.h \
@@ -823,6 +904,7 @@ einstellunghauptlicht.o: einstellunghauptlicht.cpp einstellunghauptlicht.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -838,6 +920,7 @@ rgbwand.o: rgbwand.cpp rgbwand.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -855,6 +938,7 @@ mythread.o: mythread.cpp mythread.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		application.h \
 		pca_9635.h \
@@ -873,6 +957,7 @@ pca_9635.o: pca_9635.cpp pca_9635.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h
@@ -887,6 +972,7 @@ passwort.o: passwort.cpp passwort.h \
 		einstellung.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -902,6 +988,7 @@ mainconfig.o: mainconfig.cpp mainconfig.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h
@@ -916,6 +1003,7 @@ maincontroll.o: maincontroll.cpp maincontroll.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h
@@ -930,6 +1018,7 @@ modelthreadlicht.o: modelthreadlicht.cpp modelthreadlicht.h \
 		einstellung.h \
 		passwort.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h
@@ -939,6 +1028,7 @@ steuerungthreadlicht.o: steuerungthreadlicht.cpp steuerungthreadlicht.h \
 		mainconfig.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -959,6 +1049,7 @@ rgb_decke.o: rgb_decke.cpp rgb_decke.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -976,7 +1067,8 @@ thread_ueberwachung.o: thread_ueberwachung.cpp thread_ueberwachung.h \
 		modelthreadlicht.h \
 		thread_slider.h \
 		sliderarduino.h \
-		application.h
+		application.h \
+		arduinocommunication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thread_ueberwachung.o thread_ueberwachung.cpp
 
 sliderarduino.o: sliderarduino.cpp sliderarduino.h \
@@ -989,6 +1081,7 @@ sliderarduino.o: sliderarduino.cpp sliderarduino.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		application.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sliderarduino.o sliderarduino.cpp
@@ -1003,6 +1096,7 @@ thread_slider.o: thread_slider.cpp thread_slider.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		application.h \
 		sliderarduino.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thread_slider.o thread_slider.cpp
@@ -1017,11 +1111,11 @@ menue_einstellung.o: menue_einstellung.cpp menue_einstellung.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
 		einstellunghauptlicht.h \
-		pca_9635.h \
 		ui_einstellunghauptlicht.h \
 		rgb_decke.h \
 		ui_rgb_decke.h \
@@ -1037,6 +1131,7 @@ theke.o: theke.cpp theke.h \
 		passwort.h \
 		modelthreadlicht.h \
 		thread_ueberwachung.h \
+		arduinocommunication.h \
 		thread_slider.h \
 		sliderarduino.h \
 		application.h \
@@ -1051,8 +1146,54 @@ application.o: application.cpp application.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o application.cpp
 
 audio.o: audio.cpp audio.h \
+		mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_ueberwachung.h \
+		arduinocommunication.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h \
 		ui_audio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audio.o audio.cpp
+
+medien_auswahl.o: medien_auswahl.cpp medien_auswahl.h \
+		audio.h \
+		mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_ueberwachung.h \
+		arduinocommunication.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h \
+		ui_medien_auswahl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o medien_auswahl.o medien_auswahl.cpp
+
+arduinocommunication.o: arduinocommunication.cpp arduinocommunication.h \
+		thread_ueberwachung.h \
+		mainconfig.h \
+		steuerungthreadlicht.h \
+		maincontroll.h \
+		theke.h \
+		rgbwand.h \
+		einstellung.h \
+		passwort.h \
+		modelthreadlicht.h \
+		thread_slider.h \
+		sliderarduino.h \
+		application.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arduinocommunication.o arduinocommunication.cpp
 
 qrc_bilder.o: qrc_bilder.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_bilder.o qrc_bilder.cpp
@@ -1110,6 +1251,12 @@ moc_palette.o: moc_palette.cpp
 
 moc_audio.o: moc_audio.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_audio.o moc_audio.cpp
+
+moc_medien_auswahl.o: moc_medien_auswahl.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_medien_auswahl.o moc_medien_auswahl.cpp
+
+moc_arduinocommunication.o: moc_arduinocommunication.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_arduinocommunication.o moc_arduinocommunication.cpp
 
 ####### Install
 

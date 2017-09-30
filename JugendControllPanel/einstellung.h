@@ -6,15 +6,6 @@
 #include "mainconfig.h"
 #include "passwort.h"
 
-//to match color of labels, green below High, yellow between, red above Crit
-#define TempPi_High 50
-#define TempPi_Crit 70
-#define TempNetz_High 40
-#define TempNetz_Crit 60
-#define TempPlat_High 40
-#define TempPlat_Crit 50
-#define TempRaum_High 30
-#define TempRaum_Crit 35
 
 class steuerungThreadLicht;
 class ModelThreadLicht;
@@ -40,10 +31,12 @@ public slots:
 private slots:
     void on_pushButton_back_released();
     void on_pushButton_Off_released();
-    void TempRaum_neu(float val);
-    void TempNetzteil_neu(float val);
-    void TempPlatine_neu(float val);
+    void TempRaum_neu(float val, int pwm);
+    void TempNetzteil_neu(float val, int pwm);
+    void TempPlatine_neu(float val, int pwm);
     void TempPi_neu(float val);
+    void TempPc_neu(float val);
+    void TempOnkyo_neu(float val, int pwm);
 
 signals:
     void luefterSetNetzteil(int val);

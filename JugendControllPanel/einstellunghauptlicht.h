@@ -32,6 +32,9 @@ private:
 
 signals:
     void HelligkeitChanged(int val);
+    void toggelhauptlicht();
+    void EnableParent();
+    void hauptlichtOn(int);
 
 private slots:
     //personal
@@ -53,6 +56,8 @@ private slots:
     void on_pushButton_alle_toggled(bool checked);
     void on_pushButton_Group1_toggled(bool checked);
     void on_pushButton_Group2_toggled(bool checked);
+    void on_pushButton_AnAus_released();
+    void on_horizontalSlider_valueChanged(int value);
 };
 
 #endif // EINSTELLUNGHAUPTLICHT_H
