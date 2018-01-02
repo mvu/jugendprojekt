@@ -1,0 +1,4 @@
+Einrichten des autostarts des Programms:
+Skript "Starter.sh" in $HOME erstellt, welches automatisch ausgeführt wird
+.config/lxsession/LXDE-pi/autostart mit @lxterminal -e /home/pi/Starter.sh
+
