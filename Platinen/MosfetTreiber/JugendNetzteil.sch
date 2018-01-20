@@ -20574,19 +20574,19 @@ Source: http://www.irf.com/product-info/datasheets/data/irf9530.pdf</description
 <parts>
 <part name="J1" library="WR-TBL" deviceset="691210910002" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="10nF"/>
-<part name="D1" library="diode" deviceset="DIODE-" device="MINIMELF"/>
-<part name="R9" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="3k9R"/>
+<part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="1nF"/>
+<part name="D1" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
+<part name="R9" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="3k9"/>
 <part name="U1" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
 <part name="U2" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
 <part name="U3" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
 <part name="R10" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="200R"/>
-<part name="R11" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="10kR"/>
-<part name="D2" library="diode" deviceset="DIODE-" device="MINIMELF"/>
-<part name="R12" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="10kR"/>
-<part name="D3" library="diode" deviceset="DIODE-" device="MINIMELF"/>
+<part name="R11" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="2k"/>
+<part name="D2" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
+<part name="R12" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="D3" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="L1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="0207/15"/>
+<part name="L1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="0207/15" value="1m"/>
 <part name="L2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="TJ8-U1" value="47H"/>
 <part name="Q1" library="transistor-power" library_urn="urn:adsk.eagle:library:400" deviceset="IRF9530" device=""/>
 <part name="C7" library="resistor" deviceset="CPOL-EU" device="TT5D11" value="680µF"/>
@@ -20613,11 +20613,11 @@ Source: http://www.irf.com/product-info/datasheets/data/irf9530.pdf</description
 <part name="P2" library="con-molex" deviceset="5566-10" device=""/>
 <part name="U4" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
 <part name="U5" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
-<part name="R3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805"/>
-<part name="D5" library="diode" deviceset="DIODE-" device="MINIMELF"/>
-<part name="R4" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805"/>
-<part name="D6" library="diode" deviceset="DIODE-" device="MINIMELF"/>
-<part name="L3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="0207/15"/>
+<part name="R3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="2k"/>
+<part name="D5" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
+<part name="R4" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="D6" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
+<part name="L3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="0207/15" value="6m8"/>
 <part name="L4" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="L-EU" device="TJ8-U1" value="47H"/>
 <part name="Q2" library="transistor-power" library_urn="urn:adsk.eagle:library:400" deviceset="IRF9530" device=""/>
 <part name="C1" library="resistor" deviceset="CPOL-EU" device="TT5D11" value="680µF"/>
@@ -20640,11 +20640,11 @@ Source: http://www.irf.com/product-info/datasheets/data/irf9530.pdf</description
 <part name="C26" library="resistor" deviceset="C-EU" device="C1206" value="100pF"/>
 <part name="C27" library="resistor" deviceset="C-EU" device="C1206" value="100nF"/>
 <part name="C28" library="resistor" deviceset="C-EU" device="C1206" value="100pF"/>
-<part name="C29" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="10nF"/>
-<part name="D8" library="diode" deviceset="DIODE-" device="MINIMELF"/>
-<part name="R8" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805"/>
+<part name="C29" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="101F"/>
+<part name="D8" library="diode" deviceset="DIODE-" device="MINIMELF" value="1n4148"/>
+<part name="R8" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="3k9"/>
 <part name="U6" library="Taiwan_Farnell" deviceset="TSM2314CX" device="" value="BSS123"/>
-<part name="R13" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805"/>
+<part name="R13" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" value="200"/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J2" library="WR-TBL" deviceset="691210910002" device=""/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>

@@ -22425,7 +22425,6 @@ ultra fast</description>
 <part name="J1" library="WR-TBL" deviceset="691210910002" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="10nF"/>
-<part name="IC2" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM358" device="D"/>
 <part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="10nF"/>
 <part name="D1" library="diode" deviceset="DIODE-" device="MINIMELF"/>
 <part name="R9" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805"/>
@@ -22530,7 +22529,6 @@ ultra fast</description>
 <instance part="GND3" gate="1" x="-190.5" y="675.64"/>
 <instance part="P+2" gate="1" x="-322.58" y="744.22" rot="R270"/>
 <instance part="GND5" gate="1" x="-325.12" y="723.9"/>
-<instance part="IC2" gate="P" x="-342.9" y="736.6"/>
 <instance part="IC1" gate="P" x="-335.28" y="736.6"/>
 <instance part="L1" gate="G$1" x="-119.38" y="772.16" rot="R90"/>
 <instance part="L2" gate="G$1" x="-40.64" y="795.02" rot="R90"/>
@@ -22560,10 +22558,10 @@ ultra fast</description>
 <instance part="P2" gate="-2" x="-381" y="789.94" rot="R180"/>
 <instance part="P2" gate="-3" x="-381" y="792.48" rot="R180"/>
 <instance part="P2" gate="-4" x="-381" y="795.02" rot="R180"/>
-<instance part="P2" gate="-5" x="55.88" y="795.02"/>
-<instance part="P2" gate="-6" x="55.88" y="792.48"/>
-<instance part="P2" gate="-7" x="86.36" y="995.68"/>
-<instance part="P2" gate="-8" x="86.36" y="993.14"/>
+<instance part="P2" gate="-5" x="78.74" y="995.68"/>
+<instance part="P2" gate="-6" x="78.74" y="993.14"/>
+<instance part="P2" gate="-7" x="55.88" y="795.02"/>
+<instance part="P2" gate="-8" x="55.88" y="792.48"/>
 <instance part="U4" gate="A" x="-116.84" y="922.02"/>
 <instance part="U5" gate="A" x="-71.12" y="965.2"/>
 <instance part="R3" gate="G$1" x="-99.06" y="944.88" rot="R90"/>
@@ -22680,9 +22678,6 @@ ultra fast</description>
 <wire x1="-325.12" y1="726.44" x2="-325.12" y2="728.98" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="P" pin="V-"/>
 <wire x1="-335.28" y1="728.98" x2="-325.12" y2="728.98" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="P" pin="V-"/>
-<wire x1="-342.9" y1="728.98" x2="-335.28" y2="728.98" width="0.1524" layer="91"/>
-<junction x="-335.28" y="728.98"/>
 </segment>
 <segment>
 <pinref part="GND7" gate="1" pin="GND"/>
@@ -22842,12 +22837,9 @@ ultra fast</description>
 </net>
 <net name="+5V" class="0">
 <segment>
-<pinref part="IC2" gate="P" pin="V+"/>
 <pinref part="IC1" gate="P" pin="V+"/>
-<wire x1="-342.9" y1="744.22" x2="-335.28" y2="744.22" width="0.1524" layer="91"/>
 <pinref part="P+2" gate="1" pin="+5V"/>
 <wire x1="-335.28" y1="744.22" x2="-325.12" y2="744.22" width="0.1524" layer="91"/>
-<junction x="-335.28" y="744.22"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -22971,7 +22963,7 @@ ultra fast</description>
 <wire x1="0" y1="784.86" x2="0" y2="782.32" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$2" class="0">
+<net name="+48V" class="0">
 <segment>
 <pinref part="P2" gate="-3" pin="P"/>
 <pinref part="P2" gate="-4" pin="P"/>
@@ -23049,11 +23041,8 @@ ultra fast</description>
 <wire x1="-365.76" y1="995.68" x2="-172.72" y2="995.68" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="OUT1" class="0">
 <segment>
-<pinref part="P2" gate="-6" pin="P"/>
-<pinref part="P2" gate="-5" pin="P"/>
-<wire x1="53.34" y1="792.48" x2="53.34" y2="795.02" width="0.1524" layer="91"/>
 <pinref part="C19" gate="G$1" pin="1"/>
 <wire x1="35.56" y1="789.94" x2="35.56" y2="795.02" width="0.1524" layer="91"/>
 <pinref part="R17" gate="G$1" pin="1"/>
@@ -23062,9 +23051,12 @@ ultra fast</description>
 <wire x1="27.94" y1="795.02" x2="35.56" y2="795.02" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="789.94" x2="27.94" y2="795.02" width="0.1524" layer="91"/>
 <junction x="27.94" y="795.02"/>
-<wire x1="53.34" y1="795.02" x2="35.56" y2="795.02" width="0.1524" layer="91"/>
-<junction x="53.34" y="795.02"/>
+<pinref part="P2" gate="-7" pin="P"/>
+<wire x1="35.56" y1="795.02" x2="53.34" y2="795.02" width="0.1524" layer="91"/>
 <junction x="35.56" y="795.02"/>
+<pinref part="P2" gate="-8" pin="P"/>
+<wire x1="53.34" y1="795.02" x2="53.34" y2="792.48" width="0.1524" layer="91"/>
+<junction x="53.34" y="795.02"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -23165,7 +23157,7 @@ ultra fast</description>
 <wire x1="20.32" y1="985.52" x2="20.32" y2="982.98" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$20" class="0">
+<net name="OUT2" class="0">
 <segment>
 <pinref part="C28" gate="G$1" pin="1"/>
 <wire x1="55.88" y1="990.6" x2="55.88" y2="995.68" width="0.1524" layer="91"/>
@@ -23177,11 +23169,11 @@ ultra fast</description>
 <junction x="48.26" y="995.68"/>
 <wire x1="73.66" y1="995.68" x2="55.88" y2="995.68" width="0.1524" layer="91"/>
 <junction x="55.88" y="995.68"/>
-<pinref part="P2" gate="-7" pin="P"/>
-<wire x1="73.66" y1="995.68" x2="83.82" y2="995.68" width="0.1524" layer="91"/>
-<pinref part="P2" gate="-8" pin="P"/>
-<wire x1="83.82" y1="995.68" x2="83.82" y2="993.14" width="0.1524" layer="91"/>
-<junction x="83.82" y="995.68"/>
+<pinref part="P2" gate="-5" pin="P"/>
+<wire x1="73.66" y1="995.68" x2="76.2" y2="995.68" width="0.1524" layer="91"/>
+<pinref part="P2" gate="-6" pin="P"/>
+<wire x1="76.2" y1="995.68" x2="76.2" y2="993.14" width="0.1524" layer="91"/>
+<junction x="76.2" y="995.68"/>
 </segment>
 </net>
 <net name="N$24" class="0">

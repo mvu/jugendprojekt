@@ -2537,68 +2537,6 @@ type 0817, grid 6.35 mm</description>
 </package>
 </packages>
 </library>
-<library name="transistor-fet" urn="urn:adsk.eagle:library:396">
-<description>&lt;b&gt;Field Effect Transistors&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;p&gt;
-&lt;p&gt;
-Symbols changed according to IEC617&lt;p&gt; 
-All types, packages and assignment to symbols and pins checked&lt;p&gt;
-Package outlines partly checked&lt;p&gt;
-&lt;p&gt;
-JFET = junction FET&lt;p&gt;
-IGBT-x = insulated gate bipolar transistor&lt;p&gt;
-x=N: NPN; x=P: PNP&lt;p&gt;
-IGFET-mc-nnn; (IGFET=insulated gate field effect transistor)&lt;P&gt;
-m=D: depletion mode (Verdr&amp;auml;ngungstyp)&lt;p&gt;
-m=E: enhancement mode (Anreicherungstyp)&lt;p&gt;
-c: N=N-channel; P=P-Channel&lt;p&gt;
-GDSB: gate, drain, source, bulk&lt;p&gt;
-&lt;p&gt;
-by R. Vogg  15.March.2002</description>
-<packages>
-<package name="TO220" library_version="1">
-<description>&lt;b&gt;TO 220 horizontal&lt;/b&gt;</description>
-<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.207" y1="14.605" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="5.207" y1="-1.27" x2="5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="5.207" y1="11.176" x2="4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="4.318" y1="11.176" x2="4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="4.318" y1="12.7" x2="5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="5.207" y1="12.7" x2="5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="11.176" x2="-4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="11.176" x2="-4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="12.7" x2="-5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="12.7" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<circle x="0" y="11.176" radius="1.8034" width="0.127" layer="21"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="42"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="43"/>
-<pad name="1" x="-2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="2" x="0" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="3" x="2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<text x="-3.81" y="5.207" size="1.778" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.937" y="2.54" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-4.445" y="7.874" size="0.9906" layer="21" ratio="12">A17,5mm</text>
-<text x="-3.175" y="0" size="1.27" layer="51" ratio="10">1</text>
-<text x="-0.635" y="0" size="1.27" layer="51" ratio="10">2</text>
-<text x="1.905" y="0" size="1.27" layer="51" ratio="10">3</text>
-<rectangle x1="2.159" y1="-4.699" x2="2.921" y2="-4.064" layer="21"/>
-<rectangle x1="-0.381" y1="-4.699" x2="0.381" y2="-4.064" layer="21"/>
-<rectangle x1="-2.921" y1="-4.699" x2="-2.159" y2="-4.064" layer="21"/>
-<rectangle x1="-3.175" y1="-4.064" x2="-1.905" y2="-1.27" layer="21"/>
-<rectangle x1="-0.635" y1="-4.064" x2="0.635" y2="-1.27" layer="21"/>
-<rectangle x1="1.905" y1="-4.064" x2="3.175" y2="-1.27" layer="21"/>
-<rectangle x1="-2.921" y1="-6.604" x2="-2.159" y2="-4.699" layer="51"/>
-<rectangle x1="-0.381" y1="-6.604" x2="0.381" y2="-4.699" layer="51"/>
-<rectangle x1="2.159" y1="-6.604" x2="2.921" y2="-4.699" layer="51"/>
-<hole x="0" y="11.176" drill="3.302"/>
-</package>
-</packages>
-</library>
 <library name="diode" urn="urn:adsk.eagle:library:210">
 <description>&lt;b&gt;Diodes&lt;/b&gt;&lt;p&gt;
 Based on the following sources:
@@ -2672,6 +2610,35 @@ Source: http://www.molex.com</description>
 <text x="-10.16" y="-6.985" size="1.27" layer="27">&gt;VALUE</text>
 <hole x="13.1" y="2.29" drill="3"/>
 <hole x="-13.1" y="2.29" drill="3"/>
+</package>
+</packages>
+</library>
+<library name="transistor-power" urn="urn:adsk.eagle:library:400">
+<description>&lt;b&gt;Power Transistors&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="TO220BV" library_version="1">
+<description>&lt;b&gt;Molded Package&lt;/b&gt;&lt;p&gt;
+grid 2.54 mm</description>
+<wire x1="4.699" y1="-4.318" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.318" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-1.143" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-5.08" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="-4.4958" y="-3.7084" radius="0.254" width="0" layer="21"/>
+<pad name="G" x="-2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="D" x="0" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="S" x="2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<text x="-5.08" y="-6.0452" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-5.334" y1="-0.762" x2="5.334" y2="0" layer="21"/>
+<rectangle x1="-5.334" y1="-1.27" x2="-3.429" y2="-0.762" layer="21"/>
+<rectangle x1="-1.651" y1="-1.27" x2="-0.889" y2="-0.762" layer="21"/>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="-0.762" layer="51"/>
+<rectangle x1="0.889" y1="-1.27" x2="1.651" y2="-0.762" layer="21"/>
+<rectangle x1="3.429" y1="-1.27" x2="5.334" y2="-0.762" layer="21"/>
+<rectangle x1="-0.889" y1="-1.27" x2="0.889" y2="-0.762" layer="51"/>
+<rectangle x1="1.651" y1="-1.27" x2="3.429" y2="-0.762" layer="51"/>
 </package>
 </packages>
 </library>
@@ -2932,13 +2899,21 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="8.89" y="18.7325" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="L2" library="resistor" library_urn="urn:adsk.eagle:library:348" package="TJ8-U1" value="" x="24.9936" y="53.9623" rot="R270"/>
-<element name="Q1" library="transistor-fet" library_urn="urn:adsk.eagle:library:396" package="TO220" value="BUZ172" x="24.9936" y="80.645"/>
+<element name="Q1" library="transistor-power" library_urn="urn:adsk.eagle:library:400" package="TO220BV" value="IRF9530" x="24.9936" y="76.835" smashed="yes">
+<attribute name="NAME" x="16.7386" y="73.6473" size="1.27" layer="25" ratio="10"/>
+</element>
 <element name="C7" library="resistor" package="TT5D11" value="" x="12.4968" y="34.5948" smashed="yes" rot="R180">
 <attribute name="NAME" x="18.7198" y="39.6748" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="16.1798" y="38.0238" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C8" library="resistor" package="E5-8,5" value="" x="44.9072" y="71.6153" rot="R270"/>
-<element name="C9" library="resistor" package="E5-8,5" value="" x="34.7472" y="71.6153" rot="R270"/>
+<element name="C8" library="resistor" package="E5-8,5" value="" x="44.9072" y="71.6153" smashed="yes" rot="R270">
+<attribute name="NAME" x="48.7299" y="74.4982" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="41.8846" y="74.1299" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
+<element name="C9" library="resistor" package="E5-8,5" value="" x="34.7472" y="71.6153" smashed="yes" rot="R270">
+<attribute name="NAME" x="38.2524" y="74.4982" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="31.7246" y="74.1299" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
 <element name="C10" library="resistor" package="C1206" value="" x="29.845" y="63.8175" smashed="yes" rot="MR0">
 <attribute name="NAME" x="35.2425" y="63.1825" size="1.27" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="31.115" y="61.2775" size="1.27" layer="28" rot="MR0"/>
@@ -2969,8 +2944,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="30.861" y="18.415" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
 <element name="D4" library="diode" library_urn="urn:adsk.eagle:library:210" package="TO220ACS" value="BYT08P" x="23.495" y="66.9925" smashed="yes" rot="R180">
-<attribute name="NAME" x="20.6375" y="73.0377" size="1.27" layer="25" ratio="10" rot="R180"/>
-<attribute name="VALUE" x="28.575" y="74.6125" size="1.27" layer="27" ratio="10" rot="R180"/>
+<attribute name="NAME" x="17.4625" y="69.5452" size="1.27" layer="25" ratio="10" rot="R180"/>
 </element>
 <element name="R17" library="resistor" package="P0817V" value="" x="43.815" y="23.1648" smashed="yes" rot="R90">
 <attribute name="NAME" x="45.9613" y="21.9075" size="1.27" layer="25" ratio="10"/>
@@ -3039,10 +3013,18 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="98.1075" y="18.7325" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="L4" library="resistor" library_urn="urn:adsk.eagle:library:348" package="TJ8-U1" value="" x="75.0062" y="53.9623" rot="R270"/>
-<element name="Q2" library="transistor-fet" library_urn="urn:adsk.eagle:library:396" package="TO220" value="BUZ172" x="75.0062" y="80.645"/>
+<element name="Q2" library="transistor-power" library_urn="urn:adsk.eagle:library:400" package="TO220BV" value="IRF9530" x="75.0062" y="76.835" smashed="yes">
+<attribute name="NAME" x="80.7212" y="73.9648" size="1.27" layer="25" ratio="10"/>
+</element>
 <element name="C1" library="resistor" package="TT5D11" value="" x="87.503" y="34.5948"/>
-<element name="C3" library="resistor" package="E5-8,5" value="" x="55.0672" y="71.8947" rot="R270"/>
-<element name="C4" library="resistor" package="E5-8,5" value="" x="65.2272" y="71.8947" rot="R270"/>
+<element name="C3" library="resistor" package="E5-8,5" value="" x="55.0672" y="71.8947" smashed="yes" rot="R270">
+<attribute name="NAME" x="59.2455" y="74.4982" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="52.0446" y="74.4093" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
+<element name="C4" library="resistor" package="E5-8,5" value="" x="65.2272" y="71.8947" smashed="yes" rot="R270">
+<attribute name="NAME" x="60.198" y="67.1957" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="62.2046" y="74.4093" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
 <element name="C6" library="resistor" package="C1206" value="" x="70.485" y="65.405" smashed="yes" rot="MR180">
 <attribute name="NAME" x="64.77" y="66.04" size="1.27" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="69.215" y="67.945" size="1.27" layer="28" rot="MR180"/>
@@ -3076,8 +3058,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="69.1515" y="13.335" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="D7" library="diode" library_urn="urn:adsk.eagle:library:210" package="TO220ACS" value="BYT08P" x="76.5175" y="67.6275" smashed="yes" rot="R180">
-<attribute name="NAME" x="81.5975" y="73.6727" size="1.27" layer="25" ratio="10" rot="R180"/>
-<attribute name="VALUE" x="81.5975" y="75.2475" size="1.27" layer="27" ratio="10" rot="R180"/>
+<attribute name="NAME" x="85.09" y="70.4977" size="1.27" layer="25" ratio="10" rot="R180"/>
 </element>
 <element name="R7" library="resistor" package="P0817V" value="" x="56.1975" y="23.1648" smashed="yes" rot="R90">
 <attribute name="NAME" x="58.9788" y="21.2725" size="1.27" layer="25" ratio="10"/>
@@ -3220,7 +3201,7 @@ design rules under a new name.</description>
 <signal name="N$10">
 <contactref element="U3" pad="2"/>
 <contactref element="D2" pad="A"/>
-<contactref element="Q1" pad="1"/>
+<contactref element="Q1" pad="G"/>
 <wire x1="22.5425" y1="65.405" x2="22.5425" y2="66.675" width="0.508" layer="16"/>
 <wire x1="22.5425" y1="66.675" x2="22.5425" y2="71.755" width="0.508" layer="16"/>
 <wire x1="22.5425" y1="71.755" x2="22.5425" y2="72.0725" width="0.508" layer="16"/>
@@ -3289,7 +3270,7 @@ design rules under a new name.</description>
 <wire x1="6.6675" y1="53.975" x2="6.77684375" y2="54.08434375" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="N$21">
-<contactref element="Q1" pad="3"/>
+<contactref element="Q1" pad="S"/>
 <contactref element="L2" pad="1"/>
 <contactref element="C10" pad="2"/>
 <contactref element="C11" pad="2"/>
@@ -3359,7 +3340,7 @@ design rules under a new name.</description>
 <wire x1="28.575" y1="15.875" x2="28.575" y2="24.4475" width="1.778" layer="16"/>
 </signal>
 <signal name="+48V">
-<contactref element="Q1" pad="2"/>
+<contactref element="Q1" pad="D"/>
 <contactref element="L1" pad="2"/>
 <contactref element="D3" pad="C"/>
 <contactref element="U3" pad="3"/>
@@ -3367,7 +3348,7 @@ design rules under a new name.</description>
 <contactref element="C8" pad="+"/>
 <contactref element="C15" pad="2"/>
 <contactref element="C14" pad="2"/>
-<contactref element="Q2" pad="2"/>
+<contactref element="Q2" pad="D"/>
 <contactref element="L3" pad="2"/>
 <contactref element="D6" pad="C"/>
 <contactref element="U5" pad="3"/>
@@ -3534,7 +3515,7 @@ design rules under a new name.</description>
 <signal name="N$6">
 <contactref element="U5" pad="2"/>
 <contactref element="D5" pad="A"/>
-<contactref element="Q2" pad="1"/>
+<contactref element="Q2" pad="G"/>
 <wire x1="67.6275" y1="67.6275" x2="66.3575" y2="66.3575" width="0.6096" layer="16"/>
 <wire x1="67.6275" y1="67.6275" x2="68.2625" y2="68.2625" width="0.6096" layer="16"/>
 <wire x1="68.2625" y1="68.2625" x2="68.58" y2="68.58" width="0.6096" layer="16"/>
@@ -3567,7 +3548,7 @@ design rules under a new name.</description>
 <wire x1="94.2975" y1="49.2125" x2="94.2975" y2="22.5425" width="0.8128" layer="16"/>
 </signal>
 <signal name="N$14">
-<contactref element="Q2" pad="3"/>
+<contactref element="Q2" pad="S"/>
 <contactref element="L4" pad="1"/>
 <contactref element="C6" pad="2"/>
 <contactref element="C20" pad="2"/>
