@@ -1,0 +1,36 @@
+* C:\users\jonas\Meine Dokumente\LTspiceXVII\Hauptlicht_EVAL\Hauptlichtsteuerung_einfach.asc
+R2 N009 0 200
+C2 N010 PWM-MOSFET 1n
+D1 N006 N005 1N5818
+R3 N004 N005 2k
+R4 N003 N004 5k6
+L1 N001 N003 5m6
+D2 N004 N001 1N5818
+XM3 MOSFET-OUT N006 N001 IRF9530
+V1 N001 0 48V
+L2 N002 MOSFET-OUT 1m
+C1 N002 0 1000µ
+D3 0 MOSFET-OUT 1N5818
+R_LAST OUT 0 10
+R_SENS OUT N002 100m
+V§PCA-OUT PWM-MOSFET 0 PULSE(0 5 0 14n 1.5n {d/F} {1/F})
+D4 0 N010 1N5818
+R1 N010 0 3k9
+M4 N005 N007 N008 N008 BSS123
+C3 N008 0 100n
+V§PCA1 N007 0 PULSE(0 5 0 14n 1.5n {d/F} {1/F})
+M2 N001 N004 N006 N006 BSS123
+M5 N009 N010 0 0 BSS123
+R5 N008 0 200
+.model D D
+.lib C:\users\jonas\Meine Dokumente\LTspiceXVII\lib\cmp\standard.dio
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\jonas\Meine Dokumente\LTspiceXVII\lib\cmp\standard.mos
+.tran 10m
+.inc BUZ.lib
+.inc 2n7000.lib
+.param F=100k d=0.5
+.inc IRF9530.lib
+.backanno
+.end
