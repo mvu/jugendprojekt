@@ -1,48 +1,46 @@
 /*
- Name:		JugendSliderControll.ino
- Created:	16.04.2017 16:09:39
- Author:	Martin Laptop
- Version	V2.0
-
- Neu aufbau der Slider rotine.
- Verbesserung: 
- Schneller Slider anfahrt bewegung 
- Weniger Fehler beim anfahren von sollwert. 
- Auslese Genauigkeit verbessert durch 4 mal auslesen des AD wertes dann erst Senden
-
-
- Ablauf:
- Die Main loop kontrolliert zyklisch ob die Slider postition der Werten entspricht die im Array Slider drinnen steht. Wenn dies erreicht wurde werden die Motoren frei gegeben und erst wieder 
- geändert wenn über I2C das Array geändert wurde.
- Wenn über I2C neue Slider werte kommen wird nur das Array geändert und keine Funktion aufgerufen.
- Beim lesen der Aktuellen Postion wird 4 mal ein AD wert aufgenommen und davon ein Mittelwert erstellt und dieser wird dann gesendet
+ Name:		Slider_UDP.ino
+ Created:	16.02.2018 15:21:43
+ Author:	Martin
 */
 
-
-#include <Wire.h>
 #include <AFMotor.h>
+#include <SPI.h>
+#include <Ethernet.h>
+#include <EthernetUdp.h>
+#include <string.h>
 
 #define adSlider1 A0
 #define adSlider2 A1
 #define adSlider3 A2
 #define adSlider4 A3
-#define i2cAdresse 0x0E
+#define udpPort 4506
 
-int arraySlider[4];
-int arraySliderOld[4];
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEf };
+IPAddress ip(192, 168, 188, 251);									//  in der Fritzbox Jugend hinterlegt
+IPAddress gateway(192, 168, 188, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress RecipientIP(192, 168, 188, 1);
+
+unsigned int localPort = 8888;
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
+int arraySlider[4], arraySliderOld[4], arraySliderValue[4];
 char arrayAd[] = { A0, A1, A2, A3 };
-int arraySliderValue[4];
-int wireValue;
-int slider, slider1, slider2, slider3, slider4;
-int a , i2cInput;
+int wireValue, slider = 0, slider1 = 0 , slider2 = 0 , slider3 = 0 , slider4 = 0;
+int a;
+
+
+EthernetUDP Udp;
 
 // Motor configurieren 
+
 AF_DCMotor mSlider1(1, MOTOR12_1KHZ);
 AF_DCMotor mSlider2(2, MOTOR12_1KHZ);
 AF_DCMotor mSlider3(3, MOTOR12_1KHZ);
 AF_DCMotor mSlider4(4, MOTOR12_1KHZ);
 
 void setup() {
+
 	pinMode(adSlider1, INPUT);					// Sider A/D wert abfrage A0 = Slider1
 	pinMode(adSlider2, INPUT);
 	pinMode(adSlider3, INPUT);
@@ -53,19 +51,19 @@ void setup() {
 	mSlider3.run(RELEASE);
 	mSlider4.run(RELEASE);
 
-	Wire.begin(i2cAdresse);						// I2C Adresse festlegen 
-	Wire.onReceive(interruptSet);				// Aufruf der Funktion beim Empfang von Daten
-	Wire.onRequest(interruptGet);				// Aufruf der Funktion beim Senden von Daten
+	Serial.begin(115200);
+	Ethernet.begin(mac, ip);
+	Udp.begin(localPort);
 
-
-	for (size_t i = 0; i < 5; i++)				// Slider Arry auf Null setzten;
-	{
+	for (size_t i = 0; i < 5; i++){				// Slider Arry auf Null setzten;
 		arraySlider[i] = 0;
 	}
 
-	Serial.begin(115200);
+	
+
 	delay(10);
 	Serial.println("Slider Controllpanal V2.0");
+
 	mSlider1.run(BACKWARD);
 	mSlider1.setSpeed(160);
 	mSlider2.run(BACKWARD);
@@ -74,26 +72,22 @@ void setup() {
 	mSlider3.setSpeed(160);
 	mSlider4.run(BACKWARD);
 	mSlider4.setSpeed(160);
-	slider1 = 0;
-	slider2 = 0;
-	slider3 = 0;
-	slider4 = 0;
-	i2cInput = -1;
 
 	while (true)
 	{
-		if (slider1 == 0)if (analogRead(adSlider1) >= 1020) {slider1 = 1; mSlider1.run(RELEASE);};
-		if (slider2 == 0)if (analogRead(adSlider2) >= 1020) {slider2 = 1; mSlider2.run(RELEASE);};
-		if (slider3 == 0)if (analogRead(adSlider3) >= 1020) {slider3 = 1; mSlider3.run(RELEASE);};
-		if (slider4 == 0)if (analogRead(adSlider4) >= 1020) {slider4 = 1; mSlider4.run(RELEASE);};
+		if (slider1 == 0)if (analogRead(adSlider1) >= 1020) { slider1 = 1; mSlider1.run(RELEASE); };
+		if (slider2 == 0)if (analogRead(adSlider2) >= 1020) { slider2 = 1; mSlider2.run(RELEASE); };
+		if (slider3 == 0)if (analogRead(adSlider3) >= 1020) { slider3 = 1; mSlider3.run(RELEASE); };
+		if (slider4 == 0)if (analogRead(adSlider4) >= 1020) { slider4 = 1; mSlider4.run(RELEASE); };
 		if (slider1 == 1 && slider2 == 1 && slider3 == 1 && slider4 == 1) break;
 	}
-
-
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+
+	checkUDP();
+
 	for (size_t a = 0; a < 4; a++)
 	{
 		int read = analogRead(arrayAd[a]);
@@ -101,18 +95,9 @@ void loop() {
 		read += analogRead(arrayAd[a]);
 		read += analogRead(arrayAd[a]);
 		arraySliderValue[a] = read / 4;
-		//if (a == 1){
-		//	Serial.println(arraySliderValue[a]);
-		//}
 	}
 
-	if (i2cInput >= 0) {
-		i2cInput = max(min(i2cInput, 100), 1);
-		arraySlider[slider] = 1024 - (float(10.24) * float(i2cInput));
-		Serial.println(arraySlider[slider]);
-		i2cInput = -1;
-	}
-	
+
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (arraySlider[i] != arraySliderOld[i]) {
@@ -165,40 +150,85 @@ void loop() {
 				default:
 					break;
 				}
-				
 			}
 		}
+	}  
+}
+
+void checkUDP() {
+	if (Udp.parsePacket()) {
+		Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
+		char Sliderwahl = packetBuffer[0];
+		packetBuffer[0] = 0;
+		int val = atoi(packetBuffer);
+		val = max(min(val,100), 0);
+		if (val < 1) {
+			switch (Sliderwahl)
+			{
+			case'A':
+				Udp.print(arraySliderValue[0]);
+				Udp.endPacket();
+				break;
+			case'B':
+				Udp.print(arraySliderValue[1]);
+				Udp.endPacket();
+				break;
+			case'C':
+				Udp.print(arraySliderValue[2]);
+				Udp.endPacket();
+				break;
+			case'D':
+				Udp.print(arraySliderValue[3]);
+				Udp.endPacket();
+				break;
+			default:
+				break;
+			}
+		}
+		else if (val == 1){
+			switch (Sliderwahl)
+			{
+			case 'A':
+				arraySlider[0] = 0;
+				break;
+
+			case 'B':
+				arraySlider[1] = 0;
+				break;
+
+			case 'C':
+				arraySlider[2] = 0;
+				break;
+
+			case 'D':
+				arraySlider[3] = 0;
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			switch (Sliderwahl)
+			{
+			case 'A':
+				arraySliderValue[0] = val;
+				break;
+
+			case 'B':
+				arraySliderValue[1] = val;
+				break;
+			
+			case 'C':
+				arraySliderValue[2] = val;
+				break;
+
+			case 'D':
+				arraySliderValue[3] = val;
+				break;			
+			default:
+				break;
+			}
+		}
+
 	}
-}
-
-void interruptSet(int byteCount) {
-	if (Wire.available())
-	{
-		slider = Wire.read();
-		i2cInput= Wire.read();
-
-		//Serial.print("Slider ad:");
-		//Serial.println(slider);
-		//Serial.print("Slider Value:");
-		//Serial.println(arraySlider[slider]);
-	}
-}
-
-void interruptGet() {
-	//Serial.print("Silder abfrage:");
-	//Serial.println(slider);
-	//int i = Wire.read();
-	Wire.write(100 - (max(min((arraySliderValue[slider] / 10), 100), 1)));
-	//Serial.print("Send:");
-	//Serial.println(arraySliderValue[slider]);
-	Wire.read();
-	Wire.clearWriteError();
-}
-
-void sliderSet(int num, int Val) {
-
-}
-
-void sliderGet() {
-
 }
