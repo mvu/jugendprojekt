@@ -2,8 +2,9 @@
 #define SLIDERARDUINO_H
 
 #include "mainconfig.h"
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
+#include <QtNetwork>
+#include <QTimer>
+
 
 #include <QObject>
 
@@ -21,7 +22,14 @@ public slots:
     int get(int slider);
 private:
     int slider1;
-
+    QUdpSocket *udp;
+    QTimer *timer;
+    QByteArray buffer;
+    int valSlider[4], Sliderwechsel = 0;
+    const char Slider[] {0,"A","B","C","D"};
+private slots:
+    void read();
+    void timerEnd();
 
 };
 

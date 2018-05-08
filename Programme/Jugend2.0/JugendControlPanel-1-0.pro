@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     application.cpp \
     audio.cpp \
     medien_auswahl.cpp \
-    arduinocommunication.cpp
+    arduinocommunication.cpp \
+    config.cpp
 
 HEADERS  += mainwindow.h \
     licht.h \
@@ -61,7 +62,8 @@ HEADERS  += mainwindow.h \
     application.h \
     audio.h \
     medien_auswahl.h \
-    arduinocommunication.h
+    arduinocommunication.h \
+    config.h
 
 FORMS    += mainwindow.ui \
     licht.ui \
@@ -74,7 +76,8 @@ FORMS    += mainwindow.ui \
     theke.ui \
     palette.ui \
     audio.ui \
-    medien_auswahl.ui
+    medien_auswahl.ui \
+    config.ui
 
 RESOURCES += \
     bilder.qrc

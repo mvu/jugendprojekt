@@ -16,6 +16,7 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, steuerungThreadLic
     if(SlinderarduinoEnable == true)
     {
         Slider = new thread_Slider(this);
+        ui->horizontalSlider->isHidden();   // Disable Slider if Arduino Slider true
     }
     sThread = s;
     mThread = m;
@@ -94,10 +95,12 @@ void EinstellungHauptlicht::ButtonPressed(int button, bool checked)
 
 void EinstellungHauptlicht::SliderHellChanged(int value)
 {
-    int wert = int(value*2.55);
-    if(wert >= 120) wert = 120;
-    emit HelligkeitChanged(wert);
-    SetAllButtonsColor();
+    if(SlinderarduinoEnable == false){
+        int wert = int(value*2.55);
+        if(wert >= 120) wert = 120;
+        emit HelligkeitChanged(wert);
+        SetAllButtonsColor();
+    }
 }
 
 void EinstellungHauptlicht::SetAllButtonsColor()

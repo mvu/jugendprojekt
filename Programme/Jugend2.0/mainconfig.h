@@ -35,6 +35,7 @@
 
 //Event Filter
 #include "application.h"
+#include "arduinocommunication.h"
 
 // PCA REGISTER ALLE
 #define PCA9635_MODE1       0x00
@@ -136,6 +137,16 @@
 #define TempPc_Crit 60.0
 #define TempOnkyo_High 40.0
 #define TempOnkyo_Crit 50.0
+
+// Arduino Slider Einstellung
+
+#define IP ip
+#define PORT port
+#define AktualisierungsZeit 10;     // Zeit in msec, danach wird 1 Slider ausgelesen
+
+const QString ip = "192.168.188.249";
+const quint16 port = 9999;
+
 
 // Init
 void init();

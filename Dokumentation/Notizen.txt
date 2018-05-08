@@ -1,4 +1,17 @@
-Einrichten des autostarts des Programms:
+﻿##   Einrichten des autostarts des Programms: ###################################
 Skript "Starter.sh" in $HOME erstellt, welches automatisch ausgeführt wird
 .config/lxsession/LXDE-pi/autostart mit @lxterminal -e /home/pi/Starter.sh
 
+
+
+##  Beim Fehler QXcbConnection Could not connect to display #####################
+
+In Pi config alle Verbindungen Aktivieren I2c spi Uart und vnc monitor auch aktivieren 
+
+
+
+## QT Installieren #################################################
+ sudo apt-get install qt5-default
+ sudo apt-get install qt5-qmake
+
+ ## Optional## sudo apt-get install qtcreator
