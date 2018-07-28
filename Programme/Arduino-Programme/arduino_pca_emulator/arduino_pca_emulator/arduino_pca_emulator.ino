@@ -26,7 +26,11 @@ void serialEvent(){
 	}
 	int compA = 16000 / freq - f_corr;
 	int compB = compA * float(pwm)/100.;
+	uint8_t tccr2b_tmp;
+	(pwm > 0) ? tccr2b_tmp = TCCR2B | 0x01 : tccr2b_tmp = TCCR2B & 0xFE;
+	
 	noInterrupts();
+	TCCR2B = tccr2b_tmp;
 	OCR2A = compA;
 	OCR2B = compB;
 	interrupts();
