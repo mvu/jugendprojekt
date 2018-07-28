@@ -157,10 +157,16 @@ void loop() {
 
 void checkUDP() {
 	if (Udp.parsePacket()) {
+		Serial.print("data received: ");
 		Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
+		Serial.println(packetBuffer);
+		Serial.println(sizeof(packetBuffer)/sizeof(packetBuffer[0]));
 		char Sliderwahl = packetBuffer[0];
+		Serial.println(Sliderwahl);
 		packetBuffer[0] = 0;
+		packetBuffer[4] = 0;
 		int val = atoi(packetBuffer);
+		Serial.println(val);
 		val = max(min(val,100), 0);
 		if (val < 1) {
 			switch (Sliderwahl)
