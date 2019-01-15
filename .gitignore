@@ -34,3 +34,6 @@
 # LT-Spice
 *.log
 *.raw
+
+# Qt
+*.pro.user*

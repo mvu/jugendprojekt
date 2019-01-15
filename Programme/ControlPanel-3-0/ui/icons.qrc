@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/audio.png</file>
+        <file>icons/fish.png</file>
+        <file>icons/jugend.png</file>
+        <file>icons/lampe.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/backspace.png</file>
+        <file>icons/arrow_left.png</file>
+        <file>icons/shutdown.png</file>
+        <file>icons/arrow_left_blk.png</file>
+        <file>icons/arrow_left_wht.png</file>
+    </qresource>
+</RCC>
