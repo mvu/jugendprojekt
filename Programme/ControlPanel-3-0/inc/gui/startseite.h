@@ -3,12 +3,16 @@
 
 #include <QMainWindow>
 
-#include "inc/jugendraum.h"
+#include "../model/jugendraum.h"
 
+//! Namespace der GUI, den von Qt von Haus aus verwendet.
 namespace Ui {
 class Startseite;
 }
 
+/*!
+ * \brief GUI: Startseite
+ */
 class Startseite : public QMainWindow
 {
     Q_OBJECT
@@ -18,6 +22,11 @@ public:
     ~Startseite();
 
 private slots:
+    void on_pushButton_youth_released();
+    void on_pushButton_teen_released();
+    void on_pushButton_light_released();
+    void on_pushButton_media_released();
+    void on_pushButton_system_released();
 
 private:
     Ui::Startseite *ui;

@@ -1,12 +1,12 @@
-#include "inc/jugendraum.h"
+#include "inc/model/jugendraum.h"
 
 Jugendraum::Jugendraum()
 {
-    // init hardware
+    hw::Init();
     // init Klassen
 }
 
 void Jugendraum::shutdown()
 {
-    qDebug() << "closed";
+    qDebug() << Q_FUNC_INFO;
 }

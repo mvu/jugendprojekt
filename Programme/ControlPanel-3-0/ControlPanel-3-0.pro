@@ -25,24 +25,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    src/startseite.cpp \
-    src/application.cpp \
-    src/jugendraum.cpp \
-    src/main.cpp
+    src/gui/startseite.cpp \
+    src/model/application.cpp \
+    src/model/jugendraum.cpp \
+    src/model/main.cpp \
+    src/model/i2cdevice.cpp \
+    src/model/hardware.cpp
 
 HEADERS += \
-    inc/application.h \
-    inc/jugendraum.h \
-    inc/startseite.h \
+    inc/model/application.h \
+    inc/model/jugendraum.h \
+    inc/gui/startseite.h \
+    inc/model/hardware.h \
+    inc/model/i2cdevice.h \
+    inc/model/hardware_config.h \
+    inc/model/hardware_register.h
 
 FORMS += \
     ui/startseite.ui
+
+RESOURCES += \
+    ui/icons.qrc \
+    ui/backgrounds.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    ui/icons.qrc \
-    ui/backgrounds.qrc

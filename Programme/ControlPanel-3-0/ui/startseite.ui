@@ -28,6 +28,9 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
@@ -57,7 +60,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_clock">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
+        <string notr="true">background-color:rgba(0, 0, 0, 0);border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -69,6 +72,9 @@
         <bool>false</bool>
        </property>
        <widget class="QPushButton" name="pushButton_clock">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -80,6 +86,9 @@
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background:rgba(0,0,0,0);</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -87,7 +96,7 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_uhrzeit">
+       <widget class="QLabel" name="label_time">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -260,7 +269,7 @@
          <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
         </property>
        </widget>
-       <widget class="QLabel" name="label_datum">
+       <widget class="QLabel" name="label_date">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -433,13 +442,13 @@
          <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
         </property>
        </widget>
-       <zorder>label_datum</zorder>
-       <zorder>label_uhrzeit</zorder>
+       <zorder>label_date</zorder>
+       <zorder>label_time</zorder>
        <zorder>pushButton_clock</zorder>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_audio">
+      <widget class="QGroupBox" name="groupBox_media">
        <property name="styleSheet">
         <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
        </property>
@@ -475,7 +484,7 @@ background-color:rgba(0,0,0,0);</string>
          <number>1</number>
         </property>
        </widget>
-       <widget class="QLabel" name="label_audio">
+       <widget class="QLabel" name="label_media">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -623,7 +632,7 @@ background-color:rgba(0,0,0,0);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_audio">
+       <widget class="QPushButton" name="pushButton_media">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -645,6 +654,9 @@ background-color:rgba(0,0,0,0);</string>
          <bool>true</bool>
         </property>
        </widget>
+       <zorder>label_media</zorder>
+       <zorder>frame_10</zorder>
+       <zorder>pushButton_media</zorder>
       </widget>
      </item>
      <item>
@@ -653,7 +665,7 @@ background-color:rgba(0,0,0,0);</string>
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+        <string notr="true">background-color:rgba(0,0,0,100);</string>
        </property>
        <property name="title">
         <string/>
@@ -851,6 +863,9 @@ background-color:rgba(0,0,0,0);</string>
          <bool>true</bool>
         </property>
        </widget>
+       <zorder>label_system</zorder>
+       <zorder>frame_2</zorder>
+       <zorder>pushButton_system</zorder>
       </widget>
      </item>
     </layout>
@@ -881,7 +896,7 @@ background-color:rgba(0,0,0,0);</string>
       <number>15</number>
      </property>
      <item>
-      <widget class="QGroupBox" name="groupBox_jugend">
+      <widget class="QGroupBox" name="groupBox_youth">
        <property name="styleSheet">
         <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
        </property>
@@ -914,7 +929,7 @@ background-color:rgba(0,0,0,0);</string>
          <enum>QFrame::Plain</enum>
         </property>
        </widget>
-       <widget class="QLabel" name="label_lugend">
+       <widget class="QLabel" name="label_youth">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1090,7 +1105,7 @@ background-color:rgba(0,0,0,0);</string>
          <number>1</number>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_jugend">
+       <widget class="QPushButton" name="pushButton_youth">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -1109,7 +1124,7 @@ background-color:rgba(0,0,0,0);</string>
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_lugend_2">
+       <widget class="QLabel" name="label_youth_action">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1285,14 +1300,14 @@ background-color:rgba(0,0,0,0);</string>
          <number>1</number>
         </property>
        </widget>
+       <zorder>label_youth_action</zorder>
        <zorder>frame_11</zorder>
-       <zorder>label_lugend</zorder>
-       <zorder>label_lugend_2</zorder>
-       <zorder>pushButton_jugend</zorder>
+       <zorder>label_youth</zorder>
+       <zorder>pushButton_youth</zorder>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_teenkreis">
+      <widget class="QGroupBox" name="groupBox_teen">
        <property name="styleSheet">
         <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
        </property>
@@ -1325,7 +1340,7 @@ background-color:rgba(0,0,0,0);</string>
          <enum>QFrame::Plain</enum>
         </property>
        </widget>
-       <widget class="QLabel" name="label_teenkreis">
+       <widget class="QLabel" name="label_teen">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1504,7 +1519,7 @@ background-color:rgba(0,0,0,0);</string>
          <number>0</number>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_teenkreis">
+       <widget class="QPushButton" name="pushButton_teen">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -1523,7 +1538,7 @@ background-color:rgba(0,0,0,0);</string>
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_teenkreis_2">
+       <widget class="QLabel" name="label_teen_action">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1702,14 +1717,14 @@ background-color:rgba(0,0,0,0);</string>
          <number>0</number>
         </property>
        </widget>
+       <zorder>label_teen</zorder>
+       <zorder>label_teen_action</zorder>
        <zorder>frame_12</zorder>
-       <zorder>label_teenkreis</zorder>
-       <zorder>label_teenkreis_2</zorder>
-       <zorder>pushButton_teenkreis</zorder>
+       <zorder>pushButton_teen</zorder>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_lichteinstellung">
+      <widget class="QGroupBox" name="groupBox_light">
        <property name="styleSheet">
         <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
        </property>
@@ -1742,7 +1757,7 @@ background-color:rgba(0,0,0,0);</string>
          <enum>QFrame::Plain</enum>
         </property>
        </widget>
-       <widget class="QLabel" name="label_lichteinstellung">
+       <widget class="QLabel" name="label_light">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1887,7 +1902,7 @@ background-color:rgba(0,0,0,0);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_lichteinstellung">
+       <widget class="QPushButton" name="pushButton_light">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -1906,6 +1921,9 @@ background-color:rgba(0,0,0,0);</string>
          <bool>true</bool>
         </property>
        </widget>
+       <zorder>label_light</zorder>
+       <zorder>frame_13</zorder>
+       <zorder>pushButton_light</zorder>
       </widget>
      </item>
     </layout>
@@ -1915,7 +1933,7 @@ background-color:rgba(0,0,0,0);</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>799</width>
+      <width>800</width>
       <height>480</height>
      </rect>
     </property>

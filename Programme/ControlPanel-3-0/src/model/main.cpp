@@ -10,10 +10,10 @@
  * \mainpage Das Hauptprogramm zur Steuerung des Jugendraumes
  */
 
-#include "inc/application.h"
+#include "inc/model/application.h"
 
-#include "inc/jugendraum.h"
-#include "inc/startseite.h"
+#include "inc/model/jugendraum.h"
+#include "inc/gui/startseite.h"
 
 
 int main(int argc, char *argv[])
@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     Application a(argc, argv);
     Jugendraum jugendraum;
     Startseite startseite(nullptr, &jugendraum);
+    startseite.setWindowFlag(Qt::FramelessWindowHint);
     startseite.show();
 
     return a.exec();

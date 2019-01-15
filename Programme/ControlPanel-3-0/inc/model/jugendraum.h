@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QDebug>
 
+#include "hardware.h"
+
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
  * \details Die Jugendraum-Klasse speichert alle Parameter zur Kontrolle des
@@ -13,7 +15,12 @@ class Jugendraum : public QObject
 {
     Q_OBJECT
 public:
-    explicit Jugendraum();  //!< Constructor
+    /*!
+     * \brief Constructor, initialisiert alles
+     * \details Es werden nach einander alle Bestandteile initialisert. Zunächst
+     *      die Hardware über den namespace hw, dann die high level Klassen
+     */
+    explicit Jugendraum();
     void shutdown(void);    //!< Destructor
 
 private:
