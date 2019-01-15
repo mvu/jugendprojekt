@@ -17,7 +17,7 @@ public:
      *  \details Die Zeit, die mindestens zwischen den Events liegen muss,
      *      wird über min_time_passed_ms_ festgelegt. Der Standardwert ist 100 ms.
      */
-    bool notify(QObject *receiver, QEvent *e);
+    bool notify(QObject *receiver /*!< Der Empfänger des Signals */, QEvent *e /*!< Das Event */);
 
 private:
     qint64 timestamp_;

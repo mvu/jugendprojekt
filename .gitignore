@@ -1,5 +1,6 @@
 # Object files
 *.o
+*moc_*
 *.ko
 *.obj
 *.elf
@@ -37,7 +38,10 @@
 
 # Qt
 *.pro.user*
-
+*.autosave
 
 # Doxygen
-Programme/ControlPanel-3-0/doc/html/*
+Programme/ControlPanel-3-0/doc/html/
+
+# Folders
+build/

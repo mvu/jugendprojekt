@@ -28,29 +28,14 @@ SOURCES += \
     src/startseite.cpp \
     src/application.cpp \
     src/jugendraum.cpp \
-    src/main.cpp \
-    src/application.cpp \
-    src/jugendraum.cpp \
-    src/main.cpp \
-    src/startseite.cpp \
-    src/application.cpp \
-    src/jugendraum.cpp \
-    src/main.cpp \
-    src/startseite.cpp
+    src/main.cpp
 
 HEADERS += \
     inc/application.h \
     inc/jugendraum.h \
     inc/startseite.h \
-    inc/application.h \
-    inc/jugendraum.h \
-    inc/startseite.h \
-    inc/application.h \
-    inc/jugendraum.h \
-    inc/startseite.h
 
 FORMS += \
-    ui/startseite.ui \
     ui/startseite.ui
 
 # Default rules for deployment.

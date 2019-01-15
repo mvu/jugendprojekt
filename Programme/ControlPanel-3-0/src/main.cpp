@@ -19,7 +19,8 @@
 int main(int argc, char *argv[])
 {
     Application a(argc, argv);
-    Startseite startseite;
+    Jugendraum jugendraum;
+    Startseite startseite(nullptr, &jugendraum);
     startseite.show();
 
     return a.exec();

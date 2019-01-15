@@ -1,6 +1,12 @@
-#include "jugendraum.h"
+#include "inc/jugendraum.h"
 
-Jugendraum::Jugendraum(QObject *parent) : QObject(parent)
+Jugendraum::Jugendraum()
 {
+    // init hardware
+    // init Klassen
+}
 
+void Jugendraum::shutdown()
+{
+    qDebug() << "closed";
 }

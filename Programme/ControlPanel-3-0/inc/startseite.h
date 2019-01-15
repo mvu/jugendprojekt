@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "inc/jugendraum.h"
+
 namespace Ui {
 class Startseite;
 }
@@ -12,14 +14,14 @@ class Startseite : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Startseite(QWidget *parent = nullptr);
+    explicit Startseite(QWidget *parent = nullptr, Jugendraum *j = nullptr);
     ~Startseite();
 
 private slots:
-    void on_pushButton_clicked();
 
 private:
     Ui::Startseite *ui;
+    Jugendraum *jugendraum_;
 };
 
 #endif // STARTSEITE_H
