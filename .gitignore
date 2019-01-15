@@ -37,3 +37,7 @@
 
 # Qt
 *.pro.user*
+
+
+# Doxygen
+Programme/ControlPanel-3-0/doc/html/*
