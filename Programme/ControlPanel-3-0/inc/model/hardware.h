@@ -1,3 +1,8 @@
+/*!
+ * \file hardware.h
+ * \brief definiert den namespace hw
+ */
+
 #ifndef HARDWARE_H
 #define HARDWARE_H
 

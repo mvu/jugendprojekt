@@ -1,9 +1,9 @@
-#ifndef HARDWARE_REGISTER_H
-#define HARDWARE_REGISTER_H
-
-/*!
+/*! \file hardware_register.h
  * \brief Register map für alle ICs
  */
+
+#ifndef HARDWARE_REGISTER_H
+#define HARDWARE_REGISTER_H
 
 // PCA9635 Register
 #define PCA9635_MODE1       0x00

@@ -8,6 +8,21 @@
  * \copyright GNU Public License
  *
  * \mainpage Das Hauptprogramm zur Steuerung des Jugendraumes
+ *
+ * \dir inc
+ * \brief Header
+ * \dir inc/model
+ * \brief Header des Models
+ * \dir inc/gui
+ * \brief Header der GUI
+ *
+ * \dir src
+ * \brief Source
+ * \dir src/gui
+ * \brief Source der GUI
+ * \dir src/model
+ * \brief Source des Models
+ *
  */
 
 #include "inc/model/application.h"

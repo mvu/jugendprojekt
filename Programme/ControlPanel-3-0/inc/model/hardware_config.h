@@ -1,9 +1,9 @@
+/*! \file hardware_config.h
+ * \brief Definiert die Pinbelegung im Schaltschrank
+ */
+
 #ifndef HARDWARE_CONFIG_H
 #define HARDWARE_CONFIG_H
-
-/*!
- * \brief Definition der Pinbelegung im Schaltschrank
- */
 
 // I2C Adressen
 #define PCA_LIGHT           0x5d
