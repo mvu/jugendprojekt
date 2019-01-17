@@ -7,6 +7,8 @@
 
 #include <QDialog>
 
+#include "inc/gui/einstellung_theke.h"
+
 #include "inc/model/jugendraum.h"
 
 namespace Ui {
@@ -40,6 +42,7 @@ private slots:
 private:
     Ui::MenueLicht *ui_;
     Jugendraum *jugendraum_;
+    EinstellungTheke *einstellung_theke_;
 };
 
 #endif // MENUE_LICHT_H

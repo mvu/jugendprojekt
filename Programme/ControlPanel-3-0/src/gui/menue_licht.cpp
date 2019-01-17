@@ -45,6 +45,8 @@ void MenueLicht::on_pushButton_rgb_ceiling_released()
 void MenueLicht::on_pushButton_counter_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    einstellung_theke_ = new EinstellungTheke(this, jugendraum_);
 }
 
 void MenueLicht::on_pushButton_rgb_windows_released()
