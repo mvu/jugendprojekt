@@ -1,11 +1,13 @@
 /*!
  * \file menue_licht.h
- * \brief Header für die Licht-Menü GUI
+ * \brief Header für das Licht Menü
  */
 #ifndef MENUE_LICHT_H
 #define MENUE_LICHT_H
 
 #include <QDialog>
+
+#include "inc/gui/einstellung_theke.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -16,8 +18,6 @@ class MenueLicht;
 /*!
  * \brief Klasse die Licht-Menü GUI
  * \todo Schließen button durch Icon ersetzen
- * \todo Entfernen der borders der GroupBoxes, ohne das sich das stylesheet
- *      auf die Buttons überträgt.
  */
 class MenueLicht : public QDialog
 {
@@ -42,6 +42,7 @@ private slots:
 private:
     Ui::MenueLicht *ui_;
     Jugendraum *jugendraum_;
+    EinstellungTheke *einstellung_theke_;
 };
 
 #endif // MENUE_LICHT_H

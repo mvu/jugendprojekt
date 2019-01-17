@@ -1,7 +1,3 @@
-/*!
- * \file menue_medien.cpp
- * \brief Source für die Medien-Menü GUI
- */
 #include "inc/gui/menue_medien.h"
 #include "ui_menue_medien.h"
 

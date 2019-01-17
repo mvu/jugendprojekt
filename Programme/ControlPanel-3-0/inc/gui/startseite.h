@@ -10,7 +10,6 @@
 
 #include "inc/gui/menue_licht.h"
 #include "inc/gui/menue_medien.h"
-#include "inc/gui/system_status.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -20,9 +19,6 @@ class Startseite;
 
 /*!
  * \brief GUI: Startseite
- * \todo Entfernen der borders der GroupBoxes, ohne das sich das stylesheet
- *      auf die Buttons überträgt.
- * \todo Schwärzung der Buttons beim Klicken durch Verdunklung ersetzen.
  */
 class Startseite : public QMainWindow
 {
@@ -41,10 +37,9 @@ private slots:
 
 private:
     Ui::Startseite *ui_;
-    MenueLicht *menu_light_;        //!< GUI vom Lichtmenü
-    MenueMedien *menu_media_;       //!< GUI vom Medienmenü
-    SystemStatus *system_status_;   //!< GUI von der Systemanzeige
-    Jugendraum *jugendraum_;        //!< Das model
+    MenueLicht *menu_light_;
+    MenueMedien *menu_media_;
+    Jugendraum *jugendraum_;
 };
 
 #endif // STARTSEITE_H
