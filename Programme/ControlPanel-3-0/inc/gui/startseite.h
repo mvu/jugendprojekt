@@ -1,11 +1,18 @@
+/*!
+ * \file startseite.h
+ * \brief Header für das Hauptfenster der GUI
+ */
 #ifndef STARTSEITE_H
 #define STARTSEITE_H
 
 #include <QMainWindow>
+#include <QTimer>
 
-#include "../model/jugendraum.h"
+#include "inc/gui/menue_licht.h"
+#include "inc/gui/menue_medien.h"
 
-//! Namespace der GUI, den von Qt von Haus aus verwendet.
+#include "inc/model/jugendraum.h"
+
 namespace Ui {
 class Startseite;
 }
@@ -29,7 +36,9 @@ private slots:
     void on_pushButton_system_released();
 
 private:
-    Ui::Startseite *ui;
+    Ui::Startseite *ui_;
+    MenueLicht *menu_light_;
+    MenueMedien *menu_media_;
     Jugendraum *jugendraum_;
 };
 

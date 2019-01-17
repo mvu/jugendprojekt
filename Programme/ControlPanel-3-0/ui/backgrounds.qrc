@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>img/startseite.png</file>
+        <file>img/einstellung_hauptlicht.png</file>
+        <file>img/grundriss.png</file>
+        <file>img/menue_licht.jpg</file>
+        <file>img/menue_medien.jpg</file>
     </qresource>
 </RCC>

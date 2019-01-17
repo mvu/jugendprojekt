@@ -26,6 +26,8 @@ CONFIG += c++11
 
 SOURCES += \
     src/gui/startseite.cpp \
+    src/gui/menue_licht.cpp \
+    src/gui/menue_medien.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -33,22 +35,27 @@ SOURCES += \
     src/model/hardware.cpp
 
 HEADERS += \
+    inc/gui/startseite.h \
+    inc/gui/menue_licht.h \
+    inc/gui/menue_medien.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
-    inc/gui/startseite.h \
     inc/model/hardware.h \
     inc/model/i2cdevice.h \
     inc/model/hardware_config.h \
     inc/model/hardware_register.h
 
 FORMS += \
-    ui/startseite.ui
+    ui/startseite.ui \
+    ui/einstellung_hauptlicht.ui \
+    ui/menue_licht.ui \
+    ui/menue_medien.ui \
+    ui/menue_medien.ui
 
 RESOURCES += \
     ui/icons.qrc \
     ui/backgrounds.qrc
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+# rules for deployment.
+target.path = /home/pi
+INSTALLS += target

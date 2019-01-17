@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
     Application a(argc, argv);
     Jugendraum jugendraum;
     Startseite startseite(nullptr, &jugendraum);
-    startseite.setWindowFlag(Qt::FramelessWindowHint);
-    startseite.show();
+    //startseite.setWindowFlag(Qt::FramelessWindowHint);
+    startseite.showFullScreen();
 
     return a.exec();
 }
