@@ -8,6 +8,7 @@
 #include <QDialog>
 
 #include "inc/gui/einstellung_theke.h"
+#include "inc/gui/einstellung_rgb_wand.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -43,6 +44,7 @@ private:
     Ui::MenueLicht *ui_;
     Jugendraum *jugendraum_;
     EinstellungTheke *einstellung_theke_;
+    EinstellungRgbWand *einstellung_rgb_wand_;
 };
 
 #endif // MENUE_LICHT_H

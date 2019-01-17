@@ -29,6 +29,7 @@ SOURCES += \
     src/gui/menue_licht.cpp \
     src/gui/menue_medien.cpp \
     src/gui/einstellung_theke.cpp \
+    src/gui/einstellung_rgb_wand.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     inc/gui/menue_licht.h \
     inc/gui/menue_medien.h \
     inc/gui/einstellung_theke.h \
+    inc/gui/einstellung_rgb_wand.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
     inc/model/hardware.h \
@@ -51,6 +53,7 @@ HEADERS += \
 FORMS += \
     ui/startseite.ui \
     ui/einstellung_hauptlicht.ui \
+    ui/einstellung_rgb_wand.ui \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
     ui/menue_medien.ui \
