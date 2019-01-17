@@ -169,7 +169,7 @@ color:white;</string>
   <widget class="QPushButton" name="pushButton_back">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>330</x>
      <y>410</y>
      <width>60</width>
      <height>60</height>
@@ -183,7 +183,7 @@ color:white;</string>
    </property>
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/icons/arrow_left_wht.png</normaloff>:/icons/arrow_left_wht.png</iconset>
+     <normaloff>:/icons/arrow_left_blk.png</normaloff>:/icons/arrow_left_blk.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -200,7 +200,7 @@ color:white;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>399</width>
+     <width>400</width>
      <height>480</height>
     </rect>
    </property>

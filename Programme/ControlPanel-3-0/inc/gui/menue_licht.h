@@ -1,6 +1,6 @@
 /*!
  * \file menue_licht.h
- * \brief Header für das Licht Menü
+ * \brief Header für die Licht-Menü GUI
  */
 #ifndef MENUE_LICHT_H
 #define MENUE_LICHT_H
@@ -16,6 +16,8 @@ class MenueLicht;
 /*!
  * \brief Klasse die Licht-Menü GUI
  * \todo Schließen button durch Icon ersetzen
+ * \todo Entfernen der borders der GroupBoxes, ohne das sich das stylesheet
+ *      auf die Buttons überträgt.
  */
 class MenueLicht : public QDialog
 {

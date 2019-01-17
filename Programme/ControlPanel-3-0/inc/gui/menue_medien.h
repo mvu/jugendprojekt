@@ -1,6 +1,6 @@
 /*!
  * \file menue_medien.h
- * \brief Header für das Medien Menü
+ * \brief Header für die Medien-Menü GUI
  */
 #ifndef MENUE_MEDIEN_H
 #define MENUE_MEDIEN_H
@@ -15,6 +15,7 @@ class MenueMedien;
 
 /*!
  * \brief Klasse für die Medien-Menü GUI
+ * \todo Verdunklung der Buttons bei Klicken
  */
 class MenueMedien : public QDialog
 {

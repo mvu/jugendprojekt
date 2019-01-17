@@ -48,4 +48,7 @@ void Startseite::on_pushButton_media_released()
 void Startseite::on_pushButton_system_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    // erzeuge Systemanzeige
+    system_status_ = new SystemStatus(this, jugendraum_);
 }
