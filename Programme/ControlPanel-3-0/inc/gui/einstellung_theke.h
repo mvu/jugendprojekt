@@ -1,3 +1,7 @@
+/*!
+ * \file einstellung_theke.h 
+ * \brief Header für die Theke-Einstellung GUI
+ */
 #ifndef EINSTELLUNG_THEKE_H
 #define EINSTELLUNG_THEKE_H
 

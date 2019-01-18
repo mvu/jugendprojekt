@@ -10,6 +10,7 @@
 
 #include "inc/gui/menue_licht.h"
 #include "inc/gui/menue_medien.h"
+#include "inc/gui/system_status.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -40,6 +41,7 @@ private:
     MenueLicht *menu_light_;
     MenueMedien *menu_media_;
     Jugendraum *jugendraum_;
+    SystemStatus *system_status_;
 };
 
 #endif // STARTSEITE_H

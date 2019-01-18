@@ -34,6 +34,8 @@ MenueMedien::~MenueMedien()
 void MenueMedien::on_pushButton_audio_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    einstellung_audio_ = new EinstellungAudio(this, jugendraum_);
 }
 
 void MenueMedien::on_pushButton_beamer_released()

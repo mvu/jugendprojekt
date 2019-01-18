@@ -7,5 +7,6 @@
         <file>img/menue_medien.jpg</file>
         <file>img/einstellung_theke.png</file>
         <file>img/einstellung_rgb_wand.png</file>
+        <file>img/einstellung_audio.jpg</file>
     </qresource>
 </RCC>
