@@ -62,7 +62,7 @@ FORMS += \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
     ui/menue_medien.ui \
-    ui/einstellung_theke.ui
+    ui/einstellung_theke.ui \
     ui/system_status.ui \
     ui/passwort.ui
 

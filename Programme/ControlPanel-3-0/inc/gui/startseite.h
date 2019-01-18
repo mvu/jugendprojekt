@@ -11,6 +11,7 @@
 
 #include "inc/gui/menue_licht.h"
 #include "inc/gui/menue_medien.h"
+#include "inc/gui/system_status.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -40,6 +41,7 @@ private:
     Ui::Startseite *ui_;
     MenueLicht *menu_light_;
     MenueMedien *menu_media_;
+    SystemStatus *system_status_;
     Jugendraum *jugendraum_;
 };
 
