@@ -43,7 +43,6 @@ private:
     MenueMedien *menu_media_;
     SystemStatus *system_status_;
     Jugendraum *jugendraum_;
-    SystemStatus *system_status_;
 };
 
 #endif // STARTSEITE_H
