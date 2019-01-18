@@ -1,3 +1,7 @@
+/*!
+ * \file einstellung_theke.cpp
+ * \brief Source für die Theke-Einstellung GUI
+ */
 #include "inc/gui/einstellung_theke.h"
 #include "ui_einstellung_theke.h"
 

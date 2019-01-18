@@ -1,3 +1,7 @@
+/*!
+ * \file einstellung_rgb_wand.h 
+ * \brief Header für die Wand-RGB-Einstellung GUI
+ */
 #ifndef EINSTELLUNGRGBWAND_H
 #define EINSTELLUNGRGBWAND_H
 

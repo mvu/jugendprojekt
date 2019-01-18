@@ -1,3 +1,7 @@
+/*!
+ * \file einstellung_rgb_wand.cpp
+ * \brief Source für die Wand-RGB-Einstellung GUI
+ */
 #include "inc/gui/einstellung_rgb_wand.h"
 #include "ui_einstellung_rgb_wand.h"
 

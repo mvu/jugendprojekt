@@ -11,6 +11,8 @@
 
 #include "inc/model/jugendraum.h"
 
+#include "inc/gui/einstellung_audio.h"
+
 
 namespace Ui {
 class MenueMedien;
@@ -36,6 +38,7 @@ private slots:
 private:
     Ui::MenueMedien *ui_;
     Jugendraum *jugendraum_;
+    EinstellungAudio *einstellung_audio_;
    
 };
 
