@@ -29,6 +29,7 @@ SOURCES += \
     src/gui/menue_licht.cpp \
     src/gui/menue_medien.cpp \
     src/gui/system_status.cpp \
+    src/gui/passwort.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     inc/gui/menue_licht.h \
     inc/gui/menue_medien.h \
     inc/gui/system_status.h \
+    inc/gui/passwort.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
     inc/model/hardware.h \
@@ -53,7 +55,8 @@ FORMS += \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
     ui/menue_medien.ui \
-    ui/system_status.ui
+    ui/system_status.ui \
+    ui/passwort.ui
 
 RESOURCES += \
     ui/icons.qrc \

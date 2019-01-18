@@ -6,6 +6,7 @@
 #define MENUE_LICHT_H
 
 #include <QDialog>
+#include <QDebug>
 
 #include "inc/model/jugendraum.h"
 

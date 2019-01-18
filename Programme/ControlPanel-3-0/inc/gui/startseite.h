@@ -7,6 +7,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QDebug>
 
 #include "inc/gui/menue_licht.h"
 #include "inc/gui/menue_medien.h"

@@ -38,6 +38,7 @@ SystemStatus::~SystemStatus()
 void SystemStatus::on_pushButton_shutdown_released()
 {
     qDebug() << Q_FUNC_INFO;
+    passwort_ = new Passwort(this, jugendraum_, QCryptographicHash::hash(QByteArray(QString("123").toUtf8()), QCryptographicHash::Sha256));
 }
 
 void SystemStatus::on_pushButton_back_released()

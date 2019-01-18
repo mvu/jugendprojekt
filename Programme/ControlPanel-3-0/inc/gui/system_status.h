@@ -6,6 +6,10 @@
 #define SYSTEM_STATUS_H
 
 #include <QDialog>
+#include <QCryptographicHash>
+#include <QDebug>
+
+#include "inc/gui/passwort.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -30,6 +34,7 @@ private slots:
 
 private:
     Ui::SystemStatus *ui_;
+    Passwort *passwort_;
     Jugendraum *jugendraum_;
 };
 
