@@ -31,6 +31,7 @@ SOURCES += \
     src/gui/einstellung_theke.cpp \
     src/gui/system_status.cpp \
     src/gui/einstellung_rgb_wand.cpp \
+    src/gui/passwort.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     inc/gui/einstellung_theke.h \
     inc/gui/system_status.h \
     inc/gui/einstellung_rgb_wand.h \
+    inc/gui/passwort.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
     inc/model/hardware.h \
@@ -61,6 +63,8 @@ FORMS += \
     ui/menue_medien.ui \
     ui/menue_medien.ui \
     ui/einstellung_theke.ui
+    ui/system_status.ui \
+    ui/passwort.ui
 
 RESOURCES += \
     ui/icons.qrc \
