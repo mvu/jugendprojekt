@@ -6,6 +6,7 @@
 #define MENUE_LICHT_H
 
 #include <QDialog>
+#include <QDebug>
 
 #include "inc/gui/einstellung_theke.h"
 #include "inc/gui/einstellung_rgb_wand.h"
