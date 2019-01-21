@@ -38,11 +38,17 @@ MenueSpeichern::~MenueSpeichern()
 void MenueSpeichern::on_pushButton_youth_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    password_ = new Passwort(this, QCryptographicHash::hash(QByteArray(QString("123").toUtf8()), QCryptographicHash::Sha256));
+    connect(password_, SIGNAL(PasswordCorrect()), this, SLOT(SaveAllForYouth()));
 }
 
-void MenueSpeichern::on_pushButton_teen_2_released()
+void MenueSpeichern::on_pushButton_teen_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    password_ = new Passwort(this, QCryptographicHash::hash(QByteArray(QString("123").toUtf8()), QCryptographicHash::Sha256));
+    connect(password_, SIGNAL(PasswordCorrect()), this, SLOT(SaveAllForTeens()));
 }
 
 void MenueSpeichern::on_pushButton_back_released()
@@ -57,5 +63,14 @@ void MenueSpeichern::on_pushButton_back_released()
     animation->setEndValue(QRect(110,-150,580,180));
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
 
+void MenueSpeichern::SaveAllForYouth()
+{
+    qDebug() << Q_FUNC_INFO;
+}
+
+void MenueSpeichern::SaveAllForTeens()
+{
+    qDebug() << Q_FUNC_INFO;
 }

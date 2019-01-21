@@ -44,9 +44,9 @@ color:black;</string>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>80</y>
-     <width>561</width>
+     <width>541</width>
      <height>81</height>
     </rect>
    </property>
@@ -69,7 +69,7 @@ border:none;</string>
       <property name="checkable">
        <bool>false</bool>
       </property>
-      <widget class="QFrame" name="frame_11">
+      <widget class="QFrame" name="frame_logo_youth">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -270,7 +270,7 @@ background-color:rgba(0,0,0,0);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>271</width>
+         <width>261</width>
          <height>81</height>
         </rect>
        </property>
@@ -298,17 +298,17 @@ border:none;</string>
       <property name="checkable">
        <bool>false</bool>
       </property>
-      <widget class="QFrame" name="frame_13">
+      <widget class="QFrame" name="frame_logo_teen">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>188</x>
          <y>10</y>
          <width>61</width>
          <height>61</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">image:url(:/icons/teen_logo_small.png);
+        <string notr="true">image:url(:/icons/teenkreis.png);
 background-color:rgba(0,0,0,0);</string>
        </property>
        <property name="frameShape">
@@ -497,12 +497,12 @@ background-color:rgba(0,0,0,0);</string>
         <number>0</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_teen_2">
+      <widget class="QPushButton" name="pushButton_teen">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>271</width>
+         <width>261</width>
          <height>81</height>
         </rect>
        </property>
@@ -567,7 +567,6 @@ background-color:rgba(0,0,0,0);</string>
   </widget>
   <zorder>frame_background</zorder>
   <zorder>label_title</zorder>
-  <zorder>pushButton_teen_2</zorder>
   <zorder>horizontalLayoutWidget</zorder>
   <zorder>pushButton_back</zorder>
  </widget>
