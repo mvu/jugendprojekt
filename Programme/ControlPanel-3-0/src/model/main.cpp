@@ -9,20 +9,6 @@
  *
  * \mainpage Das Hauptprogramm zur Steuerung des Jugendraumes
  *
- * \dir inc
- * \brief Header
- * \dir inc/model
- * \brief Header des Models
- * \dir inc/gui
- * \brief Header der GUI
- *
- * \dir src
- * \brief Source
- * \dir src/gui
- * \brief Source der GUI
- * \dir src/model
- * \brief Source des Models
- *
  */
 
 #include "inc/model/application.h"
@@ -37,7 +23,7 @@ int main(int argc, char *argv[])
     Jugendraum jugendraum;
     Startseite startseite(nullptr, &jugendraum);
     //startseite.setWindowFlag(Qt::FramelessWindowHint);
-    startseite.show();
+    startseite.showFullScreen();
 
     return a.exec();
 }

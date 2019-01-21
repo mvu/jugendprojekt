@@ -1,3 +1,7 @@
+/*!
+ * \file menue_licht.cpp
+ * \brief Header für das Licht Menü
+ */
 #include "inc/gui/menue_licht.h"
 #include "ui_menue_licht.h"
 

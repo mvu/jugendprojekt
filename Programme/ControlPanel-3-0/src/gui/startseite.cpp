@@ -1,3 +1,7 @@
+/*!
+ * \file startseite.cpp
+ * \brief Header für das Hauptfenster der GUI
+ */
 #include "inc/gui/startseite.h"
 #include "ui_startseite.h"
 

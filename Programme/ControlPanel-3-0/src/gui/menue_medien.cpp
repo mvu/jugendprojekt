@@ -1,3 +1,7 @@
+/*!
+ * \file menue_medien.cpp
+ * \brief Header für das Medien Menü
+ */
 #include "inc/gui/menue_medien.h"
 #include "ui_menue_medien.h"
 
