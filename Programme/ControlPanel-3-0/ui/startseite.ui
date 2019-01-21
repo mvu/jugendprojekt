@@ -1333,7 +1333,7 @@ background-color:rgba(0,0,0,0);</string>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-image:url(:/icons/fish.png);
+         <string notr="true">background-image:url(:/icons/teenkreis.png);
 background-color:rgba(0,0,0,0);</string>
         </property>
         <property name="frameShape">
