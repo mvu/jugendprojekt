@@ -31,10 +31,15 @@ public:
     /*!
      * \brief Erzeugt eine Passwort GUI
      * \param parent Erzeugendes QWidget
-     * \param j Pointer auf das Jugendraum Model
      * \param correct_password_hash Der SHA256 hash des korrekten passwortes
+     * \todo Zeige Sterne im label_password entsprechend den Zeichen in
+     *      tmp_password_raw_
+     * \todo Entfernen der Verbindung des signals PasswordCorrect() mit dem
+     *      verbundenen slots des parents. Dies ist zwar nicht zwingend nötig, da die
+     *      Verbindungen beim Löschen des Passwort-Objektes automatisch mit
+     *      gelöscht werden, aber für guten Stil sollte es da sein.
      */
-    explicit Passwort(QWidget *parent = nullptr, Jugendraum *j = nullptr, QByteArray correct_password_hash = nullptr);
+    explicit Passwort(QWidget *parent = nullptr, QByteArray correct_password_hash = nullptr);
     /*!
      * \brief Löscht das Passwort Objekt
      */
@@ -54,7 +59,7 @@ private slots:
     void on_pushButton_9_released(); //!< Zahl 9 für Passwort eingegeben
     void on_pushButton_0_released(); //!< Zahl 0 für Passwort eingegeben
     /*!
-     * \brief Der SHA256Hash des eingegebenen Passworts wird mit dem
+     * \brief Der SHA256 Hash des eingegebenen Passworts wird mit dem
      *      geforderten verglichen
      */
     void on_pushButton_ok_released();
@@ -65,12 +70,11 @@ private slots:
     void on_pushButton_back_released();
 
 signals:
-    void PasswortCorrect(); //!< Wird gesendet, wenn das richtige Passwort eingegeben wurde
+    void PasswordCorrect(); //!< Wird gesendet, wenn das richtige Passwort eingegeben wurde
 
 
 private:
     Ui::Passwort *ui_;
-    Jugendraum *jugendraum_;
     QByteArray correct_password_hash_;  //!< Der erwartete Hash
     QByteArray tmp_password_raw_;       //!< Das eingebene Passwort
 };

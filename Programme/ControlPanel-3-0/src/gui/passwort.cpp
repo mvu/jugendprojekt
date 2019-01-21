@@ -5,13 +5,12 @@
 #include "inc/gui/passwort.h"
 #include "ui_passwort.h"
 
-Passwort::Passwort(QWidget *parent, Jugendraum *j, QByteArray correct_password_hash) :
+Passwort::Passwort(QWidget *parent, QByteArray correct_password_hash) :
     QDialog(parent),
     ui_(new Ui::Passwort)
 {
     qDebug() << Q_FUNC_INFO;
 
-    jugendraum_ = j;
     correct_password_hash_ = correct_password_hash;
     tmp_password_raw_ = nullptr;
 
@@ -108,12 +107,8 @@ void Passwort::on_pushButton_ok_released()
 {
     qDebug() << Q_FUNC_INFO;
 
-    qDebug() << tmp_password_raw_;
-    qDebug() << QCryptographicHash::hash(tmp_password_raw_, QCryptographicHash::Sha256);
-    qDebug() << correct_password_hash_;
-
     if (QCryptographicHash::hash(tmp_password_raw_, QCryptographicHash::Sha256) == correct_password_hash_) {
-        emit PasswortCorrect();
+        emit PasswordCorrect();
         this->close();
     } else {
         // shake Animation
@@ -129,11 +124,10 @@ void Passwort::on_pushButton_ok_released()
 
 void Passwort::on_pushButton_back_released()
 {
-    qDebug() << tmp_password_raw_.isEmpty();
     if (tmp_password_raw_.isEmpty()) {
         this->close();
     } else {
         tmp_password_raw_.chop(1);
-        //ui_->label_password->setText(ui_->label_password->text().chopped(1));
+        ui_->label_password->setText(ui_->label_password->text().chopped(1));
     }
 }
