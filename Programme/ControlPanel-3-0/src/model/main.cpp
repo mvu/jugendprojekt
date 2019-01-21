@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     Jugendraum jugendraum;
     Startseite startseite(nullptr, &jugendraum);
     //startseite.setWindowFlag(Qt::FramelessWindowHint);
-    startseite.showFullScreen();
+    startseite.show();
 
     return a.exec();
 }

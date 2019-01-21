@@ -9,5 +9,8 @@
         <file>icons/backspace.png</file>
         <file>icons/shutdown.png</file>
         <file>icons/arrow_left_wht.png</file>
+        <file>icons/teen_logo_small.png</file>
+        <file>icons/arrow_up_blk.png</file>
+        <file>icons/arrow_up_wht.png</file>
     </qresource>
 </RCC>

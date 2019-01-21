@@ -10,6 +10,7 @@
 
 #include "inc/gui/einstellung_theke.h"
 #include "inc/gui/einstellung_rgb_wand.h"
+#include "inc/gui/menue_speichern.h"
 
 #include "inc/model/jugendraum.h"
 
@@ -46,6 +47,8 @@ private:
     Jugendraum *jugendraum_;
     EinstellungTheke *einstellung_theke_;
     EinstellungRgbWand *einstellung_rgb_wand_;
+    MenueSpeichern *menu_speichern_;
+
 };
 
 #endif // MENUE_LICHT_H

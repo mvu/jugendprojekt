@@ -134,6 +134,6 @@ void Passwort::on_pushButton_back_released()
         this->close();
     } else {
         tmp_password_raw_.chop(1);
-        ui_->label_password->setText(ui_->label_password->text().chopped(1));
+        //ui_->label_password->setText(ui_->label_password->text().chopped(1));
     }
 }

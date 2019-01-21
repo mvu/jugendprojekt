@@ -64,6 +64,8 @@ void MenueLicht::on_pushButton_palette_released()
 void MenueLicht::on_pushButton_save_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    menu_speichern_ = new MenueSpeichern(this, jugendraum_);
 }
 
 void MenueLicht::on_pushButton_close_released()

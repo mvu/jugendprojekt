@@ -33,6 +33,7 @@ SOURCES += \
     src/gui/einstellung_rgb_wand.cpp \
     src/gui/einstellung_audio.cpp \
     src/gui/passwort.cpp \
+    src/gui/menue_speichern.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
     inc/gui/einstellung_rgb_wand.h \
     inc/gui/einstellung_audio.h \
     inc/gui/passwort.h \
+    inc/gui/menue_speichern.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
     inc/model/hardware.h \
@@ -66,7 +68,8 @@ FORMS += \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
     ui/menue_medien.ui \
-    ui/passwort.ui
+    ui/passwort.ui \
+    ui/menue_speichern.ui
 
 RESOURCES += \
     ui/icons.qrc \
