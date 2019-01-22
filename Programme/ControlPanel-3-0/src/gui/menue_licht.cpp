@@ -39,6 +39,8 @@ MenueLicht::~MenueLicht()
 void MenueLicht::on_pushButton_main_light_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    einstellung_hauptlicht_ = new EinstellungHauptlicht(this, jugendraum_);
 }
 
 void MenueLicht::on_pushButton_rgb_ceiling_released()
