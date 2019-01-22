@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <sstream> 
+#include <stdexcept>
 
 /*!
  * \brief Klasse zum Lesen und Schreiben von Konfigurations-Dateien
@@ -42,7 +43,7 @@ public:
         while(std::getline(file_, line)){
             //find and erase comments
             pos = line.find("#");
-            std::cout << line << " " << pos <<std::endl;
+            //std::cout << line << " " << pos <<std::endl;
   
             if (pos != std::string::npos){
                 line.erase(pos, std::string::npos);
@@ -53,12 +54,23 @@ public:
                 inStream >> p; //first word is name of parameter
                 inStream >> equal; //second word is an '='
                 inStream >> value; //third word is needed value
+                // check if an error occured
+                if (inStream.fail()){ 
+                    //std::cerr << "[READ-ERROR] An error occured while reading '" << param << "'\n";
+                    throw std::invalid_argument("[READ-ERROR] An error occured while reading '" + param + "' from '" + filename_ + "'");
+                }
                 file_.close();
                 return value;
             }
         }
-        std::cout << "[READ-ERROR] Parameter '"<<param<<"' not found\n";
         file_.close();
+        
+        //std::cerr << "[READ-ERROR] Parameter '"<<param<<"' not found\n";
+        
+        // if the parameter is not found, an exception will be thrown and the method will terminate
+        throw std::invalid_argument("[READ-ERROR] Parameter '" + param + "' not found in '" + filename_ + "'"); 
+        
+        // this will never be reached, just to avoid compiler warnings
         return value;
     }
     

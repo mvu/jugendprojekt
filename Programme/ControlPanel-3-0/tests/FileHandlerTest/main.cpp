@@ -9,12 +9,13 @@ int main(int argc, char const *argv[]) {
   std::cout << "Läuft\n";
 
   double d = file_handler_->readFromFile<double>("v_double");
-  std::string s = file_handler_->readFromFile<std::string>("v_string");
+  std::cout << "double: "<< d << std::endl;
+  std::string s = file_handler_->readFromFile<std::string>("v_sring");
+  std::cout << "string: "<< s << std::endl;
   //bool b = file_handler_->readFromFile<bool>("v_bool");
   double d_err = file_handler_->readFromFile<double>("v_string");
-  std::cout << "string: "<< s << std::endl;
-  std::cout << "double: "<< d << std::endl;
-  std::cout << "double: "<< d_err << std::endl;
+
+  std::cout << "double err: "<< d_err << std::endl;
 
   return 0;
 }

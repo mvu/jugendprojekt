@@ -10,7 +10,9 @@ FileHandler::FileHandler(std::string filename)
 }
 
 FileHandler::~FileHandler(){
-    file_.close();
+    if (file_.is_open()){
+        file_.close();
+    }
 }
 
 template<typename T>
