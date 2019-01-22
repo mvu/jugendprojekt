@@ -35,7 +35,6 @@ MenueLicht::~MenueLicht()
     delete ui_;
 }
 
-
 void MenueLicht::on_pushButton_main_light_released()
 {
     qDebug() << Q_FUNC_INFO;
@@ -46,6 +45,8 @@ void MenueLicht::on_pushButton_main_light_released()
 void MenueLicht::on_pushButton_rgb_ceiling_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    einstellung_rgb_decke_ = new EinstellungRGBDecke(this, jugendraum_);
 }
 
 void MenueLicht::on_pushButton_counter_released()
@@ -59,7 +60,7 @@ void MenueLicht::on_pushButton_rgb_windows_released()
 {
     qDebug() << Q_FUNC_INFO;
     
-    einstellung_rgb_wand_ = new EinstellungRgbWand(this, jugendraum_);
+    einstellung_rgb_wand_ = new EinstellungRGBWand(this, jugendraum_);
 }
 
 void MenueLicht::on_pushButton_palette_released()
