@@ -26,14 +26,15 @@ CONFIG += c++11
 
 SOURCES += \
     src/gui/startseite.cpp \
+    src/gui/passwort.cpp \
+    src/gui/system_status.cpp \
     src/gui/menue_licht.cpp \
     src/gui/menue_medien.cpp \
+    src/gui/menue_speichern.cpp \
     src/gui/einstellung_theke.cpp \
-    src/gui/system_status.cpp \
     src/gui/einstellung_rgb_wand.cpp \
     src/gui/einstellung_audio.cpp \
-    src/gui/passwort.cpp \
-    src/gui/menue_speichern.cpp \
+    src/gui/einstellung_hauptlicht.cpp \
     src/model/application.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
@@ -43,14 +44,15 @@ SOURCES += \
 
 HEADERS += \
     inc/gui/startseite.h \
+    inc/gui/passwort.h \
+    inc/gui/system_status.h \
     inc/gui/menue_licht.h \
     inc/gui/menue_medien.h \
+    inc/gui/menue_speichern.h \
     inc/gui/einstellung_theke.h \
-    inc/gui/system_status.h \
     inc/gui/einstellung_rgb_wand.h \
     inc/gui/einstellung_audio.h \
-    inc/gui/passwort.h \
-    inc/gui/menue_speichern.h \
+    inc/gui/einstellung_hauptlicht.h \
     inc/model/application.h \
     inc/model/jugendraum.h \
     inc/model/hardware.h \
@@ -60,15 +62,14 @@ HEADERS += \
 
 FORMS += \
     ui/startseite.ui \
-    ui/einstellung_hauptlicht.ui \
+    ui/passwort.ui \
     ui/system_status.ui \
+    ui/einstellung_theke.ui \
     ui/einstellung_rgb_wand.ui \
     ui/einstellung_audio.ui \
-    ui/einstellung_theke.ui \
+    ui/einstellung_hauptlicht.ui \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
-    ui/menue_medien.ui \
-    ui/passwort.ui \
     ui/menue_speichern.ui
 
 RESOURCES += \

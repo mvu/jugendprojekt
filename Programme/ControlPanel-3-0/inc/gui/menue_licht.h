@@ -10,6 +10,7 @@
 
 #include "inc/gui/einstellung_theke.h"
 #include "inc/gui/einstellung_rgb_wand.h"
+#include "inc/gui/einstellung_hauptlicht.h"
 #include "inc/gui/menue_speichern.h"
 
 #include "inc/model/jugendraum.h"
@@ -21,6 +22,8 @@ class MenueLicht;
 /*!
  * \brief Klasse die Licht-Menü GUI
  * \todo Schließen button durch Icon ersetzen
+ * \todo Verdunklung der Butons bei Klick
+ * \todo Update der Uhr
  */
 class MenueLicht : public QDialog
 {
@@ -47,6 +50,7 @@ private:
     Jugendraum *jugendraum_;
     EinstellungTheke *einstellung_theke_;
     EinstellungRgbWand *einstellung_rgb_wand_;
+    EinstellungHauptlicht *einstellung_hauptlicht_;
     MenueSpeichern *menu_speichern_;
 
 };
