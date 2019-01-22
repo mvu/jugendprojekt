@@ -11,20 +11,20 @@
 #include "inc/model/jugendraum.h"
 
 namespace Ui {
-class EinstellungRgbWand;
+class EinstellungRGBWand;
 }
 
 /*!
  * \brief Klasse für GUI der Einstellungen der RGB an der Wand
  */
 
-class EinstellungRgbWand : public QDialog
+class EinstellungRGBWand : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit EinstellungRgbWand(QWidget *parent = nullptr, Jugendraum *j = nullptr);
-    ~EinstellungRgbWand();
+    explicit EinstellungRGBWand(QWidget *parent = nullptr, Jugendraum *j = nullptr);
+    ~EinstellungRGBWand();
     
 private slots:
     void on_pushButton_back_released();
@@ -32,7 +32,7 @@ private slots:
     void on_pushButton_set_color_released();
     
 private:
-    Ui::EinstellungRgbWand *ui_;
+    Ui::EinstellungRGBWand *ui_;
     Jugendraum *jugendraum_;
 };
 

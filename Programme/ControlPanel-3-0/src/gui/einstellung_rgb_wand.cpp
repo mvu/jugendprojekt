@@ -5,9 +5,9 @@
 #include "inc/gui/einstellung_rgb_wand.h"
 #include "ui_einstellung_rgb_wand.h"
 
-EinstellungRgbWand::EinstellungRgbWand(QWidget *parent, Jugendraum *j) :
+EinstellungRGBWand::EinstellungRGBWand(QWidget *parent, Jugendraum *j) :
     QDialog(parent),
-    ui_(new Ui::EinstellungRgbWand)
+    ui_(new Ui::EinstellungRGBWand)
 {
     qDebug() << Q_FUNC_INFO;
         
@@ -30,13 +30,13 @@ EinstellungRgbWand::EinstellungRgbWand(QWidget *parent, Jugendraum *j) :
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
-EinstellungRgbWand::~EinstellungRgbWand()
+EinstellungRGBWand::~EinstellungRGBWand()
 {
     qDebug() << Q_FUNC_INFO;
     delete ui_;
 }
 
-void EinstellungRgbWand::on_pushButton_back_released()
+void EinstellungRGBWand::on_pushButton_back_released()
 {
     qDebug() << Q_FUNC_INFO;
     
@@ -50,12 +50,12 @@ void EinstellungRgbWand::on_pushButton_back_released()
     animation->start(QAbstractAnimation::DeleteWhenStopped);  
 }
 
-void EinstellungRgbWand::on_pushButton_on_off_released()
+void EinstellungRGBWand::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
 }
 
-void EinstellungRgbWand::on_pushButton_set_color_released()
+void EinstellungRGBWand::on_pushButton_set_color_released()
 {
     qDebug() << Q_FUNC_INFO;
 }
