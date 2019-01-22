@@ -17,6 +17,7 @@ class EinstellungHauptlicht;
 
 /*!
  * \brief Klasse der Hauptlicht-Einstellungs GUI
+ * \todo checked der Gruppen Buttons entsprechend der checked HL-Buttons setzen
  */
 class EinstellungHauptlicht : public QDialog
 {
