@@ -40,7 +40,8 @@ SOURCES += \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
     src/model/i2cdevice.cpp \
-    src/model/hardware.cpp
+    src/model/hardware.cpp \
+    src/model/j_element.cpp
 
 HEADERS += \
     inc/gui/startseite.h \
@@ -60,7 +61,8 @@ HEADERS += \
     inc/model/i2cdevice.h \
     inc/model/hardware_config.h \
     inc/model/hardware_register.h \
-    inc/model/file_handler.h
+    inc/model/file_handler.h \
+    inc/model/j_element.h
 
 FORMS += \
     ui/startseite.ui \
