@@ -92,19 +92,18 @@ public:
     template<typename T>
     void writeToFile(std::string param, T value){
         std::string tmp_filename = "tmp.txt";
-        std::ifstream file;
         std::ofstream tmp;
         std::string comment, line;
         size_t pos, pos2;
         bool found = false;
     
-        file.open(filename_);
+        file_.open(filename_);
         tmp.open(tmp_filename);
     
         //replace value of 'param' by 'value'
-        if (file.is_open()){
-            while(!file.eof()){
-                getline(file, line);
+        if (file_.is_open()){
+            while(!file_.eof()){
+                getline(file_, line);
     
                 pos = line.find(param);
                 if (pos != std::string::npos){
@@ -120,22 +119,21 @@ public:
                     tmp << line << std::endl;
                 }
             }
-	}
-	
-	// if param was not found, it is added at the end
-	if (!found){
-        tmp << param << " = " << value << std::endl;
-	}
-
-	tmp.close();
-	file.close();
-
-    // replace old file by new one
-	const char * tmp_file_p = tmp_filename.c_str();
-	const char * file_p = filename_.c_str();
-	remove(file_p);
-	rename(tmp_file_p, file_p);
-
+        }
+        
+        // if param was not found, it is added at the end
+        if (!found){
+            tmp << param << " = " << value << std::endl;
+        }
+    
+        tmp.close();
+        file_.close();
+    
+        // replace old file by new one
+        const char * tmp_file_p = tmp_filename.c_str();
+        const char * file_p = filename_.c_str();
+        remove(file_p);
+        rename(tmp_file_p, file_p);
     }
     
 private:
