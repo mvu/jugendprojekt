@@ -37,9 +37,7 @@ SOURCES += \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
     src/model/i2cdevice.cpp \
-    src/model/hardware.cpp \
-    src/model/file_handler.cpp
-
+    src/model/hardware.cpp
 
 HEADERS += \
     inc/gui/startseite.h \

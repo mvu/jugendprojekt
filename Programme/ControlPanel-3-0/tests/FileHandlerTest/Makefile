@@ -1,5 +1,5 @@
 
-SRC = main.cpp ../../src/model/file_handler.cpp
+SRC = main.cpp
 INC = ../../inc/model/file_handler.h
 
 first: $(SRC) $(INC)
