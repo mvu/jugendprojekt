@@ -42,7 +42,6 @@ SOURCES += \
     src/model/i2cdevice.cpp \
     src/model/hardware.cpp
 
-
 HEADERS += \
     inc/gui/startseite.h \
     inc/gui/passwort.h \
@@ -60,7 +59,8 @@ HEADERS += \
     inc/model/hardware.h \
     inc/model/i2cdevice.h \
     inc/model/hardware_config.h \
-    inc/model/hardware_register.h
+    inc/model/hardware_register.h \
+    inc/model/file_handler.h
 
 FORMS += \
     ui/startseite.ui \
