@@ -3,10 +3,11 @@
 
 #include <vector>
 #include <functional>
+#include <iostream>
 #include <QSet>
 #include <QDebug>
 
-typedef std::function<void(void)>* FuncPtr;
+typedef std::function<void(void)> UpdateFunc;
 
 /*!
  * \brief The JElement class
@@ -23,6 +24,7 @@ public:
     virtual void saveToFile(); 
     /// \todo muss irgendwie noch unterscheiden, woher geladen wird
     virtual void loadFromFile();
+    
 
 protected:
     /*!
@@ -30,8 +32,11 @@ protected:
      * \param updater
      * \todo doppelte Updater aus der Liste entfernen
      */
-    void addToUpdaters(FuncPtr updater);
-    std::vector<FuncPtr> updaters_;    
+    void addToUpdaters(UpdateFunc updater);
+    
+    QList<UpdateFunc> updaters_;
+    QSet<UpdateFunc*> updaters_addr_;
+    
 };
 
 #endif // J_ELEMENT_H

@@ -3,8 +3,10 @@
 
 #include <QObject>
 #include <QDebug>
+#include <iostream>
 
 #include "hardware.h"
+
 
 #include "inc/model/paletten_licht.h"
 

@@ -26,9 +26,7 @@ void PalettenLicht::setOn(bool state)
     
     // add update function to list if it isn't already in there
     std::function<void(void)> updater = [this](){hw::writeState(PALETTE, is_on_);};
-    std::function<void(void)>* fptr = &updater;
-    //(*fptr)();
-    addToUpdaters(&updater);
+    addToUpdaters(updater);
 }
 
 bool PalettenLicht::isOn()
