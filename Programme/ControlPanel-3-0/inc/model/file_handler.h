@@ -10,6 +10,7 @@
 #include <string>
 #include <sstream> 
 #include <stdexcept>
+#include <QString>
 
 /*!
  * \brief Klasse zum Lesen und Schreiben von Konfigurations-Dateien. Besteht nur aus dem Header.
@@ -21,8 +22,8 @@ public:
      * \brief Konstruktur 
      * \param filename Name der Datei, die behandelt wird. Muss den gesamten absoluten oder relativen Pfad enthalten.
      */
-    FileHandler(std::string filename){
-        filename_ = filename;
+    FileHandler(QString filename){
+        filename_ = filename.toStdString();
     }
     
     //! Destructor

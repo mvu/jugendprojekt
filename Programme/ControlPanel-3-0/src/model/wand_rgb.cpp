@@ -18,11 +18,21 @@ WandRGB::WandRGB():
 void WandRGB::saveToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    file_handler_ = new FileHandler(filename);
+    file_handler_->writeToFile("WandRGB::red_value_", red_value_);
+    file_handler_->writeToFile("WandRGB::green_value_", green_value_);
+    file_handler_->writeToFile("WandRGB::blue_value_", blue_value_);
 }
 
 void WandRGB::loadFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    file_handler_ = new FileHandler(filename);
+    setRedValue( file_handler_->readFromFile<int>("WandRGB::red_value_") );
+    setGreenValue( file_handler_->readFromFile<int>("WandRGB::green_value_") );
+    setBlueValue( file_handler_->readFromFile<int>("WandRGB::blue_value_") );
 }
 
 void WandRGB::setRedValue(int value)

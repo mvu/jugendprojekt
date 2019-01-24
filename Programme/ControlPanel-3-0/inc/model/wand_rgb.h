@@ -18,18 +18,8 @@ public:
     //! Contructor
     WandRGB();
     
-    /*!
-     * \brief Schreibt den aktuellen Zustand in eine Datei
-     * \param filename Datei, in die gespeichert wird
-     * \todo implementieren
-     */
     void saveToFile(QString filename) override;
     
-    /*!
-     * \brief Lädt einen Zustand aus einer Datein
-     * \param filename Datei, aus der geladen wird
-     * \todo implementieren
-     */
     void loadFromFile(QString filename) override;
     
     /*!
