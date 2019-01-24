@@ -1,9 +1,10 @@
 /*! \file hardware_config.h
  * \brief Definiert die Pinbelegung im Schaltschrank
  */
-
 #ifndef HARDWARE_CONFIG_H
 #define HARDWARE_CONFIG_H
+
+#include "inc/model/hardware_register.h"
 
 // I2C Adressen
 #define PCA_LIGHT           0x5d
@@ -18,17 +19,15 @@
 #define RGB_THEKE_BLAU      0x10
 
 // Ausgänge von PORTEXPANDER
-// GPIOA
-#define NETZTEIL_12V        0x01
-#define THEKE               0x02
-#define PALETTE             0x04
-#define BEAMER              0x08
-#define RELAIS_1            0x10
-#define RELAIS_2            0x20
-#define RELAIS_3            0x40
-#define NETZTEIL48V         0x80
-//GPIOB
-#define PC                  0x02    // <-- GPIOB !!!!!!
+#define NETZTEIL_12V        GPIOA, 0x01
+#define THEKE               GPIOA, 0x02
+#define PALETTE             GPIOA, 0x04
+#define BEAMER              GPIOA, 0x08
+#define RELAIS_1            GPIOA, 0x10
+#define RELAIS_2            GPIOA, 0x20
+#define RELAIS_3            GPIOA, 0x40
+#define NETZTEIL48V         GPIOA, 0x80
+#define PC                  GPIOB, 0x02
 
 // Eingänge von Portexpander
 #define TasterEingang       0x10

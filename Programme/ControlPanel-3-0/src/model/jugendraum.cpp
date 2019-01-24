@@ -2,8 +2,13 @@
 
 Jugendraum::Jugendraum()
 {
-    hw::Init();
-    // init Klassen
+    hw::init();
+    
+    PalettenLicht *pal = new PalettenLicht();
+    pal->setOn(true);
+    pal->setOn(false);
+    
+    pal->update();
 }
 
 void Jugendraum::shutdown()

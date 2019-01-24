@@ -6,6 +6,8 @@
 
 #include "hardware.h"
 
+#include "inc/model/paletten_licht.h"
+
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
  * \details Die Jugendraum-Klasse speichert alle Parameter zur Kontrolle des
