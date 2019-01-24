@@ -20,6 +20,9 @@ MenueLicht::MenueLicht(QWidget *parent, Jugendraum *j) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->show();
 
+    // Erfrage Status von jugendraum_ und setze Beschriftungen entsprechend
+    ui_->label_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
+
     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
     animation->setDuration(250);
@@ -66,6 +69,11 @@ void MenueLicht::on_pushButton_rgb_windows_released()
 void MenueLicht::on_pushButton_palette_released()
 {
     qDebug() << Q_FUNC_INFO;
+
+    // invert the state of palette
+    jugendraum_->paletten_licht->setOn(not jugendraum_->paletten_licht->isOn());
+    //display the new value
+    ui_->label_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
 }
 
 void MenueLicht::on_pushButton_save_released()

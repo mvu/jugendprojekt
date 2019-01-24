@@ -18,8 +18,8 @@ Startseite::Startseite(QWidget *parent, Jugendraum *j) :
 Startseite::~Startseite()
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->~Jugendraum();
     delete ui_;
-    jugendraum_->shutdown();
 }
 
 void Startseite::on_pushButton_youth_released()
