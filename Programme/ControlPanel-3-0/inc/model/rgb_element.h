@@ -15,7 +15,7 @@ public:
     /// Constructor
     RGBElement();
     /// Destructor
-    ~RGBElement();
+    virtual ~RGBElement();
     
     /*!
      * \brief lieftert den Rot-Wert zwischen 0 und 100
