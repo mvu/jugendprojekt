@@ -1,5 +1,5 @@
 /*!
- * \file einstellung_hauptlicht.cpp
+ * \file einstellung_hauptlicht.h
  * \brief Header der Hauptlicht-Einstellungs GUI
  */
 #ifndef EINSTELLUNG_HAUPTLICHT_H

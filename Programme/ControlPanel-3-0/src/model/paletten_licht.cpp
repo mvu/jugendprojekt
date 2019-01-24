@@ -1,3 +1,7 @@
+/*!
+ * \file paletten_licht.cpp
+ * \brief Source der PalettenLicht Klasse
+ */
 #include "inc/model/paletten_licht.h"
 
 PalettenLicht::PalettenLicht():
@@ -23,8 +27,6 @@ void PalettenLicht::setOn(bool state)
     qDebug() << Q_FUNC_INFO;
     
     is_on_ = state;
-    
-    // add update function to list if it isn't already in there
     std::function<void(void)> updater = [this](){hw::writeState(PALETTE, is_on_);};
     addToUpdaters(updater);
 }
@@ -32,6 +34,6 @@ void PalettenLicht::setOn(bool state)
 bool PalettenLicht::isOn()
 {
     qDebug() << Q_FUNC_INFO;
-    return is_on_;   
+    return is_on_;
 }
 
