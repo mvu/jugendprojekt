@@ -16,6 +16,7 @@ Jugendraum::Jugendraum()
     // create all the members
     theken_licht = new ThekenLicht();
     paletten_licht = new PalettenLicht();
+    wand_rgb = new WandRGB();
 }
 
 Jugendraum::~Jugendraum()

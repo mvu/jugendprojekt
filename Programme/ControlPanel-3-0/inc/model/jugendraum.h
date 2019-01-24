@@ -16,6 +16,7 @@
 // Klassen der Elemente
 #include "inc/model/paletten_licht.h"
 #include "inc/model/theken_licht.h"
+#include "inc/model/wand_rgb.h"
 
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
@@ -34,10 +35,11 @@ public:
     explicit Jugendraum();
     ~Jugendraum();
 
-    ThekenLicht* theken_licht;          //!< Kontrolliert die Thekenlichter
+    ThekenLicht* theken_licht;          //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
     PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand
+    WandRGB* wand_rgb;                  //!< Kontrolliert die RGB Streifen an den Giebelfenstern
 private:
-    QTimer *update_timer_;
+    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus
 
 
 signals:
