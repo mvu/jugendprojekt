@@ -1,13 +1,19 @@
+/*!
+ * \file jugendraum.h
+ * \brief Header der Jugendraum Klasse.
+ */
 #ifndef JUGENDRAUM_H
 #define JUGENDRAUM_H
 
 #include <QObject>
+#include <QTimer>
 #include <QDebug>
 #include <iostream>
 
 #include "hardware.h"
+#include "j_element.h"
 
-
+// Klassen der Elemente
 #include "inc/model/paletten_licht.h"
 #include "inc/model/theken_licht.h"
 #include "inc/model/wand_rgb.h"
@@ -27,18 +33,21 @@ public:
      *      die Hardware über den namespace hw, dann die high level Klassen
      */
     explicit Jugendraum();
-    void shutdown(void);    //!< Destructor
-    
-    //! Kontrolliert die Thekenlichter
-    ThekenLicht* theken_licht;
-    WandRGB* wand_rgb;
-    
+    ~Jugendraum();
 
+    ThekenLicht* theken_licht;          //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
+    PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand
+    WandRGB* wand_rgb;                  //!< Kontrolliert die RGB Streifen an den Giebelfenstern
 private:
+    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus
+
 
 signals:
 
 public slots:
+
+private slots:
+    void update();
 };
 
 #endif // JUGENDRAUM_H
