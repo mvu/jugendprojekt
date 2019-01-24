@@ -5,6 +5,9 @@ Jugendraum::Jugendraum()
     qDebug() << Q_FUNC_INFO;
     hw::init();
     
+    // create all the members
+    theken_licht = new ThekenLicht();
+    
     PalettenLicht *pal = new PalettenLicht();
     pal->setOn(true);
     pal->setOn(false);

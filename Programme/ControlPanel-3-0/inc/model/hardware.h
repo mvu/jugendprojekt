@@ -43,12 +43,20 @@ namespace hw
     void writeState(uint8_t bank, uint8_t bit, bool state);
     
     /*!
-     * \brief Gibt den Wert des Registers in Prozent zurück 
+     * \brief Gibt den Wert des Registers repräsentiert durch einen Wert zwischen 0 und 100 zurück 
      * \return Prozentualer Registerwert
+     * \param reg Registen, dessen Wert ausgelesen wird
+     * \todo implementieren
      */
-    int readValue();
+    int readValue(uint8_t reg);
     
-    void writeValue();
+    /*!
+     * \brief Schreibt einen Wert, der aus dem übergebenen Wert zwischen 0 und 100 errechnet wird, in ein Register
+     * \param reg Register, in das geschrieben wird
+     * \param int Wert, der gesetzt werden soll
+     * \todo implemtieren
+     */
+    void writeValue(uint8_t reg, int val);
 
 
 }

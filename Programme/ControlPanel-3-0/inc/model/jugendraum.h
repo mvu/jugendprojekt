@@ -9,6 +9,7 @@
 
 
 #include "inc/model/paletten_licht.h"
+#include "inc/model/theken_licht.h"
 
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
@@ -26,6 +27,9 @@ public:
      */
     explicit Jugendraum();
     void shutdown(void);    //!< Destructor
+    
+    //! Kontrolliert die Thekenlichter
+    ThekenLicht* theken_licht;
 
 private:
 

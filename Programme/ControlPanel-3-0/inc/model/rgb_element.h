@@ -7,7 +7,7 @@
 
 /*!
  * \brief Basisklasse für RGBs, von der alle Objekt, die RGBs enthalten, erben. 
- * Speichert den Zustand eines RGB-Lichts und stellt Funktionen zum Auslesen und Verändern von diesem zur Verfügung.
+ * \details Speichert den Zustand eines RGB-Lichts und stellt Funktionen zum Auslesen und Verändern von diesem zur Verfügung.
  */
 class RGBElement
 {
@@ -39,21 +39,21 @@ public:
      * \brief Setzt den Rot-Wert zwischen 0 und 100
      * \param value Wert, der gesetzt wird
      */
-    void setRedValue(int value);
+    virtual void setRedValue(int value);
     
     /*!
      * \brief Setzt den Grün-Wert zwischen 0 und 100
      * \param value Wert, der gesetzt wird
      */
-    void setGreenValue(int value);
+    virtual void setGreenValue(int value);
     
     /*!
      * \brief Setzt den Blau-Wert zwischen 0 und 100
      * \param value Wert, der gesetzt wird
      */
-    void setBlueValue(int value);
+    virtual void setBlueValue(int value);
     
-private:
+protected:
     int red_value_ = 0;
     int green_value_ = 0;
     int blue_value_ = 0;

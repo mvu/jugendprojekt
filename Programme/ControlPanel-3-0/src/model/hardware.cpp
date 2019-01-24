@@ -34,3 +34,13 @@ void hw::writeState(uint8_t bank, uint8_t bit, bool state)
     int ret = WiringPiWriteReg8(mcp23017, bank, val_new);
     
 } 
+
+int hw::readValue(uint8_t reg)
+{
+    return 0;
+}
+
+void hw::writeValue(uint8_t reg, int val)
+{ 
+
+}

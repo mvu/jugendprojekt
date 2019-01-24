@@ -8,12 +8,12 @@ PalettenLicht::PalettenLicht():
     is_on_ = hw::readState(PALETTE);
 }
 
-void PalettenLicht::saveToFile()
+void PalettenLicht::saveToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 }
 
-void PalettenLicht::loadFromFile()
+void PalettenLicht::loadFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;      
 }

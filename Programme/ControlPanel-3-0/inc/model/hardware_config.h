@@ -15,7 +15,7 @@
 #define RGB_FENSTER_GRUEN   0x0d
 #define RGB_FENSTER_BLAU    0x0c
 #define RGB_THEKE_ROT       0x0e
-#define RGB_THEKE_GREUN     0x0f
+#define RGB_THEKE_GRUEN     0x0f
 #define RGB_THEKE_BLAU      0x10
 
 // Ausgänge von PORTEXPANDER

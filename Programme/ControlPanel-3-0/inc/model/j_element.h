@@ -38,7 +38,7 @@ protected:
     
     QList<UpdateFunc> updaters_;
     QSet<UpdateFunc*> updaters_addr_;
-    FileHandler file_handler_;
+    FileHandler* file_handler_;
     
 };
 
