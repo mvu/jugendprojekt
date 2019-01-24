@@ -26,12 +26,12 @@ void JElement::update()
 
 }
 
-void JElement::saveToFile()
+void JElement::saveToFile( QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 }
 
-void JElement::loadFromFile()
+void JElement::loadFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 }

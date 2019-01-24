@@ -20,17 +20,17 @@ public:
     ~JElement();
     
     void update();
-    /// \todo muss irgendwie noch unterscheiden, wohin gespeichert wird
-    virtual void saveToFile(); 
-    /// \todo muss irgendwie noch unterscheiden, woher geladen wird
-    virtual void loadFromFile();
+    
+    virtual void saveToFile(QString filename); 
+    
+    virtual void loadFromFile(QString filename);
     
 
 protected:
     /*!
      * \brief addToUpdaters
      * \param updater
-     * \todo doppelte Updater aus der Liste entfernen
+     * \todo was eleganteres für die Vermeidung von doppelten Updatern finden
      */
     void addToUpdaters(UpdateFunc updater);
     
