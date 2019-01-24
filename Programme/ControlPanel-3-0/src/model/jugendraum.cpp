@@ -7,23 +7,7 @@ Jugendraum::Jugendraum()
     
     // create all the members
     theken_licht = new ThekenLicht();
-    
-    PalettenLicht *pal = new PalettenLicht();
-    pal->setOn(true);
-    pal->setOn(false);
-    pal->setOn(true);
-    pal->setOn(false);
-    pal->setOn(true);
-    pal->setOn(false);
-    pal->setOn(true);
-    pal->setOn(false);
-    pal->setOn(true);
-    pal->setOn(false);
-    //qDebug() << "update von Hand";
-    //std::cout << "update von Hand in jugendraum via std\n";
-    //std::cout << pal->updaters_[0] << std::endl;
-    //(*(pal->updaters_[0]))();    
-    pal->update();
+    wand_rgb = new WandRGB();
 }
 
 void Jugendraum::shutdown()

@@ -10,6 +10,7 @@
 
 #include "inc/model/paletten_licht.h"
 #include "inc/model/theken_licht.h"
+#include "inc/model/wand_rgb.h"
 
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
@@ -30,6 +31,8 @@ public:
     
     //! Kontrolliert die Thekenlichter
     ThekenLicht* theken_licht;
+    WandRGB* wand_rgb;
+    
 
 private:
 
