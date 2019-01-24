@@ -16,11 +16,23 @@ ThekenLicht::ThekenLicht() :
 void ThekenLicht::saveToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
+    FileHandler* file_handler_ = new FileHandler(filename);
+    file_handler_->writeToFile("ThekenLicht::top_is_on_", top_is_on_);
+    file_handler_->writeToFile("ThekenLicht::red_value_", red_value_);
+    file_handler_->writeToFile("ThekenLicht::green_value_", green_value_);
+    file_handler_->writeToFile("ThekenLicht::blue_value_", blue_value_);
+    delete file_handler_;
 }
 
 void ThekenLicht::loadFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
+    FileHandler* file_handler_ = new FileHandler(filename);
+    setTopOn( file_handler_->readFromFile<bool>("ThekenLicht::top_is_on_") );
+    setRedValue( file_handler_->readFromFile<int>("ThekenLicht::red_value_"));
+    setRedValue( file_handler_->readFromFile<int>("ThekenLicht::green_value_"));
+    setRedValue( file_handler_->readFromFile<int>("ThekenLicht::blue_value_"));
+    delete file_handler_;
 }
 
 bool ThekenLicht::topIsOn()

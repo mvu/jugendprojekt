@@ -18,7 +18,7 @@ Startseite::Startseite(QWidget *parent, Jugendraum *j) :
 Startseite::~Startseite()
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->~Jugendraum();
+    delete jugendraum_;
     delete ui_;
 }
 

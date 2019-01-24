@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QDebug>
 #include <iostream>
+#include <QString>
 
 #include "hardware.h"
 #include "j_element.h"
@@ -34,6 +35,18 @@ public:
      */
     explicit Jugendraum();
     ~Jugendraum();
+    
+    /*!
+     * \brief Speichert den aktuellen Zustand aller Elemente des Jugendraums in eine Datei
+     * \param filename Datei, in die gespeichert wird
+     */
+    void saveAllToFile(QString filename);
+    
+    /*!
+     * \brief Lädt den Zustand aller Elemente des Jugendraums aus einer Datei
+     * \param filename Datei, aus der geladen wird
+     */
+    void loadAllFromFile(QString filename);
 
     ThekenLicht* theken_licht;          //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
     PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand

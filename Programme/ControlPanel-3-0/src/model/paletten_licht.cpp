@@ -15,11 +15,17 @@ PalettenLicht::PalettenLicht():
 void PalettenLicht::saveToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
+    FileHandler* file_handler_ = new FileHandler(filename);
+    file_handler_->writeToFile("PalettenLicht::is_on_", is_on_);
+    delete file_handler_;
 }
 
 void PalettenLicht::loadFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;      
+    FileHandler* file_handler_ = new FileHandler(filename);
+    setOn( file_handler_->readFromFile<bool>("PalettenLicht::is_on_") );
+    delete file_handler_;
 }
 
 void PalettenLicht::setOn(bool state)
