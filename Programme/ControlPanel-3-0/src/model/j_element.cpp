@@ -1,3 +1,7 @@
+/*!
+ * \file j_element.cpp
+ * \brief Source der JElement Basisklasse für alles im Jugendraum
+ */
 #include "inc/model/j_element.h"
 
 JElement::JElement()
@@ -16,11 +20,9 @@ void JElement::update()
     
     // execute and show complete list
     foreach (const UpdateFunc &ptr, updaters_)
-    {
-        qDebug() << &ptr;
         ptr();
-    }
 
+    // after execution, clear the list
     updaters_.clear();
     updaters_addr_.clear();
 
@@ -46,6 +48,4 @@ void JElement::addToUpdaters(UpdateFunc updater)
          updaters_.append(updater);
          updaters_addr_.insert(&updater);
     }
-    
-    qDebug() << &updater << " -> " <<  &updaters_.last();
 }
