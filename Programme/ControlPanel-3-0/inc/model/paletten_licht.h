@@ -11,8 +11,8 @@ class PalettenLicht : public JElement
 public:
     PalettenLicht();
     
-    void saveToFile() override;
-    void loadFromFile() override;
+    void saveToFile(QString filename) override;
+    void loadFromFile(QString filename) override;
     
     
     void setOn(bool state); ///< \todo name anpassen?
