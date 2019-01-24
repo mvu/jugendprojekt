@@ -42,7 +42,8 @@ SOURCES += \
     src/model/i2cdevice.cpp \
     src/model/hardware.cpp \
     src/model/j_element.cpp \
-    src/model/paletten_licht.cpp
+    src/model/paletten_licht.cpp \
+    src/model/theken_licht.cpp
 
 HEADERS += \
     inc/gui/startseite.h \
@@ -64,7 +65,8 @@ HEADERS += \
     inc/model/hardware_register.h \
     inc/model/file_handler.h \
     inc/model/j_element.h \
-    inc/model/paletten_licht.h
+    inc/model/paletten_licht.h \
+    inc/model/theken_licht.h
 
 FORMS += \
     ui/startseite.ui \
