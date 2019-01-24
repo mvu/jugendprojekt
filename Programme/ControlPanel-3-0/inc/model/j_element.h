@@ -7,6 +7,8 @@
 #include <QSet>
 #include <QDebug>
 
+#include "file_handler.h"
+
 typedef std::function<void(void)> UpdateFunc;
 
 /*!
@@ -36,6 +38,7 @@ protected:
     
     QList<UpdateFunc> updaters_;
     QSet<UpdateFunc*> updaters_addr_;
+    FileHandler file_handler_;
     
 };
 
