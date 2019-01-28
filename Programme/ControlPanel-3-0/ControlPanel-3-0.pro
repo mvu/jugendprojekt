@@ -45,7 +45,8 @@ SOURCES += \
     src/model/paletten_licht.cpp \
     src/model/theken_licht.cpp \
     src/model/rgb_element.cpp \
-    src/model/wand_rgb.cpp
+    src/model/wand_rgb.cpp \
+    src/model/hauptlicht_streifen.cpp
 
 HEADERS += \
     inc/gui/startseite.h \
@@ -70,7 +71,8 @@ HEADERS += \
     inc/model/paletten_licht.h \
     inc/model/theken_licht.h \
     inc/model/rgb_element.h \
-    inc/model/wand_rgb.h
+    inc/model/wand_rgb.h \
+    inc/model/hauptlicht_streifen.h
 
 FORMS += \
     ui/startseite.ui \

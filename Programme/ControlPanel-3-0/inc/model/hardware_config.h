@@ -10,16 +10,25 @@
 #define HW_UPDATE_INTERVAL_MS       5000
 
 // I2C Adressen
-#define PCA_LIGHT                   0x5d
+#define PCA_LICHT                   0x5d
 #define PORTEXPANDER                0x22
 
-// Ausgänge von PCA_LIGHT
+// Ausgänge von PCA_LICHT
 #define RGB_WAND_ROT                0x0b
 #define RGB_WAND_GRUEN              0x0d
 #define RGB_WAND_BLAU               0x0c
 #define RGB_THEKE_ROT               0x0e
 #define RGB_THEKE_GRUEN             0x0f
 #define RGB_THEKE_BLAU              0x10
+
+#define HL_STREIFEN_1               0x02
+#define HL_STREIFEN_2               0x03
+#define HL_STREIFEN_3               0x04
+#define HL_STREIFEN_4               0x05
+#define HL_STREIFEN_5               0x06
+#define HL_STREIFEN_6               0x07
+#define HL_STREIFEN_7               0x08
+#define HL_STREIFEN_8               0x09
 
 // Ausgänge von PORTEXPANDER
 #define NETZTEIL_12V                GPIOA, 0x01

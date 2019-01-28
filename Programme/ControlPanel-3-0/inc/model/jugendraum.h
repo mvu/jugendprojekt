@@ -18,6 +18,7 @@
 #include "inc/model/paletten_licht.h"
 #include "inc/model/theken_licht.h"
 #include "inc/model/wand_rgb.h"
+#include "inc/model/hauptlicht_streifen.h"
 
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
@@ -48,11 +49,12 @@ public:
      */
     void loadAllFromFile(QString filename);
 
-    ThekenLicht* theken_licht;          //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
-    PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand
-    WandRGB* wand_rgb;                  //!< Kontrolliert die RGB Streifen an den Giebelfenstern
+    ThekenLicht* theken_licht;              //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
+    PalettenLicht* paletten_licht;          //!< Kontroliiert die beleuchteten Paletten an der Wand
+    WandRGB* wand_rgb;                      //!< Kontrolliert die RGB Streifen an den Giebelfenstern
+    QList<HauptlichtStreifen*> hauptlicht_; //!< Kontrolliert die Hauptlichtstreifen an der Decke
 private:
-    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus
+    QTimer *update_timer_;                  //!< Kontrolliert den update-Zyklus
 
 
 signals:
