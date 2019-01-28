@@ -44,7 +44,7 @@ void setup()
     pinMode(slider_1.analog_pin, INPUT);
     pinMode(slider_1.analog_pin, INPUT);
     pinMode(slider_1.analog_pin, INPUT);
-    // anddo first measurement
+    // and do first measurement
     slider_1.analog_value = analogRead(slider_1.analog_pin);
     slider_2.analog_value = analogRead(slider_2.analog_pin);
     slider_3.analog_value = analogRead(slider_3.analog_pin);
