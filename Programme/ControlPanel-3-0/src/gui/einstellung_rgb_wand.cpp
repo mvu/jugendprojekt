@@ -53,6 +53,7 @@ void EinstellungRGBWand::on_pushButton_back_released()
 void EinstellungRGBWand::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
 }
 
 void EinstellungRGBWand::on_pushButton_set_color_released()

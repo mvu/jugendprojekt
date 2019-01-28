@@ -88,49 +88,49 @@ void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
 
-    jugendraum_->hauptlicht_[0]->allowChange(checked);
+    jugendraum_->hauptlicht[0]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_2_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[1]->allowChange(checked);
+    jugendraum_->hauptlicht[1]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_3_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[2]->allowChange(checked);
+    jugendraum_->hauptlicht[2]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_4_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[3]->allowChange(checked);
+    jugendraum_->hauptlicht[3]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_5_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[4]->allowChange(checked);
+    jugendraum_->hauptlicht[4]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_6_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[5]->allowChange(checked);
+    jugendraum_->hauptlicht[5]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_7_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[6]->allowChange(checked);
+    jugendraum_->hauptlicht[6]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_8_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    jugendraum_->hauptlicht_[7]->allowChange(checked);
+    jugendraum_->hauptlicht[7]->allowChange(checked);
 }
 
 void EinstellungHauptlicht::on_pushButton_all_toggled(bool checked)

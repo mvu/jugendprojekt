@@ -21,6 +21,11 @@
 #define RGB_THEKE_GRUEN             0x0f
 #define RGB_THEKE_BLAU              0x10
 
+/*!
+ * \brief Die Nummerierung der Streifen beginnt oben links (in der GUI) bei 1 
+ * und geht dann gegen den Uhrzeigersinn bis 8. Für weitere
+ * Erklärungen siehe den Kommentar zu Jugendraum::hauptlicht
+ */
 #define HL_STREIFEN_1               0x02
 #define HL_STREIFEN_2               0x03
 #define HL_STREIFEN_3               0x04

@@ -17,14 +17,14 @@ Jugendraum::Jugendraum()
     theken_licht = new ThekenLicht();
     paletten_licht = new PalettenLicht();
     wand_rgb = new WandRGB();
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_1));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_2));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_3));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_4));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_5));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_6));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_7));
-    hauptlicht_.append(new HauptlichtStreifen(HL_STREIFEN_8));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_1));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_2));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_3));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_4));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_5));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_6));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_7));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_8));
 
 }
 
@@ -45,7 +45,7 @@ void Jugendraum::update()
     theken_licht->update();
     wand_rgb->update();
 
-    for (auto streifen: hauptlicht_)
+    for (auto streifen: hauptlicht)
         streifen->update();
 
 }
@@ -56,7 +56,7 @@ void Jugendraum::saveAllToFile(QString filename)
     theken_licht->saveToFile(filename);
     wand_rgb->saveToFile(filename);
 
-    for (auto streifen: hauptlicht_)
+    for (auto streifen: hauptlicht)
         streifen->saveToFile(filename);
 }
 
@@ -66,6 +66,6 @@ void Jugendraum::loadAllFromFile(QString filename)
     theken_licht->loadFromFile(filename);
     wand_rgb->loadFromFile(filename);
 
-    for (auto streifen: hauptlicht_)
+    for (auto streifen: hauptlicht)
         streifen->loadFromFile(filename);
 }

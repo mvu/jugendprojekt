@@ -52,7 +52,14 @@ public:
     ThekenLicht* theken_licht;              //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
     PalettenLicht* paletten_licht;          //!< Kontroliiert die beleuchteten Paletten an der Wand
     WandRGB* wand_rgb;                      //!< Kontrolliert die RGB Streifen an den Giebelfenstern
-    QList<HauptlichtStreifen*> hauptlicht_; //!< Kontrolliert die Hauptlichtstreifen an der Decke
+    /*!
+     * \brief hauptlicht Kontrolliert die Hauptlichtstreifen an der Decke
+     * \details Die Reihenfolge der einzelnen Streifen im Array ist durch die Nummerierung der Streifen fest vorgegeben.
+     * Bezogen auf die Darstellung in der GUI beginnt die Zählung oben links in der Ecke (bei der Tür und der Theke) bei 1
+     * und geht dann gegen den Uhrzeigersinn bis 8. Dieser Nummerierung folgt auch die Belegung der Adressen in der hardware_config.h .
+     * Die Benennung der Buttons in der GUI folgt ebenfalls dieser Nummerierung.
+     */
+    QList<HauptlichtStreifen*> hauptlicht; 
 private:
     QTimer *update_timer_;                  //!< Kontrolliert den update-Zyklus
 
