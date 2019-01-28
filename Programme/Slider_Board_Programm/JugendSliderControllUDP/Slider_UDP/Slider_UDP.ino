@@ -32,7 +32,7 @@ int a;
 
 EthernetUDP Udp;
 
-// Motor configurieren 
+// Motor configurieren
 
 AF_DCMotor mSlider1(1, MOTOR12_1KHZ);
 AF_DCMotor mSlider2(2, MOTOR12_1KHZ);
@@ -59,10 +59,8 @@ void setup() {
 		arraySlider[i] = 0;
 	}
 
-	
-
 	delay(10);
-	Serial.println("Slider Controllpanal V2.0");
+	Serial.println("Slider Controllpanal Version 2.1");
 
 	mSlider1.run(BACKWARD);
 	mSlider1.setSpeed(160);
@@ -75,18 +73,29 @@ void setup() {
 
 	while (true)
 	{
-		if (slider1 == 0)if (analogRead(adSlider1) >= 1020) { slider1 = 1; mSlider1.run(RELEASE); };
-		if (slider2 == 0)if (analogRead(adSlider2) >= 1020) { slider2 = 1; mSlider2.run(RELEASE); };
-		if (slider3 == 0)if (analogRead(adSlider3) >= 1020) { slider3 = 1; mSlider3.run(RELEASE); };
-		if (slider4 == 0)if (analogRead(adSlider4) >= 1020) { slider4 = 1; mSlider4.run(RELEASE); };
+		Serial.println(slider2);
+		if (slider1 == 0) if (analogRead(adSlider1) >= 1020) { slider1 = 1; mSlider1.run(RELEASE); };
+		if (slider2 == 0) if (analogRead(adSlider2) >= 1020) { slider2 = 1; mSlider2.run(RELEASE); };
+		if (slider3 == 0) if (analogRead(adSlider3) >= 1020) { slider3 = 1; mSlider3.run(RELEASE); };
+		if (slider4 == 0) if (analogRead(adSlider4) >= 1020) { slider4 = 1; mSlider4.run(RELEASE); };
 		if (slider1 == 1 && slider2 == 1 && slider3 == 1 && slider4 == 1) break;
+	}
+
+	Serial.println("Intialization completed.\n");
+	Serial.println("Use the following addresses to move the sliders:");
+	for (int i = 0; i < 4; i++) {
+		Serial.print('\tSlider ' + i + ' -> '); Serial.println(reinterpret_cast<int>(&arraySlider[i]), HEX);
 	}
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
 
-	checkUDP();
+	// checkUDP();
+
+	if (Serial.available() > 0) {
+		int i = 0;
+	}
 
 	for (size_t a = 0; a < 4; a++)
 	{
@@ -152,89 +161,89 @@ void loop() {
 				}
 			}
 		}
-	}  
-}
-
-void checkUDP() {
-	if (Udp.parsePacket()) {
-		Serial.print("data received: ");
-		Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
-		Serial.println(packetBuffer);
-		Serial.println(sizeof(packetBuffer)/sizeof(packetBuffer[0]));
-		char Sliderwahl = packetBuffer[0];
-		Serial.println(Sliderwahl);
-		packetBuffer[0] = 0;
-		packetBuffer[4] = 0;
-		int val = atoi(packetBuffer);
-		Serial.println(val);
-		val = max(min(val,100), 0);
-		if (val < 1) {
-			switch (Sliderwahl)
-			{
-			case'A':
-				Udp.print(arraySliderValue[0]);
-				Udp.endPacket();
-				break;
-			case'B':
-				Udp.print(arraySliderValue[1]);
-				Udp.endPacket();
-				break;
-			case'C':
-				Udp.print(arraySliderValue[2]);
-				Udp.endPacket();
-				break;
-			case'D':
-				Udp.print(arraySliderValue[3]);
-				Udp.endPacket();
-				break;
-			default:
-				break;
-			}
-		}
-		else if (val == 1){
-			switch (Sliderwahl)
-			{
-			case 'A':
-				arraySlider[0] = 0;
-				break;
-
-			case 'B':
-				arraySlider[1] = 0;
-				break;
-
-			case 'C':
-				arraySlider[2] = 0;
-				break;
-
-			case 'D':
-				arraySlider[3] = 0;
-				break;
-			default:
-				break;
-			}
-		}
-		else {
-			switch (Sliderwahl)
-			{
-			case 'A':
-				arraySliderValue[0] = val;
-				break;
-
-			case 'B':
-				arraySliderValue[1] = val;
-				break;
-			
-			case 'C':
-				arraySliderValue[2] = val;
-				break;
-
-			case 'D':
-				arraySliderValue[3] = val;
-				break;			
-			default:
-				break;
-			}
-		}
-
 	}
 }
+
+// void checkUDP() {
+// 	if (Udp.parsePacket()) {
+// 		Serial.print("data received: ");
+// 		Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
+// 		Serial.println(packetBuffer);
+// 		Serial.println(sizeof(packetBuffer)/sizeof(packetBuffer[0]));
+// 		char Sliderwahl = packetBuffer[0];
+// 		Serial.println(Sliderwahl);
+// 		packetBuffer[0] = 0;
+// 		packetBuffer[4] = 0;
+// 		int val = atoi(packetBuffer);
+// 		Serial.println(val);
+// 		val = max(min(val,100), 0);
+// 		if (val < 1) {
+// 			switch (Sliderwahl)
+// 			{
+// 			case'A':
+// 				Udp.print(arraySliderValue[0]);
+// 				Udp.endPacket();
+// 				break;
+// 			case'B':
+// 				Udp.print(arraySliderValue[1]);
+// 				Udp.endPacket();
+// 				break;
+// 			case'C':
+// 				Udp.print(arraySliderValue[2]);
+// 				Udp.endPacket();
+// 				break;
+// 			case'D':
+// 				Udp.print(arraySliderValue[3]);
+// 				Udp.endPacket();
+// 				break;
+// 			default:
+// 				break;
+// 			}
+// 		}
+// 		else if (val == 1){
+// 			switch (Sliderwahl)
+// 			{
+// 			case 'A':
+// 				arraySlider[0] = 0;
+// 				break;
+//
+// 			case 'B':
+// 				arraySlider[1] = 0;
+// 				break;
+//
+// 			case 'C':
+// 				arraySlider[2] = 0;
+// 				break;
+//
+// 			case 'D':
+// 				arraySlider[3] = 0;
+// 				break;
+// 			default:
+// 				break;
+// 			}
+// 		}
+// 		else {
+// 			switch (Sliderwahl)
+// 			{
+// 			case 'A':
+// 				arraySliderValue[0] = val;
+// 				break;
+//
+// 			case 'B':
+// 				arraySliderValue[1] = val;
+// 				break;
+//
+// 			case 'C':
+// 				arraySliderValue[2] = val;
+// 				break;
+//
+// 			case 'D':
+// 				arraySliderValue[3] = val;
+// 				break;
+// 			default:
+// 				break;
+// 			}
+// 		}
+//
+// 	}
+// }

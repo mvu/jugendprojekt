@@ -1,11 +1,16 @@
+<<<<<<< Updated upstream
 #include <AFMotor.h>       // Motorshield library
 #include <PID_v1.h>        // PID library
+=======
+#include "slider.h"
+>>>>>>> Stashed changes
 
 #define ADC_SLIDER_1    A0
 #define ADC_SLIDER_2    A1
 #define ADC_SLIDER_3    A2
 #define ADC_SLIDER_4    A3
 
+<<<<<<< Updated upstream
 struct Slider {
     double setpoint, analog_value, motor_speed, kp, ki, kd;
     uint8_t analog_pin;
@@ -33,10 +38,17 @@ AF_DCMotor motor_2(2, MOTOR12_1KHZ);
 AF_DCMotor motor_3(3, MOTOR12_1KHZ);
 AF_DCMotor motor_4(4, MOTOR12_1KHZ);
 
+=======
+Slider slider_1(ADC_SLIDER_1, 1, 1.1, 5, 0);
+Slider slider_2(ADC_SLIDER_2, 2, 1.1, 5, 0);
+Slider slider_3(ADC_SLIDER_3, 3, 5, 2, 0);
+Slider slider_4(ADC_SLIDER_4, 4, 0.3, 2, 0);
+>>>>>>> Stashed changes
 
 void setup()
 {
     Serial.begin(115200);
+<<<<<<< Updated upstream
     Serial.println("Slider Controller Version 3.0\nIntialization started");
 
     // setup pins for analog input
@@ -68,15 +80,36 @@ void setup()
 
     // show the addresses of the setpoints
     Serial.println("Intialization completed.\n");
+=======
+
+    // Nice Serial Output ;)
+    Serial.println("Slider controller version 3.0");
+    Serial.println("Intialization completed.\n");
+    // Tell user about addresses of setpoints
+>>>>>>> Stashed changes
     Serial.println("Use the following addresses to move the sliders:");
     Serial.print("\tSlider 1 -> "); Serial.println(reinterpret_cast<int>(&slider_1.setpoint), HEX);
     Serial.print("\tSlider 2 -> "); Serial.println(reinterpret_cast<int>(&slider_2.setpoint), HEX);
     Serial.print("\tSlider 3 -> "); Serial.println(reinterpret_cast<int>(&slider_3.setpoint), HEX);
     Serial.print("\tSlider 4 -> "); Serial.println(reinterpret_cast<int>(&slider_4.setpoint), HEX);
+<<<<<<< Updated upstream
+=======
+    // Tell user about addresses of active flags
+    Serial.println("Use the following addresses to activate the sliders:");
+    Serial.print("\tSlider 1 -> "); Serial.println(reinterpret_cast<int>(&slider_1.active), HEX);
+    Serial.print("\tSlider 2 -> "); Serial.println(reinterpret_cast<int>(&slider_2.active), HEX);
+    Serial.print("\tSlider 3 -> "); Serial.println(reinterpret_cast<int>(&slider_3.active), HEX);
+    Serial.print("\tSlider 4 -> "); Serial.println(reinterpret_cast<int>(&slider_4.active), HEX);
+
+    // use slider_3 for testing
+    slider_4.active = true;
+    slider_4.setpoint = 500;
+>>>>>>> Stashed changes
 }
 
 void loop()
 {
+<<<<<<< Updated upstream
     // delay(500);
     slider_4.analog_value = analogRead(slider_4.analog_pin);
 
@@ -92,4 +125,13 @@ void loop()
         slider_4.setpoint = tmp;
         Serial.println(tmp);
     }
+=======
+    slider_4.update();
+
+    if (Serial.available() > 0)
+    {
+        slider_4.setpoint = Serial.parseInt();
+    }
+
+>>>>>>> Stashed changes
 }
