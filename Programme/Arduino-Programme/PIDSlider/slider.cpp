@@ -11,7 +11,7 @@ Slider::Slider(int analog_pin, int motor_num){
     motor_speed_ = 0;
 
     active_ = false;
-    free_running = true;
+    released_ = true;
 
     // setup pin
     pinMode(analog_pin_, INPUT);
@@ -27,12 +27,18 @@ Slider::Slider(int analog_pin, int motor_num){
 }
 
 void Slider::update(){
-    if (active) {
+    // only do stuff, when active
+    if (active_) {
+        // get the new AD reading
         analog_value_ = analogRead(analog_pin_);
-        if (not free_running_) {
-            pid_.Compute();
+
+        // compute motor speed, if slider needs to be moved
+        if (not released_) {
+            pid_compute();
             motor_.setSpeed(abs(motor_speed_));
             motor_.run((motor_speed_ <= 0) ? FORWARD : BACKWARD);
+        } else {
+            motor_.run(RELEASE);
         }
     }
 }
@@ -55,7 +61,7 @@ void Slider::pid_compute(){
     if(time_change >= sample_time_) {
     /*Compute all the working error variables*/
         double error = setpoint_ - analog_value_;
-        double d_input = analog_value_ - last_analog_value_);
+        double d_input = analog_value_ - last_analog_value_;
         output_sum_ += (ki_ * error);
 
         if(output_sum > out_max_) output_sum_ = out_max_;
