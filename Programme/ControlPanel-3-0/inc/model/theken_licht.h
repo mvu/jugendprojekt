@@ -6,9 +6,9 @@
 #ifndef THEKEN_LICHT_H
 #define THEKEN_LICHT_H
 
-#include "j_element.h"
-#include "rgb_element.h"
-#include "hardware.h"
+#include "inc/model/j_element.h"
+#include "inc/model/rgb_element.h"
+#include "inc/model/hardware.h"
 
 /*!
  * \brief Klasse zur Steuerung der Lichter der Theke: RGB-Streifen und Lichter über der Theke
