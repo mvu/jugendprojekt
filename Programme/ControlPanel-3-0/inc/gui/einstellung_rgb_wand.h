@@ -16,6 +16,7 @@ class EinstellungRGBWand;
 
 /*!
  * \brief Klasse für GUI der Einstellungen der RGB an der Wand
+ * \todo stylesheets beim Klicken anpassen
  */
 
 class EinstellungRGBWand : public QDialog

@@ -53,10 +53,13 @@ void EinstellungRGBWand::on_pushButton_back_released()
 void EinstellungRGBWand::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
-    
+    // invert current state of RGB
+    jugendraum_->wand_rgb->setRGBOn(not jugendraum_->wand_rgb->RGBisOn());
 }
 
 void EinstellungRGBWand::on_pushButton_set_color_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // activate the slider 
 }

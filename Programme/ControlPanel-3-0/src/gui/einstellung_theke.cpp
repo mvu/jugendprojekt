@@ -54,14 +54,19 @@ void EinstellungTheke::on_pushButton_back_released()
 void EinstellungTheke::on_pushButton_lampen_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    // invert current state
+    jugendraum_->theken_licht->setTopOn(not jugendraum_->theken_licht->topIsOn());
 }
 
 void EinstellungTheke::on_pushButton_rgb_set_released()
 {
     qDebug() << Q_FUNC_INFO;
+    // activate slider
 }
 
 void EinstellungTheke::on_pushButton_rgb_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    // invert current state
+    jugendraum_->theken_licht->setRGBOn(not jugendraum_->theken_licht->RGBisOn());
 }
