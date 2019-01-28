@@ -6,14 +6,13 @@
 #ifndef THEKEN_LICHT_H
 #define THEKEN_LICHT_H
 
-#include "inc/model/j_element.h"
 #include "inc/model/rgb_element.h"
 #include "inc/model/hardware.h"
 
 /*!
  * \brief Klasse zur Steuerung der Lichter der Theke: RGB-Streifen und Lichter über der Theke
  */
-class ThekenLicht : public JElement, public RGBElement
+class ThekenLicht : public RGBElement
 {
 public:
     //! Constructor

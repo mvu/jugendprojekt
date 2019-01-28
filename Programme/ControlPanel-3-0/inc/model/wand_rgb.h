@@ -5,14 +5,13 @@
 #ifndef WAND_RGB_H
 #define WAND_RGB_H
 
-#include "inc/model/j_element.h"
 #include "inc/model/rgb_element.h"
 #include "inc/model/hardware.h"
 
 /*!
  * \brief Klasse für die Repräsentation und Kontrolle des Wand-RGB-Streifens
  */
-class WandRGB : public JElement, RGBElement
+class WandRGB : public RGBElement
 {
 public:
     //! Contructor
