@@ -16,7 +16,8 @@ class EinstellungRGBWand;
 
 /*!
  * \brief Klasse für GUI der Einstellungen der RGB an der Wand
- * \todo stylesheets beim Klicken anpassen
+ * \todo irgendwie beim Klicken von "Farbe einstellen" deutlich machen, 
+ * dass der Klick erkannt wurde und die Slider jetzt benutzt werden können
  */
 
 class EinstellungRGBWand : public QDialog

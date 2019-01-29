@@ -55,6 +55,7 @@ void EinstellungRGBWand::on_pushButton_on_off_released()
     qDebug() << Q_FUNC_INFO;
     // invert current state of RGB
     jugendraum_->wand_rgb->setRGBOn(not jugendraum_->wand_rgb->RGBisOn());
+    ui_->pushButton_on_off->setText(jugendraum_->wand_rgb->RGBisOn() ? "Aus" : "An");
 }
 
 void EinstellungRGBWand::on_pushButton_set_color_released()

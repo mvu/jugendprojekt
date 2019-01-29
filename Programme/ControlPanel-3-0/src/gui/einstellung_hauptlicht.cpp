@@ -204,6 +204,7 @@ void EinstellungHauptlicht::on_pushButton_on_off_released()
     qDebug() << Q_FUNC_INFO;
     
     // welchen Zustand zeigt der Knopf wenn mehrere Streifen mit unterschiedlichem Status ausgewählt werden??
+    // Am besten: Sobald einer der ausgewählten an ist, kann der Knopf nur zum Ausschalten benutzt werden, weil das vermutlich der öfter benötigte Fall ist
     
     // will only affect selected ones
     for (auto streifen: jugendraum_->hauptlicht)
