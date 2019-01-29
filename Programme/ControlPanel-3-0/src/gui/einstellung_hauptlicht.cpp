@@ -21,6 +21,10 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, Jugendraum *j) :
     this->show();
 
     InitButtons();
+    
+    all_selected_last_ = false;
+    group_1_selected_last_ = false;
+    group_2_selected_last_ = false;
 
     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
@@ -89,71 +93,117 @@ void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
     qDebug() << Q_FUNC_INFO;
 
     jugendraum_->hauptlicht[0]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_2_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[1]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_3_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[2]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_4_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[3]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_5_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[4]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_6_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[5]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_7_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[6]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_8_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     jugendraum_->hauptlicht[7]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_all_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-
-    for (auto push_button: push_buttons_HL_)
-        push_button->setChecked(checked);
+    
+    // will affect all other buttons only if the button itself was hit
+    if (all_selected_last_ != checked)
+    {
+        all_selected_last_ = checked;
+        
+        for (auto push_button: push_buttons_HL_)
+        push_button->setChecked(checked); 
+    }
+    
+   
 }
 
 void EinstellungHauptlicht::on_pushButton_group_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // will affect all other buttons only if the button itself was hit
+    if (group_1_selected_last_ != checked)
+    {
+        group_1_selected_last_ = checked;
+        
+        for (int i = 0; i < 4; i++)
+        {
+            push_buttons_HL_[i]->setChecked(checked); 
+        }
+    }
+    
+    // check if by toggeling the button another group is selected
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_group_2_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // will affect all other buttons only if the button itself was hit
+    if (group_2_selected_last_ != checked)
+    {
+        group_2_selected_last_ = checked;
+        
+        for (int i = 4; i < 8; i++)
+        {
+            push_buttons_HL_[i]->setChecked(checked); 
+        }
+    }
+    
+    // check if by toggeling the button another group is selected
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // welchen Zustand zeigt der Knopf wenn mehrere Streifen mit unterschiedlichem Status ausgewählt werden??
     
     // will only affect selected ones
     for (auto streifen: jugendraum_->hauptlicht)
@@ -176,3 +226,43 @@ void EinstellungHauptlicht::on_pushButton_back_released()
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
+
+void EinstellungHauptlicht::checkForGroups()
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    // check if all-group is selected
+    bool all_selected = true;
+   
+    for (auto push_button: push_buttons_HL_)
+    {
+        all_selected = all_selected && push_button->isChecked();
+    }
+    
+    // check if group 1 is selected
+    bool group_1_selected = true;
+    
+    for (int i = 0; i < 4; i++)
+    {
+        group_1_selected = group_1_selected && push_buttons_HL_[i]->isChecked();
+    }
+    
+    // check if group 2 is selected
+    bool group_2_selected = true;
+    
+    for (int i = 4; i < 8; i++)
+    {
+        group_2_selected = group_2_selected && push_buttons_HL_[i]->isChecked();
+    }
+    
+    ui_->pushButton_all->setChecked(all_selected);
+    
+    // if the group buttons have the same state like the all_button, then the 
+    // actions of the smaller groups aren't needed because the all_button 
+    // does it all alone
+    if (all_selected != group_1_selected)
+        ui_->pushButton_group_1->setChecked(group_1_selected);
+    if (all_selected != group_2_selected)
+        ui_->pushButton_group_2->setChecked(group_2_selected); 
+}
+

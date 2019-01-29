@@ -6,6 +6,30 @@ HauptlichtStreifen::HauptlichtStreifen(uint8_t address)
 
     address_ = address;
     allow_change_ = false;
+    
+    // read inital state from hardware
+    brightness_ = hw::readValue(address_);
+    is_on_ = (brightness_ != 0);
+}
+
+void HauptlichtStreifen::saveToFile(QString filename)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    FileHandler* file_handler = new FileHandler(filename);
+    std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
+    file_handler->writeToFile(name, brightness_);
+    delete file_handler;
+}
+
+void HauptlichtStreifen::loadFromFile(QString filename)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    FileHandler* file_handler = new FileHandler(filename);
+    std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
+    brightness_ = file_handler->readFromFile<int>(name);
+    delete file_handler;
 }
 
 void HauptlichtStreifen::allowChange(bool allow)

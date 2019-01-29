@@ -46,9 +46,19 @@ private slots:
 
 
 private:
+    /*!
+     * \brief Überprüft die Einzelbuttons, ob sie eine der drei Gruppen 
+     * all, group_1 oder group_2 bilden. Je nach dem werden die entsprechenden 
+     * Buttons umgeschaltet.
+     */
+    void checkForGroups();
+    
     Ui::EinstellungHauptlicht *ui_;
     Jugendraum *jugendraum_;
     QList<QPushButton *> push_buttons_HL_, push_buttons_groups_;
+    bool all_selected_last_;     // Hält den Zustand vom all-Button, wird für das Erkennen und Umschalten bei der Einzelauswahl gebraucht
+    bool group_1_selected_last_;
+    bool group_2_selected_last_;
 };
 
 #endif // EINSTELLUNG_HAUPTLICHT_H
