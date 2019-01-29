@@ -154,6 +154,13 @@ void EinstellungHauptlicht::on_pushButton_group_2_toggled(bool checked)
 void EinstellungHauptlicht::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // will only affect selected ones
+    for (auto streifen: jugendraum_->hauptlicht)
+    {
+        // invert current state    
+        streifen->setOn(not streifen->isOn());
+    }
 }
 
 void EinstellungHauptlicht::on_pushButton_back_released()

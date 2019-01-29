@@ -22,7 +22,7 @@ void HauptlichtStreifen::setBrightness(int val)
     if (allow_change_)
     {
         brightness_ = val;
-        std::function<void(void)> updater = [this](){hw::writeValue(address_, brightness_);};
+        UpdateFunc updater = [this](){hw::writeValue(address_, brightness_);};
         addToUpdaters(updater);
     }
 }
@@ -36,10 +36,28 @@ int HauptlichtStreifen::getBrightness()
 
 void HauptlichtStreifen::setOn(bool state)
 {
-    is_on_ = state;
+    qDebug() << Q_FUNC_INFO;
+    
+    if (allow_change_)
+    {
+        is_on_ = state;
+    
+        if (is_on_)
+        {
+            // restore last value
+            setBrightness(brightness_);
+        }
+        else
+        {
+            // write 0 to hardware without changing the software value
+            UpdateFunc updater = [this](){hw::writeValue(address_, 0);};
+        }
+    }
+    
 }
 
 bool HauptlichtStreifen::isOn()
 {
-    return is_on_
+    qDebug() << Q_FUNC_INFO;
+    return is_on_;
 }

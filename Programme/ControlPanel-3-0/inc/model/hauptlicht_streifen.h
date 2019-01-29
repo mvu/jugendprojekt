@@ -16,13 +16,14 @@ public:
     HauptlichtStreifen(uint8_t address);
 
     /*!
-     * \brief
-     * \param allow
+     * \brief (De-)Aktiviert den Streifen, nur wenn der Streifen aktiv ist werden 
+     * Änderungen durchgeführt
+     * \param allow true = aktiv
      */
     void allowChange(bool allow);
 
     /*!
-     * \brief setValue
+     * \brief Setzt den Helligkeitswert, wenn der Streifen aktiviert ist
      * \param val Helligkeitswert zwischen 0 und 100
      */
     void setBrightness(int val);
@@ -34,7 +35,7 @@ public:
     int getBrightness();
     
     /*!
-     * \brief Schaltet den Streifen an und aus
+     * \brief Schaltet den Streifen an und aus, wenn der Streifen aktiviert ist
      * \param state true = an
      */
     void setOn(bool state);
