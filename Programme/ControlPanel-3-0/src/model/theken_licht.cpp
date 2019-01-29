@@ -56,32 +56,3 @@ void ThekenLicht::setTopOn(bool state)
     addToUpdaters(updater);
 }
 
-void ThekenLicht::setRedValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    red_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_red_, red_value_);};
-    addToUpdaters(updater);
-}
-
-void ThekenLicht::setGreenValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    green_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_green_, green_value_);};
-    addToUpdaters(updater);
-}
-
-void ThekenLicht::setBlueValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    blue_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_blue_, blue_value_);};
-    addToUpdaters(updater);
-}

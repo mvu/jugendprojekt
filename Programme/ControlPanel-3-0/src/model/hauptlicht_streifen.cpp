@@ -33,3 +33,13 @@ int HauptlichtStreifen::getBrightness()
 
     return brightness_;
 }
+
+void HauptlichtStreifen::setOn(bool state)
+{
+    is_on_ = state;
+}
+
+bool HauptlichtStreifen::isOn()
+{
+    return is_on_
+}

@@ -44,22 +44,25 @@ public:
     int getBlueValue();
     
     /*!
-     * \brief Setzt den Rot-Wert zwischen 0 und 100
+     * \brief Setzt den Rot-Wert zwischen 0 und 100 und 
+     * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    virtual void setRedValue(int value);
+    void setRedValue(int value);
     
     /*!
-     * \brief Setzt den Grün-Wert zwischen 0 und 100
+     * \brief Setzt den Grün-Wert zwischen 0 und 100 und 
+     * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    virtual void setGreenValue(int value);
+    void setGreenValue(int value);
     
     /*!
-     * \brief Setzt den Blau-Wert zwischen 0 und 100
+     * \brief Setzt den Blau-Wert zwischen 0 und 100 und 
+     * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    virtual void setBlueValue(int value);
+    void setBlueValue(int value);
     
     /*!
      * \brief Liefert den Zustand der RGBs

@@ -41,33 +41,3 @@ void WandRGB::loadFromFile(QString filename)
     setBlueValue( file_handler_->readFromFile<int>("WandRGB::blue_value_") );
     delete file_handler_;
 }
-
-void WandRGB::setRedValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    red_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_red_, red_value_);};
-    addToUpdaters(updater);
-}
-
-void WandRGB::setGreenValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    green_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_green_, green_value_);};
-    addToUpdaters(updater);
-}
-
-void WandRGB::setBlueValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    blue_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(addr_blue_, blue_value_);};
-    addToUpdaters(updater);
-}
