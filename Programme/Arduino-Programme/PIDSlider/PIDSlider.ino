@@ -9,7 +9,7 @@ unsigned int local_port = 8888;
 
 uint8_t packet_buffer[UDP_TX_PACKET_MAX_SIZE];
 uint8_t reply_buffer[UDP_TX_PACKET_MAX_SIZE];
-uint8_t register_buffer[16];
+uint8_t register_buffer[24];
 
 EthernetUDP udp;
 
@@ -51,6 +51,12 @@ void setup()
     Serial.print("\tSlider 2 -> "); Serial.println(reinterpret_cast<int>(&slider_2.analog_value), DEC);
     Serial.print("\tSlider 3 -> "); Serial.println(reinterpret_cast<int>(&slider_3.analog_value), DEC);
     Serial.print("\tSlider 4 -> "); Serial.println(reinterpret_cast<int>(&slider_4.analog_value), DEC);
+    // Tell user about addresses of active flags
+    Serial.println("Use the following addresses to activate the sliders:");
+    Serial.print("\tSlider 1 -> "); Serial.println(reinterpret_cast<int>(&slider_1.active), DEC);
+    Serial.print("\tSlider 2 -> "); Serial.println(reinterpret_cast<int>(&slider_2.active), DEC);
+    Serial.print("\tSlider 3 -> "); Serial.println(reinterpret_cast<int>(&slider_3.active), DEC);
+    Serial.print("\tSlider 4 -> "); Serial.println(reinterpret_cast<int>(&slider_4.active), DEC);
 
     slider_1.disable();
 }
@@ -70,17 +76,17 @@ void handleUDP()
     int packet_size = udp.parsePacket();
     if (packet_size)
     {
-        // Serial.print("packet_size = "); Serial.println(packet_size, DEC);
+        Serial.print("packet_size = "); Serial.println(packet_size, DEC);
         // high byte in 0, low byte in 1
         udp.read(packet_buffer, UDP_TX_PACKET_MAX_SIZE);
         if (packet_size == 1)
         {
             // send addresses
             udp.beginPacket(udp.remoteIP(), udp.remotePort());
-            udp.write(register_buffer, 16);
+            udp.write(register_buffer, 24);
             udp.endPacket();
         }
-        if (packet_size == 2)
+        else if (packet_size == 2)
         {
             // send content of memory address
             uint16_t reg = (packet_buffer[0] << 8) + packet_buffer[1];
@@ -89,7 +95,19 @@ void handleUDP()
             udp.write(value, 2);
             udp.endPacket();
         }
-        if (packet_size == 4)
+        else if (packet_size == 3)
+        {
+            Serial.print((packet_buffer[0] << 8) + packet_buffer[1], DEC); Serial.print(" -> ");
+            Serial.println(bool(packet_buffer[2]));
+            // set active
+            *(reinterpret_cast<bool*>((packet_buffer[0] << 8) + packet_buffer[1])) = bool(packet_buffer[2]);
+            // report success
+            udp.beginPacket(udp.remoteIP(), udp.remotePort());
+            udp.write('0');
+            udp.endPacket();
+
+        }
+        else if (packet_size == 4)
         {
             // set content of memory address
             *(reinterpret_cast<double*>((packet_buffer[0] << 8) + packet_buffer[1])) = double((packet_buffer[2] << 8) + packet_buffer[3]);
@@ -103,7 +121,7 @@ void handleUDP()
 
 void packThePacket()
 {
-    uint16_t addr[8] = { \
+    uint16_t addr[12] = { \
         reinterpret_cast<uint16_t>(&slider_1.setpoint), \
         reinterpret_cast<uint16_t>(&slider_2.setpoint), \
         reinterpret_cast<uint16_t>(&slider_3.setpoint), \
@@ -111,9 +129,13 @@ void packThePacket()
         reinterpret_cast<uint16_t>(&slider_1.analog_value), \
         reinterpret_cast<uint16_t>(&slider_2.analog_value), \
         reinterpret_cast<uint16_t>(&slider_3.analog_value), \
-        reinterpret_cast<uint16_t>(&slider_4.analog_value) \
+        reinterpret_cast<uint16_t>(&slider_4.analog_value), \
+        reinterpret_cast<uint16_t>(&slider_1.active), \
+        reinterpret_cast<uint16_t>(&slider_2.active), \
+        reinterpret_cast<uint16_t>(&slider_3.active), \
+        reinterpret_cast<uint16_t>(&slider_4.active) \
     };
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 12; i++)
     {
         register_buffer[2*i] = addr[i] >> 8;
         register_buffer[2*i + 1] = addr[i];
