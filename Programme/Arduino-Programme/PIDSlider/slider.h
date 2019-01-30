@@ -33,3 +33,18 @@ private:
     // status
     bool released_;
 };
+
+/*
+ * Laufzeiten:
+ *
+ * handleUDP():
+ *     - ohne Anfrage: 44 µs
+ *     - get/set       570 µs
+ * pid_compute():
+ *     - typisch       8 µs ... 80 µs
+ *     - release       250 µs
+ * update():
+ *     - not active    4 µs
+ *     - released      120 µs
+ *     - moving        280 µs
+ */

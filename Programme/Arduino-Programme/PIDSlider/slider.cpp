@@ -34,7 +34,6 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
 
 void Slider::update()
 {
-    unsigned long before = micros();
     // only do stuff, when active
     if (active)
     {
@@ -59,8 +58,6 @@ void Slider::update()
             }
         }
     }
-    unsigned long after = micros();
-    Serial.println(after-before);
 }
 
 void Slider::pid_compute(){
