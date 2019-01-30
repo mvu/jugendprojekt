@@ -22,6 +22,7 @@ class EinstellungHauptlicht;
  * Gruppe 1 und 2 sind jeweils nur ausgewählt, wenn genau ihre Streifen ausgewählt sind und schalten beim 
  * Drücken des jeweiligen Gruppen-Buttons alle nicht zur Gruppe gehörigen Streifen aus, außer wenn dadurch 
  * alle ausgewählt werden.
+ * \todo an/aus-Knopf verarbeiten!!!
  */
 class EinstellungHauptlicht : public QDialog
 {
@@ -48,7 +49,8 @@ private slots:
     void on_pushButton_on_off_released();
     void on_pushButton_back_released();
 
-
+    void on_Slider_valueChanged(int value);
+    
 private:
     /*!
      * \brief Überprüft die Einzelbuttons, ob sie eine der drei Gruppen 
@@ -56,6 +58,12 @@ private:
      * Buttons umgeschaltet.
      */
     void checkForGroups();
+    
+    /*!
+     * \brief Liest den aktuellen Helligkeitswert aller Streifen aus dem
+     * Jugendraum aus und passt den Hintergrund entsprechend an.
+     */
+    void updateButtonBackgrounds();
     
     Ui::EinstellungHauptlicht *ui_;
     Jugendraum *jugendraum_;

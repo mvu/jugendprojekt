@@ -36,6 +36,8 @@ EinstellungHauptlicht::~EinstellungHauptlicht()
     qDebug() << Q_FUNC_INFO;
 
     // uncheck all buttons
+    for (auto push_button: push_buttons_HL_)
+        push_button->setChecked(false);
 
     delete ui_;
 }
@@ -62,6 +64,7 @@ void EinstellungHauptlicht::InitButtons()
     // setze StyleSheets für QPushButtons der Hauptlichter
     for (int i = 0; i < push_buttons_HL_.length(); i++){
         push_buttons_HL_[i]->setStyleSheet("QPushButton { \
+                                                background-color: rgba(0,0,0,80); \
                                                 border: 2px solid black; \
                                                 border-radius: 10px; \
                                             } \
@@ -70,6 +73,9 @@ void EinstellungHauptlicht::InitButtons()
                                                 border-radius: 10px;\
                                             }");
     }
+    
+    // set backgrounds to real values
+    updateButtonBackgrounds();
 
     // setzte StyleSheets für QPushButtons der Gruppen
     for (int i = 0; i < push_buttons_groups_.length(); i++){
@@ -82,6 +88,15 @@ void EinstellungHauptlicht::InitButtons()
                                                    border: 2px solid white; \
                                                }");
     }
+    
+    ui_->pushButton_on_off->setStyleSheet("QPushButton { \
+                                                   background-color: rgba(0,0,0,80); \
+                                                   color: white; \
+                                                   border: none; \
+                                               } \
+                                               QPushButton:checked { \
+                                                   border: 2px solid white; \
+                                               }");
 }
 
 void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
@@ -266,3 +281,31 @@ void EinstellungHauptlicht::checkForGroups()
     }
 }
 
+void EinstellungHauptlicht::updateButtonBackgrounds()
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    for (int i = 0; i < push_buttons_HL_.length(); i++)
+    {
+        int brightness = jugendraum_->hauptlicht[i]->getBrightness() * 255 / 100;
+        QString stylesheet_text = push_buttons_HL_[i]->styleSheet();
+        int start_pos = stylesheet_text.indexOf("rgba");
+        int end_pos = stylesheet_text.indexOf(")", start_pos);
+        QString val = QString::number(brightness);
+        QString new_rgb_text = "rgba(" + val + "," + val + "," + val + ",80)";
+        stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
+        qDebug() << stylesheet_text;
+        push_buttons_HL_[i]->setStyleSheet(stylesheet_text);
+    }
+}
+
+
+void EinstellungHauptlicht::on_Slider_valueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    for (auto streifen: jugendraum_->hauptlicht)
+        streifen->setBrightness(value);
+    
+    updateButtonBackgrounds();
+}
