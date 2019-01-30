@@ -8,10 +8,12 @@ Jugendraum::Jugendraum()
 {
     qDebug() << Q_FUNC_INFO;
     hw::init();
+    hw::setSliderPosition(2, 50);
+    hw::getSliderPosition(2);
 
     update_timer_ = new QTimer();
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
-    update_timer_->start(HW_UPDATE_INTERVAL_MS);
+    // update_timer_->start(HW_UPDATE_INTERVAL_MS);
 
     // create all the members
     theken_licht = new ThekenLicht();

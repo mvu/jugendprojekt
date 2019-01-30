@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -45,7 +45,8 @@ SOURCES += \
     src/model/paletten_licht.cpp \
     src/model/theken_licht.cpp \
     src/model/rgb_element.cpp \
-    src/model/wand_rgb.cpp
+    src/model/wand_rgb.cpp \
+    src/model/j_slider.cpp
 
 HEADERS += \
     inc/gui/startseite.h \
@@ -70,7 +71,8 @@ HEADERS += \
     inc/model/paletten_licht.h \
     inc/model/theken_licht.h \
     inc/model/rgb_element.h \
-    inc/model/wand_rgb.h
+    inc/model/wand_rgb.h \
+    inc/model/j_slider.h
 
 FORMS += \
     ui/startseite.ui \

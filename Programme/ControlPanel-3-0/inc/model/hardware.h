@@ -7,6 +7,9 @@
 #define HARDWARE_H
 
 #include <QDebug>
+#include <QByteArray>
+#include <QList>
+#include <QtNetwork>
 
 #include "hardware_config.h"
 #include "hardware_register.h"
@@ -58,6 +61,19 @@ namespace hw
      */
     void writeValue(uint8_t reg, int val);
 
+    /*!
+     * \brief Setzt den setpoint eines Sliders
+     * \param slider_num Nummer des Sliders; von 1 (links) bis 4 (rechts)
+     * \param val Prozentuale Position, d.h. von 0 (unten) bis 100 (oben)
+     */
+    void setSliderPosition(int slider_num, int val);
+
+    /*!
+     * \brief Liefert die aktuell Position eines Sliders
+     * \param slider_num Nummer des Sliders; von 1 (links) bis 4 (rechts)
+     * \return Prozentuale Position, d.h. von 0 (unten) bis 100 (oben)
+     */
+    int getSliderPosition(int slider_num);
 
 }
 

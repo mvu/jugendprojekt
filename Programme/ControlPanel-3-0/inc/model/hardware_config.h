@@ -6,11 +6,16 @@
 
 #include "inc/model/hardware_register.h"
 
+// UDP Verbindung für slider
+#define SLIDER_IP                   "192.168.1.111"
+#define SLIDER_PORT                 8888
+#define SLIDER_UPDATE_CYCLE_MS      50
+
 // update Zyklus für die gesamte Hardware
 #define HW_UPDATE_INTERVAL_MS       5000
 
 // I2C Adressen
-#define PCA_LIGHT                   0x5d
+#define PCA_LICHT                   0x5d
 #define PORTEXPANDER                0x22
 
 // Ausgänge von PCA_LIGHT
