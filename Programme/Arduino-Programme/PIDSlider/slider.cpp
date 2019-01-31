@@ -34,13 +34,20 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
 
 void Slider::update()
 {
+    // on activation, move slider to setpoint
+    if (active != last_active_)
+    {
+        if (active) last_setpoint_ = -1;
+        last_active_ = active;
+    }
+
     // only do stuff, when active
     if (active)
     {
         // get the new AD reading
         analog_value = analogRead(analog_pin_);
 
-        // check for new setpoint
+        // check for new setpoint or if slider has been moved
         if (last_setpoint_ != setpoint)
         {
             released_ = false;

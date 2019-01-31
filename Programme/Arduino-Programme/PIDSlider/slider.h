@@ -31,7 +31,7 @@ private:
     // adc pin
     int analog_pin_;
     // status
-    bool released_;
+    bool released_, last_active_;
 };
 
 /*
