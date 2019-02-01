@@ -76,11 +76,14 @@ void handleUDP()
     int packet_size = udp.parsePacket();
     if (packet_size)
     {
-        Serial.print("packet_size = "); Serial.println(packet_size, DEC);
+        // Serial.print("packet_size = "); Serial.print(packet_size, DEC);
+        // Serial.print(" from "); Serial.print(udp.remoteIP(), DEC); Serial.print(":"); Serial.print(udp.remotePort(), DEC);
+        // Serial.print(" : ");
         // high byte in 0, low byte in 1
         udp.read(packet_buffer, UDP_TX_PACKET_MAX_SIZE);
         if (packet_size == 1)
         {
+            // Serial.println("done");
             // send addresses
             udp.beginPacket(udp.remoteIP(), udp.remotePort());
             udp.write(register_buffer, 24);
@@ -88,6 +91,7 @@ void handleUDP()
         }
         else if (packet_size == 2)
         {
+            // Serial.println((packet_buffer[0] << 8) + packet_buffer[1], DEC);
             // send content of memory address
             uint16_t reg = (packet_buffer[0] << 8) + packet_buffer[1];
             uint8_t value[] = {(uint8_t)(int(*(reinterpret_cast<double* >(reg))) >> 8), (uint8_t)*(reinterpret_cast<double* >(reg))};
@@ -97,8 +101,8 @@ void handleUDP()
         }
         else if (packet_size == 3)
         {
-            Serial.print((packet_buffer[0] << 8) + packet_buffer[1], DEC); Serial.print(" -> ");
-            Serial.println(bool(packet_buffer[2]));
+            // Serial.print((packet_buffer[0] << 8) + packet_buffer[1], DEC); Serial.print(" -> ");
+            // Serial.println(bool(packet_buffer[2]));
             // set active
             *(reinterpret_cast<bool*>((packet_buffer[0] << 8) + packet_buffer[1])) = bool(packet_buffer[2]);
             // report success
@@ -109,6 +113,8 @@ void handleUDP()
         }
         else if (packet_size == 4)
         {
+            // Serial.print((packet_buffer[0] << 8) + packet_buffer[1], DEC); Serial.print(" -> ");
+            // Serial.println(double((packet_buffer[2] << 8) + packet_buffer[3]));
             // set content of memory address
             *(reinterpret_cast<double*>((packet_buffer[0] << 8) + packet_buffer[1])) = double((packet_buffer[2] << 8) + packet_buffer[3]);
             // report success

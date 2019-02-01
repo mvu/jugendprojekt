@@ -34,35 +34,35 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
 
 void Slider::update()
 {
-    // on activation, move slider to setpoint
+    // get the new AD reading
+    analog_value = analogRead(analog_pin_);
+
+    // on activation, move slider ALWAYS to setpoint
     if (active != last_active_)
     {
         if (active) last_setpoint_ = -1;
         last_active_ = active;
     }
 
-    // only do stuff, when active
+    // only move when active
     if (active)
     {
-        // get the new AD reading
-        analog_value = analogRead(analog_pin_);
-
         // check for new setpoint or if slider has been moved
         if (last_setpoint_ != setpoint)
         {
             released_ = false;
             last_setpoint_ = setpoint;
         }
-
-        // compute motor speed, if slider needs to be moved
-        if (not released_)
-        {
-            pid_compute();
-            // do nothing if pid_compute has changed the state of released_
-            if (not released_) {
-                motor_->setSpeed(abs(motor_speed_));
-                motor_->run((motor_speed_ <= 0) ? FORWARD : BACKWARD);
-            }
+    }
+    
+    // compute motor speed, if slider needs to be moved
+    if (not released_)
+    {
+        pid_compute();
+        // do nothing if pid_compute has changed the state of released_
+        if (not released_) {
+            motor_->setSpeed(abs(motor_speed_));
+            motor_->run((motor_speed_ <= 0) ? FORWARD : BACKWARD);
         }
     }
 }
