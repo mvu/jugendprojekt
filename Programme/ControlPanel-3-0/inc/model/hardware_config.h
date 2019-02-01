@@ -7,9 +7,11 @@
 #include "inc/model/hardware_register.h"
 
 // UDP Verbindung für slider
+#define SLIDER_UDP                  QHostAddress("192.168.1.111"), 8888
 #define SLIDER_IP                   "192.168.1.111"
 #define SLIDER_PORT                 8888
 #define SLIDER_UPDATE_CYCLE_MS      50
+#define SLIDER_NOISE_THRESHOLD      1
 
 // update Zyklus für die gesamte Hardware
 #define HW_UPDATE_INTERVAL_MS       5000

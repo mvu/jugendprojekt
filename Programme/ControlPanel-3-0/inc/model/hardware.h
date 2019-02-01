@@ -21,6 +21,7 @@
  */
 namespace hw
 {
+
     /*!
     * \brief Initialisiert die Hardware
     */
@@ -62,19 +63,36 @@ namespace hw
     void writeValue(uint8_t reg, int val);
 
     /*!
-     * \brief Setzt den setpoint eines Sliders
+     * \brief Liefert Adressen der Slider-Register
      * \param slider_num Nummer des Sliders; von 1 (links) bis 4 (rechts)
-     * \param val Prozentuale Position, d.h. von 0 (unten) bis 100 (oben)
+     * \return [reg_setpoint, reg_analog, reg_active]
+     * \details Die Register-Adressen werden in init() vom Arduino geholt und
+     *      gespeichert. Hier werden die gespeicherten Werte geliefert.
+     *      Im Normalfall sollten sich die Adressen nie ändern, da der Arduino
+     *      immer die selben Adressen verwendet.
      */
-    void setSliderPosition(int slider_num, int val);
+    QList<QByteArray> getSliderConfig(int slider_num);
 
     /*!
-     * \brief Liefert die aktuell Position eines Sliders
-     * \param slider_num Nummer des Sliders; von 1 (links) bis 4 (rechts)
-     * \return Prozentuale Position, d.h. von 0 (unten) bis 100 (oben)
+     * \brief Sendet ein Datenpaket über UDP
+     * \param data Daten zum Versenden
+     * \param ip IP des Empfängers, verwende zusammen mit port im Macro
+     * \param port Port des Empfängers, verwende zusammen mit ip im Macro
+     * \todo Verhalten bei Schreibfehler
      */
-    int getSliderPosition(int slider_num);
+    void writeUDP(QByteArray data, QHostAddress ip, quint16 port);
 
+    /*!
+     * \brief Liest einen uint16_t über UDP aus einem entfernten Register
+     * \param reg Das zu lesende Register
+     * \param ip IP des Empfängers, verwende zusammen mit port im Macro
+     * \param port Port des Empfängers, verwende zusammen mit ip im Macro
+     * \return Wert des Registers als int
+     * \note Der Client muss den Wert als high- und low-byte senden, nicht
+     *      in utf8-encoding
+     * \todo Verhalten bei Lesefehler
+     */
+    int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
 }
 
 #endif // HARDWARE_H
