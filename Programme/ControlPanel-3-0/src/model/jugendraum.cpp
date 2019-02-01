@@ -8,8 +8,6 @@ Jugendraum::Jugendraum()
 {
     qDebug() << Q_FUNC_INFO;
     hw::init();
-    hw::setSliderPosition(2, 50);
-    hw::getSliderPosition(2);
 
     update_timer_ = new QTimer();
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));

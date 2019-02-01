@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <iostream>
 #include <QString>
+#include <QThread>
 
 #include "hardware.h"
 #include "j_element.h"
@@ -52,8 +53,7 @@ public:
     PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand
     WandRGB* wand_rgb;                  //!< Kontrolliert die RGB Streifen an den Giebelfenstern
 private:
-    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus
-
+    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus der Hardware
 
 signals:
 

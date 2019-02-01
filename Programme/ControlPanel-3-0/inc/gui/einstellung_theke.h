@@ -8,6 +8,7 @@
 #include <QDialog>
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/j_slider.h"
 
 namespace Ui {
 class EinstellungTheke;
@@ -30,10 +31,14 @@ private slots:
     void on_pushButton_lampen_on_off_released();    
     void on_pushButton_rgb_set_released();    
     void on_pushButton_rgb_on_off_released();
+    void sliderRedChanged(int val);
+    void sliderGreenChanged(int val);
+    void sliderBlueChanged(int val);
     
 private:
     Ui::EinstellungTheke *ui_;
     Jugendraum *jugendraum_;
+    JSlider* slider_red_, * slider_green_, * slider_blue_;
 };
 
 #endif // EINSTELLUNG_THEKE_H

@@ -29,11 +29,21 @@ EinstellungTheke::EinstellungTheke(QWidget *parent, Jugendraum *j) :
     animation->setEndValue(QRect(0,0,400,480));
     animation->setEasingCurve(QEasingCurve::InExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // erzeuge Slider zum Testen
+    slider_red_   = new JSlider(this, 2, jugendraum_->theken_licht->getRedValue());
+    slider_green_ = new JSlider(this, 3, jugendraum_->theken_licht->getGreenValue());
+    slider_blue_  = new JSlider(this, 4, jugendraum_->theken_licht->getBlueValue());
+
+    connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+    connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+    connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
 }
 
 EinstellungTheke::~EinstellungTheke()
 {
     qDebug() << Q_FUNC_INFO;
+    delete slider_red_;
     delete ui_;
 }
 
@@ -64,4 +74,28 @@ void EinstellungTheke::on_pushButton_rgb_set_released()
 void EinstellungTheke::on_pushButton_rgb_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+void EinstellungTheke::sliderRedChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_1->setText(QString("%1").arg(val));
+    jugendraum_->theken_licht->setRedValue(val);
+}
+
+void EinstellungTheke::sliderGreenChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_2->setText(QString("%1").arg(val));
+    jugendraum_->theken_licht->setGreenValue(val);
+}
+
+void EinstellungTheke::sliderBlueChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_3->setText(QString("%1").arg(val));
+    jugendraum_->theken_licht->setBlueValue(val);
 }
