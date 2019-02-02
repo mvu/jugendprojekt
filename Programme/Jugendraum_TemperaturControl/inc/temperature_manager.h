@@ -7,7 +7,8 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QtNetwork/QUdpSocket>
+#include <QtNetwork>
+#include <QTimer>
 
 #include "inc/j_temperature_controller.h"
 
@@ -20,18 +21,15 @@ class TemperatureManager : public QObject
     Q_OBJECT
 public:
     explicit TemperatureManager(QObject *parent = nullptr);
+    ~TemperatureManager();
+
+    void operate();
 
 private:
-    QTimer* update_timer_;
-    QUdpSocket* udp_control_panel_;
-    JTemperatureController* pwr_supply_;    //!< testweise
-
-signals:
-
-public slots:
+    QUdpSocket * udp_control_panel_;
+    JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_;
 
 private slots:
-    void update();                  //!< called by update_timer
     void controlPanelRequest();     //!< called by udp_control_panel's ReadyRead() signal
 };
 

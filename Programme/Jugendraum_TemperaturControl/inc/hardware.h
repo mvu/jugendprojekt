@@ -3,7 +3,9 @@
 
 #include <QtCore>
 #include <QList>
-#include <QtNetwork/QUdpSocket>
+#include <QByteArray>
+#include <QtNetwork>
+#include <QDebug>
 
 #include "inc/hardware_config.h"
 #include "inc/hardware_register.h"
@@ -19,17 +21,11 @@ namespace hw {
     void init();
 
     /*!
-     * \brief Holt sich die neuen Temperaturen vom Arduino
-     * \todo Versuche erneut bei Lesefehler
-     * \todo Prüfe Datenintegrität
-     */
-    void updateTemperatures();
-    /*!
      * \brief sendet einen PWM-Wert an einen Lüfter
      * \param reg Das Register; verwende die macros aus hardware_config.h
      * \param value PWM-Wert zwischen 0 und 100
      */
-    void writePWMValue(uint8_t, reg, uint8_t value);
+    void writePWMValue(uint8_t reg, uint8_t value);
 
     /*!
      * \brief liest den PWM-Wert eines Registers aus
@@ -39,15 +35,31 @@ namespace hw {
     int readPWMValue(uint8_t reg);
 
     /*!
-     * \brief Liest die Temperatur eines Sensors aus
+     * \brief Liefert das Register, das den Sensorwert enthält
      * \param sensor Der zu Lesende Sensor; Verwende Macros aus hardware_config.h
-     * \return
+     * \return Register als high- und low-byte
      */
-    float getTemperature(int sensor);
+    QByteArray getSensorRegister(int sensor);
 
-    int pca9635_fd;
-    QList<float> temperatures;
-    QUdpSocket* udp_sensors;
+    /*!
+     * \brief Sende ein Datenpaket
+     * \param data Daten zum Versenden
+     * \param ip IP des Empfängers
+     * \param port Port des Empfängers
+     * \todo Verhalten bei Schreibfehler implementieren
+     */
+    void writeUDP(QByteArray data, QHostAddress ip, quint16 port);
+
+    /*!
+    * \brief Liest einen uint16_t über UDP aus einem entfernten Register
+    * \param reg Das zu lesende Register
+    * \param ip IP des Empfängers, verwende zusammen mit port im Macro
+    * \param port Port des Empfängers, verwende zusammen mit ip im Macro
+    * \return Wert des Registers als int
+    * \todo Verhalten bei Lesefehler implementieren
+    * \todo auf float umbauen; Arduino liefert float
+    */
+    int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
 }
 
 #endif // HARDWARE_H
