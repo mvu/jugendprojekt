@@ -16,6 +16,7 @@ class EinstellungTheke;
 
 /*!
  * \brief Klasse für die GUI der Thekeneinstellung
+ * \todo stylesheets beim Klicken anpassen
  */
 
 class EinstellungTheke : public QDialog

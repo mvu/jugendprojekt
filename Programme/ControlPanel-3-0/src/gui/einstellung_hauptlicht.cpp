@@ -21,8 +21,8 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, Jugendraum *j) :
     this->show();
 
     InitButtons();
-
-    // slide-in Animation
+    
+     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
     animation->setDuration(250);
     animation->setStartValue(QRect(-800,0,0,480));
@@ -34,6 +34,10 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, Jugendraum *j) :
 EinstellungHauptlicht::~EinstellungHauptlicht()
 {
     qDebug() << Q_FUNC_INFO;
+
+    // uncheck all buttons
+    for (auto push_button: push_buttons_HL_)
+        push_button->setChecked(false);
 
     delete ui_;
 }
@@ -60,6 +64,7 @@ void EinstellungHauptlicht::InitButtons()
     // setze StyleSheets für QPushButtons der Hauptlichter
     for (int i = 0; i < push_buttons_HL_.length(); i++){
         push_buttons_HL_[i]->setStyleSheet("QPushButton { \
+                                                background-color: rgba(0,0,0,80); \
                                                 border: 2px solid black; \
                                                 border-radius: 10px; \
                                             } \
@@ -68,6 +73,9 @@ void EinstellungHauptlicht::InitButtons()
                                                 border-radius: 10px;\
                                             }");
     }
+    
+    // set backgrounds to real values
+    updateButtonBackgrounds();
 
     // setzte StyleSheets für QPushButtons der Gruppen
     for (int i = 0; i < push_buttons_groups_.length(); i++){
@@ -80,66 +88,144 @@ void EinstellungHauptlicht::InitButtons()
                                                    border: 2px solid white; \
                                                }");
     }
+    
+    ui_->pushButton_on_off->setStyleSheet("QPushButton { \
+                                                   background-color: rgba(0,0,0,80); \
+                                                   color: white; \
+                                                   border: none; \
+                                               } \
+                                               QPushButton:checked { \
+                                                   border: 2px solid white; \
+                                               }");
 }
 
 void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+
+    jugendraum_->hauptlicht[0]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_2_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[1]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_3_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[2]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_4_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[3]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_5_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[4]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_6_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[5]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_7_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[6]->allowChange(checked);
+    checkForGroups();
 }
 
 void EinstellungHauptlicht::on_pushButton_8_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    jugendraum_->hauptlicht[7]->allowChange(checked);
+    checkForGroups();
 }
 
-void EinstellungHauptlicht::on_pushButton_all_toggled(bool checked)
+void EinstellungHauptlicht::on_pushButton_all_released()
 {
     qDebug() << Q_FUNC_INFO;
+    bool checked = ui_->pushButton_all->isChecked();
+ 
+    // will affect all other buttons only if the button itself was hit
+    for (auto push_button: push_buttons_HL_)
+    {  
+        // don't pass the inverted value of checked because of it is already inverted before the released-method is called
+        push_button->setChecked(checked); 
+    }
 }
 
-void EinstellungHauptlicht::on_pushButton_group_1_toggled(bool checked)
+void EinstellungHauptlicht::on_pushButton_group_1_released()
 {
     qDebug() << Q_FUNC_INFO;
+    bool checked = ui_->pushButton_group_1->isChecked();
+    
+    // if group 2 is also checked this will result in checking group all
+    if (ui_->pushButton_group_2->isChecked())
+    {
+        ui_->pushButton_all->setChecked(true);
+        on_pushButton_all_released();
+    }
+    else
+    {
+        // will affect all other buttons only if the button itself was hit
+        for (int i = 0; i < 4; i++)
+        {
+            push_buttons_HL_[i]->setChecked(checked); 
+            push_buttons_HL_[i+4]->setChecked(false);
+        }
+    }
 }
 
-void EinstellungHauptlicht::on_pushButton_group_2_toggled(bool checked)
+void EinstellungHauptlicht::on_pushButton_group_2_released()
 {
     qDebug() << Q_FUNC_INFO;
+    bool checked = ui_->pushButton_group_2->isChecked();
+    
+    // if group 1 is also checked this will result in checking group all
+    if (ui_->pushButton_group_1->isChecked())
+    {
+        ui_->pushButton_all->setChecked(true);
+        on_pushButton_all_released();
+    }
+    else
+    {
+        // will affect all other buttons only if the button itself was hit
+        for (int i = 4; i < 8; i++)
+        {
+            push_buttons_HL_[i]->setChecked(checked);
+            push_buttons_HL_[i-4]->setChecked(false);
+        }
+    }
 }
 
 void EinstellungHauptlicht::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // welchen Zustand zeigt der Knopf wenn mehrere Streifen mit unterschiedlichem Status ausgewählt werden??
+    // Am besten: Sobald einer der ausgewählten an ist, kann der Knopf nur zum Ausschalten benutzt werden, weil das vermutlich der öfter benötigte Fall ist
+    
+    // will only affect selected ones
+    for (auto streifen: jugendraum_->hauptlicht)
+    {
+        // invert current state    
+        streifen->setOn(not streifen->isOn());
+    }
 }
 
 void EinstellungHauptlicht::on_pushButton_back_released()
@@ -154,4 +240,72 @@ void EinstellungHauptlicht::on_pushButton_back_released()
     animation->setEndValue(QRect(-800,0,0,480));
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void EinstellungHauptlicht::checkForGroups()
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    // check if all are selected
+    bool all_check = true;
+    
+    for (auto push_button: push_buttons_HL_)
+    {
+        all_check = all_check && push_button->isChecked();
+    }
+    
+    // check if group 1 is selected
+    bool group_1_selected = true;
+    
+    for (int i = 0; i < 4; i++)
+    {
+        group_1_selected = group_1_selected && push_buttons_HL_[i]->isChecked() && (not push_buttons_HL_[4+i]->isChecked());
+    }
+    
+    // check if group 2 is selected
+    bool group_2_selected = true;
+    
+    for (int i = 4; i < 8; i++)
+    {
+        group_2_selected = group_2_selected && push_buttons_HL_[i]->isChecked() && (not push_buttons_HL_[i-4]->isChecked());
+    }
+    
+    ui_->pushButton_all->setChecked(all_check);
+    ui_->pushButton_group_1->setChecked(group_1_selected);
+    ui_->pushButton_group_2->setChecked(group_2_selected);
+    // overwrite the buttons of the subgroups if group all is selected
+    if (all_check)
+    {
+        ui_->pushButton_group_1->setChecked(false);
+        ui_->pushButton_group_2->setChecked(false);    
+    }
+}
+
+void EinstellungHauptlicht::updateButtonBackgrounds()
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    for (int i = 0; i < push_buttons_HL_.length(); i++)
+    {
+        int brightness = jugendraum_->hauptlicht[i]->getBrightness() * 255 / 100;
+        QString stylesheet_text = push_buttons_HL_[i]->styleSheet();
+        int start_pos = stylesheet_text.indexOf("rgba");
+        int end_pos = stylesheet_text.indexOf(")", start_pos);
+        QString val = QString::number(brightness);
+        QString new_rgb_text = "rgba(" + val + "," + val + "," + val + ",80)";
+        stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
+        qDebug() << stylesheet_text;
+        push_buttons_HL_[i]->setStyleSheet(stylesheet_text);
+    }
+}
+
+
+void EinstellungHauptlicht::on_Slider_valueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    for (auto streifen: jugendraum_->hauptlicht)
+        streifen->setBrightness(value);
+    
+    updateButtonBackgrounds();
 }

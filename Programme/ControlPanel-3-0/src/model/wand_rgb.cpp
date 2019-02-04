@@ -5,14 +5,19 @@
 #include "inc/model/wand_rgb.h"
 
 WandRGB::WandRGB():
-    JElement(), RGBElement()
+    RGBElement()
 {
     qDebug() << Q_FUNC_INFO;
     
+    // load registers of the colors
+    addr_red_ = RGB_WAND_ROT;
+    addr_green_ = RGB_WAND_GRUEN;
+    addr_blue_ = RGB_WAND_BLAU;
+    
     // read initial state from hardware
-    red_value_ = hw::readValue(RGB_WAND_ROT);
-    green_value_ = hw::readValue(RGB_WAND_GRUEN);
-    blue_value_ = hw::readValue(RGB_WAND_BLAU);
+    red_value_ = hw::readValue(addr_red_);
+    green_value_ = hw::readValue(addr_green_);
+    blue_value_ = hw::readValue(addr_blue_);
 }
 
 void WandRGB::saveToFile(QString filename)
@@ -35,34 +40,4 @@ void WandRGB::loadFromFile(QString filename)
     setGreenValue( file_handler_->readFromFile<int>("WandRGB::green_value_") );
     setBlueValue( file_handler_->readFromFile<int>("WandRGB::blue_value_") );
     delete file_handler_;
-}
-
-void WandRGB::setRedValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    red_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_WAND_ROT, red_value_);};
-    addToUpdaters(updater);
-}
-
-void WandRGB::setGreenValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    green_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_WAND_GRUEN, green_value_);};
-    addToUpdaters(updater);
-}
-
-void WandRGB::setBlueValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    blue_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_WAND_BLAU, blue_value_);};
-    addToUpdaters(updater);
 }

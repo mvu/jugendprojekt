@@ -19,6 +19,7 @@
 #include "inc/model/paletten_licht.h"
 #include "inc/model/theken_licht.h"
 #include "inc/model/wand_rgb.h"
+#include "inc/model/hauptlicht_streifen.h"
 
 /*!
  * \brief Die Klasse, die alles enthält; das Modell im MVC Pattern
@@ -49,11 +50,24 @@ public:
      */
     void loadAllFromFile(QString filename);
 
-    ThekenLicht* theken_licht;          //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
-    PalettenLicht* paletten_licht;      //!< Kontroliiert die beleuchteten Paletten an der Wand
-    WandRGB* wand_rgb;                  //!< Kontrolliert die RGB Streifen an den Giebelfenstern
+    ThekenLicht* theken_licht;              //!< Kontrolliert die Lichter an der Theke, d.h. die Hängelampen und die RGBs
+    PalettenLicht* paletten_licht;          //!< Kontroliiert die beleuchteten Paletten an der Wand
+    WandRGB* wand_rgb;                      //!< Kontrolliert die RGB Streifen an den Giebelfenstern
+    /*!
+     * \brief hauptlicht Kontrolliert die Hauptlichtstreifen an der Decke
+     * \details Die Reihenfolge der einzelnen Streifen im Array ist durch die Nummerierung der Streifen fest vorgegeben.
+     * Bezogen auf die Darstellung in der GUI beginnt die Zählung oben links in der Ecke (bei der Tür und der Theke) bei 1
+     * und geht dann gegen den Uhrzeigersinn bis 8. Dieser Nummerierung folgt auch die Belegung der Adressen in der hardware_config.h .
+     * Die Benennung der Buttons in der GUI folgt ebenfalls dieser Nummerierung.
+     */
+    QList<HauptlichtStreifen*> hauptlicht; 
 private:
+<<<<<<< HEAD
     QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus der Hardware
+=======
+    QTimer *update_timer_;                  //!< Kontrolliert den update-Zyklus
+
+>>>>>>> streifen_develop
 
 signals:
 

@@ -1,15 +1,20 @@
 #include "inc/model/theken_licht.h"
 
 ThekenLicht::ThekenLicht() :
-    JElement(), RGBElement()
+    RGBElement()
 {
-    qDebug() << Q_FUNC_INFO;    
+    qDebug() << Q_FUNC_INFO;
+    
+    // load registers of the colors
+    addr_red_ = RGB_THEKE_ROT;
+    addr_green_ = RGB_THEKE_GRUEN;
+    addr_blue_ = RGB_THEKE_BLAU;    
     
     // read initial state from hardware
     top_is_on_ = hw::readState(THEKE);
-    red_value_ = hw::readValue(RGB_THEKE_ROT);
-    green_value_ = hw::readValue(RGB_THEKE_GRUEN);
-    blue_value_ = hw::readValue(RGB_THEKE_BLAU);
+    red_value_ = hw::readValue(addr_red_);
+    green_value_ = hw::readValue(addr_green_);
+    blue_value_ = hw::readValue(addr_blue_);
     
 }
 
@@ -51,32 +56,3 @@ void ThekenLicht::setTopOn(bool state)
     addToUpdaters(updater);
 }
 
-void ThekenLicht::setRedValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    red_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_THEKE_ROT, red_value_);};
-    addToUpdaters(updater);
-}
-
-void ThekenLicht::setGreenValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    green_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_THEKE_GRUEN, green_value_);};
-    addToUpdaters(updater);
-}
-
-void ThekenLicht::setBlueValue(int value)
-{
-    qDebug() << Q_FUNC_INFO;
-    blue_value_ = value;
-    
-    // add update function to list if it isn't already in there
-    UpdateFunc updater = [this](){hw::writeValue(RGB_THEKE_BLAU, blue_value_);};
-    addToUpdaters(updater);
-}

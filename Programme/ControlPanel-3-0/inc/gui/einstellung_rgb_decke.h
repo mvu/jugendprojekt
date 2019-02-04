@@ -17,7 +17,8 @@ class EinstellungRGBDecke;
 
 /*!
  * \brief Klasse der GUI zur Einstellung der Decken-RGBs
- * \todo checked der Gruppen Buttons entsprechend der checked RGB-Buttons setzen
+ * \todo checked der Gruppen Buttons entsprechend der checked RGB-Buttons setzen. Sinnvolle 
+ * Verwendung von Gruppenadressen!
  */
 class EinstellungRGBDecke : public QDialog
 {

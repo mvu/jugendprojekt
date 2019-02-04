@@ -6,14 +6,13 @@
 #ifndef THEKEN_LICHT_H
 #define THEKEN_LICHT_H
 
-#include "j_element.h"
-#include "rgb_element.h"
-#include "hardware.h"
+#include "inc/model/rgb_element.h"
+#include "inc/model/hardware.h"
 
 /*!
  * \brief Klasse zur Steuerung der Lichter der Theke: RGB-Streifen und Lichter über der Theke
  */
-class ThekenLicht : public JElement, public RGBElement
+class ThekenLicht : public RGBElement
 {
 public:
     //! Constructor
@@ -45,26 +44,6 @@ public:
      */
     void setTopOn(bool state);
     
-     /*!
-     * \brief Setzt den Rot-Wert zwischen 0 und 100 und erzeugt einen Updater, 
-     * der beim nächsten Update-Zyklus die Hardware aktualisiert
-     * \param value Wert, der gesetzt wird
-     */
-    void setRedValue(int value) override;
-    
-    /*!
-     * \brief Setzt den Grün-Wert zwischen 0 und 100 und erzeugt einen Updater, 
-     * der beim nächsten Update-Zyklus die Hardware aktualisiert
-     * \param value Wert, der gesetzt wird
-     */
-    void setGreenValue(int value) override;
-    
-    /*!
-     * \brief Setzt den Blau-Wert zwischen 0 und 100 und erzeugt einen Updater, 
-     * der beim nächsten Update-Zyklus die Hardware aktualisiert
-     * \param value Wert, der gesetzt wird
-     */
-    void setBlueValue(int value) override;
     
 private:
     bool top_is_on_ = false;
