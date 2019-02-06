@@ -9,6 +9,7 @@ HauptlichtStreifen::HauptlichtStreifen(uint8_t address)
     
     // read inital state from hardware
     brightness_ = hw::readValue(address_);
+    
     is_on_ = (brightness_ != 0);
 }
 
@@ -80,7 +81,8 @@ void HauptlichtStreifen::setOn(bool state)
             addToUpdaters(updater);*/
             
             // store current value
-            last_brightness_ = brightness_;
+            if (brightness_ != 0)
+                last_brightness_ = brightness_;
             // set brightness to zero
             setBrightness(0);
         }

@@ -22,6 +22,9 @@ class EinstellungHauptlicht;
  * Gruppe 1 und 2 sind jeweils nur ausgewählt, wenn genau ihre Streifen ausgewählt sind und schalten beim 
  * Drücken des jeweiligen Gruppen-Buttons alle nicht zur Gruppe gehörigen Streifen aus, außer wenn dadurch 
  * alle ausgewählt werden.
+ * Der An-/Aus-Button ist nur aktiv, wenn ein Streifen ausgewählt ist. Wenn mindestens einer der ausgewählten
+ * Streifen an ist, kann der Button nur zum ausschalten benutzt werden. Wird ein Button später wieder angeschaltet,
+ * so wird der Zustand vor dem Ausschalten wiederhergestellt.
  * \todo Was passiert, wenn der An-Knopf gedrückt wird, aber der vorherige Wert auch 0 war??
  */
 class EinstellungHauptlicht : public QDialog
@@ -66,7 +69,7 @@ private:
     void updateButtonBackgrounds();
     
     /*!
-     * \brief Überprüft, ob der An/Aus-Button gerade "An" oder "Aus" anzeigt
+     * \brief Überprüft, ob der An/Aus-Button gerade "An" oder "Aus" oder nichts anzeigt
      */
     void checkOnOffState();
     
