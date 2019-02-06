@@ -1,3 +1,7 @@
+/*!
+ * \file hauptlicht_streifen.h
+ * \brief Header für die Repräsentation der Hauptlicht-Streifen
+ */
 #ifndef HAUPTLICHT_STREIFEN_H
 #define HAUPTLICHT_STREIFEN_H
 

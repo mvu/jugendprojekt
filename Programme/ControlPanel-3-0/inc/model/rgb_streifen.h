@@ -15,9 +15,12 @@ class RGBStreifen : public RGBElement
 public:
     /*!
      * \brief Konstruktor für RGBStreifen
-     * \param address Register des Streifens; verwende Macro aus hardware_config.h
+     * \param address_red Register des Streifens für rot
+     * \param address_green Register des Streifens für grün
+     * \param address_blue Register des Streifens für blau
      */
-    RGBStreifen(uint8_t address);
+    RGBStreifen(uint8_t address_red, uint8_t address_green, uint8_t address_blue);   
+
 };
 
 #endif // RGB_STREIFEN_H
