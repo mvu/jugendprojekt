@@ -18,10 +18,10 @@ EthernetUDP udp;
 #define ADC_SLIDER_3    A2
 #define ADC_SLIDER_4    A3
 
-Slider slider_1(ADC_SLIDER_1, 1, 0.2, 2.5, 0);
-Slider slider_2(ADC_SLIDER_2, 2, 0.2, 2.5, 0);
-Slider slider_3(ADC_SLIDER_3, 3, 0.2, 2.5, 0);
-Slider slider_4(ADC_SLIDER_4, 4, 0.2, 2.5, 0);
+Slider slider_1(ADC_SLIDER_1, 1, 0.45, 6, 0.72); // doesn't work that great... :(
+Slider slider_2(ADC_SLIDER_2, 2, 0.45, 6, 0.72); // 
+Slider slider_3(ADC_SLIDER_3, 3, 0.45, 6, 0.72); // 
+Slider slider_4(ADC_SLIDER_4, 4, 0.45, 6, 0.72); // 
 
 void setup()
 {

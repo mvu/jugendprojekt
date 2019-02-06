@@ -4,7 +4,7 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
     // initialize variables
     sample_time_ = 25;
     last_setpoint_ = -1;
-    setpoint = 1023; // so it automatically moves to the bottom on start up
+    setpoint = 1020; // so it automatically moves to the bottom on start up
     motor_speed_ = 0;
     settle_time_ = 300;
     settle_threshold_ = 50;
@@ -18,7 +18,7 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
     settle_counter_ = settle_time_ / sample_time_;
     kp_ = kp;
     ki_ = ki * sample_time_/1000;
-    kd_ = 0; // kd / (sample_time_/1000);
+    kd_ = kd; // / (sample_time_/1000);
 
     // setup pin
     pinMode(analog_pin_, INPUT);
@@ -26,6 +26,7 @@ Slider::Slider(int analog_pin, int motor_num, double kp, double ki, double kd){
 
     // set up AFMotor
     motor_ = new AF_DCMotor(motor_num, MOTOR12_1KHZ);
+    motor_->run(motor_speed_);
     motor_->run(RELEASE);
 
     active = true;
