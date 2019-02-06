@@ -52,10 +52,11 @@ public:
     bool isOn();
 
 private:
-    int brightness_;    //!< aktueller Helligkeitswert
+    int brightness_;        //!< aktueller Helligkeitswert
+    int last_brightness_;   //!< speichert den aktuellen Helligkeitswert, wenn der Streifen mit dem Aus-Knopf ausgeschaltet wird
     uint8_t address_;       //!< Register des Streifens, verwende Macro aus hardware_config.h
-    bool allow_change_; //!< Wenn true, dann reagiert der Streifen auf Slider
-    bool is_on_;        //!< Speichert den Zustand des Streifens
+    bool allow_change_;     //!< Wenn true, dann reagiert der Streifen auf Slider
+    bool is_on_;            //!< Speichert den Zustand des Streifens
 
 };
 

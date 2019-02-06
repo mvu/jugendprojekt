@@ -97,6 +97,8 @@ void EinstellungHauptlicht::InitButtons()
                                                QPushButton:checked { \
                                                    border: 2px solid white; \
                                                }");
+                                               
+    checkOnOffState();
 }
 
 void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
@@ -167,6 +169,9 @@ void EinstellungHauptlicht::on_pushButton_all_released()
         // don't pass the inverted value of checked because of it is already inverted before the released-method is called
         push_button->setChecked(checked); 
     }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
 }
 
 void EinstellungHauptlicht::on_pushButton_group_1_released()
@@ -189,6 +194,9 @@ void EinstellungHauptlicht::on_pushButton_group_1_released()
             push_buttons_HL_[i+4]->setChecked(false);
         }
     }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
 }
 
 void EinstellungHauptlicht::on_pushButton_group_2_released()
@@ -211,14 +219,14 @@ void EinstellungHauptlicht::on_pushButton_group_2_released()
             push_buttons_HL_[i-4]->setChecked(false);
         }
     }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
 }
 
 void EinstellungHauptlicht::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
-    
-    // welchen Zustand zeigt der Knopf wenn mehrere Streifen mit unterschiedlichem Status ausgewählt werden??
-    // Am besten: Sobald einer der ausgewählten an ist, kann der Knopf nur zum Ausschalten benutzt werden, weil das vermutlich der öfter benötigte Fall ist
     
     // will only affect selected ones
     for (auto streifen: jugendraum_->hauptlicht)
@@ -226,6 +234,9 @@ void EinstellungHauptlicht::on_pushButton_on_off_released()
         // invert current state    
         streifen->setOn(not streifen->isOn());
     }
+    
+    checkOnOffState();
+    updateButtonBackgrounds();
 }
 
 void EinstellungHauptlicht::on_pushButton_back_released()
@@ -279,6 +290,9 @@ void EinstellungHauptlicht::checkForGroups()
         ui_->pushButton_group_1->setChecked(false);
         ui_->pushButton_group_2->setChecked(false);    
     }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
 }
 
 void EinstellungHauptlicht::updateButtonBackgrounds()
@@ -294,9 +308,29 @@ void EinstellungHauptlicht::updateButtonBackgrounds()
         QString val = QString::number(brightness);
         QString new_rgb_text = "rgba(" + val + "," + val + "," + val + ",80)";
         stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
-        qDebug() << stylesheet_text;
+        //qDebug() << stylesheet_text;
         push_buttons_HL_[i]->setStyleSheet(stylesheet_text);
     }
+}
+
+void EinstellungHauptlicht::checkOnOffState()
+{
+    bool is_on = false;
+    int active_counter = 0;
+    
+    for (int i = 0; i < push_buttons_HL_.length(); i++)
+        if (push_buttons_HL_[i]->isChecked())
+            {
+                // is true, if only one of the buttons is on
+                is_on = is_on || jugendraum_->hauptlicht[i]->isOn(); 
+                active_counter++;
+            }
+    
+    ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
+    
+    // show no label if no button is active
+    if (active_counter == 0)
+        ui_->pushButton_on_off->setText("");
 }
 
 
@@ -304,8 +338,10 @@ void EinstellungHauptlicht::on_Slider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO;
     
+    // will only affect selected ones
     for (auto streifen: jugendraum_->hauptlicht)
         streifen->setBrightness(value);
     
+    checkOnOffState();
     updateButtonBackgrounds();
 }
