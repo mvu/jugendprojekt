@@ -9,17 +9,20 @@
 
 /*!
  * \brief Die Klasse repräsentiert die RGB-Decken-Streifen
+ * \todo Die Set-Funktionen für die Farben mit der einen Adresse überschreiben. Dazu müssen die in RGBElement erstmal
+ * virtual gemacht werden...
  */
 class RGBStreifen : public RGBElement
 {
 public:
     /*!
      * \brief Konstruktor für RGBStreifen
-     * \param address_red Register des Streifens für rot
-     * \param address_green Register des Streifens für grün
-     * \param address_blue Register des Streifens für blau
+     * \param address Adresse des Streifens
      */
-    RGBStreifen(uint8_t address_red, uint8_t address_green, uint8_t address_blue);   
+    RGBStreifen(uint8_t address);   
+    
+private:
+    uint8_t address_;   //!< Adresse des Streifens
 
 };
 

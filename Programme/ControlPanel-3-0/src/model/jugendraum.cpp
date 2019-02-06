@@ -25,6 +25,7 @@ Jugendraum::Jugendraum()
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_6));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_7));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_8));
+    
 
 }
 
