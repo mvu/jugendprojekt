@@ -25,7 +25,8 @@ class EinstellungHauptlicht;
  * Der An-/Aus-Button ist nur aktiv, wenn ein Streifen ausgewählt ist. Wenn mindestens einer der ausgewählten
  * Streifen an ist, kann der Button nur zum ausschalten benutzt werden. Wird ein Button später wieder angeschaltet,
  * so wird der Zustand vor dem Ausschalten wiederhergestellt.
- * \todo Was passiert, wenn der An-Knopf gedrückt wird, aber der vorherige Wert auch 0 war??
+ * \todo Wenn der An-Knopf gedrückt wird, aber der vorherige Wert auch 0 war, einen Wert aus der Default-Datei lesen
+ * und den benutzen
  */
 class EinstellungHauptlicht : public QDialog
 {
