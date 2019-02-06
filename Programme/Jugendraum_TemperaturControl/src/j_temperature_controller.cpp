@@ -12,6 +12,7 @@ JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, i
     sensor_id_ = sensor_id;
     fan_reg_ = fan_reg;
     device_name_ = device_name;
+    has_fan_ = true;
 
     // get some configuration parameters from a file
     readAllFromFile("file");
@@ -22,7 +23,28 @@ JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, i
     // setup a timer for updating
     update_timer_ = new QTimer(this);
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
-    update_timer_->start(UPDATE_CYCLE_S);
+    //update_timer_->start(UPDATE_CYCLE_S);
+}
+
+JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, QString device_name) : QObject(parent)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // move parameters to private variables
+    sensor_id_ = sensor_id;
+    device_name_ = device_name;
+    has_fan_ = false;
+
+    // get some configuration parameters from a file
+    readAllFromFile("file");
+
+    // get the register from the arduino
+    sensor_reg_= hw::getSensorRegister(sensor_id_);
+
+    // setup a timer for updating
+    update_timer_ = new QTimer(this);
+    connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
+    //update_timer_->start(UPDATE_CYCLE_S);
 }
 
 JTemperatureController::~JTemperatureController()
@@ -32,7 +54,7 @@ JTemperatureController::~JTemperatureController()
     delete update_timer_;
 }
 
-float JTemperatureController::getTemperature()
+double JTemperatureController::getTemperature()
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -43,15 +65,24 @@ int JTemperatureController::getFanSpeed()
 {
     qDebug() << Q_FUNC_INFO;
 
-    return fan_speed_;
+    return (has_fan_) ? fan_speed_ : -1;
+}
+
+QString JTemperatureController::getName()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    return device_name_;
 }
 
 void JTemperatureController::setFanSpeed(int val)
 {
     qDebug() << Q_FUNC_INFO;
 
-    fan_speed_ = val;
-    hw::writePWMValue(fan_reg_, static_cast<uint8_t>(fan_speed_));
+    if (val != fan_speed_) {
+        fan_speed_ = val;
+        hw::writePWMValue(fan_reg_, static_cast<uint8_t>(fan_speed_));
+    }
 }
 
 void JTemperatureController::update()
@@ -65,11 +96,11 @@ void JTemperatureController::update()
     if (abs(new_temperature - temperature_) > 0.1)
     {
         temperature_ = new_temperature;
-        setFanSpeed(calculateFanSpeed(temperature_));
+        if (has_fan_) setFanSpeed(calculateFanSpeed(temperature_));
     }
 }
 
-int JTemperatureController::calculateFanSpeed(float temperature)
+int JTemperatureController::calculateFanSpeed(double temperature)
 {
     qDebug() << Q_FUNC_INFO;
 

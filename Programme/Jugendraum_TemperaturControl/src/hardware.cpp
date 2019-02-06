@@ -29,9 +29,10 @@ void hw::init()
     {
         // store addresses
         QByteArray raw = udp->receiveDatagram().data();
-        for (int i = 0; i <  6; i++) { registers.append(raw.mid(2*i, 2)); }
+        for (int i = 0; i < 6; i++) { registers.append(raw.mid(2*i, 2)); }
     } else {
         qDebug() << "Failed to load Arduino's registers!";
+        for (int i = 0; i < 6; i++) { registers.append(nullptr); }
     }
 }
 
@@ -78,7 +79,7 @@ int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
             qDebug() << "data not as exspected, got " << d.data();
         }
     } else {
-        qDebug() << "Failed to load Arduino's registers!";
+        qDebug() << "Failed to read Arduino's registers!";
     }
 
     return tmp;

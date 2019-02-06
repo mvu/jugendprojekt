@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QtNetwork>
 #include <QTimer>
+#include <QJsonObject>
 
 #include "inc/j_temperature_controller.h"
 
@@ -23,11 +24,9 @@ public:
     explicit TemperatureManager(QObject *parent = nullptr);
     ~TemperatureManager();
 
-    void operate();
-
 private:
     QUdpSocket * udp_control_panel_;
-    JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_;
+    JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_, *tc_pc_;
 
 private slots:
     void controlPanelRequest();     //!< called by udp_control_panel's ReadyRead() signal

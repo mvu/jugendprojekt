@@ -11,7 +11,7 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     // initialize the hardware
     hw::init();
 
-    // setup udo connection to control panel via udp on localhost
+    // setup connection to control panel via udp on localhost
     udp_control_panel_ = new QUdpSocket(this);
     udp_control_panel_->bind(CONTROL_PANEL_UDP);
     connect(udp_control_panel_, SIGNAL(readyRead()), this, SLOT(controlPanelRequest()));
@@ -20,6 +20,7 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     tc_onkyo_ = new JTemperatureController(this, SENSOR_ONKYO, FAN_ONKYO, "Onkyo");
     tc_cabin_ = new JTemperatureController(this, SENSOR_CABIN, FAN_CABIN, "Schaltschrank");
     tc_pwr_supply_ = new JTemperatureController(this, SENSOR_PWR_SUPPLY, FAN_PWR_SUPPLY, "Netzteile");
+    tc_pc_ = new JTemperatureController(this, SENSOR_PC, "PC");
 }
 
 TemperatureManager::~TemperatureManager()
@@ -29,17 +30,33 @@ TemperatureManager::~TemperatureManager()
     delete tc_cabin_;
     delete tc_onkyo_;
     delete tc_pwr_supply_;
-}
-
-void TemperatureManager::operate()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    // do nothing; timers are doing all the work
-    QThread::sleep(1023);
+    delete tc_pc_;
+    delete udp_control_panel_;
 }
 
 void TemperatureManager::controlPanelRequest()
 {
     qDebug() << Q_FUNC_INFO;
+
+    // read the request to empty out the buffer
+    while (udp_control_panel_->hasPendingDatagrams())
+    {
+        QNetworkDatagram d = udp_control_panel_->receiveDatagram();
+
+        // create answer
+        // put all temps and fan speed into one JSON file
+        QJsonObject jo;
+
+        for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_})
+        {
+            QJsonObject tmp;
+            tmp.insert("Temperature", tc->getTemperature());
+            tmp.insert("FanSpeed", tc->getFanSpeed());
+            jo.insert(tc->getName(), tmp);
+        }
+
+        // send the JSON file
+        udp_control_panel_->writeDatagram(QJsonDocument(jo).toJson(), d.senderAddress(), d.senderPort());
+        //qDebug() << QJsonDocument(jo);
+    }
 }

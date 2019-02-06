@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 
     // instantiate temperatur manager
     TemperatureManager tm;
-    tm.operate();
 
     return a.exec();
 }

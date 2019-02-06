@@ -26,5 +26,6 @@
 #define SENSOR_PWR_SUPPLY   2
 #define SENSOR_CABIN        3
 #define SENSOR_PI           4
+#define SENSOR_PC           5
 
 #endif // HARDWARE_CONFIG_H

@@ -45,4 +45,5 @@ html/
 
 # Folders
 build/
+Test*/
 **build-*/
