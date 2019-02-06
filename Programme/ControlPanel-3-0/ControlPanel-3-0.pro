@@ -46,7 +46,7 @@ SOURCES += \
     src/model/theken_licht.cpp \
     src/model/rgb_element.cpp \
     src/model/wand_rgb.cpp \
-    src/model/j_slider.cpp
+    src/model/j_slider.cpp \
     src/model/hauptlicht_streifen.cpp
 
 HEADERS += \
@@ -73,7 +73,7 @@ HEADERS += \
     inc/model/theken_licht.h \
     inc/model/rgb_element.h \
     inc/model/wand_rgb.h \
-    inc/model/j_slider.h
+    inc/model/j_slider.h \
     inc/model/hauptlicht_streifen.h
 
 FORMS += \
@@ -87,7 +87,7 @@ FORMS += \
     ui/einstellung_rgb_decke.ui \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
-    ui/menue_speichern.ui \
+    ui/menue_speichern.ui
 
 RESOURCES += \
     ui/icons.qrc \

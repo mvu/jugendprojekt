@@ -549,19 +549,6 @@ background-color:rgba(0,0,0,80);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QSlider" name="Slider">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>30</y>
-     <width>160</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <zorder>frame_background</zorder>
   <zorder>frame_grundriss</zorder>
   <zorder>pushButton_6</zorder>
@@ -577,7 +564,6 @@ background-color:rgba(0,0,0,80);</string>
   <zorder>label_title_groups</zorder>
   <zorder>pushButton_back</zorder>
   <zorder>pushButton_on_off</zorder>
-  <zorder>Slider</zorder>
  </widget>
  <resources>
   <include location="icons.qrc"/>

@@ -29,6 +29,10 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, Jugendraum *j) :
     animation->setEndValue(QRect(0,0,800,480));
     animation->setEasingCurve(QEasingCurve::InExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // erzeuge Slider
+    slider_ = new JSlider(this, 2, 0);
+    connect(slider_, SIGNAL(changed(int)), this, SLOT(sliderChanged(int)));
 }
 
 EinstellungHauptlicht::~EinstellungHauptlicht()
@@ -39,6 +43,7 @@ EinstellungHauptlicht::~EinstellungHauptlicht()
     for (auto push_button: push_buttons_HL_)
         push_button->setChecked(false);
 
+    delete slider_;
     delete ui_;
 }
 
@@ -294,13 +299,12 @@ void EinstellungHauptlicht::updateButtonBackgrounds()
         QString val = QString::number(brightness);
         QString new_rgb_text = "rgba(" + val + "," + val + "," + val + ",80)";
         stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
-        qDebug() << stylesheet_text;
+        // qDebug() << stylesheet_text;
         push_buttons_HL_[i]->setStyleSheet(stylesheet_text);
     }
 }
 
-
-void EinstellungHauptlicht::on_Slider_valueChanged(int value)
+void EinstellungHauptlicht::sliderChanged(int value)
 {
     qDebug() << Q_FUNC_INFO;
     

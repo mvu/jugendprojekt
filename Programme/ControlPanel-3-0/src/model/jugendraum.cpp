@@ -11,11 +11,7 @@ Jugendraum::Jugendraum()
 
     update_timer_ = new QTimer();
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
-<<<<<<< HEAD
     // update_timer_->start(HW_UPDATE_INTERVAL_MS);
-=======
-//    update_timer_->start(HW_UPDATE_INTERVAL_MS);
->>>>>>> streifen_develop
 
     // create all the members
     theken_licht = new ThekenLicht();

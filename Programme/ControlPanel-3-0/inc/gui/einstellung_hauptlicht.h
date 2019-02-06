@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/j_slider.h"
 
 namespace Ui {
 class EinstellungHauptlicht;
@@ -49,7 +50,7 @@ private slots:
     void on_pushButton_on_off_released();
     void on_pushButton_back_released();
 
-    void on_Slider_valueChanged(int value);
+    void sliderChanged(int value);
     
 private:
     /*!
@@ -68,6 +69,7 @@ private:
     Ui::EinstellungHauptlicht *ui_;
     Jugendraum *jugendraum_;
     QList<QPushButton *> push_buttons_HL_, push_buttons_groups_;
+    JSlider *slider_;
 };
 
 #endif // EINSTELLUNG_HAUPTLICHT_H

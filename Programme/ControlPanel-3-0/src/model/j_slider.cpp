@@ -20,7 +20,6 @@ JSlider::JSlider(QObject *parent, int slider_num, int init_position) : QObject(p
 
     activate();
     setPosition(init_position);
-    // wait a little bit for the sliders to finish their movement
     update_timer_->start(SLIDER_UPDATE_CYCLE_MS);
 }
 
@@ -78,7 +77,7 @@ void JSlider::deactivate()
     qDebug() << Q_FUNC_INFO;
 
     QByteArray datagram = reg_active_;
-    datagram.append(uint8_t(1));datagram[2] = 0;
+    datagram.append(uint8_t(1));datagram[2] = 0;    // can't put 0 in there directly for some reason…
     hw::writeUDP(datagram, SLIDER_UDP);
     active_ = false;
 }

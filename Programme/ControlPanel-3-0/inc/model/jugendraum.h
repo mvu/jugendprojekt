@@ -37,13 +37,13 @@ public:
      */
     explicit Jugendraum();
     ~Jugendraum();
-    
+
     /*!
      * \brief Speichert den aktuellen Zustand aller Elemente des Jugendraums in eine Datei
      * \param filename Datei, in die gespeichert wird
      */
     void saveAllToFile(QString filename);
-    
+
     /*!
      * \brief Lädt den Zustand aller Elemente des Jugendraums aus einer Datei
      * \param filename Datei, aus der geladen wird
@@ -60,14 +60,9 @@ public:
      * und geht dann gegen den Uhrzeigersinn bis 8. Dieser Nummerierung folgt auch die Belegung der Adressen in der hardware_config.h .
      * Die Benennung der Buttons in der GUI folgt ebenfalls dieser Nummerierung.
      */
-    QList<HauptlichtStreifen*> hauptlicht; 
+    QList<HauptlichtStreifen*> hauptlicht;
 private:
-<<<<<<< HEAD
     QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus der Hardware
-=======
-    QTimer *update_timer_;                  //!< Kontrolliert den update-Zyklus
-
->>>>>>> streifen_develop
 
 signals:
 

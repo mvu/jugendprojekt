@@ -69,10 +69,9 @@ void EinstellungTheke::on_pushButton_lampen_on_off_released()
     ui_->pushButton_lampen_on_off->setText(jugendraum_->theken_licht->topIsOn() ? "Aus" : "An");
 }
 
-void EinstellungTheke::on_pushButton_rgb_set_released()
+void EinstellungTheke::on_pushButton_rgb_set_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    // activate slider
 }
 
 void EinstellungTheke::on_pushButton_rgb_on_off_released()

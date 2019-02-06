@@ -42,9 +42,9 @@ public:
      */
     int getPosition();
 
-private:
     void activate();
     void deactivate();
+private:
     int slider_num_;
     int position_;
     bool active_;
