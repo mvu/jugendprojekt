@@ -62,12 +62,8 @@ public:
      */
     QList<HauptlichtStreifen*> hauptlicht; 
 private:
-<<<<<<< HEAD
     QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus der Hardware
-=======
-    QTimer *update_timer_;                  //!< Kontrolliert den update-Zyklus
 
->>>>>>> streifen_develop
 
 signals:
 
