@@ -46,7 +46,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QFrame" name="frame">
+  <widget class="QFrame" name="frame_background">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -97,76 +97,83 @@ font-size:20px;</string>
       <number>10</number>
      </property>
      <item>
-      <widget class="QGroupBox" name="groupBox_rgb_on_off">
+      <widget class="QPushButton" name="pushButton_rgb_on_off">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">;margin-top:0;
-border:none;
-background-color:rgba(0,0,0,100);</string>
+        <string notr="true">QPushButton {
+	margin-top:0em;
+	background-color: rgba(0,0,0,80);
+	color:white;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+QPushButton:checked {
+	border: 2px solid white;
+    border-radius: 10px;
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,160);
+}</string>
        </property>
-       <property name="title">
-        <string/>
+       <property name="text">
+        <string>An</string>
        </property>
-       <widget class="QPushButton" name="pushButton_rgb_on_off">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>131</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:rgba(0,0,0,0);
-border:none;
-color:rgb(255,255,255);</string>
-        </property>
-        <property name="text">
-         <string>An</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_rgb_set">
+      <widget class="QPushButton" name="pushButton_rgb_set">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">;margin-top:0;
-border:none;
-background-color:rgba(0,0,0,100);</string>
+        <string notr="true">QPushButton {
+	margin-top:0em;
+	background-color: rgba(0,0,0,80);
+	color:white;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+QPushButton:checked {
+	border: 2px solid white;
+    border-radius: 10px;
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,160);
+}</string>
        </property>
-       <property name="title">
-        <string/>
-       </property>
-       <widget class="QPushButton" name="pushButton_rgb_set">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>131</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:rgba(0,0,0,0);
-border:none;
-color:rgb(255,255,255);</string>
-        </property>
-        <property name="text">
-         <string>Farbe
+       <property name="text">
+        <string>Farbe
 einstellen</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -201,39 +208,41 @@ font-size:20px;</string>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QGroupBox" name="groupBox_lampen_on_off">
+      <widget class="QPushButton" name="pushButton_lampen_on_off">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">;margin-top:0;
-border:none;
-background-color:rgba(0,0,0,100);</string>
+        <string notr="true">QPushButton {
+	margin-top:0em;
+	background-color: rgba(0,0,0,80);
+	color:white;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+QPushButton:checked {
+	border: 2px solid white;
+    border-radius: 10px;
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,160);
+}</string>
        </property>
-       <property name="title">
-        <string/>
+       <property name="text">
+        <string>An</string>
        </property>
-       <widget class="QPushButton" name="pushButton_lampen_on_off">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>131</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:rgba(0,0,0,0);
-border:none;
-color:rgb(255,255,255);</string>
-        </property>
-        <property name="text">
-         <string>An</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -343,7 +352,7 @@ color:rgb(255,255,255);</string>
     </item>
    </layout>
   </widget>
-  <zorder>frame</zorder>
+  <zorder>frame_background</zorder>
   <zorder>label</zorder>
   <zorder>groupBox_RGB</zorder>
   <zorder>groupBox_lampen</zorder>

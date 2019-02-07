@@ -30,20 +30,17 @@ EinstellungTheke::EinstellungTheke(QWidget *parent, Jugendraum *j) :
     animation->setEasingCurve(QEasingCurve::InExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-    // erzeuge Slider zum Testen
-    slider_red_   = new JSlider(this, 2, jugendraum_->theken_licht->getRedValue());
-    slider_green_ = new JSlider(this, 3, jugendraum_->theken_licht->getGreenValue());
-    slider_blue_  = new JSlider(this, 4, jugendraum_->theken_licht->getBlueValue());
-
-    connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
-    connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
-    connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+    // setze Buttons entsprechend dem aktuellen Zustand
+    ui_->pushButton_lampen_on_off->setChecked(jugendraum_->theken_licht->topIsOn());
+    ui_->pushButton_rgb_on_off->setChecked(jugendraum_->theken_licht->RGBisOn());
+    ui_->pushButton_rgb_on_off->setChecked(false);
 }
 
 EinstellungTheke::~EinstellungTheke()
 {
     qDebug() << Q_FUNC_INFO;
-    delete slider_red_;
+    // delete slider if they exist
+    ui_->pushButton_rgb_set->setChecked(false);
     delete ui_;
 }
 
@@ -61,25 +58,53 @@ void EinstellungTheke::on_pushButton_back_released()
     animation->start(QAbstractAnimation::DeleteWhenStopped);  
 }
 
-void EinstellungTheke::on_pushButton_lampen_on_off_released()
+void EinstellungTheke::on_pushButton_lampen_on_off_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     // invert current state
-    jugendraum_->theken_licht->setTopOn(not jugendraum_->theken_licht->topIsOn());
-    ui_->pushButton_lampen_on_off->setText(jugendraum_->theken_licht->topIsOn() ? "Aus" : "An");
+    jugendraum_->theken_licht->setTopOn(checked);
+    ui_->pushButton_lampen_on_off->setText(checked ? "Aus" : "An");
 }
 
 void EinstellungTheke::on_pushButton_rgb_set_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+
+    if (checked)
+    {
+        // activate rgb, so that the changes take immediate effect
+        ui_->pushButton_rgb_on_off->setChecked(true);
+
+        // create the sliders
+        slider_red_ =   new JSlider(this, 2, jugendraum_->theken_licht->getRedValue());
+        slider_green_ = new JSlider(this, 3, jugendraum_->theken_licht->getGreenValue());
+        slider_blue_ =  new JSlider(this, 4, jugendraum_->theken_licht->getBlueValue());
+        connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+        connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+        connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+    }
+    else
+    {
+        // delete the sliders
+        disconnect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+        disconnect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+        disconnect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+        delete slider_red_;
+        delete slider_green_;
+        delete slider_blue_;
+    }
+
 }
 
-void EinstellungTheke::on_pushButton_rgb_on_off_released()
+void EinstellungTheke::on_pushButton_rgb_on_off_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
     // invert current state
-    jugendraum_->theken_licht->setRGBOn(not jugendraum_->theken_licht->RGBisOn());
-    ui_->pushButton_rgb_on_off->setText(jugendraum_->theken_licht->RGBisOn() ? "Aus" : "An");
+    jugendraum_->theken_licht->setRGBOn(checked);
+    ui_->pushButton_rgb_on_off->setText(checked ? "Aus" : "An");
+
+    // close sliders if rgb gets switched off
+    if (not checked) ui_->pushButton_rgb_set->setChecked(false);
 }
 
 void EinstellungTheke::sliderRedChanged(int val)

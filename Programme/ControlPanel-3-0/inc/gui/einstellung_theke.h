@@ -29,9 +29,9 @@ public:
     
 private slots:
     void on_pushButton_back_released();
-    void on_pushButton_lampen_on_off_released();    
+    void on_pushButton_lampen_on_off_toggled(bool ckecked);
     void on_pushButton_rgb_set_toggled(bool checked);
-    void on_pushButton_rgb_on_off_released();
+    void on_pushButton_rgb_on_off_toggled(bool checked);
     void sliderRedChanged(int val);
     void sliderGreenChanged(int val);
     void sliderBlueChanged(int val);
