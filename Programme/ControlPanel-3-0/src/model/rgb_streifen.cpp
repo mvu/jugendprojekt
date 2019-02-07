@@ -9,3 +9,72 @@ RGBStreifen::RGBStreifen(uint8_t address) :
 {
     address_ = address;
 }
+
+void RGBStreifen::allowChange(bool allow)
+{
+    qDebug() << Q_FUNC_INFO;
+    allow_change_ = allow;
+}
+
+void RGBStreifen::setRedValue(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    if (allow_change_)
+    {
+        red_value_ = value;
+    
+        // add update function to list if it isn't already in there
+        UpdateFunc updater = [this](){};
+        addToUpdaters(updater);
+    }
+}
+
+void RGBStreifen::setGreenValue(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    if (allow_change_)
+    {
+        green_value_ = value;
+    
+        // add update function to list if it isn't already in there
+        UpdateFunc updater = [this](){};
+        addToUpdaters(updater);
+    }
+    
+}
+
+void RGBStreifen::setBlueValue(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    if (allow_change_)
+    {
+        blue_value_ = value;
+    
+        // add update function to list if it isn't already in there
+        UpdateFunc updater = [this](){};
+        addToUpdaters(updater);
+    }
+    
+}
+
+void RGBStreifen::setRGBOn(bool state)
+{
+    qDebug() << Q_FUNC_INFO;
+    
+    if (allow_change_)
+    {
+        rgb_is_on_ = state;
+        
+        if (rgb_is_on_)
+        {
+            // write last value to hardware
+        }
+        else
+        {
+            // write zero to hardware
+        }
+    }  
+}

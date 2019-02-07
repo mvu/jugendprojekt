@@ -76,7 +76,6 @@ void HauptlichtStreifen::setOn(bool state)
         {
             // restore last value
             setBrightness(last_brightness_);
-            qDebug() << brightness_ << " " << brightness_;
         }
         else
         {

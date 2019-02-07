@@ -11,6 +11,7 @@
  * \brief Die Klasse repräsentiert die RGB-Decken-Streifen
  * \todo Die Set-Funktionen für die Farben mit der einen Adresse überschreiben. Dazu müssen die in RGBElement erstmal
  * virtual gemacht werden...
+ * \todo die richtigen Updater schreiben, dazu muss hw::writeUART(...) noch gebaut werden
  */
 class RGBStreifen : public RGBElement
 {
@@ -21,8 +22,24 @@ public:
      */
     RGBStreifen(uint8_t address);   
     
+    /*!
+     * \brief (De-)Aktiviert den Streifen, nur wenn der Streifen aktiv ist werden 
+     * Änderungen durchgeführt
+     * \param allow true = aktiv
+     */
+    void allowChange(bool allow);
+    
+    void setRedValue(int value) override;
+    
+    void setGreenValue(int value) override;
+    
+    void setBlueValue(int value) override;
+    
+    void setRGBOn(bool state) override;
+    
 private:
     uint8_t address_;   //!< Adresse des Streifens
+    bool allow_change_; //!< Nur wenn true werden Änderungen durchgeführt
 
 };
 
