@@ -15,7 +15,7 @@ namespace hw
         // store slider registers
         QList<QByteArray> slider_setpoints, slider_analogs, slider_actives;
         // udp
-        QUdpSocket* udp = new QUdpSocket();
+        QUdpSocket* udp_slider_ = new QUdpSocket();
     }
 }
 
@@ -29,14 +29,13 @@ void hw::init()
     // then the PCA
     pca9635 = WiringPiI2CSetup(PCA_LICHT);
 
-    // now create a udp socket to communicate with te sliders
-    // udp = new QUdpSocket();
+    // bind udp_slider_ to the adress of the arduino
+    udp_slider_->bind(SLIDER_UDP);
     // and get the addresses
-    udp->writeDatagram(QByteArray("x"), SLIDER_UDP);
-    if (udp->waitForReadyRead(1000))
+    udp_slider_->writeDatagram(QByteArray("x"), SLIDER_UDP);
+    if (udp_slider_->waitForReadyRead(1000))
     {
-        // store addresses
-        QByteArray raw = udp->receiveDatagram().data();
+        QByteArray raw = udp_slider_->receiveDatagram().data();
         qDebug() << "raw: " << raw;
         for (int i = 0; i <  4; i++) { slider_setpoints.append(raw.mid(2*i, 2)); }
         for (int i = 4; i <  8; i++) { slider_analogs.append(raw.mid(2*i, 2)); }
@@ -45,17 +44,12 @@ void hw::init()
         qDebug() << "analogs:   " << slider_analogs;
         qDebug() << "actives:   " << slider_actives;
     } else {
+        // mach was elegantes
         qDebug() << "Failed to load Arduino's registers!";
+        for (int i = 0; i <  4; i++) { slider_setpoints.append(nullptr); }
+        for (int i = 4; i <  8; i++) { slider_analogs.append(nullptr); }
+        for (int i = 8; i < 12; i++) { slider_actives.append(nullptr); }
     }
-
-    udp->writeDatagram(slider_analogs.at(1), SLIDER_UDP);
-    if (udp->waitForReadyRead(1000))
-    {
-        QNetworkDatagram d = udp->receiveDatagram(512);
-        qDebug() << "sender = " << d.senderAddress() << ":" << d.senderPort() << ", data: " << d.data();
-    }
-
-    readUDP(slider_analogs.at(1), SLIDER_UDP);
 }
 
 bool hw::readState(uint8_t bank, uint8_t bit)
@@ -103,6 +97,16 @@ void hw::writeUDP(QByteArray data, QHostAddress ip, quint16 port)
 {
     qDebug() << Q_FUNC_INFO;
 
+    /*
+     * use the right socket for the transaction
+     * this is done to ensure that the data received was emitted by the recipient
+     * of the datagram
+     */
+    QUdpSocket* udp;
+    if ((ip == QHostAddress(SLIDER_IP)) && (port == SLIDER_PORT)) udp = udp_slider_;
+    else udp = new QUdpSocket();
+
+    // transaction
     udp->writeDatagram(data, ip, port);
     if (udp->waitForReadyRead(1000))
     {
@@ -118,8 +122,17 @@ void hw::writeUDP(QByteArray data, QHostAddress ip, quint16 port)
 int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
 {
     qDebug() << Q_FUNC_INFO;
-
     // qDebug() << "want " << reg << "from " << ip << ":" << port;
+
+    /*
+     * use the right socket for the transaction
+     * this is done to ensure that the data received was emitted by the recipient
+     * of the datagram
+     */
+    QUdpSocket* udp;
+    if ((ip == QHostAddress(SLIDER_IP)) && (port == SLIDER_PORT)) udp = udp_slider_;
+    else udp = new QUdpSocket();
+
     udp->writeDatagram(reg, ip, port);
 
     int tmp = -1;

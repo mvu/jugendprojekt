@@ -24,6 +24,7 @@ namespace hw
 
     /*!
     * \brief Initialisiert die Hardware
+    * \todo Verhalten bei Lesefehler der Register ausdenken und implementieren
     */
     void init();
     
@@ -90,6 +91,9 @@ namespace hw
      * \return Wert des Registers als int
      * \note Der Client muss den Wert als high- und low-byte senden, nicht
      *      in utf8-encoding
+     * \details Wenn der udp_socket bekannt (d.h. als interne Variable existiert)
+     *      ist, wir dieser verwendet und damit sichergestellt, dass das die
+     *      empfangenen Daten vom gewünschten Sender stammen
      * \todo Verhalten bei Lesefehler
      */
     int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
