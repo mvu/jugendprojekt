@@ -64,6 +64,11 @@ public:
     
     /*!
      * \brief Kontrolliert die RGB-Streifen an der Decke
+     * \details Die Reihenfolge der einzelnen Streifen im Array ist durch die Nummerierung der Streifen fest vorgegeben.
+     * Bezogen auf die Darstellung in der GUI beginnt die Zählung oben links in der Ecke (bei der Tür und der Theke) bei 1. 
+     * Der Streifen direkt rechts daneben erhält die 2. In diesem Muster von immer zwei Streifen geht es dann gegen den 
+     * Uhrzeigersinn bis 18. Dieser Nummerierung folgt auch die Belegung der Adressen.
+     * Die Benennung der Buttons in der GUI folgt ebenfalls dieser Nummerierung.
      */
     QList<RGBStreifen*> rgb_deckenlicht;
     

@@ -9,8 +9,6 @@
 
 /*!
  * \brief Die Klasse repräsentiert die RGB-Decken-Streifen
- * \todo Die Set-Funktionen für die Farben mit der einen Adresse überschreiben. Dazu müssen die in RGBElement erstmal
- * virtual gemacht werden...
  * \todo die richtigen Updater schreiben, dazu muss hw::writeUART(...) noch gebaut werden
  */
 class RGBStreifen : public RGBElement
