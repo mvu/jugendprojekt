@@ -450,7 +450,8 @@
      <item>
       <widget class="QGroupBox" name="groupBox_media">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+        <string notr="true">background-color:rgba(0, 0, 0, 100);
+border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -644,6 +645,15 @@ background-color:rgba(0,0,0,0);</string>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border:none;
+	background-color: rgba(0,0,0,0);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,100);
+}</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -665,7 +675,7 @@ background-color:rgba(0,0,0,0);</string>
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0,0,0,100);</string>
+        <string notr="true">background-color:rgba(0,0,0,100);border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -856,6 +866,15 @@ background-color:rgba(0,0,0,0);</string>
         <property name="toolTipDuration">
          <number>-1</number>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border:none;
+	background-color: rgba(0,0,0,0);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,100);
+}</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -898,7 +917,7 @@ background-color:rgba(0,0,0,0);</string>
      <item>
       <widget class="QGroupBox" name="groupBox_youth">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+        <string notr="true">background-color:rgba(0, 0, 0, 100); border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -1118,7 +1137,13 @@ background-color:rgba(0,0,0,0);</string>
          <enum>Qt::NoFocus</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QPushButton {
+	border:none;
+	background-color: rgba(0,0,0,0);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,100);
+}</string>
         </property>
         <property name="text">
          <string/>
@@ -1312,7 +1337,7 @@ background-color:rgba(0,0,0,0);</string>
      <item>
       <widget class="QGroupBox" name="groupBox_teen">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+        <string notr="true">background-color:rgba(0, 0, 0, 100);border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -1534,6 +1559,15 @@ background-color:rgba(0,0,0,0);</string>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border:none;
+	background-color: rgba(0,0,0,0);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,100);
+}</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -1729,7 +1763,7 @@ background-color:rgba(0,0,0,0);</string>
      <item>
       <widget class="QGroupBox" name="groupBox_light">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+        <string notr="true">background-color:rgba(0, 0, 0, 100);border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -1916,6 +1950,15 @@ background-color:rgba(0,0,0,0);</string>
         </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border:none;
+	background-color: rgba(0,0,0,0);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,100);
+}</string>
         </property>
         <property name="text">
          <string/>

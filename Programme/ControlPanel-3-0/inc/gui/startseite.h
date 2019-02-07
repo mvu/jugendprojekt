@@ -21,7 +21,6 @@ class Startseite;
 
 /*!
  * \brief GUI: Startseite
- * \todo Verdunklung der Buttons bei Klick korrigieren
  * \todo Update von Uhr und Datum
  */
 class Startseite : public QMainWindow

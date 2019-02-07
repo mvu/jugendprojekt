@@ -33,7 +33,7 @@ EinstellungTheke::EinstellungTheke(QWidget *parent, Jugendraum *j) :
     // setze Buttons entsprechend dem aktuellen Zustand
     ui_->pushButton_lampen_on_off->setChecked(jugendraum_->theken_licht->topIsOn());
     ui_->pushButton_rgb_on_off->setChecked(jugendraum_->theken_licht->RGBisOn());
-    ui_->pushButton_rgb_on_off->setChecked(false);
+    ui_->pushButton_rgb_set->setChecked(false);
 }
 
 EinstellungTheke::~EinstellungTheke()
