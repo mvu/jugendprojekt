@@ -35,6 +35,7 @@ namespace hw
      * \return Zustand
      * \details Liest den Port des MCP23017 und verknüpft diesen mit dem bit
      *      und liefert dadurch den Status des Relais zurück
+     * \todo erneuter Leseversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     bool readState(uint8_t bank, uint8_t bit);
     
@@ -51,7 +52,7 @@ namespace hw
      * \brief Gibt den Wert des Registers repräsentiert durch einen Wert zwischen 0 und 100 zurück 
      * \return Prozentualer Registerwert
      * \param reg Registen, dessen Wert ausgelesen wird
-     * \todo implementieren
+     * \todo erneuter Leseversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     int readValue(uint8_t reg);
     
@@ -59,7 +60,7 @@ namespace hw
      * \brief Schreibt einen Wert, der aus dem übergebenen Wert zwischen 0 und 100 errechnet wird, in ein Register
      * \param reg Register, in das geschrieben wird
      * \param int Wert, der gesetzt werden soll
-     * \todo implemtieren
+     * \todo erneuter Schreibversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     void writeValue(uint8_t reg, int val);
 

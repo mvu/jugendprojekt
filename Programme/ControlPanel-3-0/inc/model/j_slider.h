@@ -14,6 +14,11 @@
 
 #include "inc/model/hardware.h"
 
+/*!
+ * \brief Klasse für einen Hardware Slider
+ * \todo Verhalten bei nicht antwortendem Arduino implentieren. Denkbar wäre,
+ *      dass sich dann ein Fenster mit Software-Slidern öffnet.
+ */
 class JSlider : public QObject
 {
     Q_OBJECT
@@ -31,9 +36,6 @@ public:
     /*!
      * \brief fährt den Slider auf die Position
      * \param value gewünschte Position; von 0 (unten) bis 100 (oben)
-     * \bug Bei zweimaligem Funktionsaufruf mit dem selben Wert ohne Deaktiviertung
-     *      dazwischen, erkennt der Arduino nicht, wenn der Slider zwischenzeitlich
-     *      bewegt wurde und macht dementsprechend nichts.
      */
     void setPosition(int value);
 
@@ -43,9 +45,10 @@ public:
      */
     int getPosition();
 
+private:
     void activate();
     void deactivate();
-private:
+
     int slider_num_;
     int position_;
     bool active_, standby_;
@@ -57,6 +60,11 @@ private slots:
     void update();
 
 signals:
+    /*!
+     * \brief Wird gesendet, wenn sich die Position des Sliders ändert. Die
+     *      neue Position von 0 (unten) bis 100 (oben) wird an den Empfänger
+     *      übergeben.
+     */
     void changed(int);
 };
 

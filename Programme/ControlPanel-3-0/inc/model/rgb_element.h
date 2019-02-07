@@ -14,8 +14,7 @@
 /*!
  * \brief Basisklasse für RGBs, von der alle Objekt, die RGBs enthalten, erben. 
  * \details Speichert den Zustand eines RGB-Lichts und stellt Funktionen zum Auslesen und Verändern von diesem zur Verfügung.
- * \todo Ist nach einer gewissen Zeitspanne keine Slider-Bewegung mehr erfolgt, werden die 
- * Slider deaktiviert. Das ist eigentlich eher eine Gui-Aufgabe, steht aber trotzdem hier weil alle RGB-Lichter von dieser Klasse erben.
+ * \todo Darüber nachdenken, ob bei rgb_is_on_ == false die mutators der Farben was machen oder nicht
  */
 class RGBElement : public JElement
 {
