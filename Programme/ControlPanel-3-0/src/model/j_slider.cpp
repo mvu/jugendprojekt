@@ -18,6 +18,9 @@ JSlider::JSlider(QObject *parent, int slider_num, int init_position) : QObject(p
     update_timer_ = new QTimer(this);
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
 
+    standby_ = false;
+    last_timestamp_ = QDateTime::currentMSecsSinceEpoch();
+
     activate();
     setPosition(init_position);
     update_timer_->start(SLIDER_UPDATE_CYCLE_MS);
@@ -84,12 +87,41 @@ void JSlider::deactivate()
 
 void JSlider::update()
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << " in Standby: " << standby_;
+
+    bool has_changed = false;
 
     int pos_new = int((1023. - hw::readUDP(reg_analog_, SLIDER_UDP))/1023. * 100.);
     if (abs(pos_new - position_) > SLIDER_NOISE_THRESHOLD)
     {
         position_ = pos_new;
         emit changed(position_);
+        has_changed = true;
+    }
+
+    /*
+     * check the time to last movement
+     * if it was long ago, enter standby mode
+     * if in standby, but movement is detected, wake up
+     */
+    long long now = QDateTime::currentMSecsSinceEpoch();
+    if (not has_changed)
+    {
+        if (now - last_timestamp_ > SLIDER_STANDBY_AFTER_S * 1000)
+        {
+            qDebug() << "entering standy mode";
+            standby_ = true;
+            update_timer_->setInterval(SLIDER_STANDBY_CYCLE_MS);
+        }
+    }
+    else
+    {
+        if (standby_)
+        {
+            qDebug() << "leaving standy mode";
+            standby_ = false;
+            update_timer_->setInterval(SLIDER_UPDATE_CYCLE_MS);
+        }
+        last_timestamp_ = now;
     }
 }

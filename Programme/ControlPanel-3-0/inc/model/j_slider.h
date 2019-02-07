@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <iostream>
 #include <QString>
+#include <QDateTime>
 
 #include "inc/model/hardware.h"
 
@@ -47,7 +48,8 @@ public:
 private:
     int slider_num_;
     int position_;
-    bool active_;
+    bool active_, standby_;
+    long long last_timestamp_;
     QTimer* update_timer_;
     QByteArray reg_setpoint_, reg_analog_, reg_active_;
 

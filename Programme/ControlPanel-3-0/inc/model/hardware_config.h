@@ -10,8 +10,11 @@
 #define SLIDER_IP                   "192.168.1.111"
 #define SLIDER_PORT                 8888
 #define SLIDER_UDP                  QHostAddress(SLIDER_IP), SLIDER_PORT
+// Slider Konfiguration
 #define SLIDER_UPDATE_CYCLE_MS      50
 #define SLIDER_NOISE_THRESHOLD      1
+#define SLIDER_STANDBY_AFTER_S      10      // nach wie vielen Sekunden der Slider in den Standby-Modus geht
+#define SLIDER_STANDBY_CYCLE_MS     1000    // wie oft die Sliderposition im Standby-Modus gelesen wird
 
 // update Zyklus für die gesamte Hardware
 #define HW_UPDATE_INTERVAL_MS       5000
