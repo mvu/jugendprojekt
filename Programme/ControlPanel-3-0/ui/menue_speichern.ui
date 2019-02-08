@@ -275,7 +275,12 @@ background-color:rgba(0,0,0,0);</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background:transparent;</string>
+        <string notr="true">QPushButton {
+	background:transparent;
+}
+QPushButton:pressed {
+	background-color:rgba(0,0,0,100);
+}</string>
        </property>
        <property name="text">
         <string/>
@@ -507,7 +512,12 @@ background-color:rgba(0,0,0,0);</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background:transparent;</string>
+        <string notr="true">QPushButton {
+	background:transparent;
+}
+QPushButton:pressed {
+	background-color:rgba(0,0,0,100);
+}</string>
        </property>
        <property name="text">
         <string/>

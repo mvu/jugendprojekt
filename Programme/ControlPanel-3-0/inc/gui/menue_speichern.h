@@ -23,7 +23,6 @@ class MenueSpeichern;
  *      oder den Teenkreis gespeichert werden soll. Zum Speichern wird nach dem
  *      Passwort gefragt.
  * \todo Fensterposition eher linke Hälfte für mehr Ruhe in der Ansicht?
- * \todo Buttons verdunkeln bei klick
  * \todo Reale Passwörter für Jugend und Teenkreis verwenden
  * \todo wirklich speichern
  */
