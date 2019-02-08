@@ -88,7 +88,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QPushButton" name="pushButton_rgb_ceiling_2">
+     <widget class="QPushButton" name="pushButton_main_light">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>

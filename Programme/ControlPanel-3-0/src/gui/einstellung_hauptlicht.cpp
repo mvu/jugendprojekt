@@ -31,8 +31,11 @@ EinstellungHauptlicht::EinstellungHauptlicht(QWidget *parent, Jugendraum *j) :
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
     // erzeuge Slider
-    slider_ = new JSlider(this, 2, 0);
-    connect(slider_, SIGNAL(changed(int)), this, SLOT(sliderChanged(int)));
+    if (not hw::sliderless())
+    {
+        slider_ = new JSlider(this, 2, 0);
+        connect(slider_, SIGNAL(changed(int)), this, SLOT(sliderChanged(int)));
+    }
 }
 
 EinstellungHauptlicht::~EinstellungHauptlicht()
@@ -43,7 +46,7 @@ EinstellungHauptlicht::~EinstellungHauptlicht()
     for (auto push_button: push_buttons_HL_)
         push_button->setChecked(false);
 
-    delete slider_;
+    if (not hw::sliderless()) delete slider_;
     delete ui_;
 }
 
