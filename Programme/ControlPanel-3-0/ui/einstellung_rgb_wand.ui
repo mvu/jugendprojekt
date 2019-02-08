@@ -10,7 +10,7 @@
     <height>480</height>
    </rect>
   </property>
-  <property name="windowTitle">s
+  <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
@@ -52,6 +52,9 @@
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -65,6 +68,9 @@
      <height>50</height>
     </size>
    </property>
+   <property name="default">
+    <bool>true</bool>
+   </property>
    <property name="flat">
     <bool>true</bool>
    </property>
@@ -73,25 +79,41 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>100</y>
-     <width>351</width>
-     <height>171</height>
+     <y>104</y>
+     <width>341</width>
+     <height>181</height>
     </rect>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <property name="styleSheet">
-    <string notr="true">border: 1px solid white;
-border-radius:10px;</string>
+    <string notr="true">QGroupBox {
+	margin-top:0.6em;
+	border:1px solid white;
+	border-radius:10px;
+	font-size:20px;
+	color:white;
+}
+QGroupBox::title {
+	subcontrol-origin:  margin;
+    left:10px;
+    padding: 0px 2px 0 2px;
+}</string>
    </property>
    <property name="title">
-    <string/>
+    <string>Einstellungen</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>331</width>
-      <height>151</height>
+      <x>10</x>
+      <y>30</y>
+      <width>321</width>
+      <height>141</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -99,78 +121,82 @@ border-radius:10px;</string>
       <number>10</number>
      </property>
      <item>
-      <widget class="QGroupBox" name="groupBox_2">
+      <widget class="QPushButton" name="pushButton_on_off">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(255,255,255,100);
-border:none;</string>
+        <string notr="true">QPushButton {
+	margin-top:0em;
+	background-color: rgba(255,255,255,100);
+	color:black;
+	border: none;
+	border-radius: 10px;
+}
+QPushButton:checked {
+	border: 2px solid white;
+}
+QPushButton:pressed {
+	background-color: rgba(255,255,255,150);
+}</string>
        </property>
-       <property name="title">
-        <string/>
+       <property name="text">
+        <string>An</string>
        </property>
-       <widget class="QPushButton" name="pushButton_on_off">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>161</width>
-          <height>151</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border:none;
-background-color:rgba(0,0,0,0);
-color:rgb(0,0,0);</string>
-        </property>
-        <property name="text">
-         <string>An</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_3">
+      <widget class="QPushButton" name="pushButton_set_color">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(255,255,255,100);
-border:none;</string>
+        <string notr="true">QPushButton {
+	margin-top:0em;
+	background-color: rgba(255,255,255,100);
+	color:black;
+	border: none;
+	border-radius: 10px;
+}
+QPushButton:checked {
+	border: 2px solid white;
+}
+QPushButton:pressed {
+	background-color: rgba(255,255,255,150);
+}</string>
        </property>
-       <property name="title">
-        <string/>
-       </property>
-       <widget class="QPushButton" name="pushButton_set_color">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>161</width>
-          <height>151</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border:none;
-background-color:rgba(0,0,0,0);
-color:rgb(0,0,0);</string>
-        </property>
-        <property name="text">
-         <string>Farbe
+       <property name="text">
+        <string>Farbe
 einstellen</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -195,10 +221,83 @@ einstellen</string>
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>306</y>
+     <width>101</width>
+     <height>167</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_debug">
+    <item>
+     <widget class="QLabel" name="test_label_1">
+      <property name="font">
+       <font>
+        <pointsize>30</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="test_label_2">
+      <property name="font">
+       <font>
+        <pointsize>30</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="test_label_3">
+      <property name="font">
+       <font>
+        <pointsize>30</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <zorder>frame</zorder>
   <zorder>label</zorder>
   <zorder>pushButton_back</zorder>
   <zorder>groupBox</zorder>
+  <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources>
   <include location="icons.qrc"/>

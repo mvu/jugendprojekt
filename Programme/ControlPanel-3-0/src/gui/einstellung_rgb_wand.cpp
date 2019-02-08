@@ -28,11 +28,17 @@ EinstellungRGBWand::EinstellungRGBWand(QWidget *parent, Jugendraum *j) :
     animation->setEndValue(QRect(0,0,400,480));
     animation->setEasingCurve(QEasingCurve::InExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // setze Buttons entsprechend dem aktuellen Zustand
+    ui_->pushButton_on_off->setChecked(jugendraum_->wand_rgb->RGBisOn());
+    ui_->pushButton_set_color->setChecked(false);
 }
 
 EinstellungRGBWand::~EinstellungRGBWand()
 {
     qDebug() << Q_FUNC_INFO;
+    // delete slider if they exist
+    ui_->pushButton_set_color->setChecked(false);
     delete ui_;
 }
 
@@ -50,17 +56,66 @@ void EinstellungRGBWand::on_pushButton_back_released()
     animation->start(QAbstractAnimation::DeleteWhenStopped);  
 }
 
-void EinstellungRGBWand::on_pushButton_on_off_released()
+void EinstellungRGBWand::on_pushButton_on_off_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    // invert current state of RGB
-    jugendraum_->wand_rgb->setRGBOn(not jugendraum_->wand_rgb->RGBisOn());
-    ui_->pushButton_on_off->setText(jugendraum_->wand_rgb->RGBisOn() ? "Aus" : "An");
+
+    jugendraum_->wand_rgb->setRGBOn(checked);
+    ui_->pushButton_on_off->setText(checked ? "Aus" : "An");
+
+    // close sliders if rgb gets switched off
+    if (not checked) ui_->pushButton_set_color->setChecked(false);
 }
 
-void EinstellungRGBWand::on_pushButton_set_color_released()
+void EinstellungRGBWand::on_pushButton_set_color_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-    
-    // activate the slider 
+
+    if (checked)
+    {
+        // activate rgb, so that the changes take immediate effect
+        ui_->pushButton_on_off->setChecked(true);
+
+        // create the sliders
+        slider_red_ =   new JSlider(this, 2, jugendraum_->wand_rgb->getRedValue());
+        slider_green_ = new JSlider(this, 3, jugendraum_->wand_rgb->getGreenValue());
+        slider_blue_ =  new JSlider(this, 4, jugendraum_->wand_rgb->getBlueValue());
+        connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+        connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+        connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+    }
+    else
+    {
+        // delete the sliders
+        disconnect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+        disconnect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+        disconnect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+        delete slider_red_;
+        delete slider_green_;
+        delete slider_blue_;
+    }
+}
+
+void EinstellungRGBWand::sliderRedChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_1->setText(QString("%1").arg(val));
+    jugendraum_->wand_rgb->setRedValue(val);
+}
+
+void EinstellungRGBWand::sliderGreenChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_2->setText(QString("%1").arg(val));
+    jugendraum_->wand_rgb->setGreenValue(val);
+}
+
+void EinstellungRGBWand::sliderBlueChanged(int val)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    ui_->test_label_3->setText(QString("%1").arg(val));
+    jugendraum_->wand_rgb->setBlueValue(val);
 }

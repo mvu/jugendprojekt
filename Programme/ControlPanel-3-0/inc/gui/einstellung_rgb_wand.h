@@ -9,6 +9,7 @@
 #include <QDebug>
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/j_slider.h"
 
 namespace Ui {
 class EinstellungRGBWand;
@@ -16,8 +17,6 @@ class EinstellungRGBWand;
 
 /*!
  * \brief Klasse für GUI der Einstellungen der RGB an der Wand
- * \todo irgendwie beim Klicken von "Farbe einstellen" deutlich machen, 
- * dass der Klick erkannt wurde und die Slider jetzt benutzt werden können
  */
 
 class EinstellungRGBWand : public QDialog
@@ -30,12 +29,16 @@ public:
     
 private slots:
     void on_pushButton_back_released();
-    void on_pushButton_on_off_released();
-    void on_pushButton_set_color_released();
+    void on_pushButton_on_off_toggled(bool checked);
+    void on_pushButton_set_color_toggled(bool checked);
+    void sliderRedChanged(int val);
+    void sliderGreenChanged(int val);
+    void sliderBlueChanged(int val);
     
 private:
     Ui::EinstellungRGBWand *ui_;
     Jugendraum *jugendraum_;
+    JSlider* slider_red_, * slider_green_, * slider_blue_;
 };
 
 #endif // EINSTELLUNGRGBWAND_H
