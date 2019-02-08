@@ -110,9 +110,9 @@ font-size:20px;</string>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 	margin-top:0em;
-	background-color: rgba(0,0,0,80);
+	background-color: rgba(0,0,0,100);
 	color:white;
-	border: 1px solid black;
+	border: none;
 	border-radius: 10px;
 }
 QPushButton:checked {
@@ -120,7 +120,7 @@ QPushButton:checked {
     border-radius: 10px;
 }
 QPushButton:pressed {
-	background-color: rgba(0,0,0,160);
+	background-color: rgba(0,0,0,150);
 }</string>
        </property>
        <property name="text">
@@ -151,9 +151,9 @@ QPushButton:pressed {
        <property name="styleSheet">
         <string notr="true">QPushButton {
 	margin-top:0em;
-	background-color: rgba(0,0,0,80);
+	background-color: rgba(0,0,0,100);
 	color:white;
-	border: 1px solid black;
+	border: none;
 	border-radius: 10px;
 }
 QPushButton:checked {
@@ -161,7 +161,7 @@ QPushButton:checked {
     border-radius: 10px;
 }
 QPushButton:pressed {
-	background-color: rgba(0,0,0,160);
+	background-color: rgba(0,0,0,150);
 }</string>
        </property>
        <property name="text">
@@ -221,9 +221,9 @@ font-size:20px;</string>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 	margin-top:0em;
-	background-color: rgba(0,0,0,80);
+	background-color: rgba(0,0,0,100);
 	color:white;
-	border: 1px solid black;
+	border: none;
 	border-radius: 10px;
 }
 QPushButton:checked {
@@ -231,7 +231,7 @@ QPushButton:checked {
     border-radius: 10px;
 }
 QPushButton:pressed {
-	background-color: rgba(0,0,0,160);
+	background-color: rgba(0,0,0,150);
 }</string>
        </property>
        <property name="text">
@@ -260,8 +260,8 @@ QPushButton:pressed {
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
    </property>
    <property name="text">
     <string/>
@@ -276,6 +276,9 @@ QPushButton:pressed {
      <height>50</height>
     </size>
    </property>
+   <property name="default">
+    <bool>true</bool>
+   </property>
    <property name="flat">
     <bool>true</bool>
    </property>
@@ -289,7 +292,7 @@ QPushButton:pressed {
      <height>167</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_debug">
     <item>
      <widget class="QLabel" name="test_label_1">
       <property name="font">

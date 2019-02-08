@@ -6,6 +6,7 @@
 #define EINSTELLUNG_THEKE_H
 
 #include <QDialog>
+#include <QDebug>
 
 #include "inc/model/jugendraum.h"
 #include "inc/model/j_slider.h"
@@ -17,6 +18,7 @@ class EinstellungTheke;
 /*!
  * \brief Klasse für die GUI der Thekeneinstellung
  * \todo Labels vom debuggen entfernen
+ * \todo Hintergrund des Zurück-Knopfes wenn pressed
  */
 
 class EinstellungTheke : public QDialog
