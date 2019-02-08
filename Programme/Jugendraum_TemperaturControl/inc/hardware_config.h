@@ -28,4 +28,12 @@
 #define SENSOR_PI           4
 #define SENSOR_PC           5
 
+// default config params for JTemperaturController
+// These get used if the configuration file can't be found
+#define TEMP_HIGH           60
+#define TEMP_CRIT           80
+#define TEMP_THRESHOLD      35
+#define TEMP_HYSTERESIS     5
+#define FAN_MIN             30
+
 #endif // HARDWARE_CONFIG_H

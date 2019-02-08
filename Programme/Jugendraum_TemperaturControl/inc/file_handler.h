@@ -42,7 +42,8 @@ public:
      */
      //Because this is a template the implementation needs to be in the header
     template<typename T>
-    T readFromFile(std::string param){
+    T readFromFile(QString qparam){
+        std::string param = qparam.toStdString();
         file_.open(filename_);
         std::string line, equal, p;
         T value = T(); //also initializes 'value'
@@ -87,12 +88,13 @@ public:
     /*!
      * \brief Schreibt einen Wert in eine Datei. Alle existierenden Werte werden dabei überschrieben. Ist der Parameter noch nicht vorhanden, wird er am Ende der Datei angefügt. 
      * Es wird nicht überprüft, ob der Wert, der in die Datei geschrieben wird, einen falschen Typ hat und somit beim nächsten Lesen zu einem Fehler führt.
-     * \param param Name der Variable, deren Wert in die Datei geschrieben werden soll. Exakt dieser String wird in der Datei überschrieben bzw. neu angelegt.
+     * \param qparam Name der Variable, deren Wert in die Datei geschrieben werden soll. Exakt dieser String wird in der Datei überschrieben bzw. neu angelegt.
      * \param value Wert von 'param', der in die Datei geschrieben wird.
      */
     template<typename T>
-    void writeToFile(std::string param, T value){
+    void writeToFile(QString qparam, T value){
         std::string tmp_filename = "tmp.txt";
+        std::string param = qparam.toStdString();
         std::ofstream tmp;
         std::string comment, line;
         size_t pos, pos2;

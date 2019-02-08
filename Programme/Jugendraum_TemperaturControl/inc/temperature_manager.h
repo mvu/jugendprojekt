@@ -24,6 +24,18 @@ public:
     explicit TemperatureManager(QObject *parent = nullptr);
     ~TemperatureManager();
 
+    /*!
+     * \brief Speichert die Konfigurationen aller JTemperaturController
+     * \param filename Dateiname zum Speichern
+     */
+    void saveAllToFile(QString filename);
+
+    /*!
+     * \brief Veranlasst alle JTemperaturController dazu, ihre Konfigurationen
+     *      neu einzulesen
+     * \param filename Dateiname zum Lesen
+     */
+    void readAllFromFile(QString filename);
 private:
     QUdpSocket * udp_control_panel_;
     JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_, *tc_pc_;

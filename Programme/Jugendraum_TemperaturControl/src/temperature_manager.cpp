@@ -34,6 +34,22 @@ TemperatureManager::~TemperatureManager()
     delete udp_control_panel_;
 }
 
+void TemperatureManager::saveAllToFile(QString filename)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_})
+        tc->saveConfigToFile(filename);
+}
+
+void TemperatureManager::readAllFromFile(QString filename)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_})
+        tc->readConfigFromFile(filename);
+}
+
 void TemperatureManager::controlPanelRequest()
 {
     qDebug() << Q_FUNC_INFO;

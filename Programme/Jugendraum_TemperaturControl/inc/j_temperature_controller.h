@@ -10,8 +10,10 @@
 #include <QString>
 #include <QtMath>
 #include <QTimer>
+#include <QFileInfo>
 
 #include "inc/hardware.h"
+#include "inc/file_handler.h"
 
 /*!
  * \brief Basisklasse für Temperatureregler
@@ -70,14 +72,16 @@ public:
     /*!
      * \brief Liest alle Konfigutaionsdateien aus einer Datei
      * \param Datei, aus der alles gelesen werden soll
+     * \details Wenn die Nicht existiert, werden default-Werte aus hardware_config.h
+     *      verwendet und diese anschließend in die Datei gespeichert.
      */
-    void readAllFromFile(QString filename);
+    void readConfigFromFile(QString filename);
 
     /*!
      * \brief Schreibt alle Konfigurationen in eine Datei
      * \param Die Datei, in der alles gespeichert werden soll
      */
-    void writeAllToFile(QString filename);
+    void saveConfigToFile(QString filename);
 
 private slots:
     /*!

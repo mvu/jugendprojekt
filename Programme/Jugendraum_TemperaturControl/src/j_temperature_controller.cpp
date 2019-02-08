@@ -15,7 +15,7 @@ JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, i
     has_fan_ = true;
 
     // get some configuration parameters from a file
-    readAllFromFile("file");
+    readConfigFromFile("/home/pi/conf/temperature_controller.cfg");
 
     // get the register from the arduino
     sensor_reg_= hw::getSensorRegister(sensor_id_);
@@ -23,7 +23,7 @@ JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, i
     // setup a timer for updating
     update_timer_ = new QTimer(this);
     connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
-    //update_timer_->start(UPDATE_CYCLE_S);
+    // update_timer_->start(UPDATE_CYCLE_S);
 }
 
 JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, QString device_name) : QObject(parent)
@@ -33,10 +33,11 @@ JTemperatureController::JTemperatureController(QObject *parent, int sensor_id, Q
     // move parameters to private variables
     sensor_id_ = sensor_id;
     device_name_ = device_name;
+    fan_reg_ = -1;
     has_fan_ = false;
 
     // get some configuration parameters from a file
-    readAllFromFile("file");
+    readConfigFromFile("file");
 
     // get the register from the arduino
     sensor_reg_= hw::getSensorRegister(sensor_id_);
@@ -124,22 +125,55 @@ int JTemperatureController::calculateFanSpeed(double temperature)
     return int(pwm);
 }
 
-void JTemperatureController::writeAllToFile(QString filename)
+void JTemperatureController::saveConfigToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 
-    // do stuff using filehandler
+    // QString::append() changes the string it was called on
+    // Therefore it needs to be reset after each entry was done
+    QString tmp_name = device_name_;
+
+    // store
+    FileHandler* fh = new FileHandler(filename);
+    fh->writeToFile(tmp_name.append("::temp_high_"), temp_high_); tmp_name = device_name_;
+    fh->writeToFile(tmp_name.append("::temp_crit_"), temp_crit_); tmp_name = device_name_;
+    fh->writeToFile(tmp_name.append("::temp_threshold_"), temp_threshold_); tmp_name = device_name_;
+    fh->writeToFile(tmp_name.append("::temp_hysteresis_"), temp_hysteresis_); tmp_name = device_name_;
+    fh->writeToFile(tmp_name.append("::fan_min_"), fan_min_); tmp_name = device_name_;
+    delete fh;
 }
 
-void JTemperatureController::readAllFromFile(QString filename)
+void JTemperatureController::readConfigFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 
-    // do stuff using filehandler
-    temp_high_ = 70;
-    temp_crit_ = 90;
-    temp_threshold_ = 35;
-    temp_hysteresis_ = 5;
+    // QString::append() changes the string it was called on
+    // Therefore it needs to be reset after each entry was done
+    QString tmp_name = device_name_;
 
-    fan_min_ = 30;
+    FileHandler* fh = new FileHandler(filename);
+    try
+    {
+        // read
+        temp_high_ = fh->readFromFile<double>(tmp_name.append("::temp_high_")); tmp_name = device_name_;
+        temp_crit_ = fh->readFromFile<double>(tmp_name.append("::temp_crit_")); tmp_name = device_name_;
+        temp_threshold_ = fh->readFromFile<double>(tmp_name.append("::temp_threshold_")); tmp_name = device_name_;
+        temp_hysteresis_ = fh->readFromFile<double>(tmp_name.append("::temp_hysteresis_"));  tmp_name = device_name_;
+        fan_min_ = fh->readFromFile<int>(tmp_name.append("::fan_min_")); tmp_name = device_name_;
+    }
+    catch (std::domain_error& e)
+    {
+        qDebug() << e.what();
+        // fallback to defaults
+        temp_high_ = TEMP_HIGH;
+        temp_crit_ = TEMP_CRIT;
+        temp_threshold_ = TEMP_THRESHOLD;
+        temp_hysteresis_ = TEMP_HYSTERESIS;
+        fan_min_ = FAN_MIN;
+
+        // and store them
+        saveConfigToFile(filename);
+    }
+
+    delete fh;
 }

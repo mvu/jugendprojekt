@@ -52,7 +52,7 @@ int hw::readPWMValue(uint8_t reg)
 
 QByteArray hw::getSensorRegister(int sensor)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "with sensor = " << sensor;
 
     return registers.at(sensor - 1);
 }
