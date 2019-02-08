@@ -11,6 +11,8 @@
  * \brief Die Klasse repräsentiert die RGB-Decken-Streifen
  * \todo die richtigen Updater schreiben, dazu muss hw::writeUART(...) noch gebaut werden
  * \todo die initialen Werte von der Hardware lesen, dazu fehlt das entsprechende Hardware-Tool
+ * \todo Wenn SetRGBOn() mit true aufgerufen wird und der interne Wert 0 ist, einen Default-Wert aus 
+ * einer Datei lesen
  */
 class RGBStreifen : public RGBElement
 {

@@ -20,7 +20,6 @@ class EinstellungRGBDecke;
 /*!
  * \brief Klasse der GUI zur Einstellung der Decken-RGBs
  * \details
- * \todo Software Slider mit ihren Handlern entfernen
  */
 class EinstellungRGBDecke : public QDialog
 {
@@ -61,11 +60,6 @@ private slots:
     void sliderRedChanged(int value);
     void sliderGreenChanged(int value);
     void sliderBlueChanged(int value);
-    
-    // for testing purpose only
-    void on_RSlider_valueChanged(int value);
-    void on_GSlider_valueChanged(int value);
-    void on_BSlider_valueChanged(int value);
     
 private:
     // Überprüft, ob eine Gruppe ausgewählt ist

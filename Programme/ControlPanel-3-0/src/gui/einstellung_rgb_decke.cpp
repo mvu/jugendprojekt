@@ -511,21 +511,3 @@ void EinstellungRGBDecke::checkOnOffState()
     if (active_counter == 0)
         ui_->pushButton_on_off->setText("");
 }
-
-void EinstellungRGBDecke::on_RSlider_valueChanged(int value)
-{   
-    // for testing purpose only 
-    sliderRedChanged(value);
-}
-
-void EinstellungRGBDecke::on_GSlider_valueChanged(int value)
-{
-    // for testing purpose only
-    sliderGreenChanged(value);
-}
-
-void EinstellungRGBDecke::on_BSlider_valueChanged(int value)
-{
-    // for testing purpose only
-    sliderBlueChanged(value);
-}

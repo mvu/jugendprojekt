@@ -17,6 +17,8 @@ public:
     /*!
      * \brief HauptlichtStreifen
      * \param address Register des Streifens; verwende Macro aus hardware_config.h
+     * \todo Wenn SetOn() mit true aufgerufen wird und der interne Wert 0 ist, einen Default-Wert aus 
+     * einer Datei lesen
      */
     HauptlichtStreifen(uint8_t address);
     
