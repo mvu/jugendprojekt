@@ -10,6 +10,7 @@
 /*!
  * \brief Die Klasse repräsentiert die RGB-Decken-Streifen
  * \todo die richtigen Updater schreiben, dazu muss hw::writeUART(...) noch gebaut werden
+ * \todo die initialen Werte von der Hardware lesen, dazu fehlt das entsprechende Hardware-Tool
  */
 class RGBStreifen : public RGBElement
 {

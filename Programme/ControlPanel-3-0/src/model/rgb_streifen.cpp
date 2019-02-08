@@ -8,6 +8,13 @@ RGBStreifen::RGBStreifen(uint8_t address) :
     RGBElement ()
 {
     address_ = address;
+    allow_change_ = false;
+    
+    // read initial values from hardware
+    red_value_ = 0; // to be done 
+    green_value_ = 0;
+    blue_value_ = 0;
+    rgb_is_on_ = (red_value_ + green_value_ + blue_value_) != 0;
 }
 
 void RGBStreifen::allowChange(bool allow)

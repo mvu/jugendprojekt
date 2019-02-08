@@ -456,13 +456,11 @@ void EinstellungRGBDecke::updateButtonBackgrounds()
 {
     qDebug() << Q_FUNC_INFO;
     
+    // will affect only selected ones
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
     {   
-        qDebug() << "1";
         RGBStreifen* streifen = jugendraum_->rgb_deckenlicht[i];
-        qDebug() << "2";
         setButtonBackground(push_buttons_rgb_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
-        qDebug() << "j:" << jugendraum_->rgb_deckenlicht.length() << "l: " << push_buttons_rgb_.length() << " " <<i;
     }
 }
 
