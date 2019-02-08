@@ -1,3 +1,7 @@
+/*!
+ * \file hauptlicht_streifen.cpp
+ * \brief Source für die Repräsentation der Hauptlicht-Streifen
+ */
 #include "inc/model/hauptlicht_streifen.h"
 
 HauptlichtStreifen::HauptlichtStreifen(uint8_t address)
@@ -9,7 +13,7 @@ HauptlichtStreifen::HauptlichtStreifen(uint8_t address)
     
     // read inital state from hardware
     brightness_ = hw::readValue(address_);
-    
+    last_brightness_ = brightness_;
     is_on_ = (brightness_ != 0);
 }
 
@@ -72,7 +76,6 @@ void HauptlichtStreifen::setOn(bool state)
         {
             // restore last value
             setBrightness(last_brightness_);
-            qDebug() << brightness_ << " " << brightness_;
         }
         else
         {
