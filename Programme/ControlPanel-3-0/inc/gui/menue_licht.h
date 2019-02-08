@@ -6,6 +6,8 @@
 #define MENUE_LICHT_H
 
 #include <QDialog>
+#include <QTimer>
+#include <QDateTime>
 #include <QDebug>
 
 #include "inc/gui/einstellung_theke.h"
@@ -23,8 +25,6 @@ class MenueLicht;
 /*!
  * \brief Klasse die Licht-Menü GUI
  * \todo Schließen button durch Icon ersetzen
- * \todo Verdunklung der Butons bei Klick
- * \todo Update der Uhr
  */
 class MenueLicht : public QDialog
 {
@@ -46,6 +46,8 @@ private slots:
     void on_pushButton_save_released();
     void on_pushButton_close_released();
 
+    void updateTime();
+
 private:
     Ui::MenueLicht *ui_;
     Jugendraum *jugendraum_;
@@ -54,6 +56,8 @@ private:
     EinstellungRGBDecke *einstellung_rgb_decke_;
     EinstellungHauptlicht *einstellung_hauptlicht_;
     MenueSpeichern *menu_speichern_;
+
+    QTimer *clock_timer_;
 
 };
 

@@ -20,8 +20,14 @@ MenueLicht::MenueLicht(QWidget *parent, Jugendraum *j) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->show();
 
+    // initialisiere timer zum updaten der Uhrzeit
+    clock_timer_ = new QTimer(this);
+    connect(clock_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
+    clock_timer_->start(1000);
+    updateTime();
+
     // Erfrage Status von jugendraum_ und setze Beschriftungen entsprechend
-    ui_->label_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
+    ui_->pushButton_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
 
     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
@@ -73,7 +79,7 @@ void MenueLicht::on_pushButton_palette_released()
     // invert the state of palette
     jugendraum_->paletten_licht->setOn(not jugendraum_->paletten_licht->isOn());
     //display the new value
-    ui_->label_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
+    ui_->pushButton_palette->setText(QString("Paletten ").append(jugendraum_->paletten_licht->isOn() ? "aus": "an"));
 }
 
 void MenueLicht::on_pushButton_save_released()
@@ -95,4 +101,11 @@ void MenueLicht::on_pushButton_close_released()
     animation->setEndValue(QRect(800,0,400,480));
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void MenueLicht::updateTime()
+{
+    // qDebug() << Q_FUNC_INFO;
+
+    ui_->label_clock->setText(QDateTime::currentDateTime().toString("hh:mm"));
 }

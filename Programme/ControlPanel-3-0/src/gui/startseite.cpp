@@ -64,7 +64,7 @@ void Startseite::on_pushButton_system_released()
 
 void Startseite::updateDateTime()
 {
-    qDebug() << Q_FUNC_INFO;
+    // qDebug() << Q_FUNC_INFO;
 
     QDateTime DateTime = QDateTime::currentDateTime();
     QString time = DateTime.toString("hh:mm");
