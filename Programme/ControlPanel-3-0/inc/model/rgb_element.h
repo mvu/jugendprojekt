@@ -47,21 +47,21 @@ public:
      * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    void setRedValue(int value);
+    virtual void setRedValue(int value);
     
     /*!
      * \brief Setzt den Grün-Wert zwischen 0 und 100 und 
      * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    void setGreenValue(int value);
+    virtual void setGreenValue(int value);
     
     /*!
      * \brief Setzt den Blau-Wert zwischen 0 und 100 und 
      * erzeugt einen Updater, der die Änderung im nächsten Update-Zyklus ausführt
      * \param value Wert, der gesetzt wird
      */
-    void setBlueValue(int value);
+    virtual void setBlueValue(int value);
     
     /*!
      * \brief Liefert den Zustand der RGBs
@@ -74,7 +74,7 @@ public:
      * der Farben zu ändern
      * \param state true heißt an
      */
-    void setRGBOn(bool state);
+    virtual void setRGBOn(bool state);
     
 protected:
     int red_value_ = 0;

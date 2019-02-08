@@ -23,7 +23,11 @@ class EinstellungHauptlicht;
  * Gruppe 1 und 2 sind jeweils nur ausgewählt, wenn genau ihre Streifen ausgewählt sind und schalten beim 
  * Drücken des jeweiligen Gruppen-Buttons alle nicht zur Gruppe gehörigen Streifen aus, außer wenn dadurch 
  * alle ausgewählt werden.
- * \todo an/aus-Knopf verarbeiten!!!
+ * Der An-/Aus-Button ist nur aktiv, wenn ein Streifen ausgewählt ist. Wenn mindestens einer der ausgewählten
+ * Streifen an ist, kann der Button nur zum ausschalten benutzt werden. Wird ein Button später wieder angeschaltet,
+ * so wird der Zustand vor dem Ausschalten wiederhergestellt.
+ * \todo Wenn der An-Knopf gedrückt wird, aber der vorherige Wert auch 0 war, einen Wert aus der Default-Datei lesen
+ * und den benutzen
  */
 class EinstellungHauptlicht : public QDialog
 {
@@ -65,6 +69,11 @@ private:
      * Jugendraum aus und passt den Hintergrund entsprechend an.
      */
     void updateButtonBackgrounds();
+    
+    /*!
+     * \brief Überprüft, ob der An/Aus-Button gerade "An" oder "Aus" oder nichts anzeigt
+     */
+    void checkOnOffState();
     
     Ui::EinstellungHauptlicht *ui_;
     Jugendraum *jugendraum_;

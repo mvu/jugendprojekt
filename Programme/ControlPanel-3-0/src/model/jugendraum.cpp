@@ -25,7 +25,24 @@ Jugendraum::Jugendraum()
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_6));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_7));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_8));
-
+    rgb_deckenlicht.append(new RGBStreifen(1));
+    rgb_deckenlicht.append(new RGBStreifen(2));
+    rgb_deckenlicht.append(new RGBStreifen(3));
+    rgb_deckenlicht.append(new RGBStreifen(4));
+    rgb_deckenlicht.append(new RGBStreifen(5));
+    rgb_deckenlicht.append(new RGBStreifen(6));
+    rgb_deckenlicht.append(new RGBStreifen(7));
+    rgb_deckenlicht.append(new RGBStreifen(8));
+    rgb_deckenlicht.append(new RGBStreifen(9));
+    rgb_deckenlicht.append(new RGBStreifen(10));
+    rgb_deckenlicht.append(new RGBStreifen(11));
+    rgb_deckenlicht.append(new RGBStreifen(12));
+    rgb_deckenlicht.append(new RGBStreifen(13));
+    rgb_deckenlicht.append(new RGBStreifen(14));
+    rgb_deckenlicht.append(new RGBStreifen(15));
+    rgb_deckenlicht.append(new RGBStreifen(16));
+    rgb_deckenlicht.append(new RGBStreifen(17));
+    rgb_deckenlicht.append(new RGBStreifen(18));
 }
 
 Jugendraum::~Jugendraum()
@@ -47,7 +64,9 @@ void Jugendraum::update()
 
     for (auto streifen: hauptlicht)
         streifen->update();
-
+        
+    for (auto rgb_streifen: rgb_deckenlicht)
+        rgb_streifen->update();
 }
 
 void Jugendraum::saveAllToFile(QString filename)
@@ -58,7 +77,10 @@ void Jugendraum::saveAllToFile(QString filename)
 
     for (auto streifen: hauptlicht)
         streifen->saveToFile(filename);
-}
+    
+    for (auto rgb_streifen: rgb_deckenlicht)
+        rgb_streifen->saveToFile(filename);
+}   
 
 void Jugendraum::loadAllFromFile(QString filename)
 {
@@ -68,4 +90,7 @@ void Jugendraum::loadAllFromFile(QString filename)
 
     for (auto streifen: hauptlicht)
         streifen->loadFromFile(filename);
+        
+    for (auto rgb_streifen: rgb_deckenlicht)
+        rgb_streifen->loadFromFile(filename);
 }

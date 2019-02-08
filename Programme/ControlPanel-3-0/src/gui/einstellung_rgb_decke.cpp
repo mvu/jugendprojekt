@@ -68,6 +68,7 @@ void EinstellungRGBDecke::InitButtons()
     // setze StyleSheets für QPushButtons der RGBs
     for (int i = 0; i < push_buttons_rgb_.length(); i++){
         push_buttons_rgb_[i]->setStyleSheet("QPushButton { \
+                                                background-color: rgba(0,0,0,80); \
                                                 border: 2px solid black; \
                                                 border-radius: 10px; \
                                             } \
@@ -88,116 +89,252 @@ void EinstellungRGBDecke::InitButtons()
                                                    border: 2px solid white; \
                                                }");
     }
+    
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[0]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_2_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[1]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_3_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[2]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_4_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[3]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_5_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[4]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_6_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[5]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_7_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[6]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_8_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[7]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_9_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[8]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_10_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[9]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_11_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[10]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_12_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[11]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_13_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[12]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_14_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[13]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_15_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[14]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_16_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[15]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_17_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[16]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_18_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
+    
+    jugendraum_->rgb_deckenlicht[17]->allowChange(checked);
+    checkForGroups();
+    checkOnOffState();
 }
 
-void EinstellungRGBDecke::on_pushButton_group_all_toggled(bool checked)
-{
-        qDebug() << Q_FUNC_INFO;
-}
-
-void EinstellungRGBDecke::on_pushButton_group_1_toggled(bool checked)
-{
-    qDebug() << Q_FUNC_INFO;
-}
-
-void EinstellungRGBDecke::on_pushButton_group_2_toggled(bool checked)
+void EinstellungRGBDecke::on_pushButton_group_all_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    bool checked = ui_->pushButton_group_all->isChecked();
+ 
+    // will affect all other buttons only if the button itself was hit
+    for (auto push_button: push_buttons_rgb_)
+    {  
+        // don't pass the inverted value of checked because of it is already inverted before the released-method is called
+        push_button->setChecked(checked); 
+    }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
+}
+
+void EinstellungRGBDecke::on_pushButton_group_1_released()
+{
+    qDebug() << Q_FUNC_INFO;
+    bool checked = ui_->pushButton_group_1->isChecked();
+    
+    // if group 2 is also checked this will result in checking group all
+    if (ui_->pushButton_group_2->isChecked())
+    {
+        ui_->pushButton_group_all->setChecked(true);
+        on_pushButton_group_all_released();
+    }
+    else
+    {
+        // will affect all other buttons only if the button itself was hit
+        for (int i = 0; i < 10; i++)
+            push_buttons_rgb_[i]->setChecked(checked); 
+        for (int i = 10; i < 18; i++)
+            push_buttons_rgb_[i]->setChecked(false);  
+    }
+    
+    // check which label the on/off-button show show
+    checkOnOffState();
+}
+
+void EinstellungRGBDecke::on_pushButton_group_2_released()
+{
+    qDebug() << Q_FUNC_INFO;  
+    
+     bool checked = ui_->pushButton_group_2->isChecked();
+    
+    // if group 1 is also checked this will result in checking group all
+    if (ui_->pushButton_group_1->isChecked())
+    {
+        ui_->pushButton_group_all->setChecked(true);
+        on_pushButton_group_all_released();
+    }
+    else
+    {
+        // will affect all other buttons only if the button itself was hit
+        for (int i = 0; i < 10; i++)
+            push_buttons_rgb_[i]->setChecked(false); 
+        for (int i = 10; i < 18; i++)
+            push_buttons_rgb_[i]->setChecked(checked);  
+    }
+    
+    // check which label the on/off-button show show
+    checkOnOffState(); 
 }
 
 void EinstellungRGBDecke::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    // will only affect selected ones
+    for (int i = 0; i < push_buttons_rgb_.length(); i++)
+    {
+        RGBStreifen* rgb_streifen = jugendraum_->rgb_deckenlicht[i];
+        // set new state by inverting old, does this work??
+        rgb_streifen->setRGBOn(not rgb_streifen->RGBisOn());
+        setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);
+    }
+    
+    checkOnOffState();
 }
 
 void EinstellungRGBDecke::on_pushButton_back_released()
@@ -213,3 +350,95 @@ void EinstellungRGBDecke::on_pushButton_back_released()
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
+
+void EinstellungRGBDecke::checkForGroups()
+{
+    // check if all are selected
+    bool all_check = true;
+    
+    for (auto push_button: push_buttons_rgb_)
+    {
+        all_check = all_check && push_button->isChecked();
+    }
+    
+    // check if group 1 is selected
+    bool group_1_selected = true;
+    
+    for (int i = 0; i < 10; i++)
+    {
+        group_1_selected = group_1_selected && push_buttons_rgb_[i]->isChecked();
+    }
+    for (int i = 10; i < 18; i++)
+    {
+        group_1_selected = group_1_selected && (not push_buttons_rgb_[i]->isChecked());
+    }
+    
+    // check if group 2 is selected
+    bool group_2_selected = true;
+    
+    for (int i = 0; i < 10; i++)
+    {
+        group_2_selected = group_2_selected && (not push_buttons_rgb_[i]->isChecked());
+    }
+    for (int i = 10; i < 18; i++)
+    {
+        group_2_selected = group_2_selected && push_buttons_rgb_[i]->isChecked();
+    }
+    
+    ui_->pushButton_group_all->setChecked(all_check);
+    ui_->pushButton_group_1->setChecked(group_1_selected);
+    ui_->pushButton_group_2->setChecked(group_2_selected);
+    // overwrite the buttons of the subgroups if group all is selected
+    if (all_check)
+    {
+        ui_->pushButton_group_1->setChecked(false);
+        ui_->pushButton_group_2->setChecked(false);    
+    }   
+}
+
+void EinstellungRGBDecke::updateButtonBackgrounds()
+{
+    for (int i = 0; i < push_buttons_rgb_.length(); i++)
+    {
+        RGBStreifen* streifen = jugendraum_->rgb_deckenlicht[i];
+        setButtonBackground(push_buttons_groups_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
+    }
+}
+
+void EinstellungRGBDecke::setButtonBackground(QPushButton *button, int red, int green, int blue)
+{
+    int red_val = red * 255 / 100;
+    int green_val = green * 255 / 100;
+    int blue_val = blue * 255 / 100;
+    QString stylesheet_text = button->styleSheet();
+    int start_pos = stylesheet_text.indexOf("rgba");
+    int end_pos = stylesheet_text.indexOf(")", start_pos);
+    QString red_str = QString::number(red_val);
+    QString green_str = QString::number(green_val);
+    QString blue_str = QString::number(blue_val);
+    QString new_rgb_text = "rgba(" + red_str + "," + green_str + "," + blue_str + ",80)";
+    stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
+    button->setStyleSheet(stylesheet_text);
+}
+
+void EinstellungRGBDecke::checkOnOffState()
+{
+    bool is_on = false;
+    int active_counter = 0;
+    
+    for (int i = 0; i < push_buttons_rgb_.length(); i++)
+        if (push_buttons_rgb_[i]->isChecked())
+            {
+                // is true, if one or more of the buttons is on
+                is_on = is_on || jugendraum_->rgb_deckenlicht[i]->RGBisOn(); 
+                active_counter++;
+            }
+    
+    ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
+    
+    // show no label if no button is active
+    if (active_counter == 0)
+        ui_->pushButton_on_off->setText("");
+}
+
+
