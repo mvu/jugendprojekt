@@ -10,6 +10,7 @@
 #include <QtDebug>
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/rgb_streifen.h"
 
 namespace Ui {
 class EinstellungRGBDecke;

@@ -48,6 +48,7 @@ SOURCES += \
     src/model/wand_rgb.cpp \
     src/model/hauptlicht_streifen.cpp \
     src/model/j_slider.cpp \
+    src/model/rgb_streifen.cpp
 
 HEADERS += \
     inc/gui/startseite.h \

@@ -342,7 +342,7 @@ void EinstellungHauptlicht::checkOnOffState()
 }
 
 
-void EinstellungHauptlicht::on_Slider_valueChanged(int value)
+void EinstellungHauptlicht::sliderChanged(int value)
 {
     qDebug() << Q_FUNC_INFO;
 
