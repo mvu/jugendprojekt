@@ -20,6 +20,12 @@ SystemStatus::SystemStatus(QWidget *parent, Jugendraum *j) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->show();
 
+    // update timer
+    update_timer_ = new QTimer(this);
+    connect(update_timer_, SIGNAL(timeout()), this, SLOT(update()));
+    update_timer_->start(1000);
+    update();
+
     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
     animation->setDuration(250);
@@ -32,6 +38,7 @@ SystemStatus::SystemStatus(QWidget *parent, Jugendraum *j) :
 SystemStatus::~SystemStatus()
 {
     qDebug() << Q_FUNC_INFO;
+    delete update_timer_;
     delete ui_;
 }
 
@@ -53,4 +60,21 @@ void SystemStatus::on_pushButton_back_released()
     animation->setEndValue(QRect(-400,0,400,480));
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+QColor SystemStatus::makeColor(double val, double high, double crit)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    return QColor((val > high) ? 255 : 0,
+                  (val > crit) ? 0 : 255,
+                  0);
+}
+
+void SystemStatus::update()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QJsonDocument curr = hw::readUDP(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT);
+    qDebug() << curr;
 }

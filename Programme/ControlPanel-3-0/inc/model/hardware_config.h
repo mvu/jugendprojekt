@@ -16,6 +16,9 @@
 #define SLIDER_STANDBY_AFTER_S      10      // nach wie vielen Sekunden der Slider in den Standby-Modus geht
 #define SLIDER_STANDBY_CYCLE_MS     1000    // wie oft die Sliderposition im Standby-Modus gelesen wird
 
+// UDP Verbindung zum Temperatur service
+#define TEMPERATUR_SERVICE_PORT     9091
+
 // update Zyklus für die gesamte Hardware
 #define HW_UPDATE_INTERVAL_MS       5000
 

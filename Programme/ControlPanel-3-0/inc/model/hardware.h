@@ -93,11 +93,19 @@ namespace hw
      * \note Der Client muss den Wert als high- und low-byte senden, nicht
      *      in utf8-encoding
      * \details Wenn der udp_socket bekannt (d.h. als interne Variable existiert)
-     *      ist, wir dieser verwendet und damit sichergestellt, dass das die
+     *      ist, wird dieser verwendet und damit sichergestellt, dass das die
      *      empfangenen Daten vom gewünschten Sender stammen
      * \todo Verhalten bei Lesefehler
      */
     int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
+
+    /*!
+     * \brief Liefert ein QJsonDocument über UDP
+     * \param ip IP des Clients
+     * \param port Port des Clients
+     * \return Das empfangene json file
+     */
+    QJsonDocument readUDP(QHostAddress ip, quint16 port);
 
     /*!
      * \brief Temporäre Lösung; Liefert True wenn die Slider nicht geantwortet haben
