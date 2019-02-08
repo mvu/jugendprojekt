@@ -20,6 +20,12 @@ MenueMedien::MenueMedien(QWidget *parent, Jugendraum *j) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->show();
 
+    // initialisiere timer zum updaten der Uhrzeit
+    clock_timer_ = new QTimer(this);
+    connect(clock_timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
+    clock_timer_->start(1000);
+    updateTime();
+
     // slide-in Animation
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
     animation->setDuration(250);
@@ -64,4 +70,11 @@ void MenueMedien::on_pushButton_back_released()
     animation->setEndValue(QRect(-400,0,400,480));
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void MenueMedien::updateTime()
+{
+    // qDebug() << Q_FUNC_INFO;
+
+    ui_->label_clock->setText(QDateTime::currentDateTime().toString("hh:mm"));
 }

@@ -6,6 +6,8 @@
 #define MENUE_MEDIEN_H
 
 #include <QDialog>
+#include <QTimer>
+#include <QDateTime>
 #include <QDebug>
 
 
@@ -35,10 +37,14 @@ private slots:
     void on_pushButton_pc_released();
     void on_pushButton_back_released();
 
+    void updateTime();
+
 private:
     Ui::MenueMedien *ui_;
     Jugendraum *jugendraum_;
     EinstellungAudio *einstellung_audio_;
+
+    QTimer *clock_timer_;
    
 };
 

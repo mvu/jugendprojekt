@@ -64,12 +64,17 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border: 0px solid white;
-background-color:rgba(0,0,0,100);
-color:white;</string>
+       <string notr="true">QPushButton {
+	border:none;
+	color:white;
+	background-color: rgba(0,0,0,100);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,150);
+}</string>
       </property>
       <property name="text">
-       <string>Audio (noch deaktiviert)</string>
+       <string>Audio (nicht mehr deaktiviert)</string>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -90,9 +95,14 @@ color:white;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border: 0px solid white;
-background-color:rgba(0,0,0,100);
-color:white;</string>
+       <string notr="true">QPushButton {
+	border:none;
+	color:white;
+	background-color: rgba(0,0,0,100);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,150);
+}</string>
       </property>
       <property name="text">
        <string>Beamer an</string>
@@ -119,9 +129,14 @@ color:white;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border: 0px solid white;
-background-color:rgba(0,0,0,100);
-color:white;</string>
+       <string notr="true">QPushButton {
+	border:none;
+	color:white;
+	background-color: rgba(0,0,0,100);
+}
+QPushButton:pressed {
+	background-color: rgba(0,0,0,150);
+}</string>
       </property>
       <property name="text">
        <string>PC an</string>
