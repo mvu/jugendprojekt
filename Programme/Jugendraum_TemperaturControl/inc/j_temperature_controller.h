@@ -62,6 +62,18 @@ public:
     QString getName();
 
     /*!
+     * \brief Liefert die Temperatur, bei der der Lüfter auf 100 % läuft
+     * \return Temperatur in °C
+     */
+    double getTempHigh() {return temp_high_;}
+
+    /*!
+     * \brief Liefert die Temperatur, die als kritisch angesehen wird
+     * \return Temperatur in °C
+     */
+    double getTempCritical() {return temp_crit_;}
+
+    /*!
      * \brief Setzt eine neue Lüftergeschwindigkeit
      * \param val Geschwindigkeit von 0 (aus) bis 100 (voll an)
      * \details Die neue Geschwindigkeit wird nur dann an die hardware weiter

@@ -67,6 +67,8 @@ void TemperatureManager::controlPanelRequest()
         {
             QJsonObject tmp;
             tmp.insert("Temperature", tc->getTemperature());
+            tmp.insert("TempHigh", tc->getTempHigh());
+            tmp.insert("TempCritical", tc->getTempCritical());
             tmp.insert("FanSpeed", tc->getFanSpeed());
             jo.insert(tc->getName(), tmp);
         }
