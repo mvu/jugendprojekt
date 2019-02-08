@@ -11,6 +11,7 @@
 
 #include "inc/model/jugendraum.h"
 #include "inc/model/rgb_streifen.h"
+#include "inc/model/j_slider.h"
 
 namespace Ui {
 class EinstellungRGBDecke;
@@ -19,7 +20,7 @@ class EinstellungRGBDecke;
 /*!
  * \brief Klasse der GUI zur Einstellung der Decken-RGBs
  * \details
- * \todo Slider einbauen: Erst Software zum Testen, später Hardware
+ * \todo Software Slider mit ihren Handlern entfernen
  */
 class EinstellungRGBDecke : public QDialog
 {
@@ -57,7 +58,14 @@ private slots:
     void on_pushButton_on_off_released();
     void on_pushButton_back_released();
 
+    void sliderRedChanged(int value);
+    void sliderGreenChanged(int value);
+    void sliderBlueChanged(int value);
     
+    // for testing purpose only
+    void on_RSlider_valueChanged(int value);
+    void on_GSlider_valueChanged(int value);
+    void on_BSlider_valueChanged(int value);
     
 private:
     // Überprüft, ob eine Gruppe ausgewählt ist
@@ -72,6 +80,10 @@ private:
     Ui::EinstellungRGBDecke *ui_;
     Jugendraum *jugendraum_;
     QList<QPushButton *> push_buttons_rgb_, push_buttons_groups_;
+    JSlider* slider_red_;
+    JSlider* slider_green_;
+    JSlider* slider_blue_;
+    
 };
 
 #endif // EINSTELLUNG_RGB_DECKE_H

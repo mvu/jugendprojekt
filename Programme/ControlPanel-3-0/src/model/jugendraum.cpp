@@ -51,6 +51,12 @@ Jugendraum::~Jugendraum()
     delete paletten_licht;
     delete theken_licht;
     delete wand_rgb;
+    
+    for (auto streifen: hauptlicht)
+        delete streifen;
+        
+    for (auto rgb_streifen: rgb_deckenlicht)
+        delete rgb_streifen;
 
     update_timer_->stop();
     delete update_timer_;
