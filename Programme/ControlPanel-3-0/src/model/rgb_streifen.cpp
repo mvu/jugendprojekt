@@ -30,6 +30,7 @@ void RGBStreifen::setRedValue(int value)
     if (allow_change_)
     {
         red_value_ = value;
+        rgb_is_on_ = (red_value_ + green_value_ + blue_value_) != 0;
     
         // add update function to list if it isn't already in there
         UpdateFunc updater = [this](){};
@@ -44,6 +45,7 @@ void RGBStreifen::setGreenValue(int value)
     if (allow_change_)
     {
         green_value_ = value;
+        rgb_is_on_ = (red_value_ + green_value_ + blue_value_) != 0;
     
         // add update function to list if it isn't already in there
         UpdateFunc updater = [this](){};
@@ -59,6 +61,7 @@ void RGBStreifen::setBlueValue(int value)
     if (allow_change_)
     {
         blue_value_ = value;
+        rgb_is_on_ = (red_value_ + green_value_ + blue_value_) != 0;
     
         // add update function to list if it isn't already in there
         UpdateFunc updater = [this](){};

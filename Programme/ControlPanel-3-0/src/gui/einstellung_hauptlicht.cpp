@@ -240,7 +240,7 @@ void EinstellungHauptlicht::on_pushButton_on_off_released()
     for (auto streifen: jugendraum_->hauptlicht)
     {
         // set new state (super ugly, uses gui to transport information)
-        streifen->setOn(ui_->pushButton_on_off->text() == "Aus" ? false : true);
+        streifen->setOn(ui_->pushButton_on_off->text() != "Aus" );
     }
 
     checkOnOffState();

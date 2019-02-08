@@ -342,14 +342,20 @@ void EinstellungRGBDecke::on_pushButton_group_2_released()
 void EinstellungRGBDecke::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
-    
+ 
     // will only affect selected ones
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
     {
         RGBStreifen* rgb_streifen = jugendraum_->rgb_deckenlicht[i];
-        // set new state by inverting old, does this work??
-        rgb_streifen->setRGBOn(not rgb_streifen->RGBisOn());
-        setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);
+        // set new state by reading labed of button (is a bit ugly because the information is passed through the gui)
+        rgb_streifen->setRGBOn(ui_->pushButton_on_off->text() == "An");
+        // update gui
+        if (push_buttons_rgb_[i]->isChecked())
+        {
+            if (not rgb_streifen->RGBisOn()) { setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);}
+            else { updateButtonBackgrounds();}
+        }
+        
     }
     
     checkOnOffState();
@@ -460,7 +466,9 @@ void EinstellungRGBDecke::updateButtonBackgrounds()
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
     {   
         RGBStreifen* streifen = jugendraum_->rgb_deckenlicht[i];
-        setButtonBackground(push_buttons_rgb_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
+        // update background only if it is on
+        if (streifen->RGBisOn())
+            setButtonBackground(push_buttons_rgb_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
     }
 }
 
