@@ -16,6 +16,12 @@ namespace hw
         QList<QByteArray> slider_setpoints, slider_analogs, slider_actives;
         // udp
         QUdpSocket* udp_slider_ = new QUdpSocket();
+
+        /*!
+         * \brief sliderless_ used temporarily to disable slider features if they are not hooked up
+         * ny slider-related function will return 0
+         */
+        bool sliderless_ = false;
     }
 }
 
@@ -49,6 +55,8 @@ void hw::init()
         for (int i = 0; i <  4; i++) { slider_setpoints.append(nullptr); }
         for (int i = 4; i <  8; i++) { slider_analogs.append(nullptr); }
         for (int i = 8; i < 12; i++) { slider_actives.append(nullptr); }
+
+        sliderless_ = true;
     }
 }
 
@@ -153,4 +161,11 @@ int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
         qDebug() << "Failed to load Arduino's registers!";
     }
     return tmp;
+}
+
+bool hw::sliderless()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    return sliderless_;
 }

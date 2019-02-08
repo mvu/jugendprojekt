@@ -27,10 +27,10 @@ namespace hw
     * \todo Verhalten bei Lesefehler der Register ausdenken und implementieren
     */
     void init();
-    
+
     /*!
      * \brief Gibt 'true' zurück, wenn das Gerät an ist
-     * \param bank Unterscheidet PORTA und PORTB 
+     * \param bank Unterscheidet PORTA und PORTB
      * \param bit Position des Bits in der Bank
      * \return Zustand
      * \details Liest den Port des MCP23017 und verknüpft diesen mit dem bit
@@ -38,7 +38,7 @@ namespace hw
      * \todo erneuter Leseversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     bool readState(uint8_t bank, uint8_t bit);
-    
+
     /*!
      * \brief Schaltet Geräte an und aus
      * \param bank Unterscheidet PORTA und PORTB
@@ -47,15 +47,15 @@ namespace hw
      * \todo erneuter Schreibversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     void writeState(uint8_t bank, uint8_t bit, bool state);
-    
+
     /*!
-     * \brief Gibt den Wert des Registers repräsentiert durch einen Wert zwischen 0 und 100 zurück 
+     * \brief Gibt den Wert des Registers repräsentiert durch einen Wert zwischen 0 und 100 zurück
      * \return Prozentualer Registerwert
      * \param reg Registen, dessen Wert ausgelesen wird
      * \todo erneuter Leseversuch bei Fehlschlag des ersten, wie viele Versuche?, log?
      */
     int readValue(uint8_t reg);
-    
+
     /*!
      * \brief Schreibt einen Wert, der aus dem übergebenen Wert zwischen 0 und 100 errechnet wird, in ein Register
      * \param reg Register, in das geschrieben wird
@@ -98,6 +98,13 @@ namespace hw
      * \todo Verhalten bei Lesefehler
      */
     int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
+
+    /*!
+     * \brief Temporäre Lösung; Liefert True wenn die Slider nicht geantwortet haben
+     * \return True = keine Slider verfügbar
+     * \details quick'n'dirty: kann verwndet werden, um auf der GUI Knöpfe zu deaktivieren
+     */
+   bool sliderless();
 }
 
 #endif // HARDWARE_H

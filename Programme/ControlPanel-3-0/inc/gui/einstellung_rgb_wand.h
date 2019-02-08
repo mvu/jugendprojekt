@@ -17,6 +17,7 @@ class EinstellungRGBWand;
 
 /*!
  * \brief Klasse für GUI der Einstellungen der RGB an der Wand
+ * \todo debug-labels in der GUI entfernen
  */
 
 class EinstellungRGBWand : public QDialog

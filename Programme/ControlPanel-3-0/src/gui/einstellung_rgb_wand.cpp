@@ -76,23 +76,29 @@ void EinstellungRGBWand::on_pushButton_set_color_toggled(bool checked)
         // activate rgb, so that the changes take immediate effect
         ui_->pushButton_on_off->setChecked(true);
 
-        // create the sliders
-        slider_red_ =   new JSlider(this, 2, jugendraum_->wand_rgb->getRedValue());
-        slider_green_ = new JSlider(this, 3, jugendraum_->wand_rgb->getGreenValue());
-        slider_blue_ =  new JSlider(this, 4, jugendraum_->wand_rgb->getBlueValue());
-        connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
-        connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
-        connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+        if (not hw::sliderless())
+        {
+            // create the sliders
+            slider_red_ =   new JSlider(this, 2, jugendraum_->wand_rgb->getRedValue());
+            slider_green_ = new JSlider(this, 3, jugendraum_->wand_rgb->getGreenValue());
+            slider_blue_ =  new JSlider(this, 4, jugendraum_->wand_rgb->getBlueValue());
+            connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+            connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+            connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+        }
     }
     else
     {
-        // delete the sliders
-        disconnect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
-        disconnect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
-        disconnect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
-        delete slider_red_;
-        delete slider_green_;
-        delete slider_blue_;
+        if (not hw::sliderless())
+        {
+            // delete the sliders
+            disconnect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+            disconnect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+            disconnect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+            delete slider_red_;
+            delete slider_green_;
+            delete slider_blue_;
+        }
     }
 }
 
