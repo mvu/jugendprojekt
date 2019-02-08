@@ -8,6 +8,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QDebug>
+#include <QDateTime>
 
 #include "inc/gui/menue_licht.h"
 #include "inc/gui/menue_medien.h"
@@ -21,7 +22,7 @@ class Startseite;
 
 /*!
  * \brief GUI: Startseite
- * \todo Update von Uhr und Datum
+ * \todo Laden der Jugend- / Teenkreis-Einstellungen
  */
 class Startseite : public QMainWindow
 {
@@ -38,12 +39,16 @@ private slots:
     void on_pushButton_media_released();
     void on_pushButton_system_released();
 
+    void updateDateTime();
+
 private:
     Ui::Startseite *ui_;
     MenueLicht *menu_light_;
     MenueMedien *menu_media_;
     SystemStatus *system_status_;
     Jugendraum *jugendraum_;
+
+    QTimer *clock_timer_;
 };
 
 #endif // STARTSEITE_H

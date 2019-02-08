@@ -10,7 +10,6 @@
 #include <QDebug>
 #include <iostream>
 #include <QString>
-#include <QThread>
 
 #include "hardware.h"
 #include "j_element.h"
@@ -62,7 +61,7 @@ public:
      */
     QList<HauptlichtStreifen*> hauptlicht;
 private:
-    QTimer *update_timer_;              //!< Kontrolliert den update-Zyklus der Hardware
+    QTimer *update_timer_;  //!< Kontrolliert den update-Zyklus der Hardware
 
 signals:
 
