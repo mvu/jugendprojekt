@@ -57,32 +57,9 @@ QByteArray hw::getSensorRegister(int sensor)
     return registers.at(sensor - 1);
 }
 
-int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
+double hw::readUDP(QByteArray ptr, QHostAddress ip, quint16 port)
 {
-    qDebug() << Q_FUNC_INFO;
-
-    // qDebug() << "want " << reg << "from " << ip << ":" << port;
-    udp->writeDatagram(reg, ip, port);
-
-    int tmp = -1;
-    if (udp->waitForReadyRead(1000))
-    {
-        QNetworkDatagram d = udp->receiveDatagram();
-        // qDebug() << "sender = " << d.senderAddress() << ":" << d.senderPort() << ", data: " << d.data();
-        QByteArray raw = d.data();
-        if (raw.length() == 2)
-        {
-            tmp = (uint8_t(raw.at(0)) << 8) + uint8_t(raw.at(1));
-        }
-        else
-        {
-            qDebug() << "data not as exspected, got " << d.data();
-        }
-    } else {
-        qDebug() << "Failed to read Arduino's registers!";
-    }
-
-    return tmp;
+    return 0;
 }
 
 void hw::writeUDP(QByteArray data, QHostAddress ip, quint16 port)

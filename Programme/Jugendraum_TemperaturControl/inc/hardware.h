@@ -51,15 +51,15 @@ namespace hw {
     void writeUDP(QByteArray data, QHostAddress ip, quint16 port);
 
     /*!
-    * \brief Liest einen uint16_t über UDP aus einem entfernten Register
-    * \param reg Das zu lesende Register
+    * \brief Liest einen double über UDP von einem entfernten Pointer
+    * \param ptr entfernter Pointer
     * \param ip IP des Empfängers, verwende zusammen mit port im Macro
     * \param port Port des Empfängers, verwende zusammen mit ip im Macro
-    * \return Wert des Registers als int
+    * \return Wert der Adresse, auf die der Pointer zeugt
     * \todo Verhalten bei Lesefehler implementieren
-    * \todo auf float umbauen; Arduino liefert float
+    * \todo implementieren
     */
-    int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
+    double readUDP(QByteArray ptr, QHostAddress ip, quint16 port);
 }
 
 #endif // HARDWARE_H

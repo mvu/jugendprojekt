@@ -16,6 +16,9 @@
 // update cycle in seconds
 #define UPDATE_CYCLE_S      3
 
+// noise threshold for temp sensors
+#define TEMP_NOISE_THRESHOLD 0.1
+
 // connections
 #define FAN_ONKYO           0x01
 #define FAN_PWR_SUPPLY      0x02
@@ -27,6 +30,7 @@
 #define SENSOR_CABIN        3
 #define SENSOR_PI           4
 #define SENSOR_PC           5
+#define SENSOR_PCB          6
 
 // default config params for JTemperaturController
 // These get used if the configuration file can't be found

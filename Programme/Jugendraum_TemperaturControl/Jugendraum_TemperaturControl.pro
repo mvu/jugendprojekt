@@ -14,7 +14,8 @@ SOURCES += \
     src/main.cpp \
     src/hardware.cpp \
     src/j_temperature_controller.cpp \
-    src/temperature_manager.cpp
+    src/temperature_manager.cpp \
+    src/temperature_controller_pi.cpp
 
 HEADERS += \
     inc/hardware.h \
@@ -22,7 +23,8 @@ HEADERS += \
     inc/hardware_register.h \
     inc/j_temperature_controller.h \
     inc/file_handler.h \
-    inc/temperature_manager.h
+    inc/temperature_manager.h \
+    inc/temperature_controller_pi.h
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings

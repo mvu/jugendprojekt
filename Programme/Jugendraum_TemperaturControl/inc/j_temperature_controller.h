@@ -27,39 +27,32 @@ public:
      * \brief Constructor der JTemperatureController Klasse für Gerät <b>mit</b> Lüfter
      * \param parent Erzeugendes QObject
      * \param sensor_id Sensor_id des Geräts; siehe hardware_config.h
-     * \param fan_reg Register des PCAs, das den Lüfter steuert; siehe hardware_config.h
+     * \param fan_reg Register des PCAs, das den Lüfter steuert; siehe hardware_config.h.
+     *      Für lüfterlose Controller verwende fan_reg = -1
      * \param device_name Name des Geräts
-     * \todo Min-/Max-/Threshold-/Hysterese- Werte aus Datei lesen
      */
     explicit JTemperatureController(QObject *parent = nullptr, int sensor_id = 1, int fan_reg = 0x00, QString device_name = "null");
 
-    /*!
-     * \brief Constructor der JTemperatureController Klasse für Gerät <b>ohne</b> Lüfter
-     * \param parent Erzeugendes QObject
-     * \param sensor_id Sensor_id des Geräts; siehe hardware_config.h
-     * \param device_name Name des Geräts
-     * \todo Min-/Max-/Threshold-/Hysterese- Werte aus Datei lesen
-     */
-    explicit JTemperatureController(QObject *parent = nullptr, int sensor_id = 1, QString device_name = "null");
     ~JTemperatureController();
 
     /*!
      * \brief Liefert die Temperatur des kontrollierten Geräts
      * \return Die Temperatur des kontrollierten Geräts in °C
      */
-    double getTemperature();
+    double getTemperature() {return temperature_;}
 
     /*!
-     * \brief Liefert die Lüftergeschwindigkeit von 0 bis 100
-     * \return Lüftergeschwindigkeit von 0 (aus) bis 100 (voll an)
+     * \brief Liefert die Lüftergeschwindigkeit von 0 bis 100; wenn kein Lüfter
+     *      zum Gerät dazu gehört, -1
+     * \return Lüftergeschwindigkeit von 0 (aus) bis 100 (voll an); -1 ohne Lüfter
      */
-    int getFanSpeed();
+    int getFanSpeed() {return (has_fan_) ? fan_speed_ : -1;}
 
     /*!
      * \brief Liefert den Namen des Gerätes
      * \return Name des Gerätes
      */
-    QString getName();
+    QString getName() {return device_name_;}
 
     /*!
      * \brief Liefert die Temperatur, bei der der Lüfter auf 100 % läuft
@@ -95,13 +88,19 @@ public:
      */
     void saveConfigToFile(QString filename);
 
+    /*!
+     * \brief Startet den JTemperaturController. Es wird einmal pro Sekunde die neue
+     *      Temperatur eingelesen und der Lüfter entsprechend nachgeregelt.
+     */
+    void start();
+
 private slots:
     /*!
      * \brief Holt sich die neue Temperatur und passt die Lüftergeschwindigkeit an
      */
     void update();
 
-private:
+protected:
     /*!
      * \brief Berechnet Lüftergeschwindigkeit ausgehend von Temperatur,
      *      Min-/Max-Werten für Lüftergeschwindigkeiten und High-/Critical-Werten der
@@ -110,6 +109,17 @@ private:
      * \return erforderliche Lüftergeschwindigkeit von 0 (aus) bis 100 (voll an)
      */
     int calculateFanSpeed(double temperature);
+
+    /*!
+     * \brief Initialisiert den Controller
+     */
+    virtual void init();
+
+    /*!
+     * \brief Holt die aktuelle Temperatur von der Hardware
+     * \return aktuelle Temperatur
+     */
+    virtual double readTemperature();
 
     bool has_fan_;
     int sensor_id_, fan_reg_;
