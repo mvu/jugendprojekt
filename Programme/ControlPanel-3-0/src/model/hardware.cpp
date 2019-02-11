@@ -16,6 +16,7 @@ namespace hw
         QList<QByteArray> slider_setpoints, slider_analogs, slider_actives;
         // udp
         QUdpSocket* udp_slider_ = new QUdpSocket();
+        QUdpSocket* udp_temperatur_ = new QUdpSocket();
 
         /*!
          * \brief sliderless_ used temporarily to disable slider features if they are not hooked up
@@ -58,6 +59,10 @@ void hw::init()
 
         sliderless_ = true;
     }
+
+    // bind udp port for temperatur service to a port
+    udp_temperatur_->bind(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT);
+    readUDP(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT);
 }
 
 bool hw::readState(uint8_t bank, uint8_t bit)
@@ -112,6 +117,7 @@ void hw::writeUDP(QByteArray data, QHostAddress ip, quint16 port)
      */
     QUdpSocket* udp;
     if ((ip == QHostAddress(SLIDER_IP)) && (port == SLIDER_PORT)) udp = udp_slider_;
+    else if ((ip == QHostAddress::LocalHost) && (port == TEMPERATUR_SERVICE_PORT)) udp = udp_temperatur_;
     else udp = new QUdpSocket();
 
     // transaction
@@ -139,6 +145,7 @@ int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
      */
     QUdpSocket* udp;
     if ((ip == QHostAddress(SLIDER_IP)) && (port == SLIDER_PORT)) udp = udp_slider_;
+    else if ((ip == QHostAddress::LocalHost) && (port == TEMPERATUR_SERVICE_PORT)) udp = udp_temperatur_;
     else udp = new QUdpSocket();
 
     udp->writeDatagram(reg, ip, port);
@@ -161,6 +168,29 @@ int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
         qDebug() << "Failed to load Arduino's registers!";
     }
     return tmp;
+}
+
+QJsonDocument hw::readUDP(QHostAddress ip, quint16 port)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QUdpSocket* udp;
+    if ((ip == QHostAddress::LocalHost) && (port == TEMPERATUR_SERVICE_PORT)) udp = udp_temperatur_;
+    else udp = new QUdpSocket();
+
+    // send anything to trigger transaction
+    udp->writeDatagram(QByteArray("x"), ip, port);
+
+    // read the answer
+    QJsonDocument jo;
+    if (udp->waitForReadyRead(1000))
+    {
+        QNetworkDatagram d = udp->receiveDatagram();
+        jo = QJsonDocument::fromJson(d.data());
+    } else {
+        qDebug() << "Failed to read temperatures!";
+    }
+    return jo;
 }
 
 bool hw::sliderless()

@@ -6,7 +6,8 @@
 #define HAUPTLICHT_STREIFEN_H
 
 #include <QDebug>
-#include <string>
+#include <QString>
+// #include <string>
 
 #include "inc/model/j_element.h"
 #include "inc/model/hardware.h"

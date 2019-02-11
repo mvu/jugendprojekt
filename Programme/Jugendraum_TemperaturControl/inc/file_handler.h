@@ -93,8 +93,8 @@ public:
      */
     template<typename T>
     void writeToFile(QString qparam, T value){
-        std::string param = qparam.toStdString();
         std::string tmp_filename = "tmp.txt";
+        std::string param = qparam.toStdString();
         std::ofstream tmp;
         std::string comment, line;
         size_t pos, pos2;
