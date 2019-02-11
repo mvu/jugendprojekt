@@ -41,9 +41,10 @@
 *.autosave
 
 # Doxygen
-Programme/ControlPanel-3-0/doc/html/
+html/
 
 # Folders
 build/
+Test*/
 **build-*/
 Testprogramme/
