@@ -33,11 +33,11 @@ EinstellungRGBDecke::EinstellungRGBDecke(QWidget *parent, Jugendraum *j) :
     // erzeuge Slider
     if (not hw::sliderless())
     {
-        slider_red_ = new JSlider(this, 1, 0);
+        slider_red_ = new JSlider(this, 2, 0);
         connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
-        slider_green_ = new JSlider(this, 2, 0);
+        slider_green_ = new JSlider(this, 3, 0);
         connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
-        slider_blue_ = new JSlider(this, 3, 0);
+        slider_blue_ = new JSlider(this, 4, 0);
         connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
     }
 }
@@ -45,8 +45,6 @@ EinstellungRGBDecke::EinstellungRGBDecke(QWidget *parent, Jugendraum *j) :
 EinstellungRGBDecke::~EinstellungRGBDecke()
 {
     qDebug() << Q_FUNC_INFO;
-
-    delete ui_;
     
     if (not hw::sliderless())
     {
@@ -54,6 +52,11 @@ EinstellungRGBDecke::~EinstellungRGBDecke()
         delete slider_green_;
         delete slider_blue_;
     }
+
+    for (QPushButton* pb : push_buttons_rgb_)
+        pb->setChecked(false);
+
+    delete ui_;
 }
 
 void EinstellungRGBDecke::InitButtons()
@@ -507,7 +510,9 @@ void EinstellungRGBDecke::checkOnOffState()
     
     ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
     
-    // show no label if no button is active
+    // hide button if no button is active
     if (active_counter == 0)
-        ui_->pushButton_on_off->setText("");
+        ui_->pushButton_on_off->hide();
+    else
+        ui_->pushButton_on_off->show();
 }

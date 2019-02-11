@@ -112,7 +112,6 @@ void EinstellungHauptlicht::InitButtons()
 void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-
     jugendraum_->hauptlicht[0]->allowChange(checked);
     checkForGroups();
 }
@@ -336,11 +335,12 @@ void EinstellungHauptlicht::checkOnOffState()
 
     ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
 
-    // show no label if no button is active
+    // hide button if no button is active
     if (active_counter == 0)
-        ui_->pushButton_on_off->setText("");
+        ui_->pushButton_on_off->hide();
+    else
+        ui_->pushButton_on_off->show();
 }
-
 
 void EinstellungHauptlicht::sliderChanged(int value)
 {
