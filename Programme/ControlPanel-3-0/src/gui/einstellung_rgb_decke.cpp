@@ -350,15 +350,14 @@ void EinstellungRGBDecke::on_pushButton_on_off_released()
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
     {
         RGBStreifen* rgb_streifen = jugendraum_->rgb_deckenlicht[i];
-        // set new state by reading labed of button (is a bit ugly because the information is passed through the gui)
+        // set new state by reading label of button (is a bit ugly because the information is passed through the gui)
         rgb_streifen->setRGBOn(ui_->pushButton_on_off->text() == "An");
         // update gui
         if (push_buttons_rgb_[i]->isChecked())
         {
             if (not rgb_streifen->RGBisOn()) { setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);}
             else { updateButtonBackgrounds();}
-        }
-        
+        }        
     }
     
     checkOnOffState();

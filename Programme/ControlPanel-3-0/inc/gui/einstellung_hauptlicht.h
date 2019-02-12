@@ -71,6 +71,13 @@ private:
     void updateButtonBackgrounds();
     
     /*!
+     * \brief changes the background of a button
+     * \param button the background of this button will be changed
+     * \param val new value of the background brightness
+     */
+    void setButtonBackground(QPushButton* button, int val);
+    
+    /*!
      * \brief Überprüft, ob der An/Aus-Button gerade "An" oder "Aus" oder nichts anzeigt
      */
     void checkOnOffState();
