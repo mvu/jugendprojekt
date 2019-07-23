@@ -11,10 +11,10 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     // initialize the hardware
     hw::init();
 
-    // setup connection to control panel via udp on localhost
-    udp_control_panel_ = new QUdpSocket(this);
-    udp_control_panel_->bind(CONTROL_PANEL_UDP);
-    connect(udp_control_panel_, SIGNAL(readyRead()), this, SLOT(controlPanelRequest()));
+    // Create interface on localhost for other programms to get the data
+    udp_control_ = new QUdpSocket(this);
+    udp_control_->bind(CONTROL_UDP);
+    connect(udp_control_, SIGNAL(readyRead()), this, SLOT(controlRequest()));
 
     // create controllers
     tc_onkyo_ = new JTemperatureController(this, SENSOR_ONKYO, FAN_ONKYO, "Onkyo");
@@ -42,7 +42,7 @@ TemperatureManager::~TemperatureManager()
     delete tc_pwr_supply_;
     delete tc_pc_;
     delete tc_pi_;
-    delete udp_control_panel_;
+    delete udp_control_;
 }
 
 void TemperatureManager::saveAllToFile(QString filename)
@@ -60,21 +60,23 @@ void TemperatureManager::readAllFromFile(QString filename)
 
     for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
         tc->readConfigFromFile(filename);
-<<<<<<< Updated upstream
     tc_pi_->readConfigFromFile(filename);
-=======
-
->>>>>>> Stashed changes
 }
 
-void TemperatureManager::controlPanelRequest()
+void TemperatureManager::controlRequest()
 {
     qDebug() << Q_FUNC_INFO;
 
     // read the request to empty out the buffer
-    while (udp_control_panel_->hasPendingDatagrams())
+    while (udp_control_->hasPendingDatagrams())
     {
-        QNetworkDatagram d = udp_control_panel_->receiveDatagram();
+        // QNetworkDatagram d = udp_control_->receiveDatagram();
+        QByteArray buffer;
+        QHostAddress sender;
+        quint16 sender_port;
+
+        buffer.resize(int(udp_control_->pendingDatagramSize()));
+        udp_control_->readDatagram(buffer.data(), buffer.size(), &sender, &sender_port);
 
         // create answer
         // put all temps and fan speed into one JSON file
@@ -82,7 +84,7 @@ void TemperatureManager::controlPanelRequest()
         for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
         {
             QJsonObject tmp;
-            tmp.insert("Temperature", tc->getTemperature());
+            tmp.insert("Temperature", floor(tc->getTemperature() * 10 + 0.5)/10);   // <- supid way in C++ to round to 1 decimal place :/
             tmp.insert("TempHigh", tc->getTempHigh());
             tmp.insert("TempCritical", tc->getTempCritical());
             tmp.insert("FanSpeed", tc->getFanSpeed());
@@ -97,7 +99,7 @@ void TemperatureManager::controlPanelRequest()
         jo.insert(tc_pi_->getName(), tmp);
 
         // send the JSON file
-        udp_control_panel_->writeDatagram(QJsonDocument(jo).toJson(), d.senderAddress(), d.senderPort());
+        udp_control_->writeDatagram(QJsonDocument(jo).toJson(), sender, sender_port);
         //qDebug() << QJsonDocument(jo);
     }
 }

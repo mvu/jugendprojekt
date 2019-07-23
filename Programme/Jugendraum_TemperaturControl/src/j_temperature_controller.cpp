@@ -62,11 +62,7 @@ int JTemperatureController::calculateFanSpeed(double temperature)
 
     // Fan off when temperature lower than temp_threshold,
     // then quaratic ramp-up from fan_min @ temp_threshold to 100 @ temp_high
-<<<<<<< Updated upstream
-    int pwm = 0;
-=======
     int pwm = -1;
->>>>>>> Stashed changes
 
     if (temperature < temp_threshold_ - temp_hysteresis_){
         pwm = 0;
@@ -88,7 +84,7 @@ void JTemperatureController::init()
 {
     qDebug() << Q_FUNC_INFO;
 
-    // get the register from the arduino in necassary
+    // get the register from the arduino if necassary
     sensor_reg_= hw::getSensorRegister(sensor_id_);
 
     // setup a timer for updating
@@ -101,9 +97,7 @@ double JTemperatureController::readTemperature()
 {
     qDebug() << Q_FUNC_INFO;
 
-    // get the new temperature
-    // hw::readUDP will return float, then conversion is not necassary
-    return double(hw::readUDP(sensor_reg_, SENSORS_UDP));
+    return hw::readTemperatureUDP(sensor_reg_);
 }
 
 void JTemperatureController::saveConfigToFile(QString filename)

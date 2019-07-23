@@ -38,12 +38,12 @@ public:
      */
     void readAllFromFile(QString filename);
 private:
-    QUdpSocket * udp_control_panel_;
+    QUdpSocket * udp_control_;
     JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_, *tc_pc_, *tc_pcb_;
     TemperatureControllerPi *tc_pi_;
 
 private slots:
-    void controlPanelRequest();     //!< called by udp_control_panel's ReadyRead() signal
+    void controlRequest();     //!< called by udp_control's ReadyRead() signal
 };
 
 #endif // TEMPERATUR_MANAGER_H

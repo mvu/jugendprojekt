@@ -97,6 +97,8 @@ public:
 private slots:
     /*!
      * \brief Holt sich die neue Temperatur und passt die Lüftergeschwindigkeit an
+     * \todo Prüfen, ob Zustand der Varaiblen mit Zustand des Systems übereinstimmt
+     *      und gegebenenfalls korrigieren (+loggen)
      */
     void update();
 

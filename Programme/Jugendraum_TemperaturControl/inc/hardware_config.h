@@ -7,8 +7,8 @@
 #define HARDWARE_CONFIG_H
 
 // udp connections
-#define SENSORS_UDP         QHostAddress("192.168.1.111"), 9999
-#define CONTROL_PANEL_UDP   QHostAddress::LocalHost, 9091
+#define SENSORS_UDP         QHostAddress("192.168.188.202"), 9999
+#define CONTROL_UDP         QHostAddress::LocalHost, 9091
 
 // pca address
 #define PCA9635_ADDR        0x70
@@ -25,12 +25,12 @@
 #define FAN_CABIN           0x03
 #define FAN_PI              0x04
 
-#define SENSOR_ONKYO        1
-#define SENSOR_PWR_SUPPLY   2
-#define SENSOR_CABIN        3
-#define SENSOR_PI           4
-#define SENSOR_PC           5
-#define SENSOR_PCB          6
+#define SENSOR_ONKYO        0
+#define SENSOR_PWR_SUPPLY   1
+#define SENSOR_CABIN        2
+#define SENSOR_PI           X
+#define SENSOR_PC           3
+#define SENSOR_PCB          4
 
 // default config params for JTemperaturController
 // These get used if the configuration file can't be found

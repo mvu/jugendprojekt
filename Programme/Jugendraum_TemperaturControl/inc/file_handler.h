@@ -20,7 +20,7 @@ class FileHandler
 public:
     /*!
      * \brief Konstruktur 
-     * \param filename Name der Datei, die behandelt wird. Muss den gesamten absoluten oder relativen Pfad enthalten.
+     * \param filename Name der Datei, die behandelt wird. Muss den absoluten oder relativen Pfad enthalten.
      */
     FileHandler(QString filename){
         filename_ = filename.toStdString();
@@ -90,6 +90,7 @@ public:
      * Es wird nicht überprüft, ob der Wert, der in die Datei geschrieben wird, einen falschen Typ hat und somit beim nächsten Lesen zu einem Fehler führt.
      * \param qparam Name der Variable, deren Wert in die Datei geschrieben werden soll. Exakt dieser String wird in der Datei überschrieben bzw. neu angelegt.
      * \param value Wert von 'param', der in die Datei geschrieben wird.
+     * \badcode Beim Schreiben wird eine Leerzeile vor dem Eintrag erzeugt
      */
     template<typename T>
     void writeToFile(QString qparam, T value){
