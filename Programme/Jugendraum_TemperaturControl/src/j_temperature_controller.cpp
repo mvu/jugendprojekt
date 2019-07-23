@@ -62,7 +62,11 @@ int JTemperatureController::calculateFanSpeed(double temperature)
 
     // Fan off when temperature lower than temp_threshold,
     // then quaratic ramp-up from fan_min @ temp_threshold to 100 @ temp_high
+<<<<<<< Updated upstream
     int pwm = 0;
+=======
+    int pwm = -1;
+>>>>>>> Stashed changes
 
     if (temperature < temp_threshold_ - temp_hysteresis_){
         pwm = 0;

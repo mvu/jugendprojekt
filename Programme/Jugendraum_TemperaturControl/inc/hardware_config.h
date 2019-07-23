@@ -7,7 +7,7 @@
 #define HARDWARE_CONFIG_H
 
 // udp connections
-#define SENSORS_UDP         QHostAddress("192.168.2.101"), 9999
+#define SENSORS_UDP         QHostAddress("192.168.1.111"), 9999
 #define CONTROL_PANEL_UDP   QHostAddress::LocalHost, 9091
 
 // pca address

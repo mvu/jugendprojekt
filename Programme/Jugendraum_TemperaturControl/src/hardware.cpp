@@ -24,7 +24,7 @@ void hw::init()
     // create a udp socket to communicate with the arduino
     udp = new QUdpSocket();
     // and get the addresses
-    udp->writeDatagram(QByteArray("x"), SENSORS_UDP);
+    udp->writeDatagram(QByteArray("0"), SENSORS_UDP);
     if (udp->waitForReadyRead(1000))
     {
         // store addresses

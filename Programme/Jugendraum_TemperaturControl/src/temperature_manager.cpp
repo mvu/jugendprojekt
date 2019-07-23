@@ -1,6 +1,6 @@
 /*!
  * \file temperature_manager.h
- * \brief Header der TemperatureManager Klasse
+ * \brief Source der TemperatureManager Klasse
  */
 #include "inc/temperature_manager.h"
 
@@ -60,7 +60,11 @@ void TemperatureManager::readAllFromFile(QString filename)
 
     for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
         tc->readConfigFromFile(filename);
+<<<<<<< Updated upstream
     tc_pi_->readConfigFromFile(filename);
+=======
+
+>>>>>>> Stashed changes
 }
 
 void TemperatureManager::controlPanelRequest()
