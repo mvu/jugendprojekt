@@ -4,7 +4,7 @@
 #include "temperatur_sensor.h"
 
 byte mac[] = { 0xAA, 0xE5, 0xCe, 0xC4, 0x4F, 0xF0};
-IPAddress ip(192, 168, 1, 111);
+IPAddress ip(192, 168, 188, 202);
 unsigned int local_port = 9999;
 
 uint8_t packet_buffer[UDP_TX_PACKET_MAX_SIZE];
