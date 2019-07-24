@@ -1,0 +1,14 @@
+[Unit]
+Description=Temperaturüberwachung Jugendraum Service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/home/pi/release/jTemperature
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target
