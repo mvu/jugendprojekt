@@ -48,11 +48,20 @@ void JTemperatureController::update()
     // get the new temperature
     double new_temperature = readTemperature();
 
-    // set a new fan speed if necassary
+    // only do something on relevant changes
     if (fabs(new_temperature - temperature_) > TEMP_NOISE_THRESHOLD)
     {
-        temperature_ = new_temperature;
+        // log if temperature exceeds limits
+        if ((new_temperature >= temp_high_) && (temperature_ < temp_high_)) log(LOGFILE, QString("[ WARNUNG ] temp_high (%1 °C) erreicht für %2").arg(temp_high_).arg(device_name_));
+        else if ((new_temperature < temp_high_) && (temperature_ >= temp_high_)) log(LOGFILE, QString("[ ENTWARNUNG ] temp_high (%1 °C) wieder unterschritten für %2").arg(temp_high_).arg(device_name_));
+        if ((new_temperature >= temp_crit_) && (temperature_ < temp_crit_)) log(LOGFILE, QString("[ ALARM ] temp_crit (%1 °C) erreicht für %2").arg(temp_crit_).arg(device_name_));
+        else if ((new_temperature < temp_crit_) && (temperature_ >= temp_crit_)) log(LOGFILE, QString("[ ENTWARNUNG ] temp_crit (%1 °C) unterschritten für %2").arg(temp_crit_).arg(device_name_));
+
+        // change fan speed
         if (has_fan_) setFanSpeed(calculateFanSpeed(temperature_));
+
+        // store reading
+        temperature_ = new_temperature;
     }
 }
 
@@ -110,11 +119,11 @@ void JTemperatureController::saveConfigToFile(QString filename)
 
     // store
     FileHandler* fh = new FileHandler(filename);
-    fh->writeToFile(tmp_name.append("::temp_high_"), temp_high_); tmp_name = device_name_;
-    fh->writeToFile(tmp_name.append("::temp_crit_"), temp_crit_); tmp_name = device_name_;
-    fh->writeToFile(tmp_name.append("::temp_threshold_"), temp_threshold_); tmp_name = device_name_;
-    fh->writeToFile(tmp_name.append("::temp_hysteresis_"), temp_hysteresis_); tmp_name = device_name_;
-    fh->writeToFile(tmp_name.append("::fan_min_"), fan_min_); tmp_name = device_name_;
+    fh->writeParameterToFile(tmp_name.append("::temp_high_"), temp_high_); tmp_name = device_name_;
+    fh->writeParameterToFile(tmp_name.append("::temp_crit_"), temp_crit_); tmp_name = device_name_;
+    fh->writeParameterToFile(tmp_name.append("::temp_threshold_"), temp_threshold_); tmp_name = device_name_;
+    fh->writeParameterToFile(tmp_name.append("::temp_hysteresis_"), temp_hysteresis_); tmp_name = device_name_;
+    fh->writeParameterToFile(tmp_name.append("::fan_min_"), fan_min_); tmp_name = device_name_;
     delete fh;
 }
 
@@ -137,11 +146,11 @@ void JTemperatureController::readConfigFromFile(QString filename)
     try
     {
         // read
-        temp_high_ = fh->readFromFile<double>(tmp_name.append("::temp_high_")); tmp_name = device_name_;
-        temp_crit_ = fh->readFromFile<double>(tmp_name.append("::temp_crit_")); tmp_name = device_name_;
-        temp_threshold_ = fh->readFromFile<double>(tmp_name.append("::temp_threshold_")); tmp_name = device_name_;
-        temp_hysteresis_ = fh->readFromFile<double>(tmp_name.append("::temp_hysteresis_"));  tmp_name = device_name_;
-        fan_min_ = fh->readFromFile<int>(tmp_name.append("::fan_min_")); tmp_name = device_name_;
+        temp_high_ = fh->readParameterFromFile<double>(tmp_name.append("::temp_high_")); tmp_name = device_name_;
+        temp_crit_ = fh->readParameterFromFile<double>(tmp_name.append("::temp_crit_")); tmp_name = device_name_;
+        temp_threshold_ = fh->readParameterFromFile<double>(tmp_name.append("::temp_threshold_")); tmp_name = device_name_;
+        temp_hysteresis_ = fh->readParameterFromFile<double>(tmp_name.append("::temp_hysteresis_"));  tmp_name = device_name_;
+        fan_min_ = fh->readParameterFromFile<int>(tmp_name.append("::fan_min_")); tmp_name = device_name_;
     }
     catch (std::domain_error& e)
     {

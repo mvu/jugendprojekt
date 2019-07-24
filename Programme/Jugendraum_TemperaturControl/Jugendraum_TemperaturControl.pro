@@ -3,26 +3,29 @@ QT -= gui
 QT += network
 
 CONFIG += c++11
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
-TARGET = Jugendraum_TemperaturControl
+TARGET = jTemperature
 CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
 SOURCES += \
-    src/main.cpp \
     src/hardware.cpp \
     src/j_temperature_controller.cpp \
+    src/log.cpp \
+    src/main.cpp \
     src/temperature_manager.cpp \
     src/temperature_controller_pi.cpp
 
 HEADERS += \
+    inc/file_handler.h \
     inc/hardware.h \
     inc/hardware_config.h \
     inc/hardware_register.h \
     inc/j_temperature_controller.h \
-    inc/file_handler.h \
+    inc/log.h \
     inc/temperature_manager.h \
     inc/temperature_controller_pi.h
 

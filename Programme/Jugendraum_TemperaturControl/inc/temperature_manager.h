@@ -10,9 +10,11 @@
 #include <QtNetwork>
 #include <QTimer>
 #include <QJsonObject>
+#include <QDateTime>
 
 #include "inc/j_temperature_controller.h"
 #include "inc/temperature_controller_pi.h"
+#include "inc/log.h"
 
 /*!
  * \brief Klasse, die alle Sensoren und Lüfter verteilt und die einzelnen
@@ -43,6 +45,8 @@ private:
     JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_, *tc_pc_, *tc_pcb_;
     JTemperatureController *tc_test_;
     TemperatureControllerPi *tc_pi_;
+
+    QString conf_file_, log_file_;
 
 private slots:
     void controlRequest();     //!< called by udp_control's ReadyRead() signal

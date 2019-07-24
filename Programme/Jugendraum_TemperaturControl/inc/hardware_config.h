@@ -6,6 +6,8 @@
 #ifndef HARDWARE_CONFIG_H
 #define HARDWARE_CONFIG_H
 
+// file locations
+#define LOGFILE             "/home/pi/log/temperature.log"
 // udp connections
 #define SENSORS_UDP         QHostAddress("192.168.188.202"), 9999
 #define CONTROL_UDP         QHostAddress::LocalHost, 9091
@@ -20,20 +22,20 @@
 #define TEMP_NOISE_THRESHOLD 0.1
 
 // connections
-#define FAN_ONKYO           0x0e
-#define FAN_PWR_SUPPLY      0x0e
-#define FAN_CABIN           0x0e
-#define FAN_PI              0x0e
-
+#define FAN_CABIN           0x0a
+#define FAN_ONKYO           0x0b
+#define FAN_PWR_SUPPLY      0x0c
 #define FAN_TEST            0x0f
-#define SENSOR_TEST         3
+//#define FAN_PI              0x0e
 
-#define SENSOR_ONKYO        0
-#define SENSOR_PWR_SUPPLY   1
-#define SENSOR_CABIN        2
-#define SENSOR_PI           X
-#define SENSOR_PC           3
-#define SENSOR_PCB          4
+
+#define SENSOR_CABIN        0
+#define SENSOR_ONKYO        3
+#define SENSOR_TEST         3
+#define SENSOR_PWR_SUPPLY   5
+#define SENSOR_PI           0
+#define SENSOR_PC           0
+#define SENSOR_PCB          0
 
 // default config params for JTemperaturController
 // These get used if the configuration file can't be found

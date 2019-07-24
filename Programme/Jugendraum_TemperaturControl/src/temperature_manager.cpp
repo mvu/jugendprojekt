@@ -8,6 +8,8 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
 {
     qDebug() << Q_FUNC_INFO;
 
+    conf_file_ = "/home/pi/conf/temperature_manager.cfg";
+
     // initialize the hardware
     hw::init();
 
@@ -26,12 +28,19 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     tc_test_ = new JTemperatureController(this, SENSOR_TEST, FAN_TEST, "TEST");
 
     // initialize controllers
-    readAllFromFile("/home/pi/conf/temperature_manager.cfg");
+    readAllFromFile(conf_file_);
 
     // start controllers
-    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
-        tc->start();
+    tc_onkyo_->start();
+    tc_cabin_->start();
+    tc_pwr_supply_->start();
     tc_pi_->start();
+    //tc_pc_->start();
+    //tc_pcb_->start();
+    //tc_test_->start();
+
+    // log start
+    log(LOGFILE, "[ STATUS ] Temperaturüberwachung gestartet");
 }
 
 TemperatureManager::~TemperatureManager()
@@ -46,6 +55,8 @@ TemperatureManager::~TemperatureManager()
     delete udp_control_;
 
     delete tc_test_;
+
+    log(LOGFILE, "[ STATUS ] Temperaturüberwachung geschlossen");
 }
 
 void TemperatureManager::saveAllToFile(QString filename)
@@ -87,18 +98,18 @@ void TemperatureManager::controlRequest()
         for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
         {
             QJsonObject tmp;
-            tmp.insert("Temperature", floor(tc->getTemperature() * 10 + 0.5)/10);   // <- supid way in C++ to round to 1 decimal place :/
-            tmp.insert("TempHigh", tc->getTempHigh());
             tmp.insert("TempCritical", tc->getTempCritical());
+            tmp.insert("TempHigh", tc->getTempHigh());
             tmp.insert("FanSpeed", tc->getFanSpeed());
+            tmp.insert("Temperature", floor(tc->getTemperature() * 10 + 0.5)/10);   // <- supid way in C++ to round to 1 decimal place :/
             jo.insert(tc->getName(), tmp);
         }
         // extrawurst für pi
         QJsonObject tmp;
-        tmp.insert("Temperature", tc_pi_->getTemperature());
-        tmp.insert("TempHigh", tc_pi_->getTempHigh());
         tmp.insert("TempCritical", tc_pi_->getTempCritical());
+        tmp.insert("TempHigh", tc_pi_->getTempHigh());
         tmp.insert("FanSpeed", tc_pi_->getFanSpeed());
+        tmp.insert("Temperature", tc_pi_->getTemperature());
         jo.insert(tc_pi_->getName(), tmp);
 
         // send the JSON file

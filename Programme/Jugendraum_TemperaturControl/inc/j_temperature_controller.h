@@ -14,6 +14,7 @@
 
 #include "inc/hardware.h"
 #include "inc/file_handler.h"
+#include "inc/log.h"
 
 /*!
  * \brief Basisklasse für Temperatureregler
