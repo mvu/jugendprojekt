@@ -6,9 +6,6 @@ namespace hw
     namespace
     {
         int pca9635;
-        //int WiringPiI2CSetup(uint8_t addr){return 0;}
-        //int WiringPiI2CReadReg8(int fd, uint8_t reg){return 0;}
-        //int WiringPiI2CWriteReg8(int fd, uint8_t reg, uint8_t val){return 0;}
         QList<QByteArray> registers;
         QUdpSocket* udp;
     }
@@ -21,9 +18,9 @@ void hw::init()
     // setup I2C
     pca9635 = wiringPiI2CSetup(PCA9635_ADDR);
     // configure PCA9635
-    wiringPiI2CWriteReg8(pca9635, PCA9635_MODE1, 0x00);
-    wiringPiI2CWriteReg8(pca9635, PCA9635_MODE2, 0x1D);
-    wiringPiI2CWriteReg8(pca9635, PCA9635_GRPPWM, 0x00);
+    //wiringPiI2CWriteReg8(pca9635, PCA9635_MODE1, 0x01);
+    //wiringPiI2CWriteReg8(pca9635, PCA9635_MODE2, 0x1D);
+    //wiringPiI2CWriteReg8(pca9635, PCA9635_GRPPWM, 0x00);
     // initialize all pwm outputs to 0
     for (uint8_t pwm_reg = 0x02; pwm_reg < 0x12; pwm_reg++)
     {
@@ -52,14 +49,14 @@ void hw::writePWMValue(uint8_t reg, double value)
 {
     qDebug() << Q_FUNC_INFO;
 
-    wiringPiI2CWriteReg8(pca9635, reg, (uint8_t(value * 255)));
+    wiringPiI2CWriteReg8(pca9635, reg, (uint8_t(value * 2.55)));
 }
 
 double hw::readPWMValue(uint8_t reg)
 {
     qDebug() << Q_FUNC_INFO;
 
-    return wiringPiI2CReadReg8(pca9635, reg)/255.0;
+    return wiringPiI2CReadReg8(pca9635, reg)/2.55;
 }
 
 QByteArray hw::getSensorRegister(int sensor)

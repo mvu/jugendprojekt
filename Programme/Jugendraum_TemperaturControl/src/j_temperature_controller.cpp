@@ -38,7 +38,7 @@ void JTemperatureController::setFanSpeed(int val)
 
     if (val != fan_speed_) {
         fan_speed_ = val;
-        hw::writePWMValue(fan_reg_, static_cast<uint8_t>(fan_speed_));
+        hw::writePWMValue(uint8_t(fan_reg_), fan_speed_);
     }
 }
 
@@ -74,7 +74,7 @@ int JTemperatureController::calculateFanSpeed(double temperature)
         pwm = int((100 - fan_min_)/qPow((temp_high_ - temp_threshold_), 2) * qPow((temperature - temp_threshold_), 2) + fan_min_);
     }
     else if (temperature >= temp_high_){
-        pwm = 1;
+        pwm = 100;
     }
 
     return int(pwm);

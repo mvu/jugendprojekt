@@ -37,9 +37,11 @@ public:
      * \param filename Dateiname zum Lesen
      */
     void readAllFromFile(QString filename);
+
 private:
     QUdpSocket * udp_control_;
     JTemperatureController *tc_onkyo_, *tc_cabin_, *tc_pwr_supply_, *tc_pc_, *tc_pcb_;
+    JTemperatureController *tc_test_;
     TemperatureControllerPi *tc_pi_;
 
 private slots:

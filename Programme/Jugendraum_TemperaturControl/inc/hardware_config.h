@@ -14,16 +14,19 @@
 #define PCA9635_ADDR        0x70
 
 // update cycle in seconds
-#define UPDATE_CYCLE_S      3
+#define UPDATE_CYCLE_S      1
 
 // noise threshold for temp sensors
 #define TEMP_NOISE_THRESHOLD 0.1
 
 // connections
-#define FAN_ONKYO           0x01
-#define FAN_PWR_SUPPLY      0x02
-#define FAN_CABIN           0x03
-#define FAN_PI              0x04
+#define FAN_ONKYO           0x0e
+#define FAN_PWR_SUPPLY      0x0e
+#define FAN_CABIN           0x0e
+#define FAN_PI              0x0e
+
+#define FAN_TEST            0x0f
+#define SENSOR_TEST         3
 
 #define SENSOR_ONKYO        0
 #define SENSOR_PWR_SUPPLY   1
@@ -38,6 +41,6 @@
 #define TEMP_CRIT           80
 #define TEMP_THRESHOLD      35
 #define TEMP_HYSTERESIS     5
-#define FAN_MIN             30
+#define FAN_MIN             50
 
 #endif // HARDWARE_CONFIG_H

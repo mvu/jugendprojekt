@@ -23,12 +23,13 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     tc_pc_ = new JTemperatureController(this, SENSOR_PC, -1, "PC");
     tc_pcb_ = new JTemperatureController(this, SENSOR_PCB, -1,  "PCB");
     tc_pi_ = new TemperatureControllerPi(this, "Pi");
+    tc_test_ = new JTemperatureController(this, SENSOR_TEST, FAN_TEST, "TEST");
 
     // initialize controllers
     readAllFromFile("/home/pi/conf/temperature_manager.cfg");
 
     // start controllers
-    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
+    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
         tc->start();
     tc_pi_->start();
 }
@@ -43,13 +44,15 @@ TemperatureManager::~TemperatureManager()
     delete tc_pc_;
     delete tc_pi_;
     delete udp_control_;
+
+    delete tc_test_;
 }
 
 void TemperatureManager::saveAllToFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 
-    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
+    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
         tc->saveConfigToFile(filename);
     tc_pi_->saveConfigToFile(filename);
 }
@@ -58,7 +61,7 @@ void TemperatureManager::readAllFromFile(QString filename)
 {
     qDebug() << Q_FUNC_INFO;
 
-    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
+    for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
         tc->readConfigFromFile(filename);
     tc_pi_->readConfigFromFile(filename);
 }
@@ -81,7 +84,7 @@ void TemperatureManager::controlRequest()
         // create answer
         // put all temps and fan speed into one JSON file
         QJsonObject jo;
-        for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_})
+        for (JTemperatureController* tc : {tc_onkyo_, tc_cabin_, tc_pwr_supply_, tc_pc_, tc_pcb_, tc_test_})
         {
             QJsonObject tmp;
             tmp.insert("Temperature", floor(tc->getTemperature() * 10 + 0.5)/10);   // <- supid way in C++ to round to 1 decimal place :/
