@@ -25,75 +25,75 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    src/gui/startseite.cpp \
-    src/gui/passwort.cpp \
-    src/gui/system_status.cpp \
-    src/gui/menue_licht.cpp \
-    src/gui/menue_medien.cpp \
-    src/gui/menue_speichern.cpp \
-    src/gui/einstellung_theke.cpp \
-    src/gui/einstellung_rgb_wand.cpp \
     src/gui/einstellung_audio.cpp \
     src/gui/einstellung_hauptlicht.cpp \
     src/gui/einstellung_rgb_decke.cpp \
+    src/gui/einstellung_rgb_wand.cpp \
+    src/gui/einstellung_theke.cpp \
+    src/gui/menue_licht.cpp \
+    src/gui/menue_medien.cpp \
+    src/gui/menue_speichern.cpp \
+    src/gui/passwort.cpp \
+    src/gui/startseite.cpp \
+    src/gui/system_status.cpp \
     src/model/application.cpp \
+    src/model/hardware.cpp \
+    src/model/hauptlicht_streifen.cpp \
+    src/model/i2cdevice.cpp \
+    src/model/j_element.cpp \
+    src/model/j_slider.cpp \
     src/model/jugendraum.cpp \
     src/model/main.cpp \
-    src/model/i2cdevice.cpp \
-    src/model/hardware.cpp \
-    src/model/j_element.cpp \
     src/model/paletten_licht.cpp \
-    src/model/theken_licht.cpp \
     src/model/rgb_element.cpp \
-    src/model/wand_rgb.cpp \
-    src/model/hauptlicht_streifen.cpp \
-    src/model/j_slider.cpp \
     src/model/rgb_streifen.cpp
+    src/model/theken_licht.cpp \
+    src/model/wand_rgb.cpp \
 
 HEADERS += \
-    inc/gui/startseite.h \
-    inc/gui/passwort.h \
-    inc/gui/system_status.h \
-    inc/gui/menue_licht.h \
-    inc/gui/menue_medien.h \
-    inc/gui/menue_speichern.h \
-    inc/gui/einstellung_theke.h \
-    inc/gui/einstellung_rgb_wand.h \
     inc/gui/einstellung_audio.h \
     inc/gui/einstellung_hauptlicht.h \
     inc/gui/einstellung_rgb_decke.h \
+    inc/gui/einstellung_rgb_wand.h \
+    inc/gui/einstellung_theke.h \
+    inc/gui/menue_licht.h \
+    inc/gui/menue_medien.h \
+    inc/gui/menue_speichern.h \
+    inc/gui/passwort.h \
+    inc/gui/startseite.h \
+    inc/gui/system_status.h \
     inc/model/application.h \
-    inc/model/jugendraum.h \
+    inc/model/file_handler.h \
     inc/model/hardware.h \
-    inc/model/i2cdevice.h \
     inc/model/hardware_config.h \
     inc/model/hardware_register.h \
-    inc/model/file_handler.h \
-    inc/model/j_element.h \
-    inc/model/paletten_licht.h \
-    inc/model/theken_licht.h \
-    inc/model/rgb_element.h \
-    inc/model/wand_rgb.h \
-    inc/model/j_slider.h \
     inc/model/hauptlicht_streifen.h \
+    inc/model/i2cdevice.h \
+    inc/model/j_element.h \
+    inc/model/j_slider.h \
+    inc/model/jugendraum.h \
+    inc/model/paletten_licht.h \
+    inc/model/rgb_element.h \
     inc/model/rgb_streifen.h
+    inc/model/theken_licht.h \
+    inc/model/wand_rgb.h \
 
 FORMS += \
-    ui/startseite.ui \
-    ui/passwort.ui \
-    ui/system_status.ui \
-    ui/einstellung_theke.ui \
-    ui/einstellung_rgb_wand.ui \
     ui/einstellung_audio.ui \
     ui/einstellung_hauptlicht.ui \
+    ui/einstellung_theke.ui \
     ui/einstellung_rgb_decke.ui \
+    ui/einstellung_rgb_wand.ui \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
     ui/menue_speichern.ui
+    ui/passwort.ui \
+    ui/system_status.ui \
+    ui/startseite.ui \
 
 RESOURCES += \
-    ui/icons.qrc \
-    ui/backgrounds.qrc
+    ui/backgrounds.qrc \
+    ui/icons.qrc
 
 # rules for deployment.
 target.path = /home/pi
