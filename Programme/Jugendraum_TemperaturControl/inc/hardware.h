@@ -6,8 +6,8 @@
 #include <QByteArray>
 #include <QtNetwork>
 #include <QDebug>
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
+//#include <wiringPi.h>
+//#include <wiringPiI2C.h>
 
 #include "inc/hardware_config.h"
 #include "inc/hardware_register.h"

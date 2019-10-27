@@ -31,9 +31,9 @@ TemperatureManager::TemperatureManager(QObject *parent) : QObject(parent)
     readAllFromFile(conf_file_);
 
     // start controllers
-    tc_onkyo_->start();
-    tc_cabin_->start();
-    tc_pwr_supply_->start();
+    //tc_onkyo_->start();
+    //tc_cabin_->start();
+    //tc_pwr_supply_->start();
     tc_pi_->start();
     //tc_pc_->start();
     //tc_pcb_->start();
