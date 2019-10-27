@@ -51,8 +51,8 @@ void hw::init()
         qDebug() << "analogs:   " << slider_analogs;
         qDebug() << "actives:   " << slider_actives;
     } else {
-        // mach was elegantes
         qDebug() << "Failed to load Arduino's registers!";
+        log(ERROR_LOG, "[ UDP ] timeout (1000 ms) reached when loading slider registers");
         for (int i = 0; i <  4; i++) { slider_setpoints.append(nullptr); }
         for (int i = 4; i <  8; i++) { slider_analogs.append(nullptr); }
         for (int i = 8; i < 12; i++) { slider_actives.append(nullptr); }
@@ -129,7 +129,13 @@ void hw::writeUDP(QByteArray data, QHostAddress ip, quint16 port)
         {
             // do something because the write has failed!
             qDebug() << "Client returned " << aw;
+            log(ERROR_LOG, QString("[ UDP ] write to %1:%2 failed : client returned %3").arg(ip.toString()).arg(port).arg(aw));
         }
+    }
+    else
+    {
+        qDebug() << "Client timeout on write";
+        log(ERROR_LOG, QString("[ UDP ] client %1:%2 timeout (1000 ms)").arg(ip.toString()).arg(port));
     }
 }
 
@@ -162,10 +168,14 @@ int hw::readUDP(QByteArray reg, QHostAddress ip, quint16 port)
         }
         else
         {
-            qDebug() << "data not as exspected, got " << d.data();
+            qDebug() << "data not as exspected, got " << raw;
+            log(ERROR_LOG, QString("[ UDP ] corrupted data from %1:%2 : expected 2 bytes, got %3").arg(ip.toString(), port, raw.length()));
         }
-    } else {
+    }
+    else
+    {
         qDebug() << "Failed to load Arduino's registers!";
+        log(ERROR_LOG, QString("[ UDP ] client %1:%2 timeout (1000 ms)").arg(ip.toString(), port));
     }
     return tmp;
 }
@@ -187,8 +197,15 @@ QJsonDocument hw::readUDP(QHostAddress ip, quint16 port)
     {
         QNetworkDatagram d = udp->receiveDatagram();
         jo = QJsonDocument::fromJson(d.data());
-    } else {
+        if (jo.isNull())
+        {
+            log(ERROR_LOG, QString("[ UDP ] failed to convert data from %1:%2 to json").arg(ip.toString()).arg(port));
+        }
+    }
+    else
+    {
         qDebug() << "Failed to read temperatures!";
+        log(ERROR_LOG, QString("[ UDP ] client %1:%2 timeout (1000 ms)").arg(ip.toString()).arg(port));
     }
     return jo;
 }

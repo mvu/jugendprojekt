@@ -13,6 +13,7 @@
 
 #include "hardware_config.h"
 #include "hardware_register.h"
+#include "inc/model/log.h"
 
 #include "i2cdevice.h"
 

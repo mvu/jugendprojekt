@@ -12,6 +12,7 @@
 #include "inc/gui/passwort.h"
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/log.h"
 
 namespace Ui {
 class MenueSpeichern;

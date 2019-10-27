@@ -68,9 +68,11 @@ void MenueSpeichern::on_pushButton_back_released()
 void MenueSpeichern::SaveAllForYouth()
 {
     qDebug() << Q_FUNC_INFO;
+    log(EVENT_LOG, QString("saved current setting for youth to %1").arg(YOUTH_SETTINGS_FILE));
 }
 
 void MenueSpeichern::SaveAllForTeens()
 {
     qDebug() << Q_FUNC_INFO;
+    log(EVENT_LOG, QString("saved current setting for youth to %1").arg(TEENS_SETTINGS_FILE));
 }

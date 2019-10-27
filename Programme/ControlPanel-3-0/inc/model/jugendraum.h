@@ -13,6 +13,7 @@
 
 #include "hardware.h"
 #include "j_element.h"
+#include "inc/model/log.h"
 
 // Klassen der Elemente
 #include "inc/model/paletten_licht.h"
