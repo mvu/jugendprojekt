@@ -23,6 +23,7 @@ namespace hw
          * ny slider-related function will return 0
          */
         bool sliderless_ = false;
+        bool sensorless_ = false;
     }
 }
 
@@ -62,7 +63,10 @@ void hw::init()
 
     // bind udp port for temperatur service to a port
     udp_temperatur_->bind(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT);
-    readUDP(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT);
+    if (readUDP(QHostAddress::LocalHost, TEMPERATUR_SERVICE_PORT).isNull())
+    {
+        sensorless_ = true;
+    }
 }
 
 bool hw::readState(uint8_t bank, uint8_t bit)
@@ -215,4 +219,11 @@ bool hw::sliderless()
     qDebug() << Q_FUNC_INFO;
 
     return sliderless_;
+}
+
+bool hw::sensorless()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    return sensorless_;
 }

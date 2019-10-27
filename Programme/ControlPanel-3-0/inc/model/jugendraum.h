@@ -11,9 +11,10 @@
 #include <iostream>
 #include <QString>
 
-#include "hardware.h"
-#include "j_element.h"
+
 #include "inc/model/log.h"
+#include "inc/model/hardware.h"
+#include "inc/model/j_element.h"
 
 // Klassen der Elemente
 #include "inc/model/paletten_licht.h"
