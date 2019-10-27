@@ -11,6 +11,8 @@
 #include <iostream>
 #include <QString>
 
+
+#include "inc/model/log.h"
 #include "inc/model/hardware.h"
 #include "inc/model/j_element.h"
 

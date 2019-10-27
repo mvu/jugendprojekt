@@ -7,6 +7,9 @@
 Jugendraum::Jugendraum()
 {
     qDebug() << Q_FUNC_INFO;
+    log(EVENT_LOG, "ControlPanel-3-0 started");
+    log(ERROR_LOG, "[ INFO ] ControlPanel-3-0 started"); // log to ERROR_LOG to make restarts directly visible in the file
+
     hw::init();
 
     update_timer_ = new QTimer();
@@ -17,7 +20,7 @@ Jugendraum::Jugendraum()
     theken_licht = new ThekenLicht();
     paletten_licht = new PalettenLicht();
     wand_rgb = new WandRGB();
-    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_1));
+    hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_1));	// why no loop?
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_2));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_3));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_4));
@@ -25,7 +28,7 @@ Jugendraum::Jugendraum()
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_6));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_7));
     hauptlicht.append(new HauptlichtStreifen(HL_STREIFEN_8));
-    rgb_deckenlicht.append(new RGBStreifen(1));
+    rgb_deckenlicht.append(new RGBStreifen(1));					// why no loop?
     rgb_deckenlicht.append(new RGBStreifen(2));
     rgb_deckenlicht.append(new RGBStreifen(3));
     rgb_deckenlicht.append(new RGBStreifen(4));
@@ -54,6 +57,9 @@ Jugendraum::~Jugendraum()
     delete paletten_licht;
     delete theken_licht;
     delete wand_rgb;
+
+    log(EVENT_LOG, "ControlPanel-3-0 closed");
+    log(ERROR_LOG, "[ INFO ] ControlPanel-3-0 closed");
 }
 
 void Jugendraum::update()

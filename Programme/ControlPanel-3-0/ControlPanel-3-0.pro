@@ -44,6 +44,7 @@ SOURCES += \
     src/model/j_element.cpp \
     src/model/j_slider.cpp \
     src/model/jugendraum.cpp \
+    src/model/log.cpp \
     src/model/main.cpp \
     src/model/paletten_licht.cpp \
     src/model/rgb_element.cpp \
@@ -73,6 +74,7 @@ HEADERS += \
     inc/model/j_element.h \
     inc/model/j_slider.h \
     inc/model/jugendraum.h \
+    inc/model/log.h \
     inc/model/paletten_licht.h \
     inc/model/rgb_element.h \
     inc/model/rgb_streifen.h \

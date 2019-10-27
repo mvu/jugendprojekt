@@ -11,6 +11,7 @@
 #include <QList>
 #include <QtNetwork>
 
+#include "inc/model/log.h"
 #include "inc/model/hardware_config.h"
 #include "inc/model/hardware_register.h"
 
