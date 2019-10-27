@@ -11,8 +11,8 @@
 #include <QList>
 #include <QtNetwork>
 
-#include "hardware_config.h"
-#include "hardware_register.h"
+#include "inc/model/hardware_config.h"
+#include "inc/model/hardware_register.h"
 
 #include "i2cdevice.h"
 
@@ -113,6 +113,12 @@ namespace hw
      * \details quick'n'dirty: kann verwndet werden, um auf der GUI Knöpfe zu deaktivieren
      */
    bool sliderless();
+
+    /*!
+     * \brief Temporäre Lösung; Liefert True wenn jTemperature nicht geantwortet hat
+     * \return True = keine Temperatursensoren verfügbar
+     */
+   bool sensorless();
 }
 
 #endif // HARDWARE_H
