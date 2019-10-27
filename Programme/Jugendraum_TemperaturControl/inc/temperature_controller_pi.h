@@ -14,6 +14,7 @@
 /*!
  * \brief Klasse, die die Temperatur des RaspberryPi verwaltet
  * \details unterscheidet sich nur in readTempeartur() von JTemperaturController
+ * \todo Lesen der Temperatur aus /sys/class/thermal/thermal_zone0/temp
  */
 class TemperatureControllerPi : public JTemperatureController
 {
