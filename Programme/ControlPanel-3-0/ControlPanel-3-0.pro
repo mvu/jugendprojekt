@@ -47,9 +47,9 @@ SOURCES += \
     src/model/main.cpp \
     src/model/paletten_licht.cpp \
     src/model/rgb_element.cpp \
-    src/model/rgb_streifen.cpp
+    src/model/rgb_streifen.cpp \
     src/model/theken_licht.cpp \
-    src/model/wand_rgb.cpp \
+    src/model/wand_rgb.cpp
 
 HEADERS += \
     inc/gui/einstellung_audio.h \
@@ -75,9 +75,9 @@ HEADERS += \
     inc/model/jugendraum.h \
     inc/model/paletten_licht.h \
     inc/model/rgb_element.h \
-    inc/model/rgb_streifen.h
+    inc/model/rgb_streifen.h \
     inc/model/theken_licht.h \
-    inc/model/wand_rgb.h \
+    inc/model/wand_rgb.h
 
 FORMS += \
     ui/einstellung_audio.ui \
@@ -87,10 +87,10 @@ FORMS += \
     ui/einstellung_rgb_wand.ui \
     ui/menue_licht.ui \
     ui/menue_medien.ui \
-    ui/menue_speichern.ui
+    ui/menue_speichern.ui \
     ui/passwort.ui \
     ui/system_status.ui \
-    ui/startseite.ui \
+    ui/startseite.ui
 
 RESOURCES += \
     ui/backgrounds.qrc \
