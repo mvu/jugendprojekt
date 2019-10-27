@@ -47,13 +47,13 @@ Jugendraum::Jugendraum()
 
 Jugendraum::~Jugendraum()
 {
+    update_timer_->stop();
+    delete update_timer_;
+
     qDebug() << Q_FUNC_INFO;
     delete paletten_licht;
     delete theken_licht;
     delete wand_rgb;
-
-    update_timer_->stop();
-    delete update_timer_;
 }
 
 void Jugendraum::update()
