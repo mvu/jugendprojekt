@@ -15,7 +15,10 @@
 class ThekenLicht : public RGBElement
 {
 public:
-    //! Constructor
+    /*!
+     * \brief Constructor
+     * \todo Was passiert, wenn hardware beim erzeugen des Objects nicht antwortet?
+     */
     ThekenLicht();
     
     /*!
