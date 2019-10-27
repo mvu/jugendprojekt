@@ -7,7 +7,7 @@
 #define HARDWARE_CONFIG_H
 
 // file locations
-#define LOGFILE             "/home/pi/log/temperature.log"
+#define LOGFILE             "/var/log/jugendraum/temperature.log"
 // udp connections
 #define SENSORS_UDP         QHostAddress("192.168.188.202"), 9999
 #define CONTROL_UDP         QHostAddress::LocalHost, 9091
