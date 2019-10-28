@@ -9,7 +9,7 @@ ThekenLicht::ThekenLicht() :
     addr_red_ = RGB_THEKE_ROT;
     addr_green_ = RGB_THEKE_GRUEN;
     addr_blue_ = RGB_THEKE_BLAU;    
-    
+        
     // read initial state from hardware
     top_is_on_ = hw::readState(THEKE);
     red_value_ = hw::readValue(addr_red_);

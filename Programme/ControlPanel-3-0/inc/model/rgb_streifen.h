@@ -38,6 +38,10 @@ public:
     
     void setRGBOn(bool state) override;
     
+    void saveToFile(QString filename) override;
+    
+    void loadFromFile(QString filename) override;
+    
 private:
     uint8_t address_;   //!< Adresse des Streifens
     bool allow_change_; //!< Nur wenn true werden Änderungen durchgeführt

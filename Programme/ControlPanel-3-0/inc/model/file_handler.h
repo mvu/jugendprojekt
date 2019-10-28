@@ -90,6 +90,7 @@ public:
      * Es wird nicht überprüft, ob der Wert, der in die Datei geschrieben wird, einen falschen Typ hat und somit beim nächsten Lesen zu einem Fehler führt.
      * \param qparam Name der Variable, deren Wert in die Datei geschrieben werden soll. Exakt dieser String wird in der Datei überschrieben bzw. neu angelegt.
      * \param value Wert von 'param', der in die Datei geschrieben wird.
+     * \todo eine Leerzeile wird vor die eigentliche Zeile geschrieben, wenn die Zeile neu geschrieben und nicht nur ersetzt wird
      */
     template<typename T>
     void writeToFile(QString qparam, T value){

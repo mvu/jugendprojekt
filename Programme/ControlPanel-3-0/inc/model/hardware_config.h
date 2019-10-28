@@ -9,6 +9,8 @@
 // Dateien
 #define ERROR_LOG                   "/var/log/jugendraum/error.log"
 #define EVENT_LOG                   "/var/log/jugendraum/event.log"
+#define YOUTH_SETTINGS_FILE         "/etc/jugendraum/youth.conf"
+#define TEENS_SETTTINGS_FILE        "/etc/jugendraum/teens.conf"
 
 // UDP Verbindung für slider
 #define SLIDER_IP                   "192.168.1.111"

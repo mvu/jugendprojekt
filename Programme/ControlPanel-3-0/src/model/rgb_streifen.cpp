@@ -88,3 +88,19 @@ void RGBStreifen::setRGBOn(bool state)
         }
     }  
 }
+
+void RGBStreifen::saveToFile(QString filename){
+    FileHandler* file_handler = new FileHandler(filename);
+    file_handler->writeToFile(QString("RGBStreifen%1::red_value_").arg(address_), red_value_);
+    file_handler->writeToFile(QString("RGBStreifen%1::green_value_").arg(address_), green_value_);
+    file_handler->writeToFile(QString("RGBStreifen%1::blue_value_").arg(address_), blue_value_);
+    delete file_handler;
+}
+
+void RGBStreifen::loadFromFile(QString filename){
+    FileHandler* file_handler = new FileHandler(filename);
+    red_value_ = file_handler->readFromFile<int>(QString("RGBStreifen%1::red_value_").arg(address_));
+    green_value_ = file_handler->readFromFile<int>(QString("RGBStreifen%1::green_value_").arg(address_));
+    blue_value_ = file_handler->readFromFile<int>(QString("RGBStreifen%1::blue_value_").arg(address_));
+    delete file_handler;
+}
