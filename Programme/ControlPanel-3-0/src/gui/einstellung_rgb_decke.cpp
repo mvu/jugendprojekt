@@ -29,11 +29,32 @@ EinstellungRGBDecke::EinstellungRGBDecke(QWidget *parent, Jugendraum *j) :
     animation->setEndValue(QRect(0,0,800,480));
     animation->setEasingCurve(QEasingCurve::InExpo);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+    
+    // erzeuge Slider
+    if (not hw::sliderless())
+    {
+        slider_red_ = new JSlider(this, 2, 0);
+        connect(slider_red_, SIGNAL(changed(int)), this, SLOT(sliderRedChanged(int)));
+        slider_green_ = new JSlider(this, 3, 0);
+        connect(slider_green_, SIGNAL(changed(int)), this, SLOT(sliderGreenChanged(int)));
+        slider_blue_ = new JSlider(this, 4, 0);
+        connect(slider_blue_, SIGNAL(changed(int)), this, SLOT(sliderBlueChanged(int)));
+    }
 }
 
 EinstellungRGBDecke::~EinstellungRGBDecke()
 {
     qDebug() << Q_FUNC_INFO;
+    
+    if (not hw::sliderless())
+    {
+        delete slider_red_;
+        delete slider_green_;
+        delete slider_blue_;
+    }
+
+    for (QPushButton* pb : push_buttons_rgb_)
+        pb->setChecked(false);
 
     delete ui_;
 }
@@ -324,14 +345,19 @@ void EinstellungRGBDecke::on_pushButton_group_2_released()
 void EinstellungRGBDecke::on_pushButton_on_off_released()
 {
     qDebug() << Q_FUNC_INFO;
-    
+ 
     // will only affect selected ones
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
     {
         RGBStreifen* rgb_streifen = jugendraum_->rgb_deckenlicht[i];
-        // set new state by inverting old, does this work??
-        rgb_streifen->setRGBOn(not rgb_streifen->RGBisOn());
-        setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);
+        // set new state by reading label of button (is a bit ugly because the information is passed through the gui)
+        rgb_streifen->setRGBOn(ui_->pushButton_on_off->text() == "An");
+        // update gui
+        if (push_buttons_rgb_[i]->isChecked())
+        {
+            if (not rgb_streifen->RGBisOn()) { setButtonBackground(push_buttons_rgb_[i], 0, 0, 0);}
+            else { updateButtonBackgrounds();}
+        }        
     }
     
     checkOnOffState();
@@ -351,8 +377,46 @@ void EinstellungRGBDecke::on_pushButton_back_released()
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
+void EinstellungRGBDecke::sliderRedChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // will only affect selected ones
+    for (auto rgb_streifen: jugendraum_->rgb_deckenlicht)
+        rgb_streifen->setRedValue(value);
+
+    checkOnOffState();
+    updateButtonBackgrounds();
+}
+
+void EinstellungRGBDecke::sliderGreenChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // will only affect selected ones
+    for (auto rgb_streifen: jugendraum_->rgb_deckenlicht)
+        rgb_streifen->setGreenValue(value);
+
+    checkOnOffState();
+    updateButtonBackgrounds();
+}
+
+void EinstellungRGBDecke::sliderBlueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // will only affect selected ones
+    for (auto rgb_streifen: jugendraum_->rgb_deckenlicht)
+        rgb_streifen->setBlueValue(value);
+
+    checkOnOffState();
+    updateButtonBackgrounds();    
+}
+
 void EinstellungRGBDecke::checkForGroups()
 {
+    qDebug() << Q_FUNC_INFO;
+    
     // check if all are selected
     bool all_check = true;
     
@@ -398,15 +462,22 @@ void EinstellungRGBDecke::checkForGroups()
 
 void EinstellungRGBDecke::updateButtonBackgrounds()
 {
+    qDebug() << Q_FUNC_INFO;
+    
+    // will affect only selected ones
     for (int i = 0; i < push_buttons_rgb_.length(); i++)
-    {
+    {   
         RGBStreifen* streifen = jugendraum_->rgb_deckenlicht[i];
-        setButtonBackground(push_buttons_groups_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
+        // update background only if it is on
+        if (streifen->RGBisOn())
+            setButtonBackground(push_buttons_rgb_[i], streifen->getRedValue(), streifen->getGreenValue(), streifen->getBlueValue());
     }
 }
 
 void EinstellungRGBDecke::setButtonBackground(QPushButton *button, int red, int green, int blue)
 {
+    qDebug() << Q_FUNC_INFO;
+    
     int red_val = red * 255 / 100;
     int green_val = green * 255 / 100;
     int blue_val = blue * 255 / 100;
@@ -423,6 +494,8 @@ void EinstellungRGBDecke::setButtonBackground(QPushButton *button, int red, int 
 
 void EinstellungRGBDecke::checkOnOffState()
 {
+    qDebug() << Q_FUNC_INFO;
+    
     bool is_on = false;
     int active_counter = 0;
     
@@ -436,9 +509,9 @@ void EinstellungRGBDecke::checkOnOffState()
     
     ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
     
-    // show no label if no button is active
+    // hide button if no button is active
     if (active_counter == 0)
-        ui_->pushButton_on_off->setText("");
+        ui_->pushButton_on_off->hide();
+    else
+        ui_->pushButton_on_off->show();
 }
-
-

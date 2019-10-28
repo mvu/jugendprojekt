@@ -112,7 +112,6 @@ void EinstellungHauptlicht::InitButtons()
 void EinstellungHauptlicht::on_pushButton_1_toggled(bool checked)
 {
     qDebug() << Q_FUNC_INFO;
-
     jugendraum_->hauptlicht[0]->allowChange(checked);
     checkForGroups();
 }
@@ -237,14 +236,20 @@ void EinstellungHauptlicht::on_pushButton_on_off_released()
     qDebug() << Q_FUNC_INFO;
 
     // will only affect selected ones
-    for (auto streifen: jugendraum_->hauptlicht)
+    for (int i = 0; i < push_buttons_HL_.length(); i++)
     {
+        HauptlichtStreifen* streifen = jugendraum_->hauptlicht[i];
         // set new state (super ugly, uses gui to transport information)
-        streifen->setOn(ui_->pushButton_on_off->text() == "Aus" ? false : true);
+        streifen->setOn(ui_->pushButton_on_off->text() == "An" );
+        // update gui
+        if (push_buttons_HL_[i]->isChecked())
+        {
+            if (not streifen->isOn()) { setButtonBackground(push_buttons_HL_[i], 0);}
+            else { updateButtonBackgrounds();}
+        }
     }
 
     checkOnOffState();
-    updateButtonBackgrounds();
 }
 
 void EinstellungHauptlicht::on_pushButton_back_released()
@@ -307,18 +312,20 @@ void EinstellungHauptlicht::updateButtonBackgrounds()
 {
     qDebug() << Q_FUNC_INFO;
 
-    for (int i = 0; i < push_buttons_HL_.length(); i++)
-    {
-        int brightness = jugendraum_->hauptlicht[i]->getBrightness() * 255 / 100;
-        QString stylesheet_text = push_buttons_HL_[i]->styleSheet();
-        int start_pos = stylesheet_text.indexOf("rgba");
-        int end_pos = stylesheet_text.indexOf(")", start_pos);
-        QString val = QString::number(brightness);
-        QString new_rgb_text = "rgba(" + val + "," + val + "," + val + ",80)";
-        stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
-        //qDebug() << stylesheet_text;
-        push_buttons_HL_[i]->setStyleSheet(stylesheet_text);
-    }
+    for (int i = 0; i < push_buttons_HL_.length(); i++)        
+        setButtonBackground(push_buttons_HL_[i], jugendraum_->hauptlicht[i]->getBrightness());
+}
+
+void EinstellungHauptlicht::setButtonBackground(QPushButton *button, int val)
+{
+    int brightness = val * 255 / 100;
+    QString stylesheet_text = button->styleSheet();
+    int start_pos = stylesheet_text.indexOf("rgba");
+    int end_pos = stylesheet_text.indexOf(")", start_pos);
+    QString new_val = QString::number(brightness);
+    QString new_rgb_text = "rgba(" + new_val + "," + new_val + "," + new_val + ",80)";
+    stylesheet_text.replace(start_pos, end_pos - start_pos + 1, new_rgb_text);
+    button->setStyleSheet(stylesheet_text);
 }
 
 void EinstellungHauptlicht::checkOnOffState()
@@ -336,11 +343,12 @@ void EinstellungHauptlicht::checkOnOffState()
 
     ui_->pushButton_on_off->setText(is_on ? "Aus" : "An");
 
-    // show no label if no button is active
+    // hide button if no button is active
     if (active_counter == 0)
-        ui_->pushButton_on_off->setText("");
+        ui_->pushButton_on_off->hide();
+    else
+        ui_->pushButton_on_off->show();
 }
-
 
 void EinstellungHauptlicht::sliderChanged(int value)
 {
@@ -353,3 +361,4 @@ void EinstellungHauptlicht::sliderChanged(int value)
     checkOnOffState();
     updateButtonBackgrounds();
 }
+

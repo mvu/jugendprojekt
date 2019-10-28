@@ -57,6 +57,12 @@ Jugendraum::~Jugendraum()
     delete paletten_licht;
     delete theken_licht;
     delete wand_rgb;
+    
+    for (auto streifen: hauptlicht)
+        delete streifen;
+        
+    for (auto rgb_streifen: rgb_deckenlicht)
+        delete rgb_streifen;
 
     log(EVENT_LOG, "ControlPanel-3-0 closed");
     log(ERROR_LOG, "[ INFO ] ControlPanel-3-0 closed");
