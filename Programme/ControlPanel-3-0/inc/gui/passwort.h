@@ -12,6 +12,7 @@
 #include <QDebug>
 
 #include "inc/model/jugendraum.h"
+#include "inc/model/log.h"
 
 namespace Ui {
 class Passwort;

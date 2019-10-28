@@ -111,6 +111,9 @@ void Passwort::on_pushButton_ok_released()
         emit PasswordCorrect();
         this->close();
     } else {
+        // log wrong failed attempt
+        log(EVENT_LOG, QString("wrong password entered: %1").arg(tmp_password_raw_.toInt()));
+
         // shake Animation
         QPropertyAnimation *animation = new QPropertyAnimation(ui_->label_password, "geometry");
         connect(animation, SIGNAL(finished()), this, SLOT(ResetEnteredPassword()));

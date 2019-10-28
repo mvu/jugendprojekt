@@ -21,8 +21,8 @@ void HauptlichtStreifen::saveToFile(QString filename)
     qDebug() << Q_FUNC_INFO;
     
     FileHandler* file_handler = new FileHandler(filename);
-    std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
-    file_handler->writeToFile(name, brightness_);
+    // std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
+    file_handler->writeToFile(QString("HauplichtStreifen%1::address_").arg(address_), brightness_);
     delete file_handler;
 }
 
@@ -31,8 +31,8 @@ void HauptlichtStreifen::loadFromFile(QString filename)
     qDebug() << Q_FUNC_INFO;
     
     FileHandler* file_handler = new FileHandler(filename);
-    std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
-    brightness_ = file_handler->readFromFile<int>(name);
+    // std::string name = "HauplichtStreifen" + std::to_string(address_) + "::brightness_";
+    brightness_ = file_handler->readFromFile<int>(QString("HauplichtStreifen%1::address_").arg(address_));
     delete file_handler;
 }
 

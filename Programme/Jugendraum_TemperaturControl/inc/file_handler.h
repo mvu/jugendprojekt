@@ -20,7 +20,7 @@ class FileHandler
 public:
     /*!
      * \brief Konstruktur 
-     * \param filename Name der Datei, die behandelt wird. Muss den gesamten absoluten oder relativen Pfad enthalten.
+     * \param filename Name der Datei, die behandelt wird. Muss den absoluten oder relativen Pfad enthalten.
      */
     FileHandler(QString filename){
         filename_ = filename.toStdString();
@@ -42,7 +42,7 @@ public:
      */
      //Because this is a template the implementation needs to be in the header
     template<typename T>
-    T readFromFile(QString qparam){
+    T readParameterFromFile(QString qparam){
         std::string param = qparam.toStdString();
         file_.open(filename_);
         std::string line, equal, p;
@@ -90,11 +90,12 @@ public:
      * Es wird nicht überprüft, ob der Wert, der in die Datei geschrieben wird, einen falschen Typ hat und somit beim nächsten Lesen zu einem Fehler führt.
      * \param qparam Name der Variable, deren Wert in die Datei geschrieben werden soll. Exakt dieser String wird in der Datei überschrieben bzw. neu angelegt.
      * \param value Wert von 'param', der in die Datei geschrieben wird.
+     * \badcode Beim Schreiben wird eine Leerzeile vor dem Eintrag erzeugt
      */
     template<typename T>
-    void writeToFile(QString qparam, T value){
-        std::string param = qparam.toStdString();
+    void writeParameterToFile(QString qparam, T value){
         std::string tmp_filename = "tmp.txt";
+        std::string param = qparam.toStdString();
         std::ofstream tmp;
         std::string comment, line;
         size_t pos, pos2;
@@ -139,6 +140,7 @@ public:
         rename(tmp_file_p, file_p);
     }
     
+
 private:
     std::string filename_;
     std::fstream file_;

@@ -6,15 +6,23 @@
 
 #include "inc/model/hardware_register.h"
 
+// Dateien
+#define ERROR_LOG                   "/var/log/jugendraum/error.log"
+#define EVENT_LOG                   "/var/log/jugendraum/event.log"
+
 // UDP Verbindung für slider
 #define SLIDER_IP                   "192.168.1.111"
 #define SLIDER_PORT                 8888
 #define SLIDER_UDP                  QHostAddress(SLIDER_IP), SLIDER_PORT
 // Slider Konfiguration
+
 #define SLIDER_UPDATE_CYCLE_MS      50
 #define SLIDER_NOISE_THRESHOLD      1
 #define SLIDER_STANDBY_AFTER_S      10      // nach wie vielen Sekunden der Slider in den Standby-Modus geht
 #define SLIDER_STANDBY_CYCLE_MS     1000    // wie oft die Sliderposition im Standby-Modus gelesen wird
+
+// UDP Verbindung zum Temperatur service
+#define TEMPERATUR_SERVICE_PORT     9091
 
 // update Zyklus für die gesamte Hardware
 #define HW_UPDATE_INTERVAL_MS       5000

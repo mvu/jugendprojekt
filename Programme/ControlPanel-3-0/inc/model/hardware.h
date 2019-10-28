@@ -11,8 +11,9 @@
 #include <QList>
 #include <QtNetwork>
 
-#include "hardware_config.h"
-#include "hardware_register.h"
+#include "inc/model/log.h"
+#include "inc/model/hardware_config.h"
+#include "inc/model/hardware_register.h"
 
 #include "i2cdevice.h"
 
@@ -93,11 +94,19 @@ namespace hw
      * \note Der Client muss den Wert als high- und low-byte senden, nicht
      *      in utf8-encoding
      * \details Wenn der udp_socket bekannt (d.h. als interne Variable existiert)
-     *      ist, wir dieser verwendet und damit sichergestellt, dass das die
+     *      ist, wird dieser verwendet und damit sichergestellt, dass das die
      *      empfangenen Daten vom gewünschten Sender stammen
      * \todo Verhalten bei Lesefehler
      */
     int readUDP(QByteArray reg, QHostAddress ip, quint16 port);
+
+    /*!
+     * \brief Liefert ein QJsonDocument über UDP
+     * \param ip IP des Clients
+     * \param port Port des Clients
+     * \return Das empfangene json file
+     */
+    QJsonDocument readUDP(QHostAddress ip, quint16 port);
 
     /*!
      * \brief Temporäre Lösung; Liefert True wenn die Slider nicht geantwortet haben
@@ -105,6 +114,12 @@ namespace hw
      * \details quick'n'dirty: kann verwndet werden, um auf der GUI Knöpfe zu deaktivieren
      */
    bool sliderless();
+
+    /*!
+     * \brief Temporäre Lösung; Liefert True wenn jTemperature nicht geantwortet hat
+     * \return True = keine Temperatursensoren verfügbar
+     */
+   bool sensorless();
 }
 
 #endif // HARDWARE_H
