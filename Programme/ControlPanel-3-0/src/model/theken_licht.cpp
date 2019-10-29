@@ -15,7 +15,7 @@ ThekenLicht::ThekenLicht() :
     red_value_ = hw::readValue(addr_red_);
     green_value_ = hw::readValue(addr_green_);
     blue_value_ = hw::readValue(addr_blue_);
-    
+    qDebug() << "top_is_on: "<< top_is_on_;
 }
 
 void ThekenLicht::saveToFile(QString filename)
